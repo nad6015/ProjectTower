@@ -6,17 +6,22 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     private float speed = 3;
+    [SerializeField]
+    private BoxCollider attackHitbox;
 
     private CharacterController characterController;
     private InputSystemActions actions;
+
     private Vector3 newPos;
- 
+    private Quaternion currentRotation;
 
     void Awake()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Confined;
         characterController = GetComponent<CharacterController>();
         actions = new InputSystemActions();
+        currentRotation = transform.rotation;
+        
     }
 
     private void OnEnable()
@@ -38,7 +43,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnMovePerformed(InputAction.CallbackContext context)
     {
-        newPos = new Vector3(context.ReadValue<Vector2>().x, 0, context.ReadValue<Vector2>().y);
+        var value = context.ReadValue<Vector2>();
+        newPos.x = value.x;
+        newPos.z = value.y;
     }
 
     private void OnMoveCancelled(InputAction.CallbackContext context)
@@ -48,17 +55,35 @@ public class PlayerController : MonoBehaviour
 
     private void OnAttackCancelled(InputAction.CallbackContext context)
     {
-        throw new NotImplementedException();
+        attackHitbox.enabled = false;
     }
 
     private void OnAttackPerformed(InputAction.CallbackContext context)
     {
-        throw new NotImplementedException();
+        attackHitbox.enabled = true;
     }
+
     void Update()
     {
-        transform.LookAt(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        characterController.SimpleMove(speed * (newPos + transform.forward));
-        
+        // Code referenced from - https://discussions.unity.com/t/make-a-player-model-rotate-towards-mouse-location/125354/3
+
+        Vector2 transformOnScreen = Camera.main.WorldToViewportPoint(transform.position);
+        Vector2 mouseOnScreen = Camera.main.ScreenToViewportPoint(Mouse.current.position.ReadValue());
+
+        float x = Unity.Mathematics.math.remap(0, 1, -1, 1, mouseOnScreen.x);
+        float y = Unity.Mathematics.math.remap(0, 1, -1, 1, mouseOnScreen.y);
+        currentRotation = Quaternion.LookRotation(new Vector3(x, 0, y), Vector3.up);
+
+
+        float angle = AngleBetweenTwoPoints(transformOnScreen, mouseOnScreen);
+
+        transform.rotation = currentRotation;
+
+        characterController.SimpleMove(speed * newPos);
+    }
+
+    float AngleBetweenTwoPoints(Vector3 a, Vector3 b)
+    {
+        return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
     }
 }

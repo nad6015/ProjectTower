@@ -1,25 +1,13 @@
 using UnityEngine;
 
-public class CharacterStats : MonoBehaviour
+public struct CharacterStats
 {
-    [SerializeField]
-    private int health = 5;
+    public int health;
+    public int attack;
 
-    [SerializeField]
-    private int attack = 1;
-
-    public void Attack(CharacterStats stats)
+    public CharacterStats(int health, int attack)
     {
-        stats.health -= attack;
-    }
-
-    public void Heal()
-    {
-        health += 2;
-    }
-
-    public void Block()
-    {
-        //TODO
+        this.health = health;
+        this.attack = attack;
     }
 }
