@@ -1,10 +1,12 @@
 using UnityEngine;
 using Assets.DungeonGenerator.Components;
+using CombatSystem;
 using Unity.Mathematics;
 
 namespace Assets.DungeonGenerator
 {
     using Random = UnityEngine.Random;
+    using FighterStats = CombatSystem.Fighter.FighterStats;
 
     public class DungeonMaster : MonoBehaviour
     {
@@ -34,14 +36,14 @@ namespace Assets.DungeonGenerator
         private Vector2 maxDungeonSize;
 
         private GameObject player;
-        private CombatCharacter playerCharacter;
+        private Fighter playerCharacter;
 
         private void Start()
         {
             //Random.InitState(1); // TODO: Seed should be randomised between sessions. Set to 1 for dev
             dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();
             player = GameObject.FindGameObjectWithTag("Player");
-            playerCharacter = player.GetComponentInChildren<CombatCharacter>();
+            playerCharacter = player.GetComponentInChildren<Fighter>();
             player.SetActive(false);
         }
 
@@ -81,15 +83,15 @@ namespace Assets.DungeonGenerator
 
         DungeonSize DetermineDungeonSize()
         {
-            Debug.Log(playerCharacter.stats.health);
-            if (playerCharacter.stats.health > 4)
+            int health = playerCharacter.GetStat(FighterStats.HEALTH);
+            if (health > 4)
             {
                 minItemsPerRoom = 0;
                 maxItemsPerRoom = 2;
                 enemySpawnRate = 1;
                 return DungeonSize.LARGE;
             }
-            else if (playerCharacter.stats.health < 2)
+            else if (health < 2)
             {
                 minItemsPerRoom = 3;
                 maxItemsPerRoom = 5;
