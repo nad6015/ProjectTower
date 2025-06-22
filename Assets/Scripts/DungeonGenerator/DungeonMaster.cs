@@ -1,12 +1,11 @@
 using UnityEngine;
 using Assets.DungeonGenerator.Components;
-using CombatSystem;
+using Assets.CombatSystem;
 using Unity.Mathematics;
 
 namespace Assets.DungeonGenerator
 {
     using Random = UnityEngine.Random;
-    using FighterStats = CombatSystem.Fighter.FighterStats;
 
     public class DungeonMaster : MonoBehaviour
     {

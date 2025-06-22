@@ -1,25 +1,28 @@
 using UnityEngine;
 
-public class PlayerCamera : MonoBehaviour
+namespace Assets.PlayerCharacter
 {
-    [SerializeField]
-    private float distanceFromPlayer = 10f;
-    [SerializeField]
-    private float distanceFromPlayerZ = -4f;
-    [SerializeField]
-    private float cameraTilt = 15f; 
-
-    Transform player;
-    void Start()
+    public class PlayerCamera : MonoBehaviour
     {
-        player = GameObject.FindWithTag("Player").transform;
+        [SerializeField]
+        private float distanceFromPlayer = 10f;
+        [SerializeField]
+        private float distanceFromPlayerZ = -4f;
+        [SerializeField]
+        private float cameraTilt = 15f;
 
-        transform.Rotate(Vector3.right, cameraTilt);
-    }
+        Transform player;
+        void Start()
+        {
+            player = GameObject.FindWithTag("Player").transform;
 
-    // Update is called once per frame
-    void Update()
-    {
-        transform.position = new Vector3(player.position.x, distanceFromPlayer, distanceFromPlayerZ + player.position.z);
+            transform.Rotate(Vector3.right, cameraTilt);
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            transform.position = new Vector3(player.position.x, distanceFromPlayer, distanceFromPlayerZ + player.position.z);
+        }
     }
 }

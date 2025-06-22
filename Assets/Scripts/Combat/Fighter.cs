@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CombatSystem
+namespace Assets.CombatSystem
 {
     public class Fighter : MonoBehaviour
     {
@@ -65,14 +64,6 @@ namespace CombatSystem
         internal void IsAttacking(bool isAttacking)
         {
             this.isAttacking = isAttacking;
-        }
-
-        internal enum FighterStats
-        {
-            HEALTH = 0,
-            DEFENSE = 1,
-            ATTACK = 2,
-            MAGIC = 3,
         }
 
         private void Update()

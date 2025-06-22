@@ -1,8 +1,6 @@
-using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-namespace Player
+namespace Assets.PlayerCharacter
 {
     [RequireComponent(typeof(CharacterController), typeof(PlayerAction), typeof(PlayerMovement))]
     public class PlayerController : MonoBehaviour
