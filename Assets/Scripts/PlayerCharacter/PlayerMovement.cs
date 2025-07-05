@@ -1,4 +1,5 @@
 using UnityEngine;
+using Unity;
 using UnityEngine.InputSystem;
 
 namespace Assets.PlayerCharacter
@@ -18,7 +19,7 @@ namespace Assets.PlayerCharacter
         void Awake()
         {
             characterController = GetComponent<CharacterController>();
-            animator = GetComponent<Animator>();
+            animator = GetComponentInChildren<Animator>();
             animator.SetFloat("MotionSpeed", 1);
 
             Cursor.lockState = CursorLockMode.Confined;
@@ -43,13 +44,6 @@ namespace Assets.PlayerCharacter
 
         void Update()
         {
-            // Rotation Code referenced from - https://discussions.unity.com/t/make-a-player-model-rotate-towards-mouse-location/125354/3
-
-            Vector2 transformOnScreen = Camera.main.WorldToViewportPoint(transform.position);
-            Vector2 mouseOnScreen = Camera.main.ScreenToViewportPoint(Mouse.current.position.ReadValue());
-
-            float x = Unity.Mathematics.math.remap(0, 1, -1, 1, mouseOnScreen.x);
-            float y = Unity.Mathematics.math.remap(0, 1, -1, 1, mouseOnScreen.y);
             currentRotation = Quaternion.LookRotation(newPos == Vector3.zero ? transform.forward : newPos, Vector3.up);
 
             transform.rotation = currentRotation;

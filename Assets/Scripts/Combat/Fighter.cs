@@ -31,7 +31,13 @@ namespace Assets.CombatSystem
             stats[FighterStats.HEALTH] = health;
             stats[FighterStats.ATTACK] = attack;
             weapon = GetComponentInChildren<Weapon>();
-            animator = GetComponent<Animator>();
+            animator = GetComponentInChildren<Animator>();
+
+            if (animator == null)
+            {
+                animator = GetComponent<Animator>();
+            }
+
             if (weapon != null)
             {
                 weaponReach = weapon.WeaponReach();
@@ -43,7 +49,7 @@ namespace Assets.CombatSystem
             }
         }
 
-        internal int GetStat(FighterStats stat) => stats[stat];
+        public int GetStat(FighterStats stat) => stats[stat];
 
         internal void Attack(Fighter fighter)
         {
@@ -61,7 +67,7 @@ namespace Assets.CombatSystem
             return stats[FighterStats.HEALTH] <= 0;
         }
 
-        internal void IsAttacking(bool isAttacking)
+        public void IsAttacking(bool isAttacking)
         {
             this.isAttacking = isAttacking;
         }

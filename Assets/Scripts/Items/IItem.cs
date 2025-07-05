@@ -1,6 +1,6 @@
 namespace Assets.Items
 {
-    interface IItem
+    public interface IItem
     {
         string Name { get; }
         void Use();
