@@ -9,6 +9,7 @@ namespace Assets.DungeonGenerator
         public GameObject floorAsset;
         public GameObject enemy;
         public GameObject item;
-        public GameObject spawnPoint;
+        public SpawnPoint startingPoint;
+        public DungeonExit exit;
     }
 }

@@ -34,23 +34,15 @@ namespace Assets.DungeonGenerator
         private DungeonGenerator dungeonGenerator;
         private Vector2 maxDungeonSize;
 
-        private GameObject player;
-        private Fighter playerCharacter;
-
         private void Start()
         {
             //Random.InitState(1); // TODO: Seed should be randomised between sessions. Set to 1 for dev
             dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();
-            player = GameObject.FindGameObjectWithTag("Player");
-            playerCharacter = player.GetComponentInChildren<Fighter>();
-            player.SetActive(false);
         }
 
         public void OnNewDungeon()
         {
             dungeonGenerator.GenerateDungeon(CreateDungeon());
-            player.transform.position = new Vector3(3, 1.5f, 3);
-            player.SetActive(true);
         }
 
         Dungeon CreateDungeon()
@@ -82,7 +74,7 @@ namespace Assets.DungeonGenerator
 
         DungeonSize DetermineDungeonSize()
         {
-            int health = playerCharacter.GetStat(FighterStats.HEALTH);
+            int health = 3;//playerCharacter.GetStat(FighterStats.HEALTH);
             if (health > 4)
             {
                 minItemsPerRoom = 0;

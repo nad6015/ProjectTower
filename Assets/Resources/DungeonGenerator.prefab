@@ -62,3 +62,5 @@ MonoBehaviour:
   floorAsset: {fileID: 8031560325989942358, guid: 7328ee9a0623e28469aed37d4a8d1b80, type: 3}
   enemy: {fileID: 8259528467515437859, guid: c5b194cc3e85d40408c2fca2c687f7ac, type: 3}
   item: {fileID: 2374991623033447861, guid: 3a68e34b9cf70244d910afff8f8d8799, type: 3}
+  startingPoint: {fileID: 3787019230069511806, guid: 7c404835786532a4fbf9a3cc35cbd73b, type: 3}
+  exit: {fileID: 8684044341818389683, guid: 20f557f5c48279b4d9ec43df8dfe49e2, type: 3}

@@ -234,19 +234,11 @@ namespace Assets.DungeonGenerator
                     corridors.AddRange(firstNode.GenerateCorridors());
                     if (!firstNode.HasRoom())
                     {
-
-                        {
-
-                            ConstructRooms(firstNode, secondNode, null, components);
-
-                        }
+                        ConstructRooms(firstNode, secondNode, null, components);
                     }
                     else
-                    {
-                        {
-                            secondNode?.GenerateRoom().Construct(components.floorAsset, components.wallAsset, null);
-
-                        }
+                    {    
+                        secondNode?.GenerateRoom().Construct(components.floorAsset, components.wallAsset, null);
                     }
                 };
             }
@@ -278,11 +270,14 @@ namespace Assets.DungeonGenerator
 
         public void PlaceContent(DungeonComponents components)
         {
-            var endpoint = GameObject.Instantiate(components.spawnPoint);
-            var lastRoom = rooms.Last();
+            // Place player at start of dungeon
+            BSPNode firstRoom = rooms.First();
+            components.startingPoint.Spawn(firstRoom.Bounds.center);
 
-            endpoint.transform.position = lastRoom.Bounds.center;
-            Debug.Log(dungeon.playerStartPos);
+            // Place dungeon exit point
+            BSPNode lastRoom = rooms.Last();
+            GameObject.Instantiate(components.exit, lastRoom.Bounds.center, Quaternion.identity);
+
 
             for (var i = 0; i < rooms.Count; i++)
             {

@@ -11,7 +11,6 @@ namespace Assets.DungeonGenerator
             float height = Random.Range(minSize.y, maxSize.y);
 
             return new Vector2(width, height);
-
         }
 
         internal static Vector3 Vec2ToVec3(Vector2 vector, float y)

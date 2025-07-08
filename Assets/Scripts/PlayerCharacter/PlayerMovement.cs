@@ -6,15 +6,11 @@ namespace Assets.PlayerCharacter
 {
     public class PlayerMovement : MonoBehaviour
     {
-        [SerializeField]
-        private AudioClip footstepClip;
         internal float speed { get; set; }
         private CharacterController characterController;
         private Vector3 newPos;
         private Quaternion currentRotation;
         private Animator animator;
-        private AudioSource audioSource;
-
 
         void Awake()
         {
@@ -24,7 +20,6 @@ namespace Assets.PlayerCharacter
 
             Cursor.lockState = CursorLockMode.Confined;
             currentRotation = transform.rotation;
-            audioSource = GetComponent<AudioSource>();
         }
 
         internal void OnMovePerformed(InputAction.CallbackContext context)
@@ -49,12 +44,6 @@ namespace Assets.PlayerCharacter
             transform.rotation = currentRotation;
 
             characterController.SimpleMove(speed * newPos);
-        }
-
-        public void OnFootstep()
-        {
-            audioSource.clip = footstepClip;
-            audioSource.Play();
         }
     }
 }

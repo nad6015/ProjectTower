@@ -23,7 +23,7 @@ public class EnemyController : MonoBehaviour
         graphAgent.BlackboardReference.SetVariableValue("Speed", speed);
         graphAgent.BlackboardReference.SetVariableValue("Health", (float)self.GetStat(FighterStats.HEALTH));
 
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
         animator.SetFloat("MotionSpeed", 1);
         animator.SetFloat("Speed", speed);
 

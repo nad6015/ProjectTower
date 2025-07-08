@@ -12,7 +12,7 @@ namespace Assets.PlayerCharacter
 
         private void Start()
         {
-            animator = GetComponent<Animator>();
+            animator = GetComponentInChildren<Animator>();
         }
 
         internal void OnAttackCancelled(InputAction.CallbackContext context)
@@ -26,11 +26,6 @@ namespace Assets.PlayerCharacter
         {
             animator.SetBool("Attack", true);
             GetComponent<Fighter>().IsAttacking(true);
-        }
-
-        public void Hit()
-        {
-            // TODO: Play audio
         }
     }
 }

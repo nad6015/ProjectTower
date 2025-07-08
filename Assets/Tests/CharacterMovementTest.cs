@@ -54,16 +54,16 @@ public class CharacterMovementTest : InputTestFixture
     [UnityTest]
     public IEnumerator ShouldBeAbleToAttackEnemy()
     {
-        character = GameObject.Instantiate(player, new Vector3(0, 1), Quaternion.identity);
-
         Fighter enemy = GameObject.Find("Enemy").GetComponent<Fighter>();
-        Vector3 enemyPosition = new Vector3(enemy.transform.position.x, character.transform.position.y, enemy.transform.position.z - 1);
-
-        character.transform.position = enemyPosition;
+        Vector3 enemyPosition = new Vector3(enemy.transform.position.x, 1, enemy.transform.position.z - 1);
+        
+        character = GameObject.Instantiate(player, enemyPosition, Quaternion.LookRotation(enemyPosition));
 
         Assert.That(enemy.GetStat(FighterStats.HEALTH), Is.EqualTo(5));
         Press(mouse.leftButton);
         yield return new WaitForSeconds(1f);
+        Release(mouse.leftButton);
+
 
         Assert.That(enemy.GetStat(FighterStats.HEALTH), Is.EqualTo(4));
     }
