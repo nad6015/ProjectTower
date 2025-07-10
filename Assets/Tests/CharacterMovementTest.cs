@@ -23,7 +23,6 @@ public class CharacterMovementTest : InputTestFixture
 
         Press(mouse.rightButton);
         Release(mouse.rightButton);
-
     }
 
     [UnityTest]

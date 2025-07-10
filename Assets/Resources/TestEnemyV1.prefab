@@ -84,6 +84,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Armature
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5866666021909216657, guid: 36078ab0369161e49a29d349ae3e0739, type: 3}
       propertyPath: m_Controller
       value: 
@@ -131,6 +135,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 5
   attack: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &1558052909110614210
 MonoBehaviour:
   m_ObjectHideFlags: 0

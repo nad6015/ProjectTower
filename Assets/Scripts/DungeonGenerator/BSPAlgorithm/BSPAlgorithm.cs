@@ -270,20 +270,20 @@ namespace Assets.DungeonGenerator
 
         public void PlaceContent(DungeonComponents components)
         {
-            // Place player at start of dungeon
-            BSPNode firstRoom = rooms.First();
-            components.startingPoint.Spawn(firstRoom.Bounds.center);
-
             // Place dungeon exit point
             BSPNode lastRoom = rooms.Last();
-            GameObject.Instantiate(components.exit, lastRoom.Bounds.center, Quaternion.identity);
-
+            DungeonExit exit = GameObject.Instantiate(components.exit, DungeonGeneratorUtils.Vec2ToVec3(lastRoom.Bounds.center), Quaternion.identity);
+            exit.name = "DungeonExit";
 
             for (var i = 0; i < rooms.Count; i++)
             {
                 GenerateEnemies(rooms[i], components.enemy);
                 GenerateItems(rooms[i], components.item);
             }
+
+            // Place player at start of dungeon
+            BSPNode firstRoom = rooms.First();
+            components.startingPoint.Spawn(DungeonGeneratorUtils.Vec2ToVec3(firstRoom.Bounds.center));
         }
 
         private void GenerateItems(BSPNode bspNode, GameObject item)

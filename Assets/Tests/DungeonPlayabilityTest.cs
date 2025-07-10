@@ -1,24 +1,42 @@
 using System.Collections;
+using Assets.DungeonGenerator;
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
-public class NewTestScript
+public class DungeonPlayability
 {
-    // A Test behaves as an ordinary method
-    [Test]
-    public void NewTestScriptSimplePasses()
+    private int testTimeInSeconds = 60;
+    [SetUp]
+    public void Setup()
     {
-        // Use the Assert class to test conditions
+        SceneManager.LoadScene("Scenes/Tests/DungeonGenerator");
+        testTimeInSeconds = 60;
     }
 
     // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
     // `yield return null;` to skip a frame.
     [UnityTest]
-    public IEnumerator NewTestScriptWithEnumeratorPasses()
+    [Repeat(10)] // TODO: Increase to 500
+    public IEnumerator ShouldReachDungeonEnd()
     {
-        // Use the Assert class to test conditions.
-        // Use yield to skip a frame.
-        yield return null;
+        GameObject.Find("DungeonMaster").GetComponent<DungeonMaster>().OnNewDungeon();
+        NavMeshAgent testAgent = GameObject.FindGameObjectWithTag("Player").transform.parent.GetComponent<NavMeshAgent>();
+
+        do
+        {
+            yield return new WaitForSeconds(1);
+            testTimeInSeconds--;
+        }
+        while (hasReachedDestination(testAgent) && testTimeInSeconds > 0);
+        Assert.That(hasReachedDestination(testAgent));
+    }
+
+    private bool hasReachedDestination(NavMeshAgent agent)
+    {
+        // destination condition code referenced from - https://discussions.unity.com/t/how-can-i-tell-when-a-navmeshagent-has-reached-its-destination/52403
+        return agent.hasPath || agent.velocity.sqrMagnitude == 0f;
     }
 }
