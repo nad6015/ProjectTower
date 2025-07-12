@@ -5,20 +5,10 @@ using UnityEngine.TestTools;
 
 public class CameraTests
 {
-    // A Test behaves as an ordinary method
-    [Test]
-    public void CameraTestsSimplePasses()
-    {
-        // Use the Assert class to test conditions
-    }
-
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
     [UnityTest]
-    public IEnumerator CameraTestsWithEnumeratorPasses()
+    public IEnumerator CameraFollowsPlayerTests()
     {
-        // Use the Assert class to test conditions.
-        // Use yield to skip a frame.
         yield return null;
+        Assert.Fail();
     }
 }

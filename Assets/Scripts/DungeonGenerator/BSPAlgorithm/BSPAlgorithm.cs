@@ -40,6 +40,11 @@ namespace Assets.DungeonGenerator
 
         private void ConnectRooms()
         {
+            ConnectRooms(connectedRooms);
+        }
+
+        private void ConnectRooms(Graph<BSPNode> connectedRooms)
+        {
             List<Tuple<BSPNode, BSPNode>> roomToConnect = new();
             List<BSPNode> roomsWithoutConnections = new();
 
@@ -72,7 +77,7 @@ namespace Assets.DungeonGenerator
                 }
             }
 
-            foreach (var roomNode in connectedRooms.GraphDict)
+            foreach (var roomNode in connectedRooms)
             {
                 BSPNode room = roomNode.Key;
                 if (room == rooms[0] || room == rooms[^1])
@@ -105,7 +110,7 @@ namespace Assets.DungeonGenerator
                 }
             }
 
-            foreach (KeyValuePair<BSPNode, List<BSPNode>> rooms in connectedRooms.GraphDict)
+            foreach (KeyValuePair<BSPNode, List<BSPNode>> rooms in connectedRooms)
             {
                 rooms.Value.ForEach(r =>
                 {
