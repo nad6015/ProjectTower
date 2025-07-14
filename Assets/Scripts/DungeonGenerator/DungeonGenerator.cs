@@ -7,27 +7,31 @@ namespace Assets.DungeonGenerator
     [RequireComponent(typeof(DungeonComponents))]
     public class DungeonGenerator : MonoBehaviour
     {
-        private DungeonComponents components;
-        private readonly IDungeonAlgorithm grammarDungeonGenerator;
+        private DungeonComponents _components;
+
+        private readonly IDungeonAlgorithm _grammarDungeonGenerator;
+        private Dungeon _dungeon;
 
         private void Start()
         {
             // grammarDungeonGenerator = new MissionGrammarAlgorithm();
-            components = GetComponent<DungeonComponents>();
+            _components = GetComponent<DungeonComponents>();
+            _components.navMesh = GetComponent<NavMeshSurface>();
         }
 
-        /**
-        *  Generates a new dungeon using the provided dungeon parameters.
-        */
-        public void GenerateDungeon(Dungeon dungeon)
+        /// <summary>
+        /// Generates a new dungeon using the provided dungeon parameters.
+        /// </summary>
+        /// <param name="parameters">the parameters for the dungeon.</param>
+        public void GenerateDungeon(DungeonParameters parameters)
         {
             // TODO: Run dungeon parameters through misson grammar, then pass result to BSP algorithm
             // TODO: Might need to build navmesh before placing enemies
-            IDungeonAlgorithm algorithm = new BSPAlgorithm();
-            algorithm.GenerateRepresentation(dungeon);
-            algorithm.ConstructDungeon(components);
-            algorithm.PlaceContent(components);
-            GetComponent<NavMeshSurface>().BuildNavMesh();
+            IDungeonAlgorithm grammarDungeonGenerator = new GraphGrammarAlgorithm(parameters, _components);
+            grammarDungeonGenerator.GenerateDungeon();
+
+            IDungeonAlgorithm algorithm = new BSPAlgorithm(_dungeon);
+            algorithm.GenerateDungeon();
         }
     }
 }

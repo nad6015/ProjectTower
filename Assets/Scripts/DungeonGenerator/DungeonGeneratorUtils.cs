@@ -22,5 +22,12 @@ namespace Assets.DungeonGenerator
         {
             return new Vector3(vector.x, 1, vector.y);
         }
+
+        internal static Vector3 GetRandomPointWithinBounds(Rect bounds)
+        {
+            float x = Random.Range(bounds.x + 1, bounds.xMax - 1);
+            float y = Random.Range(bounds.y + 1, bounds.yMax - 1);
+            return new(x, 0, y);
+        }
     }
 }

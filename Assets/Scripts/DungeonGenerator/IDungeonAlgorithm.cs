@@ -4,13 +4,12 @@ using UnityEngine;
 
 namespace Assets.DungeonGenerator
 {
-	/**
-	 * Interface for all dungeon algorithms. Used to ensure all algorithms have a consistent contract.
-	 */
-	internal interface IDungeonAlgorithm
+    /// <summary>
+    /// Interface for all dungeon algorithms. Used to ensure all algorithms have a consistent contract.
+    /// </summary>
+    internal interface IDungeonAlgorithm
 	{
-		void GenerateRepresentation(Dungeon dungeon);
-        void ConstructDungeon(DungeonComponents room);
-        void PlaceContent(DungeonComponents components);
+
+        void GenerateDungeon();
     }
 }

@@ -1,8 +1,3 @@
-
-using System;
-using System.Collections.Generic;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Assets.DungeonGenerator
@@ -23,7 +18,7 @@ namespace Assets.DungeonGenerator
         // Place corridor
         internal void Construct(GameObject corridorAsset, GameObject floorAsset)
         {
-            // Don[t place anything if corridor has no heightor width. This means the rooms share a boundary
+            // Don't place anything if corridor has no height or width. This means the rooms share a boundary
             if(Mathf.Approximately(Bounds.width,0)|| Mathf.Approximately(Bounds.height, 0))
             {
                 transform.position = new(Bounds.x, 0, Bounds.y);
@@ -42,11 +37,6 @@ namespace Assets.DungeonGenerator
                 float wallX = axis == DungeonAxis.VERTICAL ? Bounds.position.x : Bounds.position.x + i;
                 float wallY = axis == DungeonAxis.VERTICAL ? Bounds.position.y + i : Bounds.position.y;
 
-                //if(Physics.Raycast(new Vector3(wallX+.5f, 2f, wallY-0.5f), Vector3.down, out hit))
-                //{
-                //    GameObject.Destroy(hit.collider.gameObject);
-                //}
-
                 GameObject corridor = Instantiate(corridorAsset);
                 corridor.transform.localPosition = new Vector3(wallX, 0, wallY);
                 corridor.name = "Corridor";
@@ -54,11 +44,6 @@ namespace Assets.DungeonGenerator
 
                 wallX = axis == DungeonAxis.VERTICAL ? Bounds.position.x + Bounds.size.x : Bounds.position.x + i;
                 wallY = axis == DungeonAxis.VERTICAL ? Bounds.position.y + i : Bounds.position.y + Bounds.size.y;
-
-                //if (Physics.Raycast(new Vector3(wallX, 2f, wallY), Vector3.down, out hit))
-                //{
-                //    GameObject.Destroy(hit.collider.gameObject);
-                //}
 
                 GameObject corridor2 = Instantiate(corridorAsset);
                 corridor2.transform.localPosition = new Vector3(wallX, 0, wallY);

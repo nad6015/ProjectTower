@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tests/DungeonGenerator.unity
     guid: 94219d9ff51707f4d83a74bb90869945
+  - enabled: 1
+    path: Assets/Scenes/Tests/BSPAlgorithm.unity
+    guid: d0d2d4990f3153b44a006e3a96259763
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 99f9c9493070a9d4c979a8fec7c5a8d3, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

@@ -11,9 +11,11 @@ namespace Assets.DungeonGenerator
     public class Graph<T>
     {
         public int Count { get { return _graph.Count; } }
+
         // The internal data representation of the graph.
         // Each node T has a list of the nodes connected to it.
         private Dictionary<T, List<T>> _graph;
+
         /// <summary>
         /// Constructor. Creates an empty graph.
         /// </summary>
@@ -63,6 +65,11 @@ namespace Assets.DungeonGenerator
             }
         }
 
+        /// <summary>
+        /// Checks if a given node is in the graph.
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns>true if the node is in the graph.</returns>
         public bool Contains(T node)
         {
             return _graph.ContainsKey(node);
@@ -96,7 +103,7 @@ namespace Assets.DungeonGenerator
         }
 
         private void VisitNode(T node, HashSet<T> visitedNodes)
-        { 
+        {
             foreach (var item in _graph[node])
             {
                 if (visitedNodes.Contains(item))

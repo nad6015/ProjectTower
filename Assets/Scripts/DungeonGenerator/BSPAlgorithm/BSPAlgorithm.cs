@@ -7,15 +7,22 @@ using System.Linq;
 namespace Assets.DungeonGenerator
 {
     using Random = UnityEngine.Random;
-    internal partial class BSPAlgorithm : IDungeonAlgorithm
+    public class BSPAlgorithm : IDungeonAlgorithm
     {
-        public BSPNode bspTreeRoot;
+        private BSPNode bspTreeRoot;
         private List<BSPNode> bspTree;
         private List<BSPNode> rooms;
-        private List<DungeonCorridor> corridors = new List<DungeonCorridor>();
+        private readonly List<DungeonCorridor> _corridors = new();
         private Graph<BSPNode> connectedRooms = new();
 
-        private Dungeon dungeon;
+        private readonly Dungeon _dungeon;
+        private readonly DungeonComponents _components;
+
+        public BSPAlgorithm(Dungeon dungeon) 
+        {
+            this._dungeon = dungeon;
+            this._components = dungeon.Components;
+        }
 
         /// <summary>
         /// Generates the representation of rooms in a dungeon. The pseudocode for this algorithm is as follows:
@@ -25,17 +32,22 @@ namespace Assets.DungeonGenerator
         ///    4. Repeat for the other partition.
         /// </summary>
         /// 
-        public void GenerateRepresentation(Dungeon dungeon)
+        public void GenerateDungeon()
         {
             bspTree = new List<BSPNode>();
 
-            this.dungeon = dungeon;
             DungeonAxis axis = RandomAxis();
-            bspTreeRoot = new BSPNode(this.dungeon, axis);
+            bspTreeRoot = new BSPNode(_dungeon, axis);
             rooms = new List<BSPNode>();
 
             PartitionSpace(bspTreeRoot, axis);
-            ConnectRooms();
+
+            if (rooms.Count > 0)
+            {
+                ConnectRooms();
+                ConstructDungeon();
+                PlaceContent();
+            }
         }
 
         private void ConnectRooms()
@@ -60,11 +72,11 @@ namespace Assets.DungeonGenerator
                     }
                     continue;
                 }
-                if (firstRoom.IsRoomMinSize(dungeon.MinRoomSize))
+                if (firstRoom.IsRoomMinSize())
                 {
-                    Rect overlappingXBounds = new Rect(firstRoom.Bounds.width, firstRoom.Bounds.y, firstRoom.Bounds.xMax + secondRoom.Bounds.xMax, firstRoom.Bounds.height);
+                    Rect overlappingXBounds = new(firstRoom.Bounds.width, firstRoom.Bounds.y, firstRoom.Bounds.xMax + secondRoom.Bounds.xMax, firstRoom.Bounds.height);
 
-                    Rect overlappingYBounds = new Rect(firstRoom.Bounds.x, firstRoom.Bounds.height, firstRoom.Bounds.width, firstRoom.Bounds.yMax + secondRoom.Bounds.yMax);
+                    Rect overlappingYBounds = new(firstRoom.Bounds.x, firstRoom.Bounds.height, firstRoom.Bounds.width, firstRoom.Bounds.yMax + secondRoom.Bounds.yMax);
 
                     if (overlappingXBounds.Overlaps(secondRoom.Bounds) || overlappingYBounds.Overlaps(secondRoom.Bounds))
                     {
@@ -114,7 +126,7 @@ namespace Assets.DungeonGenerator
             {
                 rooms.Value.ForEach(r =>
                 {
-                    rooms.Key.ConnectTo(r, dungeon.MinCorridorSize);
+                    rooms.Key.ConnectTo(r, _dungeon.CorridorMinSize);
                 });
             }
 
@@ -129,7 +141,7 @@ namespace Assets.DungeonGenerator
         private void PartitionSpace(BSPNode node, DungeonAxis axis)
         {
             bspTree.Add(node);
-            if (node.IsRoomMinSize(dungeon.MinRoomSize))
+            if (node.IsRoomMinSize())
             {
                 rooms.Add(node);
                 return;
@@ -165,13 +177,13 @@ namespace Assets.DungeonGenerator
 
             if (axis == DungeonAxis.HORIZONTAL)
             {
-                height = Mathf.Round(Random.Range(dungeon.MinRoomSize.y, node.Bounds.height));
+                height = Mathf.Round(Random.Range(_dungeon.RoomMinSize.y, node.Bounds.height));
                 rightHeight -= height;
 
-                if (rightHeight < dungeon.MinRoomSize.y)
+                if (rightHeight < _dungeon.RoomMinSize.y)
                 {
-                    height -= dungeon.MinRoomSize.y;
-                    rightHeight = dungeon.MinRoomSize.y;
+                    height -= _dungeon.RoomMinSize.y;
+                    rightHeight = _dungeon.RoomMinSize.y;
                 }
 
                 if (height + rightHeight < nodeSize.height)
@@ -180,16 +192,16 @@ namespace Assets.DungeonGenerator
                 }
 
                 y += height;
-                shouldCreateOneNode = height < dungeon.MinRoomSize.y && rightHeight >= dungeon.MinRoomSize.y;
+                shouldCreateOneNode = height < _dungeon.RoomMinSize.y && rightHeight >= _dungeon.RoomMinSize.y;
             }
             else
             {
-                width = Mathf.Round(Random.Range(dungeon.MinRoomSize.x, node.Bounds.width));
+                width = Mathf.Round(Random.Range(_dungeon.RoomMinSize.x, node.Bounds.width));
                 rightWidth -= width;
-                if (rightWidth < dungeon.MinRoomSize.x)
+                if (rightWidth < _dungeon.RoomMinSize.x)
                 {
-                    width -= dungeon.MinRoomSize.x;
-                    rightWidth = dungeon.MinRoomSize.x;
+                    width -= _dungeon.RoomMinSize.x;
+                    rightWidth = _dungeon.RoomMinSize.x;
                 }
 
                 if (width + rightWidth < nodeSize.width)
@@ -198,13 +210,13 @@ namespace Assets.DungeonGenerator
                 }
 
                 x += width;
-                shouldCreateOneNode = width < dungeon.MinRoomSize.x && rightWidth >= dungeon.MinRoomSize.x;
+                shouldCreateOneNode = width < _dungeon.RoomMinSize.x && rightWidth >= _dungeon.RoomMinSize.x;
             }
 
             if (shouldCreateOneNode)
             {
-                width = Mathf.Round(Random.Range(dungeon.MinRoomSize.x, nodeSize.width - 1));
-                height = Mathf.Round(Random.Range(dungeon.MinRoomSize.y, nodeSize.height - 1));
+                width = Mathf.Round(Random.Range(_dungeon.RoomMinSize.x, nodeSize.width - 1));
+                height = Mathf.Round(Random.Range(_dungeon.RoomMinSize.y, nodeSize.height - 1));
             }
 
             Rect leftSpace = new(nodeSize.x, nodeSize.y, width - 2, height - 2);
@@ -217,115 +229,90 @@ namespace Assets.DungeonGenerator
             }
         }
 
+        // TODO: Should be apart of DungeonMaster
         private DungeonAxis RandomAxis()
         {
-            if (Random.value > dungeon.rootDungeonSplit)
-            {
-                return DungeonAxis.VERTICAL;
-            }
+            // TODO
             return DungeonAxis.HORIZONTAL;
         }
 
-        public void ConstructDungeon(DungeonComponents components)
+        public void ConstructDungeon()
         {
             for (int i = 0; i < rooms.Count; i++)
             {
                 BSPNode firstNode = rooms[i];
                 BSPNode secondNode = i != rooms.Count - 1 ? rooms[i + 1] : null;
 
-                if (firstNode.IsRoomMinSize(dungeon.MinRoomSize))
+                if (firstNode.IsRoomMinSize())
                 {
 
-                    corridors.AddRange(firstNode.GenerateCorridors());
+                    _corridors.AddRange(firstNode.GenerateCorridors());
                     if (!firstNode.HasRoom())
                     {
-                        ConstructRooms(firstNode, secondNode, null, components);
+                        ConstructRooms(firstNode, secondNode, null, _components);
                     }
                     else
-                    {    
-                        secondNode?.GenerateRoom().Construct(components.floorAsset, components.wallAsset, null);
+                    {
+                        secondNode?.GenerateRoom().Construct(_components.floorAsset, _components.wallAsset, null);
                     }
                 };
             }
 
             foreach (var room in rooms)
             {
-                for (var i = 0; corridors.Count > i; i++)
+                for (var i = 0; _corridors.Count > i; i++)
                 {
-                    corridors[i].Construct(components.corridorAsset, components.floorAsset);
-                    room?.Room.Modify(corridors[i]);
+                    _corridors[i].Construct(_components.corridorAsset, _components.floorAsset);
+                    room?.Room.Modify(_corridors[i]);
                 }
             }
         }
 
         private void ConstructRooms(BSPNode firstNode, BSPNode secondNode, DungeonCorridor corridor, DungeonComponents components)
         {
-            if (firstNode.IsRoomMinSize(dungeon.MinRoomSize) && !firstNode.HasRoom())
+            if (firstNode.IsRoomMinSize() && !firstNode.HasRoom())
             {
                 DungeonRoom room = firstNode.GenerateRoom();
                 room.Construct(components.floorAsset, components.wallAsset, corridor);
             }
 
-            if (secondNode != null && secondNode.IsRoomMinSize(dungeon.MinRoomSize) && !secondNode.HasRoom())
+            if (secondNode != null && secondNode.IsRoomMinSize() && !secondNode.HasRoom())
             {
                 DungeonRoom room = secondNode.GenerateRoom();
                 room.Construct(components.floorAsset, components.wallAsset, corridor);
             }
         }
 
-        public void PlaceContent(DungeonComponents components)
+        private void PlaceContent()
         {
             // Place dungeon exit point
             BSPNode lastRoom = rooms.Last();
-            DungeonExit exit = GameObject.Instantiate(components.exit, DungeonGeneratorUtils.Vec2ToVec3(lastRoom.Bounds.center), Quaternion.identity);
+            DungeonExit exit = GameObject.Instantiate(_components.exit, DungeonGeneratorUtils.Vec2ToVec3(lastRoom.Bounds.center), Quaternion.identity);
             exit.name = "DungeonExit";
 
             for (var i = 0; i < rooms.Count; i++)
             {
-                GenerateEnemies(rooms[i], components.enemy);
-                GenerateItems(rooms[i], components.item);
+                PlaceContent(rooms[i].Room);
             }
 
+            _components.navMesh.BuildNavMesh();
+
+            // Generate navmesh
             // Place player at start of dungeon
             BSPNode firstRoom = rooms.First();
-            components.startingPoint.Spawn(DungeonGeneratorUtils.Vec2ToVec3(firstRoom.Bounds.center));
+            _components.startingPoint.Spawn(DungeonGeneratorUtils.Vec2ToVec3(firstRoom.Bounds.center));
         }
 
-        private void GenerateItems(BSPNode bspNode, GameObject item)
+        private void PlaceContent(DungeonRoom room)
         {
-            if (Random.value > dungeon.itemSpawnRate)
+            foreach (KeyValuePair<GameObject, int> content in room.Contents)
             {
-                return;
+                for (int i = 0; i < content.Value; i++)
+                {
+                    GameObject gameObject = GameObject.Instantiate(content.Key);
+                    gameObject.transform.position += DungeonGeneratorUtils.GetRandomPointWithinBounds(room.Bounds);
+                }
             }
-
-            int numberOfItems = Random.Range(dungeon.minItemsPerRoom, dungeon.maxItemsPerRoom);
-            for (int i = 0; i < numberOfItems; i++)
-            {
-                GameObject gameObject = GameObject.Instantiate(item);
-                gameObject.transform.position += GetRandomPointWithinBounds(bspNode.Bounds);
-            }
-        }
-
-        private void GenerateEnemies(BSPNode bspNode, GameObject enemy)
-        {
-            if (Random.value > dungeon.enemySpawnRate)
-            {
-                return;
-            }
-
-            int numberOfEnemies = Random.Range(dungeon.minEnemiesPerRoom, dungeon.maxEnemiesPerRoom);
-            for (int i = 0; i < numberOfEnemies; i++)
-            {
-                GameObject gameObject = GameObject.Instantiate(enemy);
-                gameObject.transform.position += GetRandomPointWithinBounds(bspNode.Bounds);
-            }
-        }
-
-        Vector3 GetRandomPointWithinBounds(Rect bounds)
-        {
-            float x = Random.Range(bounds.x + 1, bounds.xMax - 1);
-            float y = Random.Range(bounds.y + 1, bounds.yMax - 1);
-            return new(x, 0, y);
         }
     }
 }

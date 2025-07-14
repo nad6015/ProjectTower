@@ -42,12 +42,13 @@ namespace Assets.DungeonGenerator
 
         public void OnNewDungeon()
         {
-            dungeonGenerator.GenerateDungeon(CreateDungeon());
+            dungeonGenerator.GenerateDungeon(GenerateDungeonParameters());
         }
 
-        Dungeon CreateDungeon()
+        DungeonParameters GenerateDungeonParameters()
         {
-            return new Dungeon(RandomDungeonSize(), MinRoomSize, MaxRoomSize, MinCorridorSize,
+            // TODO: Run FSM on game state
+            return new DungeonParameters(RandomDungeonSize(), MinRoomSize, MaxRoomSize, MinCorridorSize,
                 enemySpawnRate, itemSpawnRate, rootDungeonSplit, minItemsPerRoom, maxItemsPerRoom,
                 minEnemiesPerRoom, maxEnemiesPerRoom);
         }

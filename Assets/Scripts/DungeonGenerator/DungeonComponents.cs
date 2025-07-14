@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Unity.AI.Navigation;
+using UnityEngine;
+using UnityEngine.AI;
 
 namespace Assets.DungeonGenerator
 {
@@ -11,5 +13,6 @@ namespace Assets.DungeonGenerator
         public GameObject item;
         public SpawnPoint startingPoint;
         public DungeonExit exit;
+        public NavMeshSurface navMesh;
     }
 }

@@ -1,9 +1,4 @@
-
-using Assets.DungeonGenerator.Components;
-using System;
 using System.Collections.Generic;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Assets.DungeonGenerator
@@ -12,9 +7,15 @@ namespace Assets.DungeonGenerator
     {
         private static int roomId = 0;
         public Rect Bounds { get; set; }
+        public Dictionary<GameObject, int> Contents { get; internal set; }
 
         private List<Rect> corridors;
         private List<GameObject> walls;
+
+        private void Awake()
+        {
+            Contents = new();
+        }
 
         public void Construct(GameObject floorAsset, GameObject wallAsset, DungeonCorridor corridor)
         {
@@ -82,7 +83,7 @@ namespace Assets.DungeonGenerator
                 }
             }
 
-          //  Modify(corridor);
+            //  Modify(corridor);
         }
 
         public void Modify(DungeonCorridor corridor)

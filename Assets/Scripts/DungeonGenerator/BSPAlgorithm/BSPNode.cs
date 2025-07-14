@@ -1,16 +1,13 @@
 ﻿using Assets.DungeonGenerator.Components;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Animations;
 
 namespace Assets.DungeonGenerator
 {
     using Random = UnityEngine.Random;
-    internal class BSPNode
+    public class BSPNode
     {
         static int nodeId = 0;
         internal BSPNode Left { get; set; }
@@ -19,15 +16,19 @@ namespace Assets.DungeonGenerator
         internal Rect Bounds { get; set; }
         public DungeonRoom Room { get { return room; } }
 
+        internal Dungeon dungeon;
+
         private List<Tuple<Rect, DungeonAxis>> corridors = new();
 
         private readonly DungeonAxis axis;
+        
         private DungeonRoom room;
         private bool hasRoom = false;
         private string name; // TODO: This is for testing purposes.
 
         public BSPNode(Dungeon dungeon, DungeonAxis axis)
         {
+            this.dungeon = dungeon;
             Bounds = new Rect(Vector2.zero, dungeon.Size);
             this.axis = axis;
             Parent = null;
@@ -36,8 +37,7 @@ namespace Assets.DungeonGenerator
 
         public BSPNode(BSPNode parent, Rect bounds, DungeonAxis axis)
         {
-            Bounds = bounds;
-            this.axis = axis;
+   
 
             if (parent.Left == null)
             {
@@ -53,6 +53,10 @@ namespace Assets.DungeonGenerator
             {
                 throw new ArgumentException("Parent already has two children.");
             }
+            
+            Bounds = bounds;
+            this.axis = axis;
+            dungeon = parent.dungeon;
             name = parent.name + ".node" + nodeId++;
         }
 
@@ -81,19 +85,17 @@ namespace Assets.DungeonGenerator
             return dc;
         }
 
-        internal bool IsRoomMinSize(Vector2 minSize)
+        internal bool IsRoomMinSize()
         {
-            return minSize.x >= Bounds.width || minSize.y >= Bounds.height;
+            return dungeon.RoomMinSize.x >= Bounds.width || dungeon.RoomMinSize.y >= Bounds.height;
         }
 
         private void GenerateCorridor(BSPNode firstRoom, BSPNode secondRoom, Vector2 minCorridorSize)
         {
             Vector2 position, position2, size;
-            DungeonAxis axis = DungeonAxis.HORIZONTAL;
+            DungeonAxis axis;
 
-
-
-            Rect overlappingBounds = new Rect(firstRoom.Bounds.width, firstRoom.Bounds.y, firstRoom.Bounds.xMax + secondRoom.Bounds.xMax, firstRoom.Bounds.height);
+            Rect overlappingBounds = new(firstRoom.Bounds.width, firstRoom.Bounds.y, firstRoom.Bounds.xMax + secondRoom.Bounds.xMax, firstRoom.Bounds.height);
             if (overlappingBounds.Overlaps(secondRoom.Bounds))
             {
                 axis = DungeonAxis.HORIZONTAL;

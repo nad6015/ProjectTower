@@ -1,6 +1,6 @@
 ﻿namespace Assets.DungeonGenerator
 {
-    enum DungeonAxis
+    public enum DungeonAxis
     {
         HORIZONTAL,
         VERTICAL

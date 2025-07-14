@@ -8,7 +8,7 @@ using UnityEngine.TestTools;
 
 public class DungeonPlayability
 {
-    private int testTimeInSeconds = 60;
+    private int testTimeInSeconds;
     [SetUp]
     public void Setup()
     {
@@ -16,8 +16,6 @@ public class DungeonPlayability
         testTimeInSeconds = 60;
     }
 
-    // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-    // `yield return null;` to skip a frame.
     [UnityTest]
     [Repeat(10)] // TODO: Increase to 500
     public IEnumerator ShouldReachDungeonEnd()
