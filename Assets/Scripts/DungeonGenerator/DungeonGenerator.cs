@@ -10,7 +10,7 @@ namespace Assets.DungeonGenerator
         private DungeonComponents _components;
 
         private readonly IDungeonAlgorithm _grammarDungeonGenerator;
-        private Dungeon _dungeon;
+        private readonly Dungeon _dungeon;
 
         private void Start()
         {
@@ -30,7 +30,7 @@ namespace Assets.DungeonGenerator
             IDungeonAlgorithm grammarDungeonGenerator = new GraphGrammarAlgorithm(parameters, _components);
             grammarDungeonGenerator.GenerateDungeon();
 
-            IDungeonAlgorithm algorithm = new BSPAlgorithm(_dungeon);
+            IDungeonAlgorithm algorithm = new BSPAlgorithm(new Dungeon(parameters, _components));
             algorithm.GenerateDungeon();
         }
     }

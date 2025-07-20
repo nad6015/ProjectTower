@@ -14,7 +14,7 @@ namespace Assets.DungeonGenerator
 
         // The internal data representation of the graph.
         // Each node T has a list of the nodes connected to it.
-        private Dictionary<T, List<T>> _graph;
+        private readonly Dictionary<T, List<T>> _graph;
 
         /// <summary>
         /// Constructor. Creates an empty graph.
@@ -31,7 +31,8 @@ namespace Assets.DungeonGenerator
         /// <param name="node"> the new node to add.</param>
         public void Add(T node)
         {
-            if (!_graph.ContainsKey(node))
+            // TODO: TEST FOR NULL NODE
+            if (node != null && !_graph.ContainsKey(node))
             {
                 _graph[node] = new List<T>();
             }
@@ -46,19 +47,29 @@ namespace Assets.DungeonGenerator
         /// <param name="connectedNodes">the nodes connected to this new node.</param>
         public void Add(T node, params T[] connectedNodes)
         {
+            if (node == null)
+            {
+                return;
+            }
+
             Add(node);
+
+            if (connectedNodes == null)
+            {
+                return;
+            }
 
             List<T> nodes = _graph[node];
 
             foreach (var connectedNode in connectedNodes)
             {
                 Add(connectedNode);
-                if (!nodes.Contains(connectedNode))
+                if (connectedNode != null && !nodes.Contains(connectedNode))
                 {
                     nodes.Add(connectedNode);
                 }
 
-                if (!_graph[connectedNode].Contains(node))
+                if (connectedNode != null && !_graph[connectedNode].Contains(node))
                 {
                     _graph[connectedNode].Add(node);
                 }
@@ -135,6 +146,30 @@ namespace Assets.DungeonGenerator
         internal void Remove(T node)
         {
             _graph.Remove(node);
+        }
+
+        internal void ForEach(Action<T> value)
+        {
+            HashSet<T> visitedNodes = new();
+            T firstNode = _graph.First().Key;
+            visitedNodes.Add(firstNode);
+            value(firstNode);
+            VisitNode2(firstNode, visitedNodes, value);
+            
+        }
+
+        private void VisitNode2(T node, HashSet<T> visitedNodes, Action<T> value)
+        {
+            foreach (var item in _graph[node])
+            {
+                if (visitedNodes.Contains(item))
+                {
+                    continue;
+                }
+                visitedNodes.Add(item);
+                value(item);
+                VisitNode2(item, visitedNodes, value);
+            }
         }
     }
 }

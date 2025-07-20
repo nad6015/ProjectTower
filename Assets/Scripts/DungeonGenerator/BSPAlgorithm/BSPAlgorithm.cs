@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using Assets.DungeonGenerator.Components;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -9,16 +8,16 @@ namespace Assets.DungeonGenerator
     using Random = UnityEngine.Random;
     public class BSPAlgorithm : IDungeonAlgorithm
     {
-        private BSPNode bspTreeRoot;
-        private List<BSPNode> bspTree;
-        private List<BSPNode> rooms;
+        private BSPNode _root;
+        private List<BSPNode> _rooms;
         private readonly List<DungeonCorridor> _corridors = new();
-        private Graph<BSPNode> connectedRooms = new();
+        private Graph<BSPNode> _connectedRooms = new();
 
         private readonly Dungeon _dungeon;
         private readonly DungeonComponents _components;
+        private readonly int offset = 1;
 
-        public BSPAlgorithm(Dungeon dungeon) 
+        public BSPAlgorithm(Dungeon dungeon)
         {
             this._dungeon = dungeon;
             this._components = dungeon.Components;
@@ -34,15 +33,13 @@ namespace Assets.DungeonGenerator
         /// 
         public void GenerateDungeon()
         {
-            bspTree = new List<BSPNode>();
-
             DungeonAxis axis = RandomAxis();
-            bspTreeRoot = new BSPNode(_dungeon, axis);
-            rooms = new List<BSPNode>();
+            _root = new BSPNode(_dungeon, axis);
+            _rooms = new List<BSPNode>();
 
-            PartitionSpace(bspTreeRoot, axis);
+            PartitionSpace(_root, axis);
 
-            if (rooms.Count > 0)
+            if (_rooms.Count > 0)
             {
                 ConnectRooms();
                 ConstructDungeon();
@@ -52,83 +49,181 @@ namespace Assets.DungeonGenerator
 
         private void ConnectRooms()
         {
-            ConnectRooms(connectedRooms);
-        }
+            int j = 0;
+            List<BSPNode> nodes = new(_rooms);
 
-        private void ConnectRooms(Graph<BSPNode> connectedRooms)
-        {
-            List<Tuple<BSPNode, BSPNode>> roomToConnect = new();
-            List<BSPNode> roomsWithoutConnections = new();
-
-            for (int i = 0; i < rooms.Count; i++)
+            BSPNode firstRoom = nodes[0];
+            nodes.Remove(firstRoom);
+            while (nodes.Count > 0)
             {
-                BSPNode firstRoom = rooms[i];
-                BSPNode secondRoom = i != rooms.Count - 1 ? rooms[i + 1] : null;
+                BSPNode secondRoom = null;
+                float minDist = float.MaxValue;
+
+                for (int i = 0; i < nodes.Count; i++)
+                {
+                    BSPNode room = nodes[i];
+                    float dist = Vector2.Distance(firstRoom.Bounds.center, room.Bounds.center);
+
+                    if (dist < minDist)
+                    {
+                        minDist = dist;
+                        secondRoom = room;
+                    }
+
+                    ////bool isCloseVertically = Vector2.Distance(new(firstRoom.Bounds.x, firstRoom.Bounds.yMax), new(secondRoom.Bounds.x, secondRoom.Bounds.y)) < 
+                    ////     (_dungeon.MaxRoomSize.y);
+
+                    ////bool isCloseHorizontally = Vector2.Distance(new(firstRoom.Bounds.xMax, firstRoom.Bounds.y), new(secondRoom.Bounds.x, secondRoom.Bounds.y)) <
+                    ////    (_dungeon.MaxRoomSize.x);
+
+                    ////Debug.Log("rooms distance = " + Vector2.Distance(firstRoom.Bounds.max, secondRoom.Bounds.min));
+                    ////Debug.Log("is close vertically = " + isCloseVertically);
+                    ////Debug.Log("is close horizontally = " + isCloseHorizontally);
+
+                    //if (!_connectedRooms.Contains(firstRoom) || !_connectedRooms[firstRoom].Contains(secondRoom))
+                    //&& Vector2.Distance(firstRoom.Bounds.center, secondRoom.Bounds.center) < _dungeon.MinRoomSize.magnitude) 
+                    //{
+                    //Rect overlappingXBounds = new(firstRoom.Bounds.xMax, firstRoom.Bounds.y, secondRoom.Bounds.x - firstRoom.Bounds.x, firstRoom.Bounds.height);
+                    //Rect overlappingNegativeXBounds = new Rect(firstRoom.Bounds.x, firstRoom.Bounds.y, secondRoom.Bounds.xMax - firstRoom.Bounds.x, firstRoom.Bounds.height);
+
+                    ////Rect overlappingYBounds = new(secondRoom.Bounds.x, secondRoom.Bounds.yMax, secondRoom.Bounds.width, firstRoom.Bounds.y - secondRoom.Bounds.yMax);
+                    //Rect overlappingYBounds = new(firstRoom.Bounds.x, firstRoom.Bounds.yMax, firstRoom.Bounds.width, secondRoom.Bounds.y - firstRoom.Bounds.y);
+                    //Rect overlappingNegativeYBounds = new Rect(firstRoom.Bounds.x, firstRoom.Bounds.yMax, firstRoom.Bounds.width, secondRoom.Bounds.yMax - firstRoom.Bounds.y);
+
+                    //if (overlappingYBounds.Overlaps(secondRoom.Bounds))
+                    //{
+                    //    //Debug.Log("firstRoom.Bounds = " + firstRoom.Bounds);
+                    //    //Debug.Log("secondRoom.Bounds = " + secondRoom.Bounds);
+
+                    //    //Debug.Log("overlappingYBounds = " + overlappingYBounds);
+
+                    //    Debug.Log("Connecting via vertical corridor");
+                    //    if (firstRoom.Bounds.y > secondRoom.Bounds.y)
+                    //    {
+                    //        Debug.Log("First room is placed further up than second room");
+
+                    //        //secondRoom.ConnectTo(firstRoom, _dungeon.CorridorMinSize, DungeonAxis.VERTICAL);
+                    //    }
+                    //    else
+                    //    {
+                    //        Debug.Log("First room is placed further down than second room");
+                    //        //firstRoom.ConnectTo(secondRoom, _dungeon.CorridorMinSize, DungeonAxis.VERTICAL);
+                    //    }
+                    //    _connectedRooms.Add(firstRoom, secondRoom);
+                    //}
+                    //else if (overlappingXBounds.Overlaps(secondRoom.Bounds))
+                    //{
+                    //    if (firstRoom.Bounds.x > secondRoom.Bounds.x)
+                    //    {
+                    //        Debug.Log("First room is placed further right than second room");
+                    //        //   secondRoom.ConnectTo(firstRoom, _dungeon.CorridorMinSize, DungeonAxis.HORIZONTAL);
+                    //    }
+                    //    else
+                    //    {
+                    //        Debug.Log("First room is placed further left than second room");
+                    //        // firstRoom.ConnectTo(secondRoom, _dungeon.CorridorMinSize, DungeonAxis.HORIZONTAL);
+                    //    }
+                    //    //Debug.Log("firstRoom.Bounds = " + firstRoom.Bounds);
+                    //    //Debug.Log("secondRoom.Bounds = " + secondRoom.Bounds);
+
+                    //    //Debug.Log("overlappingXBounds = " + overlappingXBounds);
+                    //    //Debug.Log("Connecting via horizontal corridor");
+
+                    //    _connectedRooms.Add(firstRoom, secondRoom);
+                    //}
+                    //else
+                    //{
+                    //    Debug.Log("Not adding to connected rooms");
+                    //}
+                }
+
                 if (secondRoom == null)
                 {
-                    if ((rooms.Count % 2 == 1))
+                    Debug.Log("nodes.count = " + nodes.Count);
+                    for (int i = 0; i < _rooms.Count; i++)
                     {
-                        roomsWithoutConnections.Add(firstRoom);
+                        BSPNode node = _rooms[i];
+                        float dist = Vector2.Distance(firstRoom.Bounds.center, node.Bounds.center);
+
+                        if (node == firstRoom || secondRoom == node)
+                        {
+                            continue;
+                        }
+
+                        if (dist < minDist && dist < _dungeon.MaxRoomSize.magnitude * 2)
+                        {
+                            minDist = dist;
+                            secondRoom = node;
+                        }
                     }
-                    continue;
-                }
-                if (firstRoom.IsRoomMinSize())
-                {
-                    Rect overlappingXBounds = new(firstRoom.Bounds.width, firstRoom.Bounds.y, firstRoom.Bounds.xMax + secondRoom.Bounds.xMax, firstRoom.Bounds.height);
 
-                    Rect overlappingYBounds = new(firstRoom.Bounds.x, firstRoom.Bounds.height, firstRoom.Bounds.width, firstRoom.Bounds.yMax + secondRoom.Bounds.yMax);
-
-                    if (overlappingXBounds.Overlaps(secondRoom.Bounds) || overlappingYBounds.Overlaps(secondRoom.Bounds))
+                    firstRoom.ConnectTo(secondRoom, _dungeon.MinCorridorSize, RandomAxis());
+                    if (nodes.Contains(secondRoom))
                     {
-                        connectedRooms.Add(firstRoom, secondRoom);
+                        nodes.Remove(secondRoom);
+                        firstRoom = secondRoom;
                     }
                     else
                     {
-                        connectedRooms.Add(firstRoom);
+                        nodes.Remove(firstRoom);
+                        firstRoom = nodes[0];
                     }
+                }
+                else
+                {
+                    nodes.Remove(secondRoom);
+                    firstRoom.ConnectTo(secondRoom, _dungeon.MinCorridorSize, RandomAxis());
+                    firstRoom = secondRoom;
                 }
             }
 
-            foreach (var roomNode in connectedRooms)
-            {
-                BSPNode room = roomNode.Key;
-                if (room == rooms[0] || room == rooms[^1])
-                {
-                    continue;
-                }
-                for (int i = 0; i < rooms.Count; i++)
-                {
-                    BSPNode secondRoom = rooms[i];
-                    if (room.HasMaxCorridors() || roomNode.Value.Contains(secondRoom))
-                    {
-                        break;
-                    }
+            HashSet<BSPNode> visitedNodes = new HashSet<BSPNode>();
+            //foreach (var roomNode in rooms)
+            //{
+            //    BSPNode room = roomNode;
+            //    roomNode.Value.ForEach(r =>
+            //    {
+            //        if (!visitedNodes.Contains(r))
+            //        {
+            //            visitedNodes.Add(r);
+            //            room.ConnectTo(r, _dungeon.Parameters.CorridorMinSize);
+            //        }
+            //    });
+            //    visitedNodes.Add(room);
+            //}
+            //    for (int i = 0; i < rooms.Count; i++)
+            //    {
+            //        BSPNode secondRoom = rooms[i];
+            //        if (room.HasMaxCorridors() || roomNode.Value.Contains(secondRoom))
+            //        {
+            //            break;
+            //        }
 
-                    Rect overlappingXBounds, overlappingYBounds, overlappingNegativeXBounds, overlappingNegativeYBounds;
+            //        Rect overlappingXBounds, overlappingYBounds, overlappingNegativeXBounds, overlappingNegativeYBounds;
 
-                    overlappingXBounds = new Rect(room.Bounds.xMax, room.Bounds.y, room.Bounds.xMax + secondRoom.Bounds.xMax, room.Bounds.height);
-                    overlappingYBounds = new Rect(room.Bounds.x, room.Bounds.yMax, room.Bounds.width, room.Bounds.yMax + secondRoom.Bounds.yMax);
+            //        overlappingXBounds = new Rect(room.Bounds.xMax, room.Bounds.y, room.Bounds.xMax + secondRoom.Bounds.xMax, room.Bounds.height);
+            //        overlappingYBounds = new Rect(room.Bounds.x, room.Bounds.yMax, room.Bounds.width, room.Bounds.yMax + secondRoom.Bounds.yMax);
 
-                    overlappingNegativeXBounds = new Rect(room.Bounds.x, room.Bounds.y, secondRoom.Bounds.xMax - room.Bounds.x, room.Bounds.height);
-                    overlappingNegativeYBounds = new Rect(room.Bounds.x, room.Bounds.y, room.Bounds.width, secondRoom.Bounds.yMax - room.Bounds.y);
+            //        overlappingNegativeXBounds = new Rect(room.Bounds.x, room.Bounds.y, secondRoom.Bounds.xMax - room.Bounds.x, room.Bounds.height);
+            //        overlappingNegativeYBounds = new Rect(room.Bounds.x, room.Bounds.y, room.Bounds.width, secondRoom.Bounds.yMax - room.Bounds.y);
 
 
 
-                    if (overlappingXBounds.Overlaps(secondRoom.Bounds, true) || overlappingYBounds.Overlaps(secondRoom.Bounds, true) || overlappingNegativeXBounds.Overlaps(secondRoom.Bounds, true) || overlappingNegativeYBounds.Overlaps(secondRoom.Bounds, false))
-                    {
-                        roomToConnect.Add(new(room, secondRoom));
-                    }
+            //        if (overlappingXBounds.Overlaps(secondRoom.Bounds, true) || overlappingYBounds.Overlaps(secondRoom.Bounds, true) || overlappingNegativeXBounds.Overlaps(secondRoom.Bounds, true) || overlappingNegativeYBounds.Overlaps(secondRoom.Bounds, false))
+            //        {
+            //            nodesToConnect.Add(new(room, secondRoom));
+            //        }
 
-                }
-            }
+            //    }
+            //}
 
-            foreach (KeyValuePair<BSPNode, List<BSPNode>> rooms in connectedRooms)
-            {
-                rooms.Value.ForEach(r =>
-                {
-                    rooms.Key.ConnectTo(r, _dungeon.CorridorMinSize);
-                });
-            }
+            //foreach (KeyValuePair<BSPNode, List<BSPNode>> rooms in _connectedRooms)
+            //{
+            //    rooms.Value.ForEach(r =>
+            //    {
+            //        rooms.Key.ConnectTo(r, _dungeon.CorridorMinSize);
+            //    });
+            //}
 
             /*
             *Generator corridor representation:
@@ -140,25 +235,32 @@ namespace Assets.DungeonGenerator
 
         private void PartitionSpace(BSPNode node, DungeonAxis axis)
         {
-            bspTree.Add(node);
+            if(node == null)
+            {
+                return;
+            }
+
             if (node.IsRoomMinSize())
             {
-                rooms.Add(node);
+                _rooms.Add(node);
                 return;
+            }
+
+            if (node.CanBeSplitHorizontally() && node.CanBeSplitVertically())
+            {
+                CreateNewNodes(node, RandomAxis());
+            }
+            else if (node.CanBeSplitVertically())
+            {
+                CreateNewNodes(node, DungeonAxis.VERTICAL);
             }
             else
             {
-                CreateNewNodes(node, axis);
-
-                DungeonAxis childNodeAxis = RandomAxis();
-
-                PartitionSpace(node.Left, childNodeAxis);
-
-                if (node.Right != null)
-                {
-                    PartitionSpace(node.Right, childNodeAxis);
-                }
+                CreateNewNodes(node, DungeonAxis.HORIZONTAL);
             }
+
+            PartitionSpace(node.Left, axis);
+            PartitionSpace(node.Right, axis);
         }
 
         private void CreateNewNodes(BSPNode node, DungeonAxis axis)
@@ -173,17 +275,17 @@ namespace Assets.DungeonGenerator
             float rightWidth = nodeSize.width;
             float rightHeight = nodeSize.height;
 
-            bool shouldCreateOneNode = false;
+            bool shouldCreateOneNode = nodeSize.width <= _dungeon.MaxRoomSize.x || nodeSize.height <= _dungeon.MaxRoomSize.y;
 
             if (axis == DungeonAxis.HORIZONTAL)
             {
-                height = Mathf.Round(Random.Range(_dungeon.RoomMinSize.y, node.Bounds.height));
+                height = Mathf.Round(Random.Range(_dungeon.MinRoomSize.y, node.Bounds.height));
                 rightHeight -= height;
 
-                if (rightHeight < _dungeon.RoomMinSize.y)
+                if (rightHeight < _dungeon.MinRoomSize.y)
                 {
-                    height -= _dungeon.RoomMinSize.y;
-                    rightHeight = _dungeon.RoomMinSize.y;
+                    height -= _dungeon.MinRoomSize.y;
+                    rightHeight = _dungeon.MinRoomSize.y;
                 }
 
                 if (height + rightHeight < nodeSize.height)
@@ -192,16 +294,16 @@ namespace Assets.DungeonGenerator
                 }
 
                 y += height;
-                shouldCreateOneNode = height < _dungeon.RoomMinSize.y && rightHeight >= _dungeon.RoomMinSize.y;
+                shouldCreateOneNode = height < _dungeon.MinRoomSize.y && rightHeight >= _dungeon.MinRoomSize.y;
             }
             else
             {
-                width = Mathf.Round(Random.Range(_dungeon.RoomMinSize.x, node.Bounds.width));
+                width = Mathf.Round(Random.Range(_dungeon.MinRoomSize.x, node.Bounds.width));
                 rightWidth -= width;
-                if (rightWidth < _dungeon.RoomMinSize.x)
+                if (rightWidth < _dungeon.MinRoomSize.x)
                 {
-                    width -= _dungeon.RoomMinSize.x;
-                    rightWidth = _dungeon.RoomMinSize.x;
+                    width -= _dungeon.MinRoomSize.x;
+                    rightWidth = _dungeon.MinRoomSize.x;
                 }
 
                 if (width + rightWidth < nodeSize.width)
@@ -210,60 +312,60 @@ namespace Assets.DungeonGenerator
                 }
 
                 x += width;
-                shouldCreateOneNode = width < _dungeon.RoomMinSize.x && rightWidth >= _dungeon.RoomMinSize.x;
+                shouldCreateOneNode = width < _dungeon.MinRoomSize.x && rightWidth >= _dungeon.MinRoomSize.x;
             }
 
             if (shouldCreateOneNode)
             {
-                width = Mathf.Round(Random.Range(_dungeon.RoomMinSize.x, nodeSize.width - 1));
-                height = Mathf.Round(Random.Range(_dungeon.RoomMinSize.y, nodeSize.height - 1));
+                width = Mathf.Round(Random.Range(_dungeon.MinRoomSize.x, nodeSize.width));
+                height = Mathf.Round(Random.Range(_dungeon.MinRoomSize.y, nodeSize.height));
             }
 
-            Rect leftSpace = new(nodeSize.x, nodeSize.y, width - 2, height - 2);
-            new BSPNode(node, leftSpace, axis);
-
+            Rect leftSpace = new(nodeSize.x, nodeSize.y, width - offset, height - offset);
+            BSPNode left = new BSPNode(node, leftSpace, axis);
+            BSPNode right = null;
             if (!shouldCreateOneNode)
             {
-                Rect rightSpace = new(x, y, rightWidth - 2, rightHeight - 2);
-                new BSPNode(node, rightSpace, axis);
+                Rect rightSpace = new(x, y, rightWidth - offset, rightHeight - offset);
+                right = new BSPNode(node, rightSpace, axis);
             }
         }
 
-        // TODO: Should be apart of DungeonMaster
         private DungeonAxis RandomAxis()
         {
-            // TODO
+            if (_dungeon.Parameters.rootDungeonSplit >= Random.value)
+            {
+                return DungeonAxis.VERTICAL;
+            }
             return DungeonAxis.HORIZONTAL;
         }
 
         public void ConstructDungeon()
         {
-            for (int i = 0; i < rooms.Count; i++)
+            for (int i = 0; i < _rooms.Count; i++)
             {
-                BSPNode firstNode = rooms[i];
-                BSPNode secondNode = i != rooms.Count - 1 ? rooms[i + 1] : null;
+                BSPNode firstNode = _rooms[i];
+                BSPNode secondNode = i != _rooms.Count - 1 ? _rooms[i + 1] : null;
 
-                if (firstNode.IsRoomMinSize())
+                _corridors.AddRange(firstNode.GenerateCorridors());
+                if (!firstNode.HasRoom())
                 {
-
-                    _corridors.AddRange(firstNode.GenerateCorridors());
-                    if (!firstNode.HasRoom())
-                    {
-                        ConstructRooms(firstNode, secondNode, null, _components);
-                    }
-                    else
-                    {
-                        secondNode?.GenerateRoom().Construct(_components.floorAsset, _components.wallAsset, null);
-                    }
-                };
+                    ConstructRooms(firstNode, secondNode, null, _components);
+                }
+                else
+                {
+                    secondNode?.GenerateRoom().Construct(_components.floorAsset, _components.wallAsset, null);
+                }
             }
 
-            foreach (var room in rooms)
+            foreach (var room in _rooms)
             {
                 for (var i = 0; _corridors.Count > i; i++)
                 {
-                    _corridors[i].Construct(_components.corridorAsset, _components.floorAsset);
-                    room?.Room.Modify(_corridors[i]);
+                    DungeonCorridor corridor = _corridors[i];
+
+                    corridor.Construct(_components);
+                    room?.Room.Modify(corridor);
                 }
             }
         }
@@ -286,20 +388,20 @@ namespace Assets.DungeonGenerator
         private void PlaceContent()
         {
             // Place dungeon exit point
-            BSPNode lastRoom = rooms.Last();
+            BSPNode lastRoom = _rooms.Last();
             DungeonExit exit = GameObject.Instantiate(_components.exit, DungeonGeneratorUtils.Vec2ToVec3(lastRoom.Bounds.center), Quaternion.identity);
             exit.name = "DungeonExit";
 
-            for (var i = 0; i < rooms.Count; i++)
+            for (var i = 0; i < _rooms.Count; i++)
             {
-                PlaceContent(rooms[i].Room);
+                PlaceContent(_rooms[i].Room);
             }
 
             _components.navMesh.BuildNavMesh();
 
             // Generate navmesh
             // Place player at start of dungeon
-            BSPNode firstRoom = rooms.First();
+            BSPNode firstRoom = _rooms.First();
             _components.startingPoint.Spawn(DungeonGeneratorUtils.Vec2ToVec3(firstRoom.Bounds.center));
         }
 

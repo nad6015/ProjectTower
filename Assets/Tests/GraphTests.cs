@@ -70,6 +70,30 @@ public class GraphTests
         Assert.That(graph[node].Count == 2);
     }
 
+    [Test]
+    public void ShouldNotLinkedNodeWithItself()
+    {
+        graph.Add(node, node);
+
+        Assert.That(graph.Count == 1);
+    }
+
+    [Test]
+    public void ShouldNotAddNullValues()
+    {
+        graph.Add(null);
+
+        Assert.That(graph.Count == 0);
+
+        graph.Add(node, null);
+
+        Assert.That(graph.Count == 1);
+
+        graph.Add(null, null);
+
+        Assert.That(graph.Count == 1);
+    }
+
     // TODO: Review graph terminology. I think better naming could be utilised.
     [TestCaseSource("CompleteGraphs")]
     public void ShouldReturnIsConnectedTrueIfGraphIsFullyLinked(Graph<string> graph)

@@ -18,6 +18,9 @@ namespace Assets.DungeonGenerator.Components
         internal float itemSpawnRate;
         internal int minEnemiesPerRoom;
         internal int maxEnemiesPerRoom;
+
+        public int MaxRooms { get; }
+
         internal int maxItemsPerRoom;
         internal int minItemsPerRoom;
 
@@ -36,7 +39,7 @@ namespace Assets.DungeonGenerator.Components
         /// <param name="maxItemsPerRoom"></param>
         /// <param name="minEnemiesPerRoom"></param>
         /// <param name="maxEnemiesPerRoom"></param>
-        public DungeonParameters(Vector2 size, Vector2 minRoomSize, Vector2 maxRoomSize, Vector2 minCorridorSize, float enemySpawnRate, float itemSpawnRate, float rootDungeonSplit, int minItemsPerRoom, int maxItemsPerRoom, int minEnemiesPerRoom, int maxEnemiesPerRoom) : this()
+        public DungeonParameters(Vector2 size, Vector2 minRoomSize, Vector2 maxRoomSize, Vector2 minCorridorSize, float enemySpawnRate, float itemSpawnRate, float rootDungeonSplit, int minItemsPerRoom, int maxItemsPerRoom, int minEnemiesPerRoom, int maxEnemiesPerRoom, int maxRooms) : this()
         {
             Size = size;
             MaxRoomSize = maxRoomSize;
@@ -49,6 +52,7 @@ namespace Assets.DungeonGenerator.Components
             this.rootDungeonSplit = rootDungeonSplit;
             this.minEnemiesPerRoom = minEnemiesPerRoom;
             this.maxEnemiesPerRoom = maxEnemiesPerRoom;
+            MaxRooms = maxRooms;
         }
 
         /// <summary>

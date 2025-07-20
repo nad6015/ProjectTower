@@ -50,7 +50,7 @@ namespace Assets.DungeonGenerator
             // TODO: Run FSM on game state
             return new DungeonParameters(RandomDungeonSize(), MinRoomSize, MaxRoomSize, MinCorridorSize,
                 enemySpawnRate, itemSpawnRate, rootDungeonSplit, minItemsPerRoom, maxItemsPerRoom,
-                minEnemiesPerRoom, maxEnemiesPerRoom);
+                minEnemiesPerRoom, maxEnemiesPerRoom, 10);
         }
 
         Vector2 RandomDungeonSize()
@@ -75,24 +75,7 @@ namespace Assets.DungeonGenerator
 
         DungeonSize DetermineDungeonSize()
         {
-            int health = 3;//playerCharacter.GetStat(FighterStats.HEALTH);
-            if (health > 4)
-            {
-                minItemsPerRoom = 0;
-                maxItemsPerRoom = 2;
-                enemySpawnRate = 1;
-                return DungeonSize.LARGE;
-            }
-            else if (health < 2)
-            {
-                minItemsPerRoom = 3;
-                maxItemsPerRoom = 5;
-                enemySpawnRate = 0;
-                itemSpawnRate = 1;
-                return DungeonSize.SMALL;
-            }
-
-            return DungeonSize.MEDIUM;
+            return DungeonSize.LARGE;
         }
 
         enum DungeonSize

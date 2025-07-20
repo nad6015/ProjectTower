@@ -10,9 +10,10 @@ namespace Assets.DungeonGenerator.Components
     {
         public DungeonAxis DungeonAxis { get; }
         public Vector2 Size { get { return Parameters.Size; } }
-        public Vector2 RoomMinSize { get { return Parameters.MinRoomSize; } }
+        public Vector2 MinRoomSize { get { return Parameters.MinRoomSize; } }
+        public Vector2 MaxRoomSize { get { return Parameters.MaxRoomSize; } }
         public DungeonComponents Components { get; internal set; }
-        public Vector2 CorridorMinSize { get { return Parameters.CorridorMinSize; } }
+        public Vector2 MinCorridorSize { get { return Parameters.CorridorMinSize; } }
 
         internal DungeonParameters Parameters { get; private set; }
         internal Dictionary<string, DungeonRoom> DungeonRooms { get; }

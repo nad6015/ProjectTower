@@ -2,6 +2,7 @@
 {
     public enum DungeonAxis
     {
+        DEFAULT,
         HORIZONTAL,
         VERTICAL
     }

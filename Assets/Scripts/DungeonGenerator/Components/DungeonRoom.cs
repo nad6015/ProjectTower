@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -82,37 +83,33 @@ namespace Assets.DungeonGenerator
                     walls.Add(wall);
                 }
             }
-
-            //  Modify(corridor);
         }
 
         public void Modify(DungeonCorridor corridor)
         {
-            Rect corridorBounds = corridor.Bounds;
-            DungeonAxis axis = corridor.Axis;
-            foreach (GameObject wall in walls)
+            foreach (Tuple<Rect, DungeonAxis> path in corridor.Paths)
             {
-                Vector2 position = new(wall.transform.position.x, wall.transform.position.z);
+                Rect corridorBounds = path.Item1;
+                DungeonAxis axis = path.Item2;
 
-                if (axis == DungeonAxis.VERTICAL)
+                foreach (GameObject wall in walls)
                 {
+                    Vector2 position = new(wall.transform.position.x, wall.transform.position.z);
+
                     if ((position.x > corridorBounds.x && position.x < corridorBounds.xMax) &&
-                        (Mathf.Approximately(position.y, corridorBounds.y) || Mathf.Approximately(position.y, corridorBounds.yMax)))
+                            (Mathf.Approximately(position.y, corridorBounds.y) || Mathf.Approximately(position.y, corridorBounds.yMax)) ||
+                            (position.y > corridorBounds.y && position.y < corridorBounds.yMax) &&
+                            (Mathf.Approximately(position.x, corridorBounds.x) || Mathf.Approximately(position.x, corridorBounds.xMax)))
                     {
                         wall.SetActive(false);
                     }
                 }
-                else
-                {
-                    if ((position.y > corridorBounds.y && position.y < corridorBounds.yMax) &&
-                        (Mathf.Approximately(position.x, corridorBounds.x) || Mathf.Approximately(position.x, corridorBounds.xMax)))
-                    {
-                        wall.SetActive(false);
-                    }
-                }
+
+                corridor.Modify(Bounds);
             }
         }
 
+        // TODO: This seems pointless. Why did I add it?
         private bool WithinBounds(float x, float y)
         {
             Vector2 point = new Vector2(x, y);
@@ -120,10 +117,10 @@ namespace Assets.DungeonGenerator
             return false;
         }
 
-        internal static DungeonRoom Create(Rect bounds)
+        internal static DungeonRoom Create(Rect bounds, String name)
         {
             // Create gameobject code referenced from  - https://discussions.unity.com/t/how-do-you-create-an-empty-gameobject-in-code-and-add-it-to-the-scene/86380/4
-            GameObject gameObj = new("Room " + roomId++);
+            GameObject gameObj = new(name);
             DungeonRoom dungeonRoom = gameObj.AddComponent<DungeonRoom>();
             dungeonRoom.Bounds = bounds;
             //dungeonRoom.corridors = new List<Rect>();
