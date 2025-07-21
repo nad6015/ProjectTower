@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
-using UnityEngine.TestTools.Utils;
 
 public class CharacterMovementTest : InputTestFixture
 {
@@ -29,6 +28,10 @@ public class CharacterMovementTest : InputTestFixture
     public IEnumerator ShouldMovePlayerCharacterWhenKeyIsPressed()
     {
         character = GameObject.Instantiate(player, new Vector3(0, 1), Quaternion.identity);
+
+        float distance = Vector3.Distance(character.transform.position, new Vector3(-2, 0, 1.5f));
+        Assert.That(distance, Is.GreaterThan(1));
+
         Press(keyboard.wKey);
         Press(keyboard.aKey);
         yield return new WaitForSeconds(1f);
@@ -36,7 +39,6 @@ public class CharacterMovementTest : InputTestFixture
         Release(keyboard.aKey);
         yield return new WaitForSeconds(1f);
 
-        float distance = Vector3.Distance(character.transform.position, new Vector3(-2, 0, 1.5f));
         Assert.That(distance, Is.LessThanOrEqualTo(1));
 
         Press(keyboard.sKey);

@@ -4,25 +4,31 @@ namespace Assets.PlayerCharacter
 {
     public class PlayerCamera : MonoBehaviour
     {
-        [SerializeField]
-        private float distanceFromPlayer = 10f;
-        [SerializeField]
-        private float distanceFromPlayerZ = -4f;
+        // Field syntax referenced from - https://discussions.unity.com/t/serialize-c-properties-how-to-with-code/683762/4
+        [field: SerializeField]
+        public float DistanceFromPlayer { get; private set; }
+        
+        [field: SerializeField]
+        public float DistanceFromPlayerZ { get; private set; }
+
         [SerializeField]
         private float cameraTilt = 15f;
 
-        Transform player;
+        private Transform _player;
+        private Quaternion _initialRotation;
+        
         void Start()
         {
-            player = GameObject.FindWithTag("Player").transform;
+            _player = GameObject.FindWithTag("Player").transform;
 
             transform.Rotate(Vector3.right, cameraTilt);
+            _initialRotation = transform.rotation;
         }
 
-        // Update is called once per frame
         void Update()
         {
-            transform.position = new Vector3(player.position.x, distanceFromPlayer, distanceFromPlayerZ + player.position.z);
+            transform.position = new Vector3(_player.position.x, DistanceFromPlayer, _player.position.z - DistanceFromPlayerZ);
+            transform.rotation = _initialRotation;
         }
     }
 }

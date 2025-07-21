@@ -6,7 +6,9 @@ namespace Assets.PlayerCharacter
     public class PlayerController : MonoBehaviour
     {
         [SerializeField]
-        private float speed = 5;
+        private float _speed = 5;
+        [SerializeField]
+        private PlayerCamera _camera;
 
         private InputSystemActions actions;
         private PlayerMovement playerMovement;
@@ -15,10 +17,11 @@ namespace Assets.PlayerCharacter
         void Awake()
         {
             playerMovement = GetComponent<PlayerMovement>();
-            playerMovement.speed = speed;
+            playerMovement.speed = _speed;
 
             playerAction = GetComponent<PlayerAction>();
             actions = new InputSystemActions();
+            Instantiate(_camera);
         }
 
         private void OnEnable()
