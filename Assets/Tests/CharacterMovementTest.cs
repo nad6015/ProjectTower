@@ -9,7 +9,7 @@ using UnityEngine.TestTools.Utils;
 
 public class CharacterMovementTest : InputTestFixture
 {
-    GameObject player = Resources.Load<GameObject>("Player");
+    readonly GameObject player = Resources.Load<GameObject>("Player");
     GameObject character;
     Keyboard keyboard;
     Mouse mouse;
@@ -54,7 +54,7 @@ public class CharacterMovementTest : InputTestFixture
     public IEnumerator ShouldBeAbleToAttackEnemy()
     {
         Fighter enemy = GameObject.Find("Enemy").GetComponent<Fighter>();
-        Vector3 enemyPosition = new Vector3(enemy.transform.position.x, 1, enemy.transform.position.z - 1);
+        Vector3 enemyPosition = new(enemy.transform.position.x, 1, enemy.transform.position.z - 1);
         
         character = GameObject.Instantiate(player, enemyPosition, Quaternion.LookRotation(enemyPosition));
 

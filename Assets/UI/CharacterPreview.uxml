@@ -1,0 +1,5 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="CharacterPreview" style="flex-grow: 1; min-height: 200px; max-width: none; background-color: rgba(0, 0, 0, 0.62); border-top-width: 4px; border-right-width: 4px; border-bottom-width: 4px; border-left-width: 4px; border-top-left-radius: 3px; border-top-right-radius: 3px; border-bottom-right-radius: 3px; border-bottom-left-radius: 3px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); align-self: auto; align-items: center; justify-content: space-around;">
+        <ui:Label text="TODO: Add image" style="flex-wrap: wrap; width: initial; height: initial; -unity-text-align: upper-center; white-space: pre-wrap;" />
+    </ui:VisualElement>
+</ui:UXML>

@@ -17,6 +17,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tests/BSPAlgorithm.unity
     guid: d0d2d4990f3153b44a006e3a96259763
+  - enabled: 1
+    path: Assets/Scenes/Tests/DungeonMaster.unity
+    guid: b20bebe27f759ce4bbd61adf2d3dacc7
+  - enabled: 1
+    path: Assets/Scenes/Prod/NewGame.unity
+    guid: 133978d8ed7a5054bae3e2fcb0cc83e4
+  - enabled: 1
+    path: Assets/Scenes/Prod/StartScreen.unity
+    guid: d9df264330561d34c8d5262195abfbfd
+  - enabled: 1
+    path: Assets/Scenes/Tests/GameManagerTestScene.unity
+    guid: eb61b6ce4f801c547a6ecb82c967d199
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 99f9c9493070a9d4c979a8fec7c5a8d3, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

@@ -1,14 +1,14 @@
 ﻿using Unity.AI.Navigation;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace Assets.DungeonGenerator
 {
-    public class DungeonComponents : MonoBehaviour
+    [CreateAssetMenu(fileName = "DungeonComponents", menuName = "Dungeon Components", order = 1)]
+    public class DungeonComponents : ScriptableObject
     {
-        public GameObject wallAsset;
-        public GameObject corridorAsset;
-        public GameObject floorAsset;
+        public GameObject wallTile;
+        public GameObject corridorTile;
+        public GameObject floorTile;
         public GameObject enemy;
         public GameObject item;
         public SpawnPoint startingPoint;

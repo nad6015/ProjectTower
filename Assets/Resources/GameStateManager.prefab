@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1646912532620704439
+--- !u!1 &8970416114557497003
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,53 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7913926092012003535}
-  - component: {fileID: 1951811942797037577}
+  - component: {fileID: 4103730275809090330}
+  - component: {fileID: 7600140196230279759}
   m_Layer: 0
-  m_Name: GameDirector
-  m_TagString: Untagged
+  m_Name: GameStateManager
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7913926092012003535
+--- !u!4 &4103730275809090330
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1646912532620704439}
+  m_GameObject: {fileID: 8970416114557497003}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 8.824144, y: 1, z: 42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1951811942797037577
+--- !u!114 &7600140196230279759
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1646912532620704439}
+  m_GameObject: {fileID: 8970416114557497003}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7a268dc38c005946a262e58d36de2ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 1b1984a04f29de74ea2fb1b2849aee3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LargeDungeonSize: {x: 150, y: 150}
-  MediumDungeonSize: {x: 100, y: 100}
-  SmallDungeonSize: {x: 50, y: 50}
-  MinDungeonSize: {x: 20, y: 20}
-  MaxRoomSize: {x: 15, y: 15}
-  MinRoomSize: {x: 10, y: 10}
-  MinCorridorSize: {x: 2, y: 2}
-  rootDungeonSplit: 0.5
-  enemySpawnRate: 0.5
-  minEnemiesPerRoom: 0
-  maxEnemiesPerRoom: 3
-  itemSpawnRate: 0.5
-  minItemsPerRoom: 0
-  maxItemsPerRoom: 5

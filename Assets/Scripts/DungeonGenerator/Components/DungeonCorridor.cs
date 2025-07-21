@@ -19,8 +19,8 @@ namespace Assets.DungeonGenerator
             {
                 return;
             }
-            GameObject corridorAsset = components.corridorAsset;
-            GameObject floorAsset = components.floorAsset;
+            GameObject corridorAsset = components.corridorTile;
+            GameObject floorAsset = components.floorTile;
 
             if (Paths.Count > 1)
             {

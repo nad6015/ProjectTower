@@ -1,0 +1,10 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-color: rgba(115, 37, 39, 0); justify-content: space-around; width: auto; max-width: initial; align-self: auto; align-items: stretch; align-content: auto;">
+        <ui:VisualElement style="flex-grow: 1; flex-direction: column; flex-wrap: wrap; align-content: center; align-self: auto; justify-content: space-evenly; height: 50%; max-height: 50%; align-items: stretch; max-width: 25%; left: 37.5%;">
+            <ui:Button text="New Game" name="NewGame" data-source-type="GameManager, Assembly-CSharp" />
+            <ui:Button text="Load" />
+            <ui:Button text="Options" />
+            <ui:Button text="Exit" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,6 +1,6 @@
 using UnityEngine;
 using Assets.DungeonGenerator.Components;
-using Assets.CombatSystem;
+using Assets.PlayerCharacter;
 using Unity.Mathematics;
 
 namespace Assets.DungeonGenerator
@@ -9,6 +9,7 @@ namespace Assets.DungeonGenerator
 
     public class DungeonMaster : MonoBehaviour
     {
+        public State state { get; private set; }
         public Vector2 LargeDungeonSize;
         public Vector2 MediumDungeonSize;
         public Vector2 SmallDungeonSize;
@@ -33,16 +34,21 @@ namespace Assets.DungeonGenerator
 
         private DungeonGenerator dungeonGenerator;
         private Vector2 maxDungeonSize;
+        private PlayerController _player;
+        private Dungeon _currentDungeon;
+        private float _avgTimeBetweenEnemyDefeats = 0;
+        private float _enemiesDefeated = 0;
 
-        private void Start()
+        private void Awake()
         {
+            state = State.AWAITING_START;
             //Random.InitState(1); // TODO: Seed should be randomised between sessions. Set to 1 for dev
             dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();
         }
 
         public void OnNewDungeon()
         {
-            dungeonGenerator.GenerateDungeon(GenerateDungeonParameters());
+            _currentDungeon = dungeonGenerator.GenerateDungeon(GenerateDungeonParameters());
         }
 
         DungeonParameters GenerateDungeonParameters()
@@ -83,6 +89,51 @@ namespace Assets.DungeonGenerator
             SMALL = 0,
             MEDIUM = 1,
             LARGE = 2,
+        }
+
+        public enum State
+        {
+            AWAITING_START,
+            STARTING,
+            PAUSED,
+            MONITORING,
+            DUNGEON_CLEARED,
+            THRESHOLD_REACHED
+        }
+
+        private void Update()
+        {
+            switch (state)
+            {
+                case State.AWAITING_START: break; //no-op
+                case State.STARTING:
+                    {
+                        Initialise();
+                        break;
+                    }
+                case State.PAUSED: break;
+            }
+        }
+
+        private void Initialise()
+        {
+            _player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+            state = State.MONITORING;
+        }
+
+        public void StartDungeonMaster()
+        {
+            state = State.STARTING;
+        }
+
+        public bool IsReady()
+        {
+            return state != State.AWAITING_START && state != State.STARTING;
+        }
+
+        public void Pause()
+        {
+            state = State.PAUSED;
         }
     }
 }

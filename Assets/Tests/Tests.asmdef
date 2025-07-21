@@ -9,7 +9,9 @@
         "Unity.InputSystem.TestFramework",
         "PlayerCharacter",
         "CombatSystem",
-        "DungeonGenerator"
+        "DungeonGenerator",
+        "DungeonMaster",
+        "GameManager"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

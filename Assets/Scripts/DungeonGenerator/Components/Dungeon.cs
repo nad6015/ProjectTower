@@ -17,6 +17,7 @@ namespace Assets.DungeonGenerator.Components
 
         internal DungeonParameters Parameters { get; private set; }
         internal Dictionary<string, DungeonRoom> DungeonRooms { get; }
+        public int MaxRooms { get { return Parameters.MaxRooms; } }
 
         /// <summary>
         /// Constructs a new dungeon.
