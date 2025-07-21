@@ -20,7 +20,7 @@ public class DungeonPlayability
     [Repeat(10)] // TODO: Increase to 500
     public IEnumerator ShouldReachDungeonEnd()
     {
-        GameObject.Find("DungeonMaster").GetComponent<DungeonMaster>().OnNewDungeon();
+        GameObject.Find("DungeonMaster").GetComponent<DungeonMaster>().NewDungeon();
         NavMeshAgent testAgent = GameObject.FindGameObjectWithTag("Player").transform.parent.GetComponent<NavMeshAgent>();
 
         do

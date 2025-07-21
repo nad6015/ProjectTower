@@ -32,7 +32,7 @@ namespace Assets.DungeonGenerator
         public int minItemsPerRoom;
         public int maxItemsPerRoom;
 
-        private DungeonGenerator dungeonGenerator;
+        private DungeonGenerator _dungeonGenerator;
         private Vector2 maxDungeonSize;
         private PlayerController _player;
         private Dungeon _currentDungeon;
@@ -43,12 +43,12 @@ namespace Assets.DungeonGenerator
         {
             state = State.AWAITING_START;
             //Random.InitState(1); // TODO: Seed should be randomised between sessions. Set to 1 for dev
-            dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();
+            _dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();
         }
 
-        public void OnNewDungeon()
+        public void NewDungeon()
         {
-            _currentDungeon = dungeonGenerator.GenerateDungeon(GenerateDungeonParameters());
+            _currentDungeon = _dungeonGenerator.GenerateDungeon(GenerateDungeonParameters());
         }
 
         DungeonParameters GenerateDungeonParameters()
@@ -91,16 +91,6 @@ namespace Assets.DungeonGenerator
             LARGE = 2,
         }
 
-        public enum State
-        {
-            AWAITING_START,
-            STARTING,
-            PAUSED,
-            MONITORING,
-            DUNGEON_CLEARED,
-            THRESHOLD_REACHED
-        }
-
         private void Update()
         {
             switch (state)
@@ -108,16 +98,27 @@ namespace Assets.DungeonGenerator
                 case State.AWAITING_START: break; //no-op
                 case State.STARTING:
                     {
-                        Initialise();
+                        GenerateDungeon();
+                        break;
+                    }
+                case State.SET_MONITORING_TARGETS:
+                    {
+                        SetMonitoringTargets();
                         break;
                     }
                 case State.PAUSED: break;
             }
         }
 
-        private void Initialise()
+        private void SetMonitoringTargets()
         {
             _player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        }
+
+        private void GenerateDungeon()
+        {
+            _dungeonGenerator.ClearDungeon();
+            NewDungeon();
             state = State.MONITORING;
         }
 
@@ -134,6 +135,17 @@ namespace Assets.DungeonGenerator
         public void Pause()
         {
             state = State.PAUSED;
+        }
+
+        public enum State
+        {
+            AWAITING_START,
+            STARTING,
+            PAUSED,
+            SET_MONITORING_TARGETS,
+            MONITORING,
+            DUNGEON_CLEARED,
+            THRESHOLD_REACHED
         }
     }
 }

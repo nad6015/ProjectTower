@@ -6,11 +6,8 @@ namespace Assets.DungeonGenerator
 {
     public class DungeonRoom : MonoBehaviour
     {
-        private static int roomId = 0;
         public Rect Bounds { get; set; }
         public Dictionary<GameObject, int> Contents { get; internal set; }
-
-        private List<Rect> corridors;
         private List<GameObject> walls;
 
         private void Awake()
@@ -112,7 +109,7 @@ namespace Assets.DungeonGenerator
         // TODO: This seems pointless. Why did I add it?
         private bool WithinBounds(float x, float y)
         {
-            Vector2 point = new Vector2(x, y);
+            Vector2 point = new(x, y);
 
             return false;
         }
@@ -123,12 +120,7 @@ namespace Assets.DungeonGenerator
             GameObject gameObj = new(name);
             DungeonRoom dungeonRoom = gameObj.AddComponent<DungeonRoom>();
             dungeonRoom.Bounds = bounds;
-            //dungeonRoom.corridors = new List<Rect>();
             dungeonRoom.walls = new List<GameObject>();
-            //foreach (DungeonCorridor corridor in corridors)
-            {
-                //dungeonRoom.corridors.Add(corridor.Bounds);
-            }
 
             return dungeonRoom;
         }

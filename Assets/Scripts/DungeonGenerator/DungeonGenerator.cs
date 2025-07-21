@@ -1,12 +1,13 @@
 using UnityEngine;
 using Assets.DungeonGenerator.Components;
 using Unity.AI.Navigation;
+using System;
 
 namespace Assets.DungeonGenerator
 {
-    [RequireComponent(typeof(DungeonComponents))]
     public class DungeonGenerator : MonoBehaviour
     {
+        [SerializeField]
         private DungeonComponents _components;
 
         private readonly IDungeonAlgorithm _grammarDungeonGenerator;
@@ -15,7 +16,6 @@ namespace Assets.DungeonGenerator
         private void Start()
         {
             // grammarDungeonGenerator = new MissionGrammarAlgorithm();
-            _components = GetComponent<DungeonComponents>();
             _components.navMesh = GetComponent<NavMeshSurface>();
         }
 
@@ -32,9 +32,21 @@ namespace Assets.DungeonGenerator
             grammarDungeonGenerator.GenerateDungeon();
 
 
-            IDungeonAlgorithm algorithm = new BSPAlgorithm(d);
+            IDungeonAlgorithm algorithm = new BSPAlgorithm(d, transform);
             algorithm.GenerateDungeon();
             return d;
+        }
+
+        public void ClearDungeon()
+        {
+            if (transform.childCount > 0)
+            {
+                // Remove child object code copied from - https://stackoverflow.com/questions/46358717/how-to-loop-through-and-destroy-all-children-of-a-game-object-in-unity
+                while (transform.childCount > 0)
+                {
+                    DestroyImmediate(transform.GetChild(0).gameObject);
+                }
+            }
         }
     }
 }

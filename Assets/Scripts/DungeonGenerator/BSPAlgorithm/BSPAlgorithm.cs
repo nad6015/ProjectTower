@@ -14,12 +14,15 @@ namespace Assets.DungeonGenerator
 
         private readonly Dungeon _dungeon;
         private readonly DungeonComponents _components;
+        private readonly Transform _dungeonTransform;
         private readonly int offset = 1;
 
-        public BSPAlgorithm(Dungeon dungeon)
+        public BSPAlgorithm(Dungeon dungeon, Transform transform)
         {
-            this._dungeon = dungeon;
-            this._components = dungeon.Components;
+            _dungeon = dungeon;
+            _components = dungeon.Components;
+            _dungeonTransform = transform;
+
         }
 
         /// <summary>
@@ -174,12 +177,12 @@ namespace Assets.DungeonGenerator
             }
 
             Rect leftSpace = new(nodeSize.x, nodeSize.y, width - offset, height - offset);
-            BSPNode left = new BSPNode(node, leftSpace, axis);
+            BSPNode left = new(node, leftSpace, axis);
             
             if (!shouldCreateOneNode)
             {
                 Rect rightSpace = new(x, y, rightWidth - offset, rightHeight - offset);
-                new BSPNode(node, rightSpace, axis);
+                BSPNode bSPNode = new(node, rightSpace, axis);
             }
         }
 
@@ -206,7 +209,9 @@ namespace Assets.DungeonGenerator
                 }
                 else
                 {
-                    secondNode?.GenerateRoom().Construct(_components.floorTile, _components.wallTile, null);
+                    DungeonRoom room = secondNode?.GenerateRoom();
+                    room?.transform.SetParent(_dungeonTransform);
+                    room?.Construct(_components.floorTile, _components.wallTile, null);
                 }
             }
 
@@ -227,12 +232,14 @@ namespace Assets.DungeonGenerator
             if (firstNode.IsRoomMinSize() && !firstNode.HasRoom())
             {
                 DungeonRoom room = firstNode.GenerateRoom();
+                room.transform.SetParent(_dungeonTransform);
                 room.Construct(components.floorTile, components.wallTile, corridor);
             }
 
             if (secondNode != null && secondNode.IsRoomMinSize() && !secondNode.HasRoom())
             {
                 DungeonRoom room = secondNode.GenerateRoom();
+                room.transform.SetParent(_dungeonTransform);
                 room.Construct(components.floorTile, components.wallTile, corridor);
             }
         }

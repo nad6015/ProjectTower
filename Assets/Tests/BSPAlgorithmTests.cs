@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,24 +10,18 @@ using UnityEngine.TestTools;
 
 public class BSPAlgorithmTests
 {
+    DungeonComponents components;
     [SetUp]
     public void SetUp()
     {
         SceneManager.LoadScene("Scenes/Tests/BSPAlgorithm");
+        components = Resources.Load<DungeonComponents>("Dungeons/Dev/TestComponents");
     }
 
     [UnityTest]
     public IEnumerator ShouldGenerateTwoRoomDungeon()
     {
-        DungeonComponents components = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonComponents>();
-        yield return new WaitForSeconds(1);
-
-        Dungeon dungeon = new(CreateParameters(), components);
-        BSPAlgorithm algorithm = new(dungeon);
-        algorithm.GenerateDungeon();
-
-        yield return new WaitForSeconds(1);
-
+        yield return TestSetUp();
         List<DungeonRoom> rooms = FindRooms();
         DungeonCorridor[] corridors = GameObject.FindObjectsByType<DungeonCorridor>(FindObjectsSortMode.None);
 
@@ -45,14 +38,7 @@ public class BSPAlgorithmTests
     [UnityTest]
     public IEnumerator ShouldGenerateHorizontallySplitRooms()
     {
-        DungeonComponents components = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonComponents>();
-        yield return new WaitForSeconds(1);
-
-        Dungeon dungeon = new(CreateParameters(DungeonAxis.HORIZONTAL), components);
-        BSPAlgorithm algorithm = new(dungeon);
-        algorithm.GenerateDungeon();
-
-        yield return new WaitForSeconds(1);
+        yield return TestSetUp();
 
         List<DungeonRoom> rooms = FindRooms();
 
@@ -71,14 +57,7 @@ public class BSPAlgorithmTests
     [UnityTest]
     public IEnumerator ShouldGenerateVerticallySplitRooms()
     {
-        DungeonComponents components = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonComponents>();
-        yield return new WaitForSeconds(1);
-
-        Dungeon dungeon = new(CreateParameters(DungeonAxis.VERTICAL), components);
-        BSPAlgorithm algorithm = new(dungeon);
-        algorithm.GenerateDungeon();
-
-        yield return new WaitForSeconds(10);
+        yield return TestSetUp(DungeonAxis.VERTICAL);
 
         List<DungeonRoom> rooms = FindRooms();
 
@@ -97,15 +76,7 @@ public class BSPAlgorithmTests
     [UnityTest]
     public IEnumerator ShouldGenerateCompleteDungeon()
     {
-        DungeonComponents components = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonComponents>();
-        yield return new WaitForSeconds(1);
-
-        Dungeon dungeon = new(CreateParameters(10), components);
-        BSPAlgorithm algorithm = new(dungeon);
-
-        algorithm.GenerateDungeon();
-
-        yield return new WaitForSeconds(1);
+        yield return TestSetUp(DungeonAxis.DEFAULT);
 
         List<DungeonRoom> rooms = FindRooms();
         DungeonCorridor[] corridors = GameObject.FindObjectsByType<DungeonCorridor>(FindObjectsSortMode.None);
@@ -116,17 +87,19 @@ public class BSPAlgorithmTests
         Assert.That(corridors.Length >= 5);
     }
 
-    private DungeonParameters CreateParameters(int maxRooms = 2)
+    private IEnumerator TestSetUp(DungeonAxis axis = DungeonAxis.HORIZONTAL)
     {
-        return CreateParameters(DungeonAxis.DEFAULT, maxRooms);
+        Transform parent = GameObject.FindGameObjectWithTag("DungeonGenerator").transform;
+        yield return new WaitForSeconds(1);
+
+        Dungeon dungeon = new(CreateParameters(axis), components);
+        BSPAlgorithm algorithm = new(dungeon, parent);
+        algorithm.GenerateDungeon();
+
+        yield return new WaitForSeconds(1);
     }
 
-    private DungeonParameters CreateParameters(DungeonAxis axis)
-    {
-        return CreateParameters(axis, 2);
-    }
-
-    private DungeonParameters CreateParameters(DungeonAxis axis, int maxRooms)
+    private DungeonParameters CreateParameters(DungeonAxis axis, int maxRooms = 2)
     {
         float dungeonSplit = 0;  // HORIZONTAL
         switch (axis)
@@ -141,8 +114,8 @@ public class BSPAlgorithmTests
                 dungeonSplit = 0.5f;
                 break;
         }
-        
-        return new DungeonParameters(new Vector2(200,200), new Vector2(25, 25), new Vector2(25, 25), new(2, 2), 0, 0, dungeonSplit, 0, 0, 0, 0, maxRooms);
+
+        return new DungeonParameters(new Vector2(200, 200), new Vector2(25, 25), new Vector2(25, 25), new(2, 2), 0, 0, dungeonSplit, 0, 0, 0, 0, maxRooms);
     }
 
     private List<DungeonRoom> FindRooms()

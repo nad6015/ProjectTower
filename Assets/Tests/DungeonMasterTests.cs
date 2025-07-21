@@ -19,7 +19,7 @@ public class DungeonMasterTests
     public IEnumerator ShouldInitialiseSuccessfully()
     {
         dungeonMaster = GameObject.FindGameObjectWithTag("DungeonMaster").GetComponent<DungeonMaster>();
-        dungeonMaster.OnNewDungeon();
+        dungeonMaster.NewDungeon();
         Assert.That(dungeonMaster.state == DungeonMaster.State.AWAITING_START);
         
         dungeonMaster.StartDungeonMaster();

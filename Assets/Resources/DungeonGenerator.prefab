@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8961544758655680470}
   - component: {fileID: 7941756382882647204}
-  - component: {fileID: 5498169529587284894}
   m_Layer: 0
   m_Name: DungeonGenerator
   m_TagString: DungeonGenerator
@@ -45,22 +44,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ad3d11a844ede54296e2161e1bb40e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5498169529587284894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7937975337316847439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23f500bec246602448fd2ce8af056caf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wallAsset: {fileID: 3030302167426459883, guid: 8253c9a79c7889e44988a874c006ce5e, type: 3}
-  corridorAsset: {fileID: 3030302167426459883, guid: 8253c9a79c7889e44988a874c006ce5e, type: 3}
-  floorAsset: {fileID: 8031560325989942358, guid: 7328ee9a0623e28469aed37d4a8d1b80, type: 3}
-  enemy: {fileID: 8259528467515437859, guid: c5b194cc3e85d40408c2fca2c687f7ac, type: 3}
-  item: {fileID: 2374991623033447861, guid: 3a68e34b9cf70244d910afff8f8d8799, type: 3}
-  startingPoint: {fileID: 3787019230069511806, guid: 7c404835786532a4fbf9a3cc35cbd73b, type: 3}
-  exit: {fileID: 8684044341818389683, guid: 20f557f5c48279b4d9ec43df8dfe49e2, type: 3}
