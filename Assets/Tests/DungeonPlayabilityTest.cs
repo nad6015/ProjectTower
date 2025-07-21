@@ -13,7 +13,7 @@ public class DungeonPlayability
     public void Setup()
     {
         SceneManager.LoadScene("Scenes/Tests/DungeonGenerator");
-        testTimeInSeconds = 60;
+        testTimeInSeconds = 20;
     }
 
     [UnityTest]

@@ -28,6 +28,7 @@ namespace Assets.DungeonGenerator
             // TODO: Run dungeon parameters through misson grammar, then pass result to BSP algorithm
             // TODO: Might need to build navmesh before placing enemies
             Dungeon d = new Dungeon(parameters, _components);
+            
             IDungeonAlgorithm grammarDungeonGenerator = new GraphGrammarAlgorithm(parameters, _components);
             grammarDungeonGenerator.GenerateDungeon();
 

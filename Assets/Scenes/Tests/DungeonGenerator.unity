@@ -985,6 +985,10 @@ PrefabInstance:
       value: DungeonGenerator
       objectReference: {fileID: 0}
     - target: {fileID: 7941756382882647204, guid: 8985e713cbe74684087bf81d7d576014, type: 3}
+      propertyPath: _components
+      value: 
+      objectReference: {fileID: 11400000, guid: 8af705ee45be01c4881821ed9ca190f1, type: 2}
+    - target: {fileID: 7941756382882647204, guid: 8985e713cbe74684087bf81d7d576014, type: 3}
       propertyPath: playerCharacter
       value: 
       objectReference: {fileID: 1927581186806867705, guid: 2a3f18e31c113f4489b2a6f89b071663, type: 3}

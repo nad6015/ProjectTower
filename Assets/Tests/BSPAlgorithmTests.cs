@@ -10,12 +10,11 @@ using UnityEngine.TestTools;
 
 public class BSPAlgorithmTests
 {
-    DungeonComponents components;
+    DungeonComponents components = Resources.Load<DungeonComponents>("Dungeons/Dev/DevComponents");
     [SetUp]
     public void SetUp()
     {
         SceneManager.LoadScene("Scenes/Tests/BSPAlgorithm");
-        components = Resources.Load<DungeonComponents>("Dungeons/Dev/TestComponents");
     }
 
     [UnityTest]
@@ -76,7 +75,7 @@ public class BSPAlgorithmTests
     [UnityTest]
     public IEnumerator ShouldGenerateCompleteDungeon()
     {
-        yield return TestSetUp(DungeonAxis.DEFAULT);
+        yield return TestSetUp(DungeonAxis.DEFAULT, 10);
 
         List<DungeonRoom> rooms = FindRooms();
         DungeonCorridor[] corridors = GameObject.FindObjectsByType<DungeonCorridor>(FindObjectsSortMode.None);
@@ -87,19 +86,19 @@ public class BSPAlgorithmTests
         Assert.That(corridors.Length >= 5);
     }
 
-    private IEnumerator TestSetUp(DungeonAxis axis = DungeonAxis.HORIZONTAL)
+    private IEnumerator TestSetUp(DungeonAxis axis = DungeonAxis.HORIZONTAL, int maxRoomCount = 2)
     {
         Transform parent = GameObject.FindGameObjectWithTag("DungeonGenerator").transform;
         yield return new WaitForSeconds(1);
 
-        Dungeon dungeon = new(CreateParameters(axis), components);
+        Dungeon dungeon = new(CreateParameters(axis, maxRoomCount), components);
         BSPAlgorithm algorithm = new(dungeon, parent);
         algorithm.GenerateDungeon();
 
         yield return new WaitForSeconds(1);
     }
 
-    private DungeonParameters CreateParameters(DungeonAxis axis, int maxRooms = 2)
+    private DungeonParameters CreateParameters(DungeonAxis axis, int maxRooms)
     {
         float dungeonSplit = 0;  // HORIZONTAL
         switch (axis)
@@ -115,7 +114,7 @@ public class BSPAlgorithmTests
                 break;
         }
 
-        return new DungeonParameters(new Vector2(200, 200), new Vector2(25, 25), new Vector2(25, 25), new(2, 2), 0, 0, dungeonSplit, 0, 0, 0, 0, maxRooms);
+        return new DungeonParameters(new Vector2(200, 200), new Vector2(15, 15), new Vector2(15, 15), new(2, 2), 0, 0, dungeonSplit, 0, 0, 0, 0, maxRooms);
     }
 
     private List<DungeonRoom> FindRooms()
