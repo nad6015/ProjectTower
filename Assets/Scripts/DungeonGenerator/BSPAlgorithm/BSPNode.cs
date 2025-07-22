@@ -152,36 +152,93 @@ namespace Assets.DungeonGenerator
 
             Debug.Log("center of " + name + " = " + Bounds.center);
             Debug.Log("center of " + node.name + " = " + node.Bounds.center);
-            Debug.Log("direction = " + dir.normalized);
-            Debug.Log("direction angle = " + angle);
+            
 
-            if ((dir.x >= 0.5f || dir.x <= -0.5f) && (dir.y >= 0.5f || dir.y <= -0.5f) && (angle > 30f || angle < -30f))
+            Vector2 roundedDir = new Vector2(Mathf.Round(dir.x), Mathf.Round(dir.y));
+
+            Debug.Log(roundedDir);
+
+            GenerateCorridor(this, node, minCorridorSize, roundedDir);
+
+            if (IsWithinBounds(this, node, minCorridorSize, roundedDir))
             {
-                GenerateJointCorridor(node, minCorridorSize, new(dir.x < 0 ? -1 : 1, dir.y < 0 ? -1 : 1));
-                Rect verticalCorridor = corridors.Last().Item1;
-                Rect horizontalCorridor = corridors[corridors.IndexOf(corridors.Last()) - 1].Item1;
-                Debug.Log("horizontal corridor after: " + horizontalCorridor);
-                Debug.Log("vertical corridor after: " + verticalCorridor);
+                return;
+            }
+
+            if (roundedDir.x == 1 || roundedDir.x == -1)
+            {
+                GenerateNextCorridor(this, node, minCorridorSize, new Vector2(0, dir.y > 0 ? 1 : -1));
             }
             else
             {
-                GenerateCorridor(this, node, minCorridorSize, new Vector2(Mathf.Round(dir.x), Mathf.Round(dir.y)));
+                GenerateNextCorridor(this, node, minCorridorSize, new Vector2(dir.x > 0 ? 1 : -1, 0));
             }
+            //    var corridor = corridors.Last();
+            //    if (Mathf.Approximately(roundedDir.y, 0))
+            //    {
+            //        Debug.Log("dir.y = " + dir.y);
+            //        if (roundedDir.x > 0 && (corridor.Item1.yMax < secondRoom.y))
+            //        {
+            //            GenerateCorridor(this, node, minCorridorSize, Vector2.up);
+            //        }
+            //        else if (roundedDir.x < 0 && (corridor.Item1.yMax < secondRoom.y))
+            //        {
+            //            GenerateCorridor(this, node, minCorridorSize, Vector2.up);
+            //        }
+            //        else if (roundedDir.x > 0 && (corridor.Item1.y > secondRoom.yMax))
+            //        {
+            //            GenerateCorridor(this, node, minCorridorSize, Vector2.down);
+            //        }
+            //        else if (roundedDir.x < 0 && (corridor.Item1.y > secondRoom.y))
+            //        {
+            //            GenerateCorridor(this, node, minCorridorSize, Vector2.down);
+            //        }
+            //    }
+            //    // (dir.x >= 0.5f || dir.x <= -0.5f) && (dir.y >= 0.5f || dir.y <= -0.5f)
+            //    if (dot > 0 && dot < 0.5)//(angle > 30f || angle < -30f))
+            //    {
+            //        GenerateJointCorridor(node, minCorridorSize, new(dir.x < 0 ? -1 : 1, dir.y < 0 ? -1 : 1));
+            //        Rect verticalCorridor = corridors.Last().Item1;
+            //        Rect horizontalCorridor = corridors[corridors.IndexOf(corridors.Last()) - 1].Item1;
+            //        Debug.Log("horizontal corridor after: " + horizontalCorridor);
+            //        Debug.Log("vertical corridor after: " + verticalCorridor);
+            //    }
+            //    else
+            //    {
+
+            //    }
+            //}
+        }
+
+        private bool IsWithinBounds(BSPNode bSPNode, BSPNode node, Vector2 minCorridorSize, Vector2 roundedDir)
+        {
+            Rect corridor = corridors.Last().Item1;
+
+            if (roundedDir.x > 0 || roundedDir.x < 0)
+            {
+                return corridor.y >= Math.Max(node.Bounds.y, bSPNode.Bounds.y) && corridor.y < Math.Min(node.Bounds.yMax, bSPNode.Bounds.yMax);
+            }
+            else if(roundedDir.y > 0 || roundedDir.y < 0)
+            {
+                return corridor.x >= Math.Max(node.Bounds.x, bSPNode.Bounds.x) && corridor.x < Math.Min(node.Bounds.xMax, bSPNode.Bounds.xMax);
+            }
+
+            return true;
         }
 
         private void GenerateCorridor(BSPNode node1, BSPNode node2, Vector2 minCorridorSize, Vector2 dir)
         {
             Tuple<Rect, DungeonAxis> corridor;
 
-            if (Vector2.left == dir)
+            if (Vector2.left.x == dir.x)
             {
                 corridor = CreateHorizontalCorridor(node1, node2, minCorridorSize);
             }
-            else if (Vector2.right == dir)
+            else if (Vector2.right.x == dir.x)
             {
                 corridor = CreateHorizontalCorridor(node2, node1, minCorridorSize);
             }
-            else if (Vector2.up == dir)
+            else if (Vector2.up.y == dir.y)
             {
                 corridor = CreateVerticalCorridor(node2, node1, minCorridorSize);
             }
@@ -190,6 +247,38 @@ namespace Assets.DungeonGenerator
                 corridor = CreateVerticalCorridor(node1, node2, minCorridorSize);
             }
             corridors.Add(corridor);
+        }
+
+        private void GenerateNextCorridor(BSPNode node1, BSPNode node2, Vector2 minCorridorSize, Vector2 dir)
+        {
+            Tuple<Rect, DungeonAxis> corridor = corridors.Last();
+            Debug.Log(corridor.Item1);
+
+            Rect rect;
+            DungeonAxis axis = Mathf.Approximately(dir.y, 0) ? DungeonAxis.HORIZONTAL : DungeonAxis.VERTICAL;
+
+            if (Vector2.left == dir)
+            {
+                rect = new(corridor.Item1.xMax, corridor.Item1.yMax, node2.Bounds.x - corridor.Item1.xMax, minCorridorSize.y);
+                Debug.Log("next corridor starts from left " + rect);
+            }
+            else if (Vector2.right == dir)
+            {
+                rect = new(node2.Bounds.xMax, corridor.Item1.yMax, node2.Bounds.xMax - node1.Bounds.x, minCorridorSize.y);
+                
+                Debug.Log("next corridor starts from right " + rect);
+            }
+            else if (Vector2.up == dir)
+            {
+                rect = new(corridor.Item1.xMax, node2.Bounds.yMax, minCorridorSize.x, corridor.Item1.yMax - node2.Bounds.yMax);
+                Debug.Log("next corridor starts from up " + rect);
+            }
+            else //if (Vector2.down == dir)
+            {
+                rect = new(corridor.Item1.xMax, node1.Bounds.yMax, minCorridorSize.x, corridor.Item1.yMax - node1 .Bounds.yMax);
+                Debug.Log("next corridor starts from down " + rect);
+            }
+            corridors.Add(new(rect, axis));
         }
 
 

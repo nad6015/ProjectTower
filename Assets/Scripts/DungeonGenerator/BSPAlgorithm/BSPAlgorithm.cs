@@ -86,7 +86,6 @@ namespace Assets.DungeonGenerator
         {
             if (_rooms.Count >= _dungeon.MaxRooms)
             {
-                Debug.Log("_rooms.count " +  _rooms.Count);
                 return;
             }
 
@@ -220,6 +219,7 @@ namespace Assets.DungeonGenerator
                 for (var i = 0; _corridors.Count > i; i++)
                 {
                     DungeonCorridor corridor = _corridors[i];
+                    corridor.transform.SetParent(_dungeonTransform);
 
                     corridor.Construct(_components);
                     room?.Room.Modify(corridor);
