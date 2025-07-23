@@ -73,7 +73,7 @@ namespace Assets.DungeonGenerator
             }
 
             // Place top wall
-            for (int i = 0; i < width; i++)
+            for (int i = 0; i < width + 1; i++)
             {
                 float wallX = minX + i;
                 float wallY = maxZ;
