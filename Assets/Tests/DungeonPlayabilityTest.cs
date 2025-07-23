@@ -13,7 +13,6 @@ public class DungeonPlayability
     public void Setup()
     {
         SceneManager.LoadScene("Scenes/Tests/DungeonGenerator");
-        testTimeInSeconds = 20;
     }
 
     [UnityTest]
@@ -22,19 +21,19 @@ public class DungeonPlayability
     {
         GameObject.Find("DungeonMaster").GetComponent<DungeonMaster>().NewDungeon();
         NavMeshAgent testAgent = GameObject.FindGameObjectWithTag("Player").transform.parent.GetComponent<NavMeshAgent>();
+        Transform endPoint = GameObject.FindFirstObjectByType<DungeonExit>().transform;
 
         do
         {
             yield return new WaitForSeconds(1);
-            testTimeInSeconds--;
         }
-        while (hasReachedDestination(testAgent) && testTimeInSeconds > 0);
-        Assert.That(hasReachedDestination(testAgent));
+
+        while (!hasReachedDestination(testAgent.transform, endPoint));
+        Assert.That(hasReachedDestination(testAgent.transform, endPoint));
     }
 
-    private bool hasReachedDestination(NavMeshAgent agent)
+    private bool hasReachedDestination(Transform agent, Transform endpoint)
     {
-        // destination condition code referenced from - https://discussions.unity.com/t/how-can-i-tell-when-a-navmeshagent-has-reached-its-destination/52403
-        return agent.hasPath || agent.velocity.sqrMagnitude == 0f;
+        return Vector3.Distance(endpoint.position, agent.position) < 1;
     }
 }

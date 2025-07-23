@@ -9,6 +9,9 @@ namespace Assets.DungeonGenerator
     /// </summary>
     internal interface IDungeonAlgorithm
 	{
+        /// <summary>
+        /// Generates a dungeon.
+        /// </summary>
         void GenerateDungeon();
     }
 }

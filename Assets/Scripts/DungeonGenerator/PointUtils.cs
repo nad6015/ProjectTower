@@ -29,13 +29,6 @@ namespace Assets.DungeonGenerator
             return new Vector3(vector.x, 1, vector.y);
         }
 
-        internal static Vector3 GetRandomPointWithinBounds(Rect bounds)
-        {
-            float x = Random.Range(bounds.x + 1, bounds.xMax - 1);
-            float y = Random.Range(bounds.y + 1, bounds.yMax - 1);
-            return new(x, 0, y);
-        }
-
         /// <summary>
         /// Returns a point between two points. Ignores the y component of the Vector3.
         /// </summary>
@@ -46,6 +39,19 @@ namespace Assets.DungeonGenerator
         {
             float x = Random.Range(v1.x, v2.x);
             float z = Random.Range(v1.z, v2.z);
+            return new(x, 0, z);
+        }
+
+        /// <summary>
+        /// Returns a point within the given bounds. Ignores the y component of the Vector3.
+        /// </summary>
+        /// <param name="v1">min point</param>
+        /// <param name="v2">max point</param>
+        /// <returns>A random point within the range</returns>
+        public static Vector3 RandomPointWithinRange(Bounds b)
+        {
+            float x = Random.Range(b.min.x, b.max.x);
+            float z = Random.Range(b.min.z, b.max.z);
             return new(x, 0, z);
         }
     }

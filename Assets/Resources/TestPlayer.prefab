@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e25eaf9b0fa9a2b4091bc261bd406169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _camera: {fileID: 28193099444425750, guid: bdfe95dbaf6eb04439019623fcae6df1, type: 3}
 --- !u!136 &8663609610742355783
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -331,8 +332,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3005f02c5cca2fa4f9da472087c696dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceFromPlayer: 5
-  distanceFromPlayerZ: -1.5
+  <DistanceFromPlayer>k__BackingField: 0
+  <DistanceFromPlayerZ>k__BackingField: 0
   cameraTilt: 15
 --- !u!1001 &4419473177470310788
 PrefabInstance:

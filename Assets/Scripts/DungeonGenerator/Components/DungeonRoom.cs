@@ -29,7 +29,7 @@ namespace Assets.DungeonGenerator
 
             float minX = Bounds.min.x;
             float minZ = Bounds.min.z;
-            
+
             float maxX = Bounds.max.x;
             float maxZ = Bounds.max.z;
 
@@ -39,11 +39,11 @@ namespace Assets.DungeonGenerator
                 float wallX = minX + i;
                 float wallZ = minZ;
 
-                    GameObject wall = Instantiate(wallAsset);
-                    wall.transform.localPosition = new Vector3(wallX, 0, wallZ);
-                    wall.name = "Wall cap";
-                    wall.transform.SetParent(transform);
-                    walls.Add(wall);
+                GameObject wall = Instantiate(wallAsset);
+                wall.transform.localPosition = new Vector3(wallX, 0, wallZ);
+                wall.name = "Wall cap";
+                wall.transform.SetParent(transform);
+                walls.Add(wall);
             }
 
             // Place left and right walls
@@ -53,23 +53,18 @@ namespace Assets.DungeonGenerator
                 float wallX2 = maxX;
                 float wallY = minZ + i;
 
-                if (!WithinBounds(wallX, wallY))
-                {
-                    GameObject wall = Instantiate(wallAsset);
-                    wall.name = "Wall length";
-                    wall.transform.localPosition = new Vector3(wallX, 0, wallY);
-                    wall.transform.SetParent(transform);
-                    walls.Add(wall);
-                }
+                GameObject wall = Instantiate(wallAsset);
+                wall.name = "Wall length";
+                wall.transform.localPosition = new Vector3(wallX, 0, wallY);
+                wall.transform.SetParent(transform);
+                walls.Add(wall);
 
-                if (!WithinBounds(wallX2, wallY))
-                {
-                    GameObject wall2 = Instantiate(wallAsset);
-                    wall2.name = "Wall length";
-                    wall2.transform.localPosition = new Vector3(wallX2, 0, wallY);
-                    wall2.transform.SetParent(transform);
-                    walls.Add(wall2);
-                }
+
+                GameObject wall2 = Instantiate(wallAsset);
+                wall2.name = "Wall length";
+                wall2.transform.localPosition = new Vector3(wallX2, 0, wallY);
+                wall2.transform.SetParent(transform);
+                walls.Add(wall2);
             }
 
             // Place top wall
@@ -78,58 +73,34 @@ namespace Assets.DungeonGenerator
                 float wallX = minX + i;
                 float wallY = maxZ;
 
-                if (!WithinBounds(wallX, wallY))
-                {
-                    GameObject wall = Instantiate(wallAsset);
-                    wall.transform.localPosition = new Vector3(wallX, 0, wallY);
-                    wall.name = "Wall cap";
-                    wall.transform.SetParent(transform);
-                    walls.Add(wall);
-                }
+                GameObject wall = Instantiate(wallAsset);
+                wall.transform.localPosition = new Vector3(wallX, 0, wallY);
+                wall.name = "Wall cap";
+                wall.transform.SetParent(transform);
+                walls.Add(wall);
             }
         }
 
         public void Modify(DungeonCorridor corridor)
         {
-            foreach (Tuple<Rect, DungeonAxis> path in corridor.Paths)
+            Bounds cBounds = corridor.Bounds;
+
+            foreach (GameObject wall in walls)
             {
-                Rect corridorBounds = path.Item1;
-                DungeonAxis axis = path.Item2;
+                Vector3 position = wall.transform.position;
 
-                foreach (GameObject wall in walls)
+                if ((position.x > cBounds.min.x && position.x < cBounds.max.x) &&
+                    (Mathf.Approximately(position.z, cBounds.min.z) || Mathf.Approximately(position.z, cBounds.max.z)))
                 {
-                    Vector2 position = new(wall.transform.position.x, wall.transform.position.z);
-
-                    if ((position.x > corridorBounds.x && position.x < corridorBounds.xMax) &&
-                            (Mathf.Approximately(position.y, corridorBounds.y) || Mathf.Approximately(position.y, corridorBounds.yMax)) ||
-                            (position.y > corridorBounds.y && position.y < corridorBounds.yMax) &&
-                            (Mathf.Approximately(position.x, corridorBounds.x) || Mathf.Approximately(position.x, corridorBounds.xMax)))
-                    {
-                        wall.SetActive(false);
-                    }
+                    wall.SetActive(false);
                 }
 
-                corridor.Modify(rectBounds);
+                if ((position.z > cBounds.min.z && position.z < cBounds.max.z) &&
+                    (Mathf.Approximately(position.x, cBounds.min.x) || Mathf.Approximately(position.x, cBounds.max.x)))
+                {
+                    wall.SetActive(false);
+                }
             }
-        }
-
-        // TODO: This seems pointless. Why did I add it?
-        private bool WithinBounds(float x, float y)
-        {
-            Vector2 point = new(x, y);
-
-            return false;
-        }
-
-        internal static DungeonRoom Create(Rect bounds, String name)
-        {
-            // Create gameobject code referenced from  - https://discussions.unity.com/t/how-do-you-create-an-empty-gameobject-in-code-and-add-it-to-the-scene/86380/4
-            GameObject gameObj = new(name);
-            DungeonRoom dungeonRoom = gameObj.AddComponent<DungeonRoom>();
-            dungeonRoom.rectBounds = bounds;
-            dungeonRoom.walls = new List<GameObject>();
-
-            return dungeonRoom;
         }
 
         public static DungeonRoom Create(Bounds bounds, int i)

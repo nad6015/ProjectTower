@@ -28,7 +28,7 @@ public class RandomWalkTests
         Bounds room1 = rooms[0].Bounds;
         Bounds room2 = rooms[1].Bounds;
 
-        Vector3 roomSize = new Vector3(25, 0, 25);
+        Vector3 roomSize = new(25, 0, 25);
         Vector3Int dir = Vector3Int.RoundToInt((room2.min - room1.min).normalized);
 
         Assert.That(rooms.Count() == 2);
