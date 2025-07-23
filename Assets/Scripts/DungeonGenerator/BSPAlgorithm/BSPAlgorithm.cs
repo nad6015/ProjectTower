@@ -248,7 +248,7 @@ namespace Assets.DungeonGenerator
         {
             // Place dungeon exit point
             BSPNode lastRoom = _rooms.Last();
-            DungeonExit exit = GameObject.Instantiate(_components.exit, DungeonGeneratorUtils.Vec2ToVec3(lastRoom.Bounds.center), Quaternion.identity);
+            DungeonExit exit = GameObject.Instantiate(_components.exit, PointUtils.Vec2ToVec3(lastRoom.Bounds.center), Quaternion.identity);
             exit.name = "DungeonExit";
 
             for (var i = 0; i < _rooms.Count; i++)
@@ -261,7 +261,7 @@ namespace Assets.DungeonGenerator
             // Generate navmesh
             // Place player at start of dungeon
             BSPNode firstRoom = _rooms.First();
-            _components.startingPoint.Spawn(DungeonGeneratorUtils.Vec2ToVec3(firstRoom.Bounds.center));
+            _components.startingPoint.Spawn(PointUtils.Vec2ToVec3(firstRoom.Bounds.center));
         }
 
         private void PlaceContent(DungeonRoom room)
@@ -271,7 +271,7 @@ namespace Assets.DungeonGenerator
                 for (int i = 0; i < content.Value; i++)
                 {
                     GameObject gameObject = GameObject.Instantiate(content.Key);
-                    gameObject.transform.position += DungeonGeneratorUtils.GetRandomPointWithinBounds(room.Bounds);
+                    gameObject.transform.position += PointUtils.GetRandomPointWithinBounds(room.rectBounds);
                 }
             }
         }

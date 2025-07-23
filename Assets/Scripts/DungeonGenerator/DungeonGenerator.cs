@@ -33,7 +33,7 @@ namespace Assets.DungeonGenerator
             grammarDungeonGenerator.GenerateDungeon();
 
 
-            IDungeonAlgorithm algorithm = new BSPAlgorithm(d, transform);
+            IDungeonAlgorithm algorithm = new RandomWalk(d, transform);
             algorithm.GenerateDungeon();
             return d;
         }

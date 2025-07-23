@@ -124,7 +124,7 @@ namespace Assets.DungeonGenerator
             float width = math.abs(math.round(node2.Bounds.x - x));
             float height = minCorridorSize.y;
 
-            Rect corridorBounds = new Rect(x, y < node1.Bounds.y ? node1.Bounds.y : y, width, height);
+            Rect corridorBounds = new(x, y < node1.Bounds.y ? node1.Bounds.y : y, width, height);
 
             return new(corridorBounds, DungeonAxis.HORIZONTAL);
         }
@@ -137,7 +137,7 @@ namespace Assets.DungeonGenerator
             float width = minCorridorSize.x;
             float height = math.abs(math.round(node2.Bounds.y - y));
 
-            Rect corridorBounds = new Rect(x < node1.Bounds.x ? node1.Bounds.x : x, y, width, height);
+            Rect corridorBounds = new(x < node1.Bounds.x ? node1.Bounds.x : x, y, width, height);
 
             return new(corridorBounds, DungeonAxis.VERTICAL);
         }

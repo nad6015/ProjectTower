@@ -27,7 +27,7 @@ public class BSPAlgorithmTests
         Assert.That(rooms.Count() == 2);
         Assert.That(corridors.Count() == 1);
 
-        Assert.That(rooms[0].Bounds.size == new Vector2(25, 50));
+        Assert.That(rooms[0].rectBounds.size == new Vector2(25, 50));
         Assert.That(rooms[1].Contents.Count == 0);
 
         Assert.That(rooms[0].transform.childCount == (25 + 25 + 50 + 50));
@@ -41,16 +41,16 @@ public class BSPAlgorithmTests
 
         List<DungeonRoom> rooms = FindRooms();
 
-        Assert.That(rooms[0].Bounds.x == 0);
-        Assert.That(rooms[0].Bounds.width <= 25);
-        Assert.That(rooms[1].Bounds.x == 0);
-        Assert.That(rooms[1].Bounds.width <= 25);
+        Assert.That(rooms[0].rectBounds.x == 0);
+        Assert.That(rooms[0].rectBounds.width <= 25);
+        Assert.That(rooms[1].rectBounds.x == 0);
+        Assert.That(rooms[1].rectBounds.width <= 25);
 
-        Assert.That(rooms[0].Bounds.y == 0);
-        Assert.That(rooms[0].Bounds.height <= 25);
+        Assert.That(rooms[0].rectBounds.y == 0);
+        Assert.That(rooms[0].rectBounds.height <= 25);
 
-        Assert.That(rooms[1].Bounds.y >= rooms[0].Bounds.yMax);
-        Assert.That(rooms[0].Bounds.height >= rooms[1].Bounds.height);
+        Assert.That(rooms[1].rectBounds.y >= rooms[0].rectBounds.yMax);
+        Assert.That(rooms[0].rectBounds.height >= rooms[1].rectBounds.height);
     }
 
     [UnityTest]
@@ -60,16 +60,16 @@ public class BSPAlgorithmTests
 
         List<DungeonRoom> rooms = FindRooms();
 
-        Assert.That(rooms[0].Bounds.y == 0);
-        Assert.That(rooms[0].Bounds.height <= 25);
-        Assert.That(rooms[1].Bounds.y >= rooms[0].Bounds.yMax);
-        Assert.That(rooms[1].Bounds.height <= 25);
+        Assert.That(rooms[0].rectBounds.y == 0);
+        Assert.That(rooms[0].rectBounds.height <= 25);
+        Assert.That(rooms[1].rectBounds.y >= rooms[0].rectBounds.yMax);
+        Assert.That(rooms[1].rectBounds.height <= 25);
 
-        Assert.That(rooms[0].Bounds.x == 0);
-        Assert.That(rooms[0].Bounds.width <= 25);
+        Assert.That(rooms[0].rectBounds.x == 0);
+        Assert.That(rooms[0].rectBounds.width <= 25);
 
-        Assert.That(rooms[1].Bounds.x >= rooms[0].Bounds.xMax);
-        Assert.That((rooms[0].Bounds.width == rooms[1].Bounds.width));
+        Assert.That(rooms[1].rectBounds.x >= rooms[0].rectBounds.xMax);
+        Assert.That((rooms[0].rectBounds.width == rooms[1].rectBounds.width));
     }
 
     [UnityTest]

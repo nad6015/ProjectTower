@@ -6,7 +6,9 @@ namespace Assets.DungeonGenerator
 {
     public class DungeonRoom : MonoBehaviour
     {
-        public Rect Bounds { get; set; }
+        public Rect rectBounds { get; set; }
+        public Bounds Bounds { get; private set; }
+
         public Dictionary<GameObject, int> Contents { get; internal set; }
         private List<GameObject> walls;
 
@@ -17,34 +19,39 @@ namespace Assets.DungeonGenerator
 
         public void Construct(GameObject floorAsset, GameObject wallAsset, DungeonCorridor corridor)
         {
+            transform.position = Bounds.min;
             // Place the floor
-            GameObject floor = Instantiate(floorAsset);
-            floor.transform.SetParent(transform);
-            floor.transform.localScale = DungeonGeneratorUtils.Vec2ToVec3(Bounds.size, 0.5f);
-            floor.transform.localPosition = DungeonGeneratorUtils.Vec2ToVec3(Bounds.position, 0);
+            GameObject floor = Instantiate(floorAsset, transform);
+            floor.transform.localScale = PointUtils.Vec2ToVec3(Bounds.size, 0.5f);
+
+            float width = Bounds.size.x;
+            float height = Bounds.size.z;
+
+            float minX = Bounds.min.x;
+            float minZ = Bounds.min.z;
+            
+            float maxX = Bounds.max.x;
+            float maxZ = Bounds.max.z;
 
             // Place the top wall
-            for (int i = 0; i < Bounds.width; i++)
+            for (int i = 0; i < width; i++)
             {
-                float wallX = Bounds.position.x + i;
-                float wallY = Bounds.position.y;
+                float wallX = minX + i;
+                float wallZ = minZ;
 
-                if (!WithinBounds(wallX, wallY))
-                {
                     GameObject wall = Instantiate(wallAsset);
-                    wall.transform.localPosition = new Vector3(wallX, 0, wallY);
+                    wall.transform.localPosition = new Vector3(wallX, 0, wallZ);
                     wall.name = "Wall cap";
                     wall.transform.SetParent(transform);
                     walls.Add(wall);
-                }
             }
 
             // Place left and right walls
-            for (int i = 0; i < Bounds.height; i++)
+            for (int i = 0; i < height; i++)
             {
-                float wallX = Bounds.position.x;
-                float wallX2 = Bounds.width + Bounds.position.x;
-                float wallY = i + Bounds.position.y;
+                float wallX = minX;
+                float wallX2 = maxX;
+                float wallY = minZ + i;
 
                 if (!WithinBounds(wallX, wallY))
                 {
@@ -66,10 +73,10 @@ namespace Assets.DungeonGenerator
             }
 
             // Place top wall
-            for (int i = 0; i < Bounds.width; i++)
+            for (int i = 0; i < width; i++)
             {
-                float wallX = Bounds.position.x + i;
-                float wallY = Bounds.height + Bounds.position.y;
+                float wallX = minX + i;
+                float wallY = maxZ;
 
                 if (!WithinBounds(wallX, wallY))
                 {
@@ -102,7 +109,7 @@ namespace Assets.DungeonGenerator
                     }
                 }
 
-                corridor.Modify(Bounds);
+                corridor.Modify(rectBounds);
             }
         }
 
@@ -118,6 +125,17 @@ namespace Assets.DungeonGenerator
         {
             // Create gameobject code referenced from  - https://discussions.unity.com/t/how-do-you-create-an-empty-gameobject-in-code-and-add-it-to-the-scene/86380/4
             GameObject gameObj = new(name);
+            DungeonRoom dungeonRoom = gameObj.AddComponent<DungeonRoom>();
+            dungeonRoom.rectBounds = bounds;
+            dungeonRoom.walls = new List<GameObject>();
+
+            return dungeonRoom;
+        }
+
+        public static DungeonRoom Create(Bounds bounds, int i)
+        {
+            // Create gameobject code referenced from  - https://discussions.unity.com/t/how-do-you-create-an-empty-gameobject-in-code-and-add-it-to-the-scene/86380/4
+            GameObject gameObj = new("Room " + i);
             DungeonRoom dungeonRoom = gameObj.AddComponent<DungeonRoom>();
             dungeonRoom.Bounds = bounds;
             dungeonRoom.walls = new List<GameObject>();
