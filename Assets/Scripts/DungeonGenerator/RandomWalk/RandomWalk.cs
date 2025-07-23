@@ -18,7 +18,6 @@ namespace Assets.DungeonGenerator
         private readonly Dungeon _dungeon;
         private readonly DungeonComponents _components;
         private readonly Transform _dungeonTransform;
-        private readonly int offset = 1;
 
         public RandomWalk(Dungeon dungeon, Transform transform)
         {
@@ -91,14 +90,17 @@ namespace Assets.DungeonGenerator
             {
                 var room = _roomBounds.ElementAt(i);
                 _roomBounds[room.Key] = DungeonRoom.Create(room.Key, i);
-                _roomBounds[room.Key].Construct(_components.floorTile, _components.wallTile, null);
+                room.Value.Construct(_components);
+                room.Value.transform.SetParent(_dungeonTransform);
+                
             }
 
             for (int i = 0; i < _corridors.Count; i++)
             {
                 var corridor = _corridors.ElementAt(i);
                 _corridors[corridor.Key] = DungeonCorridor.Create(corridor.Key, i);
-                _corridors[corridor.Key].Construct(_components, _dungeon.MinCorridorSize);
+                corridor.Value.Construct(_components, _dungeon.MinCorridorSize);
+                corridor.Value.transform.SetParent(_dungeonTransform);
             }
 
             foreach (var room in _roomBounds.Values)

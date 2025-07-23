@@ -8,7 +8,6 @@ using UnityEngine.TestTools;
 
 public class DungeonPlayability
 {
-    private int testTimeInSeconds;
     [SetUp]
     public void Setup()
     {
@@ -28,11 +27,11 @@ public class DungeonPlayability
             yield return new WaitForSeconds(1);
         }
 
-        while (!hasReachedDestination(testAgent.transform, endPoint));
-        Assert.That(hasReachedDestination(testAgent.transform, endPoint));
+        while (!HasReachedDestination(testAgent.transform, endPoint));
+        Assert.That(HasReachedDestination(testAgent.transform, endPoint));
     }
 
-    private bool hasReachedDestination(Transform agent, Transform endpoint)
+    private bool HasReachedDestination(Transform agent, Transform endpoint)
     {
         return Vector3.Distance(endpoint.position, agent.position) < 1;
     }

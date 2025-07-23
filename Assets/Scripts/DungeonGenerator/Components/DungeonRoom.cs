@@ -6,7 +6,6 @@ namespace Assets.DungeonGenerator
 {
     public class DungeonRoom : MonoBehaviour
     {
-        public Rect rectBounds { get; set; }
         public Bounds Bounds { get; private set; }
 
         public Dictionary<GameObject, int> Contents { get; internal set; }
@@ -17,8 +16,11 @@ namespace Assets.DungeonGenerator
             Contents = new();
         }
 
-        public void Construct(GameObject floorAsset, GameObject wallAsset, DungeonCorridor corridor)
+        public void Construct(DungeonComponents components)
         {
+            GameObject floorAsset = components.floorTile;
+            GameObject wallAsset = components.wallTile;
+
             transform.position = Bounds.min;
             // Place the floor
             GameObject floor = Instantiate(floorAsset, transform);
@@ -33,50 +35,34 @@ namespace Assets.DungeonGenerator
             float maxX = Bounds.max.x;
             float maxZ = Bounds.max.z;
 
-            // Place the top wall
+            // Place the top and bottom walls
             for (int i = 0; i < width; i++)
             {
                 float wallX = minX + i;
-                float wallZ = minZ;
 
-                GameObject wall = Instantiate(wallAsset);
-                wall.transform.localPosition = new Vector3(wallX, 0, wallZ);
-                wall.name = "Wall cap";
-                wall.transform.SetParent(transform);
+                // Bottom wall
+                GameObject wall = Instantiate(wallAsset, new Vector3(wallX, 0, minZ), Quaternion.identity, transform);
+                wall.name = "Wall Bottom";
+                walls.Add(wall);
+
+                // Top wall
+                wall = Instantiate(wallAsset, new Vector3(wallX, 0, maxZ), Quaternion.identity, transform);
+                wall.name = "Wall Top";
                 walls.Add(wall);
             }
 
             // Place left and right walls
             for (int i = 0; i < height; i++)
             {
-                float wallX = minX;
-                float wallX2 = maxX;
-                float wallY = minZ + i;
+                float z = minZ + i;
 
-                GameObject wall = Instantiate(wallAsset);
-                wall.name = "Wall length";
-                wall.transform.localPosition = new Vector3(wallX, 0, wallY);
-                wall.transform.SetParent(transform);
+                GameObject wall = Instantiate(wallAsset, new Vector3(minX, 0, z), Quaternion.identity, transform);
+                wall.name = "Wall Left";
                 walls.Add(wall);
 
 
-                GameObject wall2 = Instantiate(wallAsset);
-                wall2.name = "Wall length";
-                wall2.transform.localPosition = new Vector3(wallX2, 0, wallY);
-                wall2.transform.SetParent(transform);
-                walls.Add(wall2);
-            }
-
-            // Place top wall
-            for (int i = 0; i < width + 1; i++)
-            {
-                float wallX = minX + i;
-                float wallY = maxZ;
-
-                GameObject wall = Instantiate(wallAsset);
-                wall.transform.localPosition = new Vector3(wallX, 0, wallY);
-                wall.name = "Wall cap";
-                wall.transform.SetParent(transform);
+                wall = Instantiate(wallAsset, new Vector3(maxX, 0, z), Quaternion.identity, transform);
+                wall.name = "Wall Right";
                 walls.Add(wall);
             }
         }

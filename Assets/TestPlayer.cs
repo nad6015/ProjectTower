@@ -6,8 +6,7 @@ public class TestPlayer : MonoBehaviour
 {
     [SerializeField]
     private GameObject _camera;
-    private bool _isInvincible = true;
-    
+
     private void Start()
     {
         GameObject exit = GameObject.Find("DungeonExit");
@@ -17,9 +16,6 @@ public class TestPlayer : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision != null && _isInvincible) 
-        {
-            collision.gameObject.SetActive(false);
-        }
+        collision?.gameObject.SetActive(false);
     }
 }

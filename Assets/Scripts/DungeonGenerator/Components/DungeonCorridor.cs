@@ -55,8 +55,6 @@ namespace Assets.DungeonGenerator
                 // Place left and right walls
                 for (int i = 0; i < height; i++)
                 {
-                    float wallX = minX;
-                    float wallX2 = maxX;
                     float z = minZ + i;
 
                     GameObject wall = Instantiate(wallAsset, new Vector3(minX, 0, z), Quaternion.identity, transform);
@@ -79,8 +77,7 @@ namespace Assets.DungeonGenerator
             return corridor;
         }
 
-
-        internal void Modify(Bounds bounds)
+        public void Modify(Bounds bounds)
         {
             foreach (var wall in walls)
             {
@@ -88,7 +85,6 @@ namespace Assets.DungeonGenerator
                 if ((wallPos.x > bounds.min.x && wallPos.x < bounds.max.x) && (wallPos.z > bounds.min.y && wallPos.z < bounds.max.y))
                 {
                     wall.SetActive(false);
-                    Debug.Log("wall pos = " + wall.transform.position);
                 }
             }
         }

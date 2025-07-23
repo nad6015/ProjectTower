@@ -11,7 +11,7 @@ using UnityEngine.TestTools.Utils;
 
 public class RandomWalkTests
 {
-    DungeonComponents components = Resources.Load<DungeonComponents>("Dungeons/Dev/DevComponents");
+    readonly DungeonComponents components = Resources.Load<DungeonComponents>("Dungeons/Dev/DevComponents");
     [SetUp]
     public void SetUp()
     {
@@ -29,7 +29,6 @@ public class RandomWalkTests
         Bounds room2 = rooms[1].Bounds;
 
         Vector3 roomSize = new(25, 0, 25);
-        Vector3Int dir = Vector3Int.RoundToInt((room2.min - room1.min).normalized);
 
         Assert.That(rooms.Count() == 2);
         Assert.That(corridors.Count() == 1);
@@ -108,20 +107,12 @@ public class RandomWalkTests
 
     private DungeonParameters CreateParameters(DungeonAxis axis, int maxRooms)
     {
-        float dungeonSplit = 0;  // HORIZONTAL
-        switch (axis)
+        var dungeonSplit = axis switch
         {
-            case DungeonAxis.HORIZONTAL:
-                dungeonSplit = 1;
-                break;
-            case DungeonAxis.VERTICAL:
-                dungeonSplit = 0;
-                break;
-            default:
-                dungeonSplit = 0.5f;
-                break;
-        }
-
+            DungeonAxis.HORIZONTAL => 1,
+            DungeonAxis.VERTICAL => 0,
+            _ => 0.5f,
+        };
         return new DungeonParameters(new Vector2(200, 200), new Vector2(15, 15), new Vector2(15, 15), new(2, 2), 0, 0, dungeonSplit, 0, 0, 0, 0, maxRooms);
     }
 
