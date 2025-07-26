@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7a268dc38c005946a262e58d36de2ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &1408374802
+--- !u!1001 &1240044089
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -452,7 +452,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8970416114557497003, guid: 10b2da97d2663014991c97bd95c9b089, type: 3}
       propertyPath: m_Name
-      value: GameStateManager
+      value: GameSceneManager
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -973,4 +973,4 @@ SceneRoots:
   - {fileID: 1759568296}
   - {fileID: 8197322950610540814}
   - {fileID: 2722796923316679953}
-  - {fileID: 1408374802}
+  - {fileID: 1240044089}

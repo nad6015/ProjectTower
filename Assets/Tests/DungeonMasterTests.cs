@@ -1,5 +1,6 @@
 using System.Collections;
 using Assets.DungeonGenerator;
+using Assets.PlayerCharacter;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -20,77 +21,54 @@ public class DungeonMasterTests
     public IEnumerator ShouldInitialiseSuccessfully()
     {
         dungeonMaster = GameObject.FindGameObjectWithTag("DungeonMaster").GetComponent<DungeonMaster>();
-        dungeonMaster.NewDungeon();
-        Assert.That(dungeonMaster.State == DungeonMaster.DungeonMasterState.AWAITING_START);
+        DungeonGenerator dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();
 
-        dungeonMaster.StartDungeonMaster();
 
-        Assert.That(dungeonMaster.State == DungeonMaster.DungeonMasterState.ENTER_DUNGEON);
+        Assert.That(dungeonMaster.State == DungeonMasterState.MONITOR_GAMEPLAY);
 
-        yield return new WaitForSeconds(1f);
+        Assert.NotNull(dungeonGenerator);
+        Assert.That(dungeonGenerator.transform.childCount > 15);
 
-        Assert.That(dungeonMaster.State == DungeonMaster.DungeonMasterState.RUNNING);
-        Assert.That(dungeonMaster.IsReady());
-    }
+        Assert.NotNull(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>());
 
-    [UnityTest]
-    public IEnumerator ShouldSetMonitoringTargets()
-    {
-        // TODO
-        Assert.Fail();
         yield return null;
     }
 
     [UnityTest]
-    public IEnumerator ShouldRegenerateDungeonOnClear()
+    public IEnumerator ShouldGenerateNewDungeonOnClear()
     {
+        TestSetUp();
+
+        Assert.That(dungeonMaster.State == DungeonMasterState.MONITOR_GAMEPLAY);
+        Assert.That(dungeonMaster.Floor == 1);
+
         GameObject startPos = GameObject.FindGameObjectWithTag("PlayerSpawn");
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
-        Assert.Null(startPos);
-        Assert.Null(player);
-
-        TestSetUp();
-
-
-        Assert.That(dungeonMaster.State == DungeonMaster.DungeonMasterState.ENTER_DUNGEON);
-        Assert.That(dungeonMaster.Floor == 0);
-
-        yield return new WaitForSeconds(1f);
-
-        Assert.That(dungeonMaster.State == DungeonMaster.DungeonMasterState.RUNNING);
-        startPos = GameObject.FindGameObjectWithTag("PlayerSpawn");
-        player = GameObject.FindGameObjectWithTag("Player");
         Vector3 startPosition = startPos.transform.position;
+
         Assert.NotNull(startPos);
         Assert.NotNull(player);
+
         yield return new WaitForSeconds(1f);
 
-        dungeonMaster.DungeonCleared();
+        dungeonMaster.OnDungeonCleared();
 
         player = GameObject.FindGameObjectWithTag("Player");
-        Assert.That(dungeonMaster.Floor == 0);
-        Assert.That(dungeonMaster.State == DungeonMaster.DungeonMasterState.DUNGEON_CLEARED);
-        Assert.That(dungeonMaster.IsReady() == false);
+        Assert.That(dungeonMaster.Floor == 1);
+        Assert.That(dungeonMaster.State == DungeonMasterState.GENERATE_DUNGEON);
         Assert.NotNull(player);
 
-        yield return null;
+        yield return new WaitForSeconds(1f);
 
         GameObject newStartPos = GameObject.FindGameObjectWithTag("PlayerSpawn");
         player = GameObject.FindGameObjectWithTag("Player");
 
-        Assert.That(dungeonMaster.State == DungeonMaster.DungeonMasterState.ENTER_DUNGEON);
-        Assert.That(dungeonMaster.Floor == 1);
-        Assert.That(dungeonMaster.IsReady() == false);
+        Assert.That(dungeonMaster.State == DungeonMasterState.MONITOR_GAMEPLAY);
+        Assert.That(dungeonMaster.Floor == 2);
 
         Assert.NotNull(newStartPos);
         Assert.NotNull(player);
-
-        yield return new WaitForSeconds(1f);
-
-        Assert.That(dungeonMaster.State == DungeonMaster.DungeonMasterState.RUNNING);
-        Assert.That(dungeonMaster.IsReady() == true);
-        Assert.That(dungeonMaster.Floor == 1);
         Assert.That(newStartPos.transform.position, Is.Not.EqualTo(startPosition).Using(Vector3EqualityComparer.Instance));
     }
 
@@ -101,39 +79,13 @@ public class DungeonMasterTests
 
         yield return new WaitForSeconds(1f);
 
-        dungeonMaster.DungeonCleared();
+        dungeonMaster.OnDungeonCleared();
 
-        Assert.That(dungeonMaster.State == DungeonMaster.DungeonMasterState.TOWER_BEATEN);
-        Assert.That(dungeonMaster.IsReady() == false);
+        Assert.That(dungeonMaster.State == DungeonMasterState.GAME_END);
 
         yield return new WaitForSeconds(1f);
 
         Assert.That(SceneManager.GetActiveScene().name == "GameWon");
-    }
-
-
-    [UnityTest]
-    public IEnumerator ShouldPause()
-    {
-        dungeonMaster = GameObject.FindGameObjectWithTag("DungeonMaster").GetComponent<DungeonMaster>();
-        dungeonMaster.StartDungeonMaster();
-        yield return new WaitForSeconds(1f);
-
-        // TODO: Assert on timer
-
-        dungeonMaster.Pause();
-
-        // TODO: Assert timer hasn't changed
-
-        Assert.Fail(); // TODO: Remove once timer assertions are in
-        yield return null;
-    }
-
-    [UnityTest]
-    public IEnumerator ShouldModifyEnemiesStrength()
-    {
-        yield return null;
-        Assert.Fail();
     }
 
     [UnityTest]
@@ -167,7 +119,5 @@ public class DungeonMasterTests
     private void TestSetUp()
     {
         dungeonMaster = GameObject.FindGameObjectWithTag("DungeonMaster").GetComponent<DungeonMaster>();
-        Assert.That(dungeonMaster.State == DungeonMaster.DungeonMasterState.AWAITING_START);
-        dungeonMaster.StartDungeonMaster();
     }
 }

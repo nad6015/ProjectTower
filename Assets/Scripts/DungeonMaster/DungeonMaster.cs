@@ -8,7 +8,7 @@ namespace Assets.DungeonGenerator
 {
     using Random = UnityEngine.Random;
 
-    public class DungeonMaster : MonoBehaviour
+    public partial class DungeonMaster : MonoBehaviour
     {
         public DungeonMasterState State { get; private set; }
         public int Floor { get; private set; }
@@ -43,9 +43,14 @@ namespace Assets.DungeonGenerator
         private float _enemiesDefeated = 0;
         private GameSceneManager _sceneManager;
 
-        private void Awake()
+        public void OnDungeonCleared()
         {
-            State = DungeonMasterState.AWAITING_START;
+            State = DungeonMasterState.GENERATE_DUNGEON;
+        }
+
+        private void Start()
+        {
+            State = DungeonMasterState.GENERATE_DUNGEON;
             //Random.InitState(1); // TODO: Seed should be randomised between sessions. Set to 1 for dev
             _dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();
             _sceneManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameSceneManager>();
@@ -95,102 +100,76 @@ namespace Assets.DungeonGenerator
         {
             switch (State)
             {
-                case DungeonMasterState.AWAITING_START:
-                break; //no-op
-                case DungeonMasterState.ENTER_DUNGEON:
+                case DungeonMasterState.GENERATE_DUNGEON:
                 {
                     GenerateDungeon();
                     break;
                 }
-                case DungeonMasterState.SET_MONITORING_TARGETS:
+                case DungeonMasterState.MONITOR_GAMEPLAY:
                 {
-                    SetMonitoringTargets();
+                    MonitorGameplay();
                     break;
                 }
-                case DungeonMasterState.RUNNING:
-                break;
-                case DungeonMasterState.PAUSED:
-                break;
-                case DungeonMasterState.DUNGEON_CLEARED:
+
+                case DungeonMasterState.ADAPT_DUNGEON:
                 {
-                    OnDungeonClear();
+                    AdaptDungeon();
                     break;
                 }
-                case DungeonMasterState.TOWER_BEATEN:
+                case DungeonMasterState.GAME_END:
                 {
-                    _sceneManager.SceneTransition(GameSceneManager.GameScene.GAME_WON);
+                    EndGame();
                     break;
                 }
             }
         }
 
-        private void OnDungeonClear()
+        private void EndGame()
         {
-            _dungeonGenerator.ClearDungeon();
-            _player.enabled = false;
-            // TODO: Modify parameters based on game data
-            State = DungeonMasterState.ENTER_DUNGEON;
-            Floor++;
+            throw new System.NotImplementedException();
+            // _sceneManager.SceneTransition(GameSceneManager.GameScene.GAME_WON);
         }
 
-        private void SetMonitoringTargets()
+        private void AdaptDungeon()
         {
-            _player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-            State = DungeonMasterState.RUNNING;
+            
+            _player.enabled = false;
+            // TODO: Modify parameters based on game data
+            State = DungeonMasterState.GENERATE_DUNGEON;
+        }
+
+        private void MonitorGameplay()
+        {
+            if (_player == null)
+            {
+
+            }
         }
 
         private void GenerateDungeon()
         {
             NewDungeon();
-            State = DungeonMasterState.SET_MONITORING_TARGETS;
+
+            _currentDungeon.DungeonExit.DungeonCleared += OnDungeonCleared;
+            _player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+            State = DungeonMasterState.MONITOR_GAMEPLAY;
+            Floor++;
         }
 
-        public void StartDungeonMaster()
+        private void NewDungeon()
         {
-            State = DungeonMasterState.ENTER_DUNGEON;
-        }
-
-        public bool IsReady()
-        {
-            return State == DungeonMasterState.RUNNING;
-        }
-
-        public void Pause()
-        {
-            State = DungeonMasterState.PAUSED;
-        }
-
-        public void DungeonCleared()
-        {
-            State = DungeonMasterState.DUNGEON_CLEARED;
-        }
-
-        public void NewDungeon()
-        {
+            _dungeonGenerator.ClearDungeon();
             _currentDungeon = _dungeonGenerator.GenerateDungeon(GenerateDungeonParameters());
             GameObject startingPoint = GameObject.FindGameObjectWithTag("PlayerSpawn");
 
             if (_player != null)
             {
-                _player.transform.SetPositionAndRotation(startingPoint.transform.position, Quaternion.identity);
-                _player.enabled = true;
+                _currentDungeon.StartingPoint.Spawn(_player.transform);
             }
             else
             {
                 startingPoint.GetComponent<SpawnPoint>().Spawn();
             }
-        }
-
-        public enum DungeonMasterState
-        {
-            AWAITING_START,
-            ENTER_DUNGEON,
-            PAUSED,
-            SET_MONITORING_TARGETS,
-            RUNNING,
-            DUNGEON_CLEARED,
-            THRESHOLD_REACHED,
-            TOWER_BEATEN
         }
     }
 }

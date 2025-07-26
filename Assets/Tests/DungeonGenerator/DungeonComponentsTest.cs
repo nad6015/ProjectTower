@@ -6,19 +6,18 @@ using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
-public class DungeonPlayability
+public class DungeonComponentsTest
 {
     [SetUp]
     public void Setup()
     {
-        SceneManager.LoadScene("Scenes/Tests/DungeonGenerator");
+        SceneManager.LoadScene("Scenes/Tests/DungeonComponents");
     }
 
     [UnityTest]
-    [Repeat(10)] // TODO: Increase to 500
-    public IEnumerator ShouldReachDungeonEnd()
+    public IEnumerator ShouldDungeonExitShouldSpawnNewPlayer()
     {
-        GameObject.Find("DungeonMaster").GetComponent<DungeonMaster>().NewDungeon();
+        yield return new WaitForSeconds(1f);
         NavMeshAgent testAgent = GameObject.FindGameObjectWithTag("Player").transform.parent.GetComponent<NavMeshAgent>();
         Transform endPoint = GameObject.FindFirstObjectByType<DungeonExit>().transform;
 

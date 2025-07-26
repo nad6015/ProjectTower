@@ -114,24 +114,26 @@ namespace Assets.DungeonGenerator
         }
 
         /// <summary>
-        /// Places the content in each room and spawns the player.
+        /// Places the content in each room, including the dungeon exit and player starting point.
         /// </summary>
         private void PlaceContent()
         {
             // Place dungeon exit point
             Bounds lastRoom = _roomBounds.Last().Key;
-            DungeonExit exit = GameObject.Instantiate(_components.exit, lastRoom.center, Quaternion.identity);
+            DungeonExit exit = GameObject.Instantiate(_components.exit, lastRoom.center, Quaternion.identity, _dungeonTransform);
             exit.name = "DungeonExit";
+            _dungeon.DungeonExit = exit;
 
             foreach (var room in _roomBounds)
             {
                 PlaceContent(room.Value);
             }
 
-            // Generate navmesh
             // Place player at start of dungeon
             Bounds firstRoom = _roomBounds.First().Key;
-            GameObject.Instantiate(_components.startingPoint, firstRoom.center, Quaternion.identity);
+            SpawnPoint startingPoint = GameObject.Instantiate(_components.startingPoint, firstRoom.center, Quaternion.identity, _dungeonTransform);
+            startingPoint.name = "DungeonEntrypoint";
+            _dungeon.StartingPoint = startingPoint;
         }
 
         /// <summary>
