@@ -5,8 +5,8 @@ public class SpawnPoint : MonoBehaviour
     [SerializeField]
     private GameObject gameObjectToSpawn;
 
-    public void Spawn(Vector3 position)
+    public void Spawn()
     {
-        GameObject.Instantiate(gameObjectToSpawn, position, Quaternion.identity);
+        GameObject.Instantiate(gameObjectToSpawn, gameObjectToSpawn.transform.position + transform.position, Quaternion.identity);
     }
 }

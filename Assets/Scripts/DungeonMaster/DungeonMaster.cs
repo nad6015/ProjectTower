@@ -2,6 +2,7 @@ using UnityEngine;
 using Assets.DungeonGenerator.Components;
 using Assets.PlayerCharacter;
 using Unity.Mathematics;
+using Assets.GameManager;
 
 namespace Assets.DungeonGenerator
 {
@@ -9,7 +10,9 @@ namespace Assets.DungeonGenerator
 
     public class DungeonMaster : MonoBehaviour
     {
-        public State state { get; private set; }
+        public DungeonMasterState State { get; private set; }
+        public int Floor { get; private set; }
+
         public Vector2 LargeDungeonSize;
         public Vector2 MediumDungeonSize;
         public Vector2 SmallDungeonSize;
@@ -38,17 +41,14 @@ namespace Assets.DungeonGenerator
         private Dungeon _currentDungeon;
         private float _avgTimeBetweenEnemyDefeats = 0;
         private float _enemiesDefeated = 0;
+        private GameSceneManager _sceneManager;
 
         private void Awake()
         {
-            state = State.AWAITING_START;
+            State = DungeonMasterState.AWAITING_START;
             //Random.InitState(1); // TODO: Seed should be randomised between sessions. Set to 1 for dev
             _dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();
-        }
-
-        public void NewDungeon()
-        {
-            _currentDungeon = _dungeonGenerator.GenerateDungeon(GenerateDungeonParameters());
+            _sceneManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameSceneManager>();
         }
 
         DungeonParameters GenerateDungeonParameters()
@@ -64,14 +64,14 @@ namespace Assets.DungeonGenerator
             switch (DetermineDungeonSize())
             {
                 case DungeonSize.SMALL:
-                    maxDungeonSize = SmallDungeonSize;
-                    break;
+                maxDungeonSize = SmallDungeonSize;
+                break;
                 case DungeonSize.MEDIUM:
-                    maxDungeonSize = MediumDungeonSize;
-                    break;
+                maxDungeonSize = MediumDungeonSize;
+                break;
                 case DungeonSize.LARGE:
-                    maxDungeonSize = LargeDungeonSize;
-                    break;
+                maxDungeonSize = LargeDungeonSize;
+                break;
             }
             float width = math.floor(Random.Range(MinDungeonSize.x, maxDungeonSize.x));
             float height = math.floor(Random.Range(MinDungeonSize.y, maxDungeonSize.y));
@@ -93,59 +93,104 @@ namespace Assets.DungeonGenerator
 
         private void Update()
         {
-            switch (state)
+            switch (State)
             {
-                case State.AWAITING_START: break; //no-op
-                case State.STARTING:
-                    {
-                        GenerateDungeon();
-                        break;
-                    }
-                case State.SET_MONITORING_TARGETS:
-                    {
-                        SetMonitoringTargets();
-                        break;
-                    }
-                case State.PAUSED: break;
+                case DungeonMasterState.AWAITING_START:
+                break; //no-op
+                case DungeonMasterState.ENTER_DUNGEON:
+                {
+                    GenerateDungeon();
+                    break;
+                }
+                case DungeonMasterState.SET_MONITORING_TARGETS:
+                {
+                    SetMonitoringTargets();
+                    break;
+                }
+                case DungeonMasterState.RUNNING:
+                break;
+                case DungeonMasterState.PAUSED:
+                break;
+                case DungeonMasterState.DUNGEON_CLEARED:
+                {
+                    OnDungeonClear();
+                    break;
+                }
+                case DungeonMasterState.TOWER_BEATEN:
+                {
+                    _sceneManager.SceneTransition(GameSceneManager.GameScene.GAME_WON);
+                    break;
+                }
             }
+        }
+
+        private void OnDungeonClear()
+        {
+            _dungeonGenerator.ClearDungeon();
+            _player.enabled = false;
+            // TODO: Modify parameters based on game data
+            State = DungeonMasterState.ENTER_DUNGEON;
+            Floor++;
         }
 
         private void SetMonitoringTargets()
         {
             _player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+            State = DungeonMasterState.RUNNING;
         }
 
         private void GenerateDungeon()
         {
-            _dungeonGenerator.ClearDungeon();
             NewDungeon();
-            state = State.MONITORING;
+            State = DungeonMasterState.SET_MONITORING_TARGETS;
         }
 
         public void StartDungeonMaster()
         {
-            state = State.STARTING;
+            State = DungeonMasterState.ENTER_DUNGEON;
         }
 
         public bool IsReady()
         {
-            return state != State.AWAITING_START && state != State.STARTING;
+            return State == DungeonMasterState.RUNNING;
         }
 
         public void Pause()
         {
-            state = State.PAUSED;
+            State = DungeonMasterState.PAUSED;
         }
 
-        public enum State
+        public void DungeonCleared()
+        {
+            State = DungeonMasterState.DUNGEON_CLEARED;
+        }
+
+        public void NewDungeon()
+        {
+            _currentDungeon = _dungeonGenerator.GenerateDungeon(GenerateDungeonParameters());
+            GameObject startingPoint = GameObject.FindGameObjectWithTag("PlayerSpawn");
+
+            if (_player != null)
+            {
+                _player.transform.SetPositionAndRotation(startingPoint.transform.position, Quaternion.identity);
+                _player.enabled = true;
+            }
+            else
+            {
+                startingPoint.GetComponent<SpawnPoint>().Spawn();
+            }
+        }
+
+        public enum DungeonMasterState
         {
             AWAITING_START,
-            STARTING,
+            ENTER_DUNGEON,
             PAUSED,
             SET_MONITORING_TARGETS,
-            MONITORING,
+            RUNNING,
             DUNGEON_CLEARED,
-            THRESHOLD_REACHED
+            THRESHOLD_REACHED,
+            TOWER_BEATEN
         }
     }
 }

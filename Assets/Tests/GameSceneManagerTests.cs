@@ -6,9 +6,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
-public class GameManagerTests
+public class GameSceneManagerTests
 {
-    GameStateManager gameManager;
+    GameSceneManager gameManager;
 
     [UnitySetUp]
     public IEnumerator SetUp()
@@ -20,7 +20,7 @@ public class GameManagerTests
     [UnityTest]
     public IEnumerator GameManagerStartsANewGame()
     {
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameStateManager>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameSceneManager>();
         gameManager.StartNewGame();
         yield return null;
 
@@ -30,11 +30,11 @@ public class GameManagerTests
     [UnityTest]
     public IEnumerator GameManagerPersistsBetweenScenes()
     {
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameStateManager>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameSceneManager>();
         gameManager.StartNewGame();
         yield return null;
 
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameStateManager>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameSceneManager>();
 
         Assert.That(gameManager != null);
     }

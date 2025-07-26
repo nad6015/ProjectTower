@@ -9,6 +9,7 @@ TagManager:
   - DungeonMaster
   - Dungeon
   - GameManager
+  - PlayerSpawn
   layers:
   - Default
   - TransparentFX

@@ -21,6 +21,7 @@ namespace Assets.PlayerCharacter
 
             playerAction = GetComponent<PlayerAction>();
             actions = new InputSystemActions();
+            
             Instantiate(_camera);
         }
 

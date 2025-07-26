@@ -13,6 +13,11 @@ namespace Assets.DungeonGenerator
         public GameObject item;
         public SpawnPoint startingPoint;
         public DungeonExit exit;
-        public NavMeshSurface navMesh;
+        //public NavMeshSurface NavMesh { get; private set; }
+
+        //private void Awake()
+        //{
+        //    NavMesh = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<NavMeshSurface>();
+        //}
     }
 }

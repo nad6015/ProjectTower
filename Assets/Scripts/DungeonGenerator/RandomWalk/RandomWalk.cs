@@ -39,7 +39,6 @@ namespace Assets.DungeonGenerator
             PlaceContent();
         }
 
-
         /// <summary>
         /// Creates the data structures for the rooms and corridors of the dungeon. The algorithm used works as follows:
         /// 
@@ -88,19 +87,20 @@ namespace Assets.DungeonGenerator
             // Dictionary upsert code referenced from - https://stackoverflow.com/questions/1243717/how-to-update-the-value-stored-in-dictionary-in-c
             for (int i = 0; i < _roomBounds.Count; i++)
             {
-                var room = _roomBounds.ElementAt(i);
-                _roomBounds[room.Key] = DungeonRoom.Create(room.Key, i);
-                room.Value.Construct(_components);
-                room.Value.transform.SetParent(_dungeonTransform);
-                
+                var roomBounds = _roomBounds.ElementAt(i);
+                DungeonRoom room = DungeonRoom.Create(roomBounds.Key, i);
+                room.Construct(_components);
+                room.transform.SetParent(_dungeonTransform);
+                _roomBounds[roomBounds.Key] = room;
             }
 
             for (int i = 0; i < _corridors.Count; i++)
             {
                 var corridor = _corridors.ElementAt(i);
-                _corridors[corridor.Key] = DungeonCorridor.Create(corridor.Key, i);
-                corridor.Value.Construct(_components, _dungeon.MinCorridorSize);
-                corridor.Value.transform.SetParent(_dungeonTransform);
+                DungeonCorridor dungeonCorridor = DungeonCorridor.Create(corridor.Key, i);
+                dungeonCorridor.Construct(_components, _dungeon.MinCorridorSize);
+                dungeonCorridor.transform.SetParent(_dungeonTransform);
+                _corridors[corridor.Key] = dungeonCorridor;
             }
 
             foreach (var room in _roomBounds.Values)
@@ -128,12 +128,10 @@ namespace Assets.DungeonGenerator
                 PlaceContent(room.Value);
             }
 
-            _components.navMesh.BuildNavMesh();
-
             // Generate navmesh
             // Place player at start of dungeon
             Bounds firstRoom = _roomBounds.First().Key;
-            _components.startingPoint.Spawn(firstRoom.center);
+            GameObject.Instantiate(_components.startingPoint, firstRoom.center, Quaternion.identity);
         }
 
         /// <summary>

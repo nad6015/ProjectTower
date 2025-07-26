@@ -7,13 +7,13 @@ namespace Assets.UI
     public class StartMenu : MonoBehaviour
     {
         private VisualElement _root;
-        private GameStateManager _gameManager;
+        private GameSceneManager _gameManager;
 
         private Button _newGame;
         void Awake()
         {
             _root = GetComponent<UIDocument>().rootVisualElement;
-            _gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameStateManager>();
+            _gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameSceneManager>();
         }
 
         private void OnEnable()
