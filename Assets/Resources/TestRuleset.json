@@ -1,0 +1,71 @@
+{
+  "rules": [
+    {
+      "id": "RoomCount_Based_On_Prev_Dungeon",
+      "parameter": "RoomCount",
+      "conditions": [
+        {
+          "type": ">",
+          "value": "4"
+        },
+        {
+          "type": "<",
+          "value": "2"
+        }
+      ],
+      "value": {
+        "type": "range",
+        "min": "10",
+        "max": "10"
+      }
+    },
+    {
+      "id": "DungeonTheme_Based_On_Prev_Dungeon",
+      "parameter": "DungeonTheme",
+      "conditions": [
+        {
+          "type": "==",
+          "value": "fire"
+        }
+      ]
+    },
+    {
+      "id": "RoomSize_based_on_floor_clear_time",
+      "parameter": "RoomSize",
+      "conditions": [
+        {
+          "type": ">",
+          "value": "4"
+        },
+        {
+          "type": "<",
+          "value": "2"
+        }
+      ],
+      "value": {
+        "type": "range",
+        "min": "10",
+        "max": "10"
+      }
+    },
+    {
+      "id": "RoomCount_Based_On_Prev_Dungeon",
+      "parameter": "RoomCount",
+      "conditions": [
+        {
+          "type": ">",
+          "value": "4"
+        },
+        {
+          "type": "<",
+          "value": "2"
+        }
+      ],
+      "value": {
+        "type": "range",
+        "min": "10",
+        "max": "10"
+      }
+    }
+  ]
+}

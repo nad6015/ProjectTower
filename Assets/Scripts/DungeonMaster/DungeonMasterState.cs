@@ -3,7 +3,7 @@
     public enum DungeonMasterState
     {
         GENERATE_DUNGEON,
-        MONITOR_GAMEPLAY,
+        RUNNING,
         ADAPT_DUNGEON,
         GAME_END
     }

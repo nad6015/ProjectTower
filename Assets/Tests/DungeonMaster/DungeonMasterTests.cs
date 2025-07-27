@@ -1,4 +1,5 @@
 using System.Collections;
+using Assets.CombatSystem;
 using Assets.DungeonGenerator;
 using Assets.PlayerCharacter;
 using NUnit.Framework;
@@ -10,6 +11,9 @@ using UnityEngine.TestTools.Utils;
 public class DungeonMasterTests
 {
     DungeonMaster dungeonMaster;
+    GameObject player;
+    DungeonGenerator dungeonGenerator;
+
     [UnitySetUp]
     public IEnumerator SetUp()
     {
@@ -20,11 +24,9 @@ public class DungeonMasterTests
     [UnityTest]
     public IEnumerator ShouldInitialiseSuccessfully()
     {
-        dungeonMaster = GameObject.FindGameObjectWithTag("DungeonMaster").GetComponent<DungeonMaster>();
-        DungeonGenerator dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();
-
-
-        Assert.That(dungeonMaster.State == DungeonMasterState.MONITOR_GAMEPLAY);
+        TestSetUp();
+        
+        Assert.That(dungeonMaster.State == DungeonMasterState.RUNNING);
 
         Assert.NotNull(dungeonGenerator);
         Assert.That(dungeonGenerator.transform.childCount > 15);
@@ -39,11 +41,10 @@ public class DungeonMasterTests
     {
         TestSetUp();
 
-        Assert.That(dungeonMaster.State == DungeonMasterState.MONITOR_GAMEPLAY);
+        Assert.That(dungeonMaster.State == DungeonMasterState.RUNNING);
         Assert.That(dungeonMaster.Floor == 1);
 
         GameObject startPos = GameObject.FindGameObjectWithTag("PlayerSpawn");
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
 
         Vector3 startPosition = startPos.transform.position;
 
@@ -64,7 +65,7 @@ public class DungeonMasterTests
         GameObject newStartPos = GameObject.FindGameObjectWithTag("PlayerSpawn");
         player = GameObject.FindGameObjectWithTag("Player");
 
-        Assert.That(dungeonMaster.State == DungeonMasterState.MONITOR_GAMEPLAY);
+        Assert.That(dungeonMaster.State == DungeonMasterState.RUNNING);
         Assert.That(dungeonMaster.Floor == 2);
 
         Assert.NotNull(newStartPos);
@@ -89,7 +90,7 @@ public class DungeonMasterTests
     }
 
     [UnityTest]
-    public IEnumerator ShouldUseGameStateToModifyGame()
+    public IEnumerator ShouldUseGameStateToModifyEventChance()
     {
         yield return null;
         Assert.Fail();
@@ -112,6 +113,10 @@ public class DungeonMasterTests
     [UnityTest]
     public IEnumerator ShouldModifyUnlockedParameters()
     {
+        TestSetUp();
+
+       
+        
         yield return null;
         Assert.Fail();
     }
@@ -119,5 +124,7 @@ public class DungeonMasterTests
     private void TestSetUp()
     {
         dungeonMaster = GameObject.FindGameObjectWithTag("DungeonMaster").GetComponent<DungeonMaster>();
+        dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 }

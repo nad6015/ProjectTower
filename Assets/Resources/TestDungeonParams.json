@@ -1,0 +1,23 @@
+{
+  "ruleset": [
+    {
+      "id": "RoomCount_Based_On_Prev_Dungeon",
+      "parameter": "RoomCount",
+      "conditions": [
+        {
+          "type": ">",
+          "value": "4"
+        },
+        {
+          "type": "<",
+          "value": "2"
+        }
+      ],
+      "value": {
+        "type": "range",
+        "min": "10",
+        "max": "10"
+      }
+    }
+  ]
+}
