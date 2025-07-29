@@ -1,0 +1,4 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/main.uss?fileID=7433441132597879392&amp;guid=588e9ad8388a2104ba49914bd7cd95db&amp;type=3#main" />
+    <engine:ProgressBar value="50" title="0/0" style="width: 200px; height: 25px;" />
+</engine:UXML>

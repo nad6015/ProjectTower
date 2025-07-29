@@ -33,6 +33,8 @@ namespace Assets.CombatSystem
         private AnimationEventsHandler _animationEvents;
         private const string _attackParam = "Attack";
 
+        public event Action OnDamageTaken;
+
         void Awake()
         {
             stats[FighterStats.HEALTH] = health;
@@ -60,6 +62,7 @@ namespace Assets.CombatSystem
         {
             stats[FighterStats.HEALTH] -= attacker.stats[FighterStats.ATTACK];
             _animator.SetTrigger("Injured");
+            OnDamageTaken?.Invoke();
 
             if (IsDead())
             {
