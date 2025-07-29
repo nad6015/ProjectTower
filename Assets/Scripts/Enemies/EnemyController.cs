@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using Unity.Behavior;
 using Assets.CombatSystem;
+using Assets.Combat;
 
 public class EnemyController : MonoBehaviour
 {
@@ -12,10 +13,11 @@ public class EnemyController : MonoBehaviour
     private BehaviorGraphAgent graphAgent;
     private Fighter self;
     private Animator animator;
+    
 
     void Start()
     {
-        self = GetComponent<Fighter>();
+        self = GetComponent<NpcFighter>();
         agent = GetComponent<NavMeshAgent>();
         graphAgent = GetComponent<BehaviorGraphAgent>();
 
@@ -44,6 +46,6 @@ public class EnemyController : MonoBehaviour
     public void Hit()
     {
         //GetComponent<Rigidbody>().isKinematic = false;
-        self.IsAttacking(true);
+        self.Attack();
     }
 }

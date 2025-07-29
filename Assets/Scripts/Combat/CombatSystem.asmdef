@@ -1,3 +1,16 @@
 {
-	"name": "CombatSystem"
+    "name": "CombatSystem",
+    "rootNamespace": "",
+    "references": [
+        "GUID:5c484d457c8d04d44928026d42ae0939"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

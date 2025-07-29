@@ -1,9 +1,11 @@
+using Assets.Scripts.Character;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.CombatSystem
 {
-    public class Fighter : MonoBehaviour
+    public abstract class Fighter : MonoBehaviour
     {
         [SerializeField]
         private int health = 5;
@@ -14,51 +16,67 @@ namespace Assets.CombatSystem
         [SerializeField]
         private LayerMask layerMask;
 
+        [SerializeField]
+        protected BoxCollider _hitbox;
+
+        [SerializeField]
+        private float _attackCooldown = 0.5f;
+
         private Dictionary<FighterStats, int> stats = new();
 
+        protected Animator _animator;
+        protected bool _isAttacking = false;
+        private float _attackCooldownDuration = 0.5f;
+
         private Weapon weapon;
-        private float weaponReach = 2f;
-        private Vector3 attackPoint;
 
-        private Animator animator;
-        private bool isAttacking = false;
-        private RaycastHit hit;
 
-        private List<Fighter> hasDamaged = new List<Fighter>();
+        private List<Fighter> _hasDamaged = new();
+        private AnimationEventsHandler _animationEvents;
+        private const string _attackParam = "Attack";
 
         void Awake()
         {
             stats[FighterStats.HEALTH] = health;
             stats[FighterStats.ATTACK] = attack;
+
             weapon = GetComponentInChildren<Weapon>();
-            animator = GetComponentInChildren<Animator>();
+            _animator = GetComponentInChildren<Animator>();
 
-            if (animator == null)
+            _animationEvents = GetComponent<AnimationEventsHandler>();
+
+            if (_animationEvents == null)
             {
-                animator = GetComponent<Animator>();
+                _animationEvents = GetComponentInChildren<AnimationEventsHandler>();
             }
 
-            if (weapon != null)
-            {
-                weaponReach = weapon.WeaponReach();
-                attackPoint = weapon.transform.localPosition;
-            }
-            else
-            {
-                attackPoint = transform.position;
-            }
+            _hitbox.includeLayers = layerMask;
+            _hitbox.enabled = false;
+
+            _animationEvents.OnAnimationEndHandler += OnAnimationEnd;
         }
 
         public int GetStat(FighterStats stat) => stats[stat];
 
-        internal void Attack(Fighter fighter)
+        protected void Attack(Fighter fighter)
         {
             fighter.stats[FighterStats.HEALTH] -= stats[FighterStats.ATTACK];
-            fighter.animator.SetTrigger("Injured");
+            fighter._animator.SetTrigger("Injured");
             if (fighter.IsDead())
             {
                 fighter.gameObject.SetActive(false); // TODO: Death indicator
-                hasDamaged.Add(fighter);
+                _hasDamaged.Add(fighter);
+            }
+        }
+
+        public void Attack()
+        {
+            if (_attackCooldown <= 0)
+            {
+                _isAttacking = true;
+                _animator.SetTrigger("Attack");
+                _animator.SetBool(_attackParam, _isAttacking);
+                _hitbox.enabled = true;
             }
         }
 
@@ -67,43 +85,43 @@ namespace Assets.CombatSystem
             return stats[FighterStats.HEALTH] <= 0;
         }
 
-        public void IsAttacking(bool isAttacking)
-        {
-            this.isAttacking = isAttacking;
-        }
-
         private void Update()
         {
-            if (isAttacking)
+            if (_attackCooldown > 0f && !_isAttacking)
             {
-                UpdateAttackPosition();
-                Debug.DrawRay(attackPoint, transform.forward, Color.magenta, 2f);
-                if (Physics.Raycast(attackPoint, transform.forward, out hit, weaponReach, layerMask))
-                {
-                    Fighter target = hit.rigidbody.GetComponent<Fighter>();
-                    if (target != null && !hasDamaged.Contains(target))
-                    {
-                        Attack(target);
-                        hasDamaged.Add(target);
-                    }
-                }
-            }
-            else
-            {
-                hasDamaged.Clear();
+                _attackCooldown -= Time.deltaTime;
             }
         }
 
-        private void UpdateAttackPosition()
+        private void OnTriggerEnter(Collider collider)
         {
-            if (weapon != null)
+            Fighter target = collider.GetComponent<Fighter>();
+            if (target != null && !_hasDamaged.Contains(target))
             {
-                attackPoint = weapon.transform.position;
-            }
-            else
-            {
-                attackPoint = transform.position;
+                Attack(target);
+                _hasDamaged.Add(target);
             }
         }
+
+        private void OnAnimationEnd()
+        {
+            _hitbox.enabled = false;
+            _isAttacking = false;
+            _attackCooldown = _attackCooldownDuration;
+            AnimationEnded();
+            _animator.SetBool(_attackParam, _isAttacking);
+        }
+
+        protected void ResetAttackCooldown()
+        {
+            _attackCooldown = 0;
+        }
+
+        protected bool IsAttacking()
+        {
+            return _animator.GetBool(_attackParam);
+        }
+
+        protected abstract void AnimationEnded();
     }
 }

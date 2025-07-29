@@ -8,24 +8,24 @@ namespace Assets.PlayerCharacter
     public class PlayerAction : MonoBehaviour
     {
         public event EventHandler PlayerAttacks;
-        private Animator animator;
+        
 
         private void Start()
         {
-            animator = GetComponentInChildren<Animator>();
+            //animator = GetComponentInChildren<Animator>();
         }
 
         internal void OnAttackCancelled(InputAction.CallbackContext context)
         {
-            animator.SetBool("Attack", false);
-            GetComponent<Fighter>().IsAttacking(false);
+            //animator.SetBool("Attack", false);
+            //GetComponent<Fighter>().IsAttacking(false);
 
         }
 
         internal void OnAttackPerformed(InputAction.CallbackContext context)
         {
-            animator.SetBool("Attack", true);
-            GetComponent<Fighter>().IsAttacking(true);
+            //animator.SetBool("Attack", true);
+            //GetComponent<Fighter>().IsAttacking(true);
         }
     }
 }

@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Assets.PlayerCharacter
 {
@@ -9,6 +11,8 @@ namespace Assets.PlayerCharacter
         private float _speed = 5;
         [SerializeField]
         private PlayerCamera _camera;
+
+        public event Action<InputAction.CallbackContext> OnAttackPerformed;
 
         private InputSystemActions actions;
         private PlayerMovement playerMovement;
@@ -32,8 +36,8 @@ namespace Assets.PlayerCharacter
             actions.Player.Move.canceled += playerMovement.OnMoveCancelled;
 
             actions.Player.Attack.Enable();
-            actions.Player.Attack.performed += playerAction.OnAttackPerformed;
-            actions.Player.Attack.canceled += playerAction.OnAttackCancelled;
+            actions.Player.Attack.performed += AttackPerformed;
+            //actions.Player.Attack.canceled += playerAction.OnAttackCancelled;
         }
 
         private void OnDisable()
@@ -43,8 +47,13 @@ namespace Assets.PlayerCharacter
             actions.Player.Move.canceled -= playerMovement.OnMoveCancelled;
             
             actions.Player.Attack.Disable();
-            actions.Player.Attack.performed -= playerAction.OnAttackPerformed;
-            actions.Player.Attack.canceled -= playerAction.OnAttackCancelled;
+            actions.Player.Attack.performed -= AttackPerformed;
+            //actions.Player.Attack.canceled -= playerAction.OnAttackCancelled;
+        }
+
+        private void AttackPerformed(InputAction.CallbackContext context)
+        {
+            OnAttackPerformed?.Invoke(context);
         }
     }
 }
