@@ -30,8 +30,6 @@ namespace Assets.CombatSystem
 
         private Weapon weapon;
 
-
-        private List<Fighter> _hasDamaged = new();
         private AnimationEventsHandler _animationEvents;
         private const string _attackParam = "Attack";
 
@@ -58,14 +56,14 @@ namespace Assets.CombatSystem
 
         public int GetStat(FighterStats stat) => stats[stat];
 
-        protected void Attack(Fighter fighter)
+        protected void TakeDamage(Fighter attacker)
         {
-            fighter.stats[FighterStats.HEALTH] -= stats[FighterStats.ATTACK];
-            fighter._animator.SetTrigger("Injured");
-            if (fighter.IsDead())
+            stats[FighterStats.HEALTH] -= attacker.stats[FighterStats.ATTACK];
+            _animator.SetTrigger("Injured");
+
+            if (IsDead())
             {
-                fighter.gameObject.SetActive(false); // TODO: Death indicator
-                _hasDamaged.Add(fighter);
+                gameObject.SetActive(false); // TODO: Death indicator
             }
         }
 
@@ -93,13 +91,19 @@ namespace Assets.CombatSystem
             }
         }
 
+        /// <summary>
+        /// When a fighter attacks, their hitbox is enabled. If any other fighter is in the hitbox,
+        /// this Unity Message is triggered on them. So, each fighter has to call Attack on themselves in order to
+        /// apply damage.
+        /// </summary>
+        /// <param name="collider">The hitbox of the attacking fighter</param>
         private void OnTriggerEnter(Collider collider)
         {
-            Fighter target = collider.GetComponent<Fighter>();
-            if (target != null && !_hasDamaged.Contains(target))
+            Fighter attacker = collider.GetComponentInParent<Fighter>();
+
+            if (attacker != null)
             {
-                Attack(target);
-                _hasDamaged.Add(target);
+                TakeDamage(attacker);
             }
         }
 
