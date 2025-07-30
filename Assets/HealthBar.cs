@@ -11,7 +11,7 @@ public class HealthBar : MonoBehaviour
     IPanel _panel;
     void Start()
     {
-        _fighter.OnDamageTaken += UpdateHealthBar;
+        _fighter.OnHealthChange += UpdateHealthBar;
         _progressBar = GetComponent<UIDocument>().rootVisualElement.Q<ProgressBar>();
         
         _progressBar.highValue = _fighter.GetStat(FighterStats.HEALTH);

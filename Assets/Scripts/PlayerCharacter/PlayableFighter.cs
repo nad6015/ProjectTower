@@ -20,20 +20,6 @@ namespace Assets.PlayerCharacter
             controller.OnAttackPerformed += OnAttackPerformed;
         }
 
-        private void OnAttackPerformed(InputAction.CallbackContext obj)
-        {
-            if (!_isAttacking)
-            {
-                Attack();
-              
-            }
-            else if (!_continueCombo)
-            {
-                _continueCombo = true;
-                comboCount++;
-            }
-        }
-
         protected override void AnimationEnded()
         {
             if (_continueCombo && comboCount < maxCombo)
@@ -48,6 +34,19 @@ namespace Assets.PlayerCharacter
 
             _animator.SetInteger(_animCombo, comboCount);
             _continueCombo = false;
+        }
+
+        private void OnAttackPerformed(InputAction.CallbackContext obj)
+        {
+            if (!_isAttacking)
+            {
+                Attack();
+            }
+            else if (!_continueCombo)
+            {
+                _continueCombo = true;
+                comboCount++;
+            }
         }
     }
 }

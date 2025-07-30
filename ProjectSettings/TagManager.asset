@@ -10,6 +10,7 @@ TagManager:
   - Dungeon
   - GameManager
   - PlayerSpawn
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Weapon
   - Enemy
   - Player
-  - 
+  - Item
   - 
   - 
   - 

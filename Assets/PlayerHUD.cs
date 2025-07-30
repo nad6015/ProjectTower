@@ -11,7 +11,7 @@ public class PlayerHUD : MonoBehaviour
 
     void Start()
     {
-        _fighter.OnDamageTaken += UpdateHealthBar;
+        _fighter.OnHealthChange += UpdateHealthBar;
         _healthBar = GetComponent<UIDocument>().rootVisualElement.Q<ProgressBar>("HealthBar");;
 
         _healthBar.highValue = _fighter.GetStat(FighterStats.HEALTH);

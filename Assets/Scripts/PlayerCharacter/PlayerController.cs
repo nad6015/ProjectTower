@@ -1,3 +1,4 @@
+using Assets.Scripts.Combat.Resources;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,10 +10,13 @@ namespace Assets.PlayerCharacter
     {
         [SerializeField]
         private float _speed = 5;
+        
         [SerializeField]
         private PlayerCamera _camera;
 
         public event Action<InputAction.CallbackContext> OnAttackPerformed;
+
+        private PlayableFighter _fighter;
 
         private InputSystemActions actions;
         private PlayerMovement playerMovement;
@@ -25,7 +29,8 @@ namespace Assets.PlayerCharacter
 
             playerAction = GetComponent<PlayerAction>();
             actions = new InputSystemActions();
-            
+            _fighter = GetComponent<PlayableFighter>();
+
             Instantiate(_camera);
         }
 
@@ -45,7 +50,7 @@ namespace Assets.PlayerCharacter
             actions.Player.Move.Disable();
             actions.Player.Move.performed -= playerMovement.OnMovePerformed;
             actions.Player.Move.canceled -= playerMovement.OnMoveCancelled;
-            
+
             actions.Player.Attack.Disable();
             actions.Player.Attack.performed -= AttackPerformed;
             //actions.Player.Attack.canceled -= playerAction.OnAttackCancelled;
@@ -54,6 +59,18 @@ namespace Assets.PlayerCharacter
         private void AttackPerformed(InputAction.CallbackContext context)
         {
             OnAttackPerformed?.Invoke(context);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            switch (other.tag)
+            {
+                case "Item":
+                {
+                    other.GetComponent<Item>().Use(_fighter);
+                    break;
+                }
+            }
         }
     }
 }

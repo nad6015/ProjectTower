@@ -7,6 +7,8 @@ namespace Assets.CombatSystem
 {
     public abstract class Fighter : MonoBehaviour
     {
+        public event Action OnHealthChange;
+
         [SerializeField]
         private int health = 5;
 
@@ -33,9 +35,7 @@ namespace Assets.CombatSystem
         private AnimationEventsHandler _animationEvents;
         private const string _attackParam = "Attack";
 
-        public event Action OnDamageTaken;
-
-        void Awake()
+        public void Awake()
         {
             stats[FighterStats.HEALTH] = health;
             stats[FighterStats.ATTACK] = attack;
@@ -58,18 +58,6 @@ namespace Assets.CombatSystem
 
         public int GetStat(FighterStats stat) => stats[stat];
 
-        protected void TakeDamage(Fighter attacker)
-        {
-            stats[FighterStats.HEALTH] -= attacker.stats[FighterStats.ATTACK];
-            _animator.SetTrigger("Injured");
-            OnDamageTaken?.Invoke();
-
-            if (IsDead())
-            {
-                gameObject.SetActive(false); // TODO: Death indicator
-            }
-        }
-
         public void Attack()
         {
             if (_attackCooldown <= 0)
@@ -79,6 +67,27 @@ namespace Assets.CombatSystem
                 _animator.SetBool(_attackParam, _isAttacking);
                 _hitbox.enabled = true;
             }
+        }
+
+        protected void TakeDamage(Fighter attacker)
+        {
+            stats[FighterStats.HEALTH] -= attacker.stats[FighterStats.ATTACK];
+            _animator.SetTrigger("Injured");
+            OnHealthChange?.Invoke();
+
+            if (IsDead())
+            {
+                gameObject.SetActive(false); // TODO: Death indicator
+            }
+        }
+
+        public void Heal(int amountToHeal)
+        {
+            stats[FighterStats.HEALTH] += amountToHeal;
+            _animator.SetTrigger("Injured");
+            OnHealthChange?.Invoke();
+
+            // TODO: Healling vfx
         }
 
         internal bool IsDead()
