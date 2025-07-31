@@ -9,6 +9,7 @@ public class PlayerHUD : MonoBehaviour
 
     ProgressBar _healthBar;
 
+    // TODO: Get fighter from parent component
     void Start()
     {
         _fighter.OnHealthChange += UpdateHealthBar;

@@ -15,8 +15,8 @@ namespace Assets.DungeonGenerator
         /// <param name="components">the component used to construct the corridor</param>
         internal void Construct(DungeonComponents components, Vector3 minCorridorSize)
         {
-            GameObject wallAsset = components.corridorTile;
-            GameObject floorAsset = components.floorTile;
+            GameObject wallAsset = components.corridorWall;
+            GameObject floorAsset = components.corridorFloor;
 
             float width = Bounds.size.x;
             float height = Bounds.size.z;

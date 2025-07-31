@@ -84,7 +84,6 @@ namespace Assets.CombatSystem
         public void Heal(int amountToHeal)
         {
             stats[FighterStats.HEALTH] += amountToHeal;
-            _animator.SetTrigger("Injured");
             OnHealthChange?.Invoke();
 
             // TODO: Healling vfx

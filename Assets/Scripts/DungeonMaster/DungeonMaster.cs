@@ -11,7 +11,7 @@ namespace Assets.DungeonGenerator
 
     public partial class DungeonMaster : MonoBehaviour
     {
-        public DungeonMasterRuleset Ruleset { get; set; }
+        public DungeonMasterRuleset Ruleset { get; private set; }
         public DungeonMasterState State { get; private set; }
         public int Floor { get; private set; }
 
@@ -53,6 +53,7 @@ namespace Assets.DungeonGenerator
             //_dungeonParams = LoadDungeonParameters();
             State = DungeonMasterState.GENERATE_DUNGEON;
             //Random.InitState(1); // TODO: Seed should be randomised between sessions. Set to 1 for dev
+            Ruleset = new DungeonMasterRuleset("TestRuleset");
         }
 
         public void OnDungeonCleared()

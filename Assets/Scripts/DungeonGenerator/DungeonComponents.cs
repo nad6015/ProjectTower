@@ -7,17 +7,16 @@ namespace Assets.DungeonGenerator
     public class DungeonComponents : ScriptableObject
     {
         public GameObject wallTile;
-        public GameObject corridorTile;
         public GameObject floorTile;
+
+        public GameObject corridorWall;
+        public GameObject corridorFloor;
+
+
         public GameObject enemy;
         public GameObject item;
         public SpawnPoint startingPoint;
         public DungeonExit exit;
-        //public NavMeshSurface NavMesh { get; private set; }
-
-        //private void Awake()
-        //{
-        //    NavMesh = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<NavMeshSurface>();
-        //}
+     
     }
 }

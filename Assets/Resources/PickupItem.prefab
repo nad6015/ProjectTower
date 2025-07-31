@@ -9,10 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5639049094493027808}
-  - component: {fileID: 4866200229214603795}
-  m_Layer: 0
+  - component: {fileID: 7369272034566480660}
+  - component: {fileID: 8197984413688897271}
+  - component: {fileID: 6629873483300158981}
+  m_Layer: 9
   m_Name: PickupItem
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34,7 +36,7 @@ Transform:
   - {fileID: 7013470231619794379}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4866200229214603795
+--- !u!114 &7369272034566480660
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,9 +45,44 @@ MonoBehaviour:
   m_GameObject: {fileID: 2374991623033447861}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfb81e034348dff4290bcc29b834c3a8, type: 3}
+  m_Script: {fileID: 11500000, guid: f33f64534a80bf8468f44ec6b8f3fb68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _amountToHeal: 0
+--- !u!65 &8197984413688897271
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2374991623033447861}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 1, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6629873483300158981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2374991623033447861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f33f64534a80bf8468f44ec6b8f3fb68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _amountToHeal: 1
 --- !u!1 &5931254158018977877
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,7 +95,7 @@ GameObject:
   - component: {fileID: 6381404208045624093}
   - component: {fileID: 667956818131651797}
   - component: {fileID: 4958094304002485735}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +209,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7013470231619794379
 Transform:
   m_ObjectHideFlags: 0
@@ -207,5 +244,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 2, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
