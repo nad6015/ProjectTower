@@ -22,21 +22,27 @@ public class RuleValueTest
     public void ShouldReturnFloatValue()
     {
         Assert.That(ruleValue.Type == RuleValue.ValueType.NUMBER);
-        Assert.That(ruleValue.GetValue<float>("value") == 30);
+        Assert.That(ruleValue.GetNumber() == 30);
     }
 
     [Test]
     public void ShouldReturnRangeValue()
     {
         Assert.That(ruleValue.Type == RuleValue.ValueType.NUMBER);
-        Assert.That(ruleValue.GetValue<float>("value") == 30);
+        Assert.That(ruleValue.GetNumber() == 30);
     }
 
     [Test]
     public void ShouldReturnNullIfValueIsNotOfTypeT()
     {
+        Dictionary<string, object> data = new()
+        {
+            { "value", "30f" },
+            { "type", "number" }
+        };
+
+        ruleValue = new RuleValue(data);
         Assert.That(ruleValue.Type != RuleValue.ValueType.STRING);
-        Assert.That(ruleValue.GetValue<float>("value") == 30f);
-        Assert.Null(ruleValue.GetValue<string>("value"));
+        Assert.That(ruleValue.GetNumber() == -1f);
     }
 }

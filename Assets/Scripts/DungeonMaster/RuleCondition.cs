@@ -11,14 +11,15 @@ namespace Assets.DungeonGenerator
         private readonly string _operand;
         private readonly string _operator;
 
-        public RuleCondition(string operatorStr, string operand)
+        public RuleCondition(string @operator, string operand)
         {
             _operand = operand;
-            _operator = operatorStr;
+            _operator = @operator;
         }
 
         public bool IsMet(float value)
         {
+
             float operand = float.Parse(_operand);
             switch (_operator)
             {

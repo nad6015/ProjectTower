@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.DungeonGenerator
 {
@@ -38,11 +39,37 @@ namespace Assets.DungeonGenerator
         /// <typeparam name="T">the type of the value</typeparam>
         /// <param name="valueName">the name of the value to get</param>
         /// <returns>the value as T</returns>
-        public T GetValue<T>(string valueName)
+        public float GetNumber()
         {
             try
             {
-                return (T)_values[valueName];
+                switch (Type)
+                {
+                    case ValueType.NUMBER: return float.Parse(_values["value"].ToString());
+                }
+                return -1; // TODO: Make const
+            }
+            catch (InvalidCastException)
+            {
+                return default;
+            }
+        }
+
+        /// <summary>
+        /// Get the actual value of a rule as T. Throws a runtime exception if the types don't match.
+        /// </summary>
+        /// <typeparam name="T">the type of the value</typeparam>
+        /// <param name="valueName">the name of the value to get</param>
+        /// <returns>the value as T</returns>
+        public Tuple<float, float> GetRange()
+        {
+            try
+            {
+                if (Type != ValueType.RANGE)
+                {
+                    return null;
+                }
+                return new Tuple<float, float>(float.Parse(_values[min].ToString()), float.Parse(_values[max].ToString()));
             }
             catch (InvalidCastException)
             {

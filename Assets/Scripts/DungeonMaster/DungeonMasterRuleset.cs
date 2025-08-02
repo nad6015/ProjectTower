@@ -2,6 +2,7 @@
 using UnityEngine;
 using Newtonsoft.Json.Linq;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Assets.DungeonGenerator
 {
@@ -21,7 +22,16 @@ namespace Assets.DungeonGenerator
 
             foreach (JToken jRule in jRules)
             {
-                DungeonMasterRule rule = jRule.ToObject<DungeonMasterRule>();
+                List<RuleCondition> conditions = new List<RuleCondition>();
+                
+                foreach (JToken jCondition in jRule["conditions"])
+                {
+                    conditions.Add(jCondition.ToObject<RuleCondition>());
+                }
+
+                RuleValue ruleValue = new(JsonConvert.DeserializeObject<Dictionary<string, object>>(jRule["value"].ToString()));
+
+                DungeonMasterRule rule = new(jRule["id"].ToString(), jRule["parameter"].ToString(), conditions, ruleValue);
                 if (!_rules.ContainsKey(rule.Id))
                 {
                     _rules.Add(rule.Id, rule);

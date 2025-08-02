@@ -45,9 +45,14 @@ public class DungeonMasterRulesetTest
 
         RuleValue ruleValue = rule.RuleValue();
 
+        Debug.Log(ruleValue.Type);
+
         Assert.That(ruleValue.Type == RuleValue.ValueType.RANGE);
-        Assert.That(ruleValue.GetValue<float>(RuleValue.min) == 10);
-        Assert.That(ruleValue.GetValue<float>(RuleValue.max) == 10);
+        Debug.Log(ruleValue.GetRange());
+
+        var range = ruleValue.GetRange();
+        Assert.That(range.Item1 == 10);
+        Assert.That(range.Item2 == 10);
     }
 
     [Test]
@@ -62,7 +67,7 @@ public class DungeonMasterRulesetTest
         foreach (JToken jRule in jRules)
         {
             // If this rule is found, increase the count by one.
-            count += jRule.ToObject<DungeonMasterRule>().Id == "RoomCount_Based_On_Prev_Dungeon" ? 1 : 0;
+            count += jRule["id"].ToString() == "RoomCount_Based_On_Prev_Dungeon" ? 1 : 0;
         }
 
         Assert.That(ruleset.Count < jRules.Count);
