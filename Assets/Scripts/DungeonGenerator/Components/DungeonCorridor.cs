@@ -16,7 +16,7 @@ namespace Assets.DungeonGenerator
         internal void Construct(DungeonComponents components, Vector3 minCorridorSize)
         {
             GameObject wallAsset = components.corridorWall;
-            GameObject floorAsset = components.corridorFloor;
+            GameObject floorAsset = components.floorTile;
 
             float width = Bounds.size.x;
             float height = Bounds.size.z;
@@ -29,42 +29,33 @@ namespace Assets.DungeonGenerator
 
             bool isHorizontal = minCorridorSize.y == height;
 
+            float angle = isHorizontal ? 0: 90f;
+            float count  = isHorizontal ? width : height;
+
             transform.position = Bounds.min;
 
-            GameObject floor = Instantiate(floorAsset, transform);
+            GameObject floor = Instantiate(floorAsset, new(minX, 0, minZ), Quaternion.identity, transform);
+            floor.name = "Floor";
             floor.transform.localScale = PointUtils.Vec2ToVec3(Bounds.size, 0.5f);
 
-            if (isHorizontal)
+            // Place the walls
+            for (int i = 0; i < count; i++)
             {
-                // Place the top and bottoms wall
-                for (int i = 0; i < width; i++)
-                {
-                    float wallX = minX + i;
+                float x = isHorizontal ? minX + i : minX;
+                float z = isHorizontal ? minZ : minZ + i;
 
-                    GameObject wall = Instantiate(wallAsset, new Vector3(wallX, 0, minZ), Quaternion.identity, transform);
-                    wall.name = "Wall Bottom";
-                    walls.Add(wall);
+                GameObject wall = Instantiate(wallAsset, new Vector3(x, 0, z), Quaternion.identity, transform);
+                wall.name = "Wall Bottom";
+                wall.transform.GetChild(0).Rotate(Vector3.up, angle);
+                walls.Add(wall);
 
-                    wall = Instantiate(wallAsset, new Vector3(wallX, 0, maxZ), Quaternion.identity, transform);
-                    wall.name = "Wall Top";
-                    walls.Add(wall);
-                }
-            }
-            else
-            {
-                // Place left and right walls
-                for (int i = 0; i < height; i++)
-                {
-                    float z = minZ + i;
+                x = isHorizontal ? minX + i : maxX;
+                z = isHorizontal ? maxZ : minZ + i;
 
-                    GameObject wall = Instantiate(wallAsset, new Vector3(minX, 0, z), Quaternion.identity, transform);
-                    wall.name = "Wall Left";
-                    walls.Add(wall);
-
-                    wall = Instantiate(wallAsset, new Vector3(maxX, 0, z), Quaternion.identity, transform);
-                    wall.name = "Wall Right";
-                    walls.Add(wall);
-                }
+                wall = Instantiate(wallAsset, new Vector3(x, 0, z), Quaternion.identity, transform);
+                wall.name = "Wall Top";
+                wall.transform.GetChild(0).Rotate(Vector3.up, angle);
+                walls.Add(wall);
             }
         }
 

@@ -36,7 +36,7 @@ namespace Assets.DungeonGenerator
             float maxZ = Bounds.max.z;
 
             // Place the top and bottom walls
-            for (int i = 0; i < width; i++)
+            for (int i = 0; i < width + 1; i++)
             {
                 float wallX = minX + i;
 
@@ -52,17 +52,19 @@ namespace Assets.DungeonGenerator
             }
 
             // Place left and right walls
-            for (int i = 0; i < height; i++)
+            for (int i = 0; i < height + 1; i++)
             {
                 float z = minZ + i;
 
                 GameObject wall = Instantiate(wallAsset, new Vector3(minX, 0, z), Quaternion.identity, transform);
                 wall.name = "Wall Left";
+                wall.transform.GetChild(0).Rotate(Vector3.up, 90);
                 walls.Add(wall);
 
 
                 wall = Instantiate(wallAsset, new Vector3(maxX, 0, z), Quaternion.identity, transform);
                 wall.name = "Wall Right";
+                wall.transform.GetChild(0).Rotate(Vector3.up, 90);
                 walls.Add(wall);
             }
         }

@@ -11,11 +11,12 @@ using UnityEngine.TestTools.Utils;
 
 public class RandomWalkTests
 {
-    readonly DungeonComponents components = Resources.Load<DungeonComponents>("Dungeons/Dev/DevComponents");
+    readonly DungeonComponents components = Resources.Load<DungeonComponents>("DevComponents");
+
     [SetUp]
     public void SetUp()
     {
-        SceneManager.LoadScene("Scenes/Tests/BSPAlgorithm");
+        SceneManager.LoadScene("Scenes/Tests/RandomWalkAlgorithm");
     }
 
     [UnityTest]
