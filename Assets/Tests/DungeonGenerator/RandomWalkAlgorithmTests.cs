@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Assets.DungeonGenerator;
 using Assets.DungeonGenerator.Components;
+using Assets.Scripts.DungeonGenerator.Components;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -100,8 +101,8 @@ public class RandomWalkTests
         yield return new WaitForSeconds(1);
 
         Dungeon dungeon = new(CreateParameters(axis, maxRoomCount), components);
-        RandomWalk algorithm = new(dungeon, parent);
-        algorithm.GenerateDungeon();
+        RandomWalk algorithm = new(parent);
+        algorithm.GenerateDungeon(dungeon);
 
         yield return new WaitForSeconds(1);
     }

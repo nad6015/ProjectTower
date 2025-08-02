@@ -1,3 +1,4 @@
+using Assets.Scripts.DungeonGenerator.Components;
 using System;
 using System.Collections.Generic;
 using UnityEngine;

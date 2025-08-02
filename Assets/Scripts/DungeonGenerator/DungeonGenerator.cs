@@ -1,7 +1,7 @@
 using UnityEngine;
 using Assets.DungeonGenerator.Components;
 using Unity.AI.Navigation;
-using System;
+using System.Collections.Generic;
 
 namespace Assets.DungeonGenerator
 {
@@ -10,12 +10,15 @@ namespace Assets.DungeonGenerator
         [SerializeField]
         private DungeonComponents _components;
 
-        private readonly IDungeonAlgorithm _grammarDungeonGenerator;
-        private readonly Dungeon _dungeon;
+        private List<IDungeonAlgorithm> _algorithms;
 
         private void Start()
         {
-            // grammarDungeonGenerator = new MissionGrammarAlgorithm();
+            _algorithms = new List<IDungeonAlgorithm>()
+            {
+                new MissionGrammar(),
+                new RandomWalk(transform)
+            };
         }
 
         /// <summary>
@@ -24,27 +27,24 @@ namespace Assets.DungeonGenerator
         /// <param name="parameters">the parameters for the dungeon.</param>
         public Dungeon GenerateDungeon(DungeonParameters parameters)
         {
-            // TODO: Run dungeon parameters through misson grammar, then pass result to Random Walk algorithm
-            // TODO: Might need to build navmesh before placing enemies
-            Dungeon d = new(parameters, _components);
+            Dungeon dungeon = new(parameters, _components);
 
-            IDungeonAlgorithm grammarDungeonGenerator = new GraphGrammarAlgorithm(parameters, _components);
-            grammarDungeonGenerator.GenerateDungeon();
+            _algorithms.ForEach(algorithm => algorithm.GenerateDungeon(dungeon));
 
-
-            IDungeonAlgorithm algorithm = new RandomWalk(d, transform);
-            algorithm.GenerateDungeon();
             GetComponent<NavMeshSurface>().BuildNavMesh();
-            return d;
+            return dungeon;
         }
 
         public void ClearDungeon()
         {
+            _algorithms.ForEach(algorithm => algorithm.ClearDungeon());
+
             // Remove child object code copied from - https://stackoverflow.com/questions/46358717/how-to-loop-through-and-destroy-all-children-of-a-game-object-in-unity
             while (transform.childCount > 0)
             {
                 DestroyImmediate(transform.GetChild(0).gameObject);
             }
+
         }
     }
 }

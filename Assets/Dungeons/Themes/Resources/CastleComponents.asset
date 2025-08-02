@@ -16,7 +16,8 @@ MonoBehaviour:
   floorTile: {fileID: 8031560325989942358, guid: 2e7ae91cf64b0ec48a1935caeb847572, type: 3}
   corridorWall: {fileID: 3030302167426459883, guid: cd459e7457c3a0d4a84e4fba790fcb74, type: 3}
   corridorFloor: {fileID: 8031560325989942358, guid: a65052709d59fc94487334d3e9b79443, type: 3}
-  enemy: {fileID: 7807404158470223261, guid: 94ba4e2304ec5bf44885dc354b291852, type: 3}
-  item: {fileID: 2374991623033447861, guid: 3a68e34b9cf70244d910afff8f8d8799, type: 3}
+  enemies:
+  - {fileID: 7807404158470223261, guid: 8a3936195cd77f449baadaa5b9e38874, type: 3}
+  roomContent: []
   startingPoint: {fileID: 3787019230069511806, guid: 7c404835786532a4fbf9a3cc35cbd73b, type: 3}
   exit: {fileID: 8684044341818389683, guid: 20f557f5c48279b4d9ec43df8dfe49e2, type: 3}

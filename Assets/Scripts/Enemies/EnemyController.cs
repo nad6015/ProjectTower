@@ -3,6 +3,7 @@ using UnityEngine.AI;
 using Unity.Behavior;
 using Assets.CombatSystem;
 using Assets.Combat;
+using Assets;
 
 public class EnemyController : MonoBehaviour
 {

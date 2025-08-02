@@ -1,4 +1,6 @@
-﻿using Unity.AI.Navigation;
+﻿using Assets.Combat;
+using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 
 namespace Assets.DungeonGenerator
@@ -13,8 +15,8 @@ namespace Assets.DungeonGenerator
         public GameObject corridorFloor;
 
 
-        public GameObject enemy;
-        public GameObject item;
+        public List<GameObject> enemies;
+        public List<GameObject> roomContent;
         public SpawnPoint startingPoint;
         public DungeonExit exit;
      

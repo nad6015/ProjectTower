@@ -113,19 +113,6 @@ namespace Assets.DungeonGenerator
             return visitedNodes.Count == Count;
         }
 
-        private void VisitNode(T node, HashSet<T> visitedNodes)
-        {
-            foreach (var item in _graph[node])
-            {
-                if (visitedNodes.Contains(item))
-                {
-                    continue;
-                }
-                visitedNodes.Add(item);
-                VisitNode(item, visitedNodes);
-            }
-        }
-
         public Dictionary<T, List<T>>.Enumerator GetEnumerator()
         {
             return _graph.GetEnumerator();
@@ -143,22 +130,24 @@ namespace Assets.DungeonGenerator
             }
         }
 
-        internal void Remove(T node)
+        /// <summary>
+        /// Removes all the nodes in the graph.
+        /// </summary>
+        public void RemoveAll()
+        {
+            _graph.Clear();
+        }
+
+        /// <summary>
+        /// Removes a node in the graph.
+        /// </summary>
+        /// <param name="node"></param>
+        public void Remove(T node)
         {
             _graph.Remove(node);
         }
 
-        internal void ForEach(Action<T> value)
-        {
-            HashSet<T> visitedNodes = new();
-            T firstNode = _graph.First().Key;
-            visitedNodes.Add(firstNode);
-            value(firstNode);
-            VisitNode2(firstNode, visitedNodes, value);
-            
-        }
-
-        private void VisitNode2(T node, HashSet<T> visitedNodes, Action<T> value)
+        private void VisitNode(T node, HashSet<T> visitedNodes)
         {
             foreach (var item in _graph[node])
             {
@@ -167,8 +156,7 @@ namespace Assets.DungeonGenerator
                     continue;
                 }
                 visitedNodes.Add(item);
-                value(item);
-                VisitNode2(item, visitedNodes, value);
+                VisitNode(item, visitedNodes);
             }
         }
     }

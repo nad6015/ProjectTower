@@ -1,8 +1,9 @@
-using System;
+using Assets.DungeonGenerator;
+using Assets.DungeonGenerator.Components;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.DungeonGenerator
+namespace Assets.Scripts.DungeonGenerator.Components
 {
     public class DungeonRoom : MonoBehaviour
     {
@@ -77,13 +78,13 @@ namespace Assets.DungeonGenerator
             {
                 Vector3 position = wall.transform.position;
 
-                if ((position.x > cBounds.min.x && position.x < cBounds.max.x) &&
+                if (position.x > cBounds.min.x && position.x < cBounds.max.x &&
                     (Mathf.Approximately(position.z, cBounds.min.z) || Mathf.Approximately(position.z, cBounds.max.z)))
                 {
                     wall.SetActive(false);
                 }
 
-                if ((position.z > cBounds.min.z && position.z < cBounds.max.z) &&
+                if (position.z > cBounds.min.z && position.z < cBounds.max.z &&
                     (Mathf.Approximately(position.x, cBounds.min.x) || Mathf.Approximately(position.x, cBounds.max.x)))
                 {
                     wall.SetActive(false);
@@ -100,6 +101,18 @@ namespace Assets.DungeonGenerator
             dungeonRoom.walls = new List<GameObject>();
 
             return dungeonRoom;
+        }
+
+        internal void Populate(Dungeon dungeon)
+        {
+            DungeonParameters parameters = dungeon.Parameters;
+            if (Random.value > parameters.enemySpawnRate)
+            {
+                return;
+            }
+            int count = Random.Range(parameters.minEnemiesPerRoom, parameters.maxEnemiesPerRoom);
+
+            Contents.Add(dungeon.Components.enemies[0].gameObject, count);
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Assets.DungeonGenerator
+namespace Assets
 {
-    using Random = UnityEngine.Random;
+    using Random = Random;
     public class PointUtils
     {
         /// <summary>
@@ -48,7 +48,7 @@ namespace Assets.DungeonGenerator
         /// <param name="v1">min point</param>
         /// <param name="v2">max point</param>
         /// <returns>A random point within the range</returns>
-        public static Vector3 RandomPointWithinRange(Bounds b)
+        public static Vector3 RandomPointWithinBounds(Bounds b)
         {
             float x = Random.Range(b.min.x, b.max.x);
             float z = Random.Range(b.min.z, b.max.z);
