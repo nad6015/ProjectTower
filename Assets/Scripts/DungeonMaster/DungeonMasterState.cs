@@ -4,7 +4,6 @@
     {
         GENERATE_DUNGEON,
         RUNNING,
-        ADAPT_DUNGEON,
         GAME_END
     }
 }

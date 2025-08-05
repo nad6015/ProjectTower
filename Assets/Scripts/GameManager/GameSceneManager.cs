@@ -50,7 +50,8 @@ namespace Assets.GameManager
         {
             START,
             NEW_GAME,
-            GAME_WON
+            GAME_WON,
+            GAME_LOST
         }
     }
 }

@@ -61,14 +61,14 @@ namespace Assets.DungeonGenerator
         /// </summary>
         private void CreateDungeonRepresentation()
         {
-            float negativeDirOffset = _dungeon.MaxRoomSize.magnitude;
+            float negativeDirOffset = _dungeon.Parameter("roomSize").VectorRange().max.magnitude;
             Vector3 dir = RandomDirection();
-            List<Vector3> lastDirs = new List<Vector3>() { dir };
 
             Bounds lastRoom = RandomRoom(Vector3.zero, Vector3.zero, dir, dir.x != 0);
             _roomBounds.Add(lastRoom, null);
+            Debug.Log(lastRoom);
 
-            while (_roomBounds.Count < _dungeon.MaxRooms)
+            while (_roomBounds.Count < _dungeon.Parameter("roomCount").Value())
             {
                 Bounds nextRoom;
                 Bounds corridor;
@@ -95,7 +95,7 @@ namespace Assets.DungeonGenerator
                 }
 
                 // If a room already exists in that area, then loop again.
-                if (canPlaceRoom(nextRoom, corridor))
+                if (CanPlaceRoom(nextRoom, corridor))
                 {
                     _corridors.Add(corridor, null);
                     _roomBounds.Add(nextRoom, null);
@@ -126,7 +126,7 @@ namespace Assets.DungeonGenerator
             {
                 var corridor = _corridors.ElementAt(i);
                 DungeonCorridor dungeonCorridor = DungeonCorridor.Create(corridor.Key, i);
-                dungeonCorridor.Construct(_components, _dungeon.MinCorridorSize);
+                dungeonCorridor.Construct(_components, _dungeon.Parameter("corridorSize").Vector());
                 dungeonCorridor.transform.SetParent(_dungeonTransform);
                 _corridors[corridor.Key] = dungeonCorridor;
             }
@@ -187,17 +187,17 @@ namespace Assets.DungeonGenerator
             Vector3 corridorCenter;
             if (isHorizontal)
             {
-                float zOffset = _dungeon.MinCorridorSize.y / 2f;
+                float zOffset = _dungeon.CorridorSize.z / 2f;
                 corridorCenter = PointUtils.RandomPointWithinRange(new(b1.max.x, 0, Mathf.Max(b1.min.z, b2.min.z) + zOffset), new(b1.max.x, 0, Mathf.Min(b1.max.z, b2.max.z) - zOffset));
                 corridorCenter.x += (dist / 2f);
             }
             else
             {
-                float xOffset = _dungeon.MinCorridorSize.x / 2f;
+                float xOffset = _dungeon.CorridorSize.x / 2f;
                 corridorCenter = PointUtils.RandomPointWithinRange(new(Mathf.Max(b1.min.x, b2.min.x) + xOffset, 0, b1.max.z), new(Mathf.Min(b1.max.x, b2.max.x) - xOffset, 0, b1.max.z));
                 corridorCenter.z += (dist / 2f);
             }
-            return new Bounds(corridorCenter, new(isHorizontal ? dist : _dungeon.MinCorridorSize.x, 0, isHorizontal ? _dungeon.MinCorridorSize.y : dist));
+            return new Bounds(corridorCenter, new(isHorizontal ? dist : _dungeon.CorridorSize.x, 0, isHorizontal ? _dungeon.CorridorSize.z : dist));
         }
 
         /// <summary>
@@ -209,8 +209,9 @@ namespace Assets.DungeonGenerator
         /// <returns>the bounds of the room</returns>
         private Bounds RandomRoom(Vector3 min, Vector3 max, Vector3 dir, bool isHorizontal)
         {
-            float roomOffset = _dungeon.MaxRoomSize.magnitude; // Distance between rooms
-            Vector3 roomSize = PointUtils.RandomSize(_dungeon.MinRoomSize, _dungeon.MaxRoomSize);
+            Range<Vector3> roomSizeParam = _dungeon.Parameter("roomSize").VectorRange();
+            float roomOffset = roomSizeParam.max.magnitude /2f; // Distance between rooms
+            Vector3 roomSize = PointUtils.RandomSize(roomSizeParam.min, roomSizeParam.max);
             Vector3 roomCenter = PointUtils.RandomPointWithinRange(min, max);
 
             if (isHorizontal)
@@ -268,11 +269,18 @@ namespace Assets.DungeonGenerator
         /// Checks if a room can be placed in the given bounds.
         /// </summary>
         /// <returns>true if no other room is in the location.</returns>
-        private bool canPlaceRoom(Bounds newRoom, Bounds corridor)
+        private bool CanPlaceRoom(Bounds newRoom, Bounds newCorridor)
         {
             foreach (var room in _roomBounds.Keys)
             {
                 if (room.Intersects(newRoom))
+                {
+                    return false;
+                }
+            }
+            foreach (var corridor in _corridors.Keys)
+            {
+                if (corridor.Intersects(newCorridor) || corridor.Intersects(newRoom))
                 {
                     return false;
                 }

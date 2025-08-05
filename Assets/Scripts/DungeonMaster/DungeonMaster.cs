@@ -1,9 +1,8 @@
 using UnityEngine;
 using Assets.DungeonGenerator.Components;
 using Assets.PlayerCharacter;
-using Unity.Mathematics;
 using Assets.GameManager;
-using System.Data.Common;
+using System.Collections.Generic;
 
 namespace Assets.DungeonGenerator
 {
@@ -11,95 +10,46 @@ namespace Assets.DungeonGenerator
 
     public partial class DungeonMaster : MonoBehaviour
     {
+        [SerializeField]
+        private List<TextAsset> _parameterFiles;
+
+        [SerializeField]
+        private List<TextAsset> _rulesets;
+
+        [SerializeField]
+        private int _randomSeed;
+
         public DungeonMasterRuleset Ruleset { get; private set; }
         public DungeonMasterState State { get; private set; }
+
         public int Floor { get; private set; }
 
-        public Vector2 LargeDungeonSize;
-        public Vector2 MediumDungeonSize;
-        public Vector2 SmallDungeonSize;
-        public Vector2 MinDungeonSize;
-
-        public Vector2 MaxRoomSize;
-        public Vector2 MinRoomSize;
-
-        public Vector2 MinCorridorSize;
-
-        public float rootDungeonSplit = 0.5f;
-
-        public float enemySpawnRate = 0.5f;
-
-        public int minEnemiesPerRoom;
-        public int maxEnemiesPerRoom;
-
-        public float itemSpawnRate = 0.5f;
-
-        public int minItemsPerRoom;
-        public int maxItemsPerRoom;
-
         private DungeonGenerator _dungeonGenerator;
-        private Vector2 maxDungeonSize;
         private PlayerController _player;
         private Dungeon _currentDungeon;
         private DungeonParameters _dungeonParams;
-        private float _avgTimeBetweenEnemyDefeats = 0;
-        private float _enemiesDefeated = 0;
+        private DungeonParameters _nextDungeonParams;
         private GameSceneManager _sceneManager;
+        private Dictionary<string, float> _gameData;
 
         public void Start()
         {
             _dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();
             _sceneManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameSceneManager>();
-            //_dungeonParams = LoadDungeonParameters();
-            State = DungeonMasterState.GENERATE_DUNGEON;
-            //Random.InitState(1); // TODO: Seed should be randomised between sessions. Set to 1 for dev
+
             Ruleset = new DungeonMasterRuleset("TestRuleset");
+            _dungeonParams = new DungeonParameters(FindByName("DefaultDungeonParameters").name);
+            _gameData = new();
+
+            Random.InitState(_randomSeed);
+            State = DungeonMasterState.GENERATE_DUNGEON;
         }
 
         public void OnDungeonCleared()
         {
+            _dungeonParams = _nextDungeonParams;
+            _nextDungeonParams = null;
             State = DungeonMasterState.GENERATE_DUNGEON;
-        }
-
-
-        DungeonParameters GenerateDungeonParameters()
-        {
-            // TODO: Run FSM on game state
-            return new DungeonParameters(RandomDungeonSize(), MinRoomSize, MaxRoomSize, MinCorridorSize,
-                enemySpawnRate, itemSpawnRate, rootDungeonSplit, minItemsPerRoom, maxItemsPerRoom,
-                minEnemiesPerRoom, maxEnemiesPerRoom, 10);
-        }
-
-        Vector2 RandomDungeonSize()
-        {
-            switch (DetermineDungeonSize())
-            {
-                case DungeonSize.SMALL:
-                maxDungeonSize = SmallDungeonSize;
-                break;
-                case DungeonSize.MEDIUM:
-                maxDungeonSize = MediumDungeonSize;
-                break;
-                case DungeonSize.LARGE:
-                maxDungeonSize = LargeDungeonSize;
-                break;
-            }
-            float width = math.floor(Random.Range(MinDungeonSize.x, maxDungeonSize.x));
-            float height = math.floor(Random.Range(MinDungeonSize.y, maxDungeonSize.y));
-
-            return new Vector2(width, height);
-        }
-
-        DungeonSize DetermineDungeonSize()
-        {
-            return DungeonSize.LARGE;
-        }
-
-        enum DungeonSize
-        {
-            SMALL = 0,
-            MEDIUM = 1,
-            LARGE = 2,
         }
 
         private void Update()
@@ -113,7 +63,7 @@ namespace Assets.DungeonGenerator
                 }
                 case DungeonMasterState.RUNNING:
                 {
-                    MonitorGameplay();
+                    DoWork();
                     break;
                 }
                 case DungeonMasterState.GAME_END:
@@ -126,30 +76,35 @@ namespace Assets.DungeonGenerator
 
         private void EndGame()
         {
-            throw new System.NotImplementedException();
-            // _sceneManager.SceneTransition(GameSceneManager.GameScene.GAME_WON);
+            if (_player.GetComponent<PlayableFighter>().IsDead())
+            {
+                _sceneManager.SceneTransition(GameSceneManager.GameScene.GAME_LOST);
+            }
+            else
+            {
+                _sceneManager.SceneTransition(GameSceneManager.GameScene.GAME_WON);
+            }
         }
 
-        private void MonitorGameplay()
+        private void DoWork()
         {
             Ruleset.ForEach(rule =>
             {
-                //if (rule.AreConditionsMet(_dungeonParams[rule.Parameter]))
-                //{
-                //    _dungeo
-                //    ModifyNextDungeonParams(rule.ReturnValue());
-                //}
-                //else
-                //{
-                //    ModifyEventChance(rule.ReturnValue());
-                //}
+                if (_gameData.ContainsKey(rule.Id) && rule.ConditionsMet(_gameData[rule.Id]))
+                {
+                    ModifyNextDungeonParams(rule.RuleValue());
+                }
             });
+        }
+
+        private void ModifyNextDungeonParams(RuleValue ruleValue)
+        {
+            // TODO
         }
 
         private void GenerateDungeon()
         {
             NewDungeon();
-
             _currentDungeon.DungeonExit.DungeonCleared += OnDungeonCleared;
             _player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
             State = DungeonMasterState.RUNNING;
@@ -159,8 +114,10 @@ namespace Assets.DungeonGenerator
         private void NewDungeon()
         {
             _dungeonGenerator.ClearDungeon();
-            _currentDungeon = _dungeonGenerator.GenerateDungeon(GenerateDungeonParameters());
+            _currentDungeon = _dungeonGenerator.GenerateDungeon(_dungeonParams);
             GameObject startingPoint = GameObject.FindGameObjectWithTag("PlayerSpawn");
+
+            _nextDungeonParams = _dungeonParams;
 
             if (_player != null)
             {
@@ -170,6 +127,11 @@ namespace Assets.DungeonGenerator
             {
                 startingPoint.GetComponent<SpawnPoint>().Spawn();
             }
+        }
+
+        private TextAsset FindByName(string v)
+        {
+            return _parameterFiles.Find(t =>  t.name.Contains(v));
         }
     }
 }

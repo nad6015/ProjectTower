@@ -1,4 +1,5 @@
 using Assets.DungeonGenerator;
+using Assets.Scripts.DungeonGenerator;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -47,7 +48,7 @@ public class DungeonMasterRulesetTest
 
         Debug.Log(ruleValue.Type);
 
-        Assert.That(ruleValue.Type == RuleValue.ValueType.RANGE);
+        Assert.That(ruleValue.Type == ValueType.RANGE);
         Debug.Log(ruleValue.GetRange());
 
         var range = ruleValue.GetRange();

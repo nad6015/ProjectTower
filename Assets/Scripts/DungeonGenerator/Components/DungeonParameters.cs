@@ -1,3 +1,9 @@
+using Assets.Scripts.DungeonGenerator;
+using Assets.Scripts.DungeonGenerator.DataStructures;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.DungeonGenerator.Components
@@ -5,64 +11,51 @@ namespace Assets.DungeonGenerator.Components
     /// <summary>
     /// Contains the parameters needed to generate a dungeon 
     /// </summary>
-    public struct DungeonParameters
+    public class DungeonParameters
     {
-        public Vector2 Size { get; }
-        public Vector2 MaxRoomSize { get; }
-        public Vector2 MinRoomSize { get; }
-        public Vector2 CorridorMinSize { get; }
-        public Vector3 playerStartPos;
+        public int Count { get { return _parameters.Count; } }
 
-        internal float rootDungeonSplit;
-        internal float enemySpawnRate;
-        internal float itemSpawnRate;
-        internal int minEnemiesPerRoom;
-        internal int maxEnemiesPerRoom;
-
-        public int MaxRooms { get; }
-
-        internal int maxItemsPerRoom;
-        internal int minItemsPerRoom;
-
-
-        /// <summary>
-        /// Constructs dungeon parameters.
-        /// </summary>
-        /// <param name="size"></param>
-        /// <param name="minRoomSize"></param>
-        /// <param name="maxRoomSize"></param>
-        /// <param name="minCorridorSize"></param>
-        /// <param name="enemySpawnRate"></param>
-        /// <param name="itemSpawnRate"></param>
-        /// <param name="rootDungeonSplit"></param>
-        /// <param name="minItemsPerRoom"></param>
-        /// <param name="maxItemsPerRoom"></param>
-        /// <param name="minEnemiesPerRoom"></param>
-        /// <param name="maxEnemiesPerRoom"></param>
-        public DungeonParameters(Vector2 size, Vector2 minRoomSize, Vector2 maxRoomSize, Vector2 minCorridorSize, float enemySpawnRate, float itemSpawnRate, float rootDungeonSplit, int minItemsPerRoom, int maxItemsPerRoom, int minEnemiesPerRoom, int maxEnemiesPerRoom, int maxRooms) : this()
-        {
-            Size = size;
-            MaxRoomSize = maxRoomSize;
-            MinRoomSize = minRoomSize;
-            CorridorMinSize = minCorridorSize;
-            this.enemySpawnRate = enemySpawnRate;
-            this.itemSpawnRate = itemSpawnRate;
-            this.minItemsPerRoom = minItemsPerRoom;
-            this.maxItemsPerRoom = maxItemsPerRoom;
-            this.rootDungeonSplit = rootDungeonSplit;
-            this.minEnemiesPerRoom = minEnemiesPerRoom;
-            this.maxEnemiesPerRoom = maxEnemiesPerRoom;
-            MaxRooms = maxRooms;
-        }
+        private Dictionary<string, DungeonParameter> _parameters;
 
         /// <summary>
         /// Constructs dungeon parameters from a JSON file.
         /// </summary>
         /// <param name="parametersFile">A JSON file with the needed parameters within.</param>
-        public DungeonParameters(string filename) : this()
+        public DungeonParameters(string filename)
         {
             TextAsset jsonFile = Resources.Load<TextAsset>(filename);
-            this = JsonUtility.FromJson<DungeonParameters>(jsonFile.text);
+            _parameters = new Dictionary<string, DungeonParameter>();
+
+            JObject rulesJson = JObject.Parse(jsonFile.text);
+            IEnumerable<JToken> jRules = rulesJson["params"].Children();
+
+            foreach (JToken jRule in jRules)
+            {
+                DungeonParameter dungeonParameter = new(JsonConvert.DeserializeObject<Dictionary<string, object>>(jRule.ToString()));
+                _parameters.Add(dungeonParameter.Id, dungeonParameter);
+            }
+        }
+
+        public DungeonParameter GetParameter(string dungeonParams)
+        {
+            return _parameters[dungeonParams];
+        }
+
+        public void ModifyParameter(string paramName, int value)
+        {
+            _parameters[paramName].Modify(value);
+        }
+    }
+
+    public struct Range<T>
+    {
+        public T min;
+        public T max;
+
+        public Range(T min, T max) : this()
+        {
+            this.min = min;
+            this.max = max;
         }
     }
 }

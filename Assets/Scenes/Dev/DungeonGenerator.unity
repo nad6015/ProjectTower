@@ -851,6 +851,22 @@ PrefabInstance:
       propertyPath: MediumDungeonSize.y
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 1951811942797037577, guid: 71b0e1507dd608f4b89db08367a1fb05, type: 3}
+      propertyPath: _rulesets.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951811942797037577, guid: 71b0e1507dd608f4b89db08367a1fb05, type: 3}
+      propertyPath: '_rulesets.Array.data[0]'
+      value: 
+      objectReference: {fileID: 4900000, guid: f6d4d6e88bf081f4c9d7eb7460577577, type: 3}
+    - target: {fileID: 1951811942797037577, guid: 71b0e1507dd608f4b89db08367a1fb05, type: 3}
+      propertyPath: _parameterFiles.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951811942797037577, guid: 71b0e1507dd608f4b89db08367a1fb05, type: 3}
+      propertyPath: '_parameterFiles.Array.data[0]'
+      value: 
+      objectReference: {fileID: 4900000, guid: c3e3dea475eb7654986c7e1b39eefb04, type: 3}
     - target: {fileID: 7913926092012003535, guid: 71b0e1507dd608f4b89db08367a1fb05, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

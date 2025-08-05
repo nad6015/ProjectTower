@@ -27,7 +27,7 @@ namespace Assets.DungeonGenerator
             float maxX = Bounds.max.x;
             float maxZ = Bounds.max.z;
 
-            bool isHorizontal = minCorridorSize.y == height;
+            bool isHorizontal = minCorridorSize.z == height;
 
             float angle = isHorizontal ? 0: 90f;
             float count  = isHorizontal ? width : height;
@@ -73,7 +73,7 @@ namespace Assets.DungeonGenerator
             foreach (var wall in walls)
             {
                 Vector3 wallPos = wall.transform.position;
-                if ((wallPos.x > bounds.min.x && wallPos.x < bounds.max.x) && (wallPos.z > bounds.min.y && wallPos.z < bounds.max.y))
+                if ((wallPos.x > bounds.min.x && wallPos.x < bounds.max.x) && (wallPos.z > bounds.min.z && wallPos.z < bounds.max.z))
                 {
                     wall.SetActive(false);
                 }

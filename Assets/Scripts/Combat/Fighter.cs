@@ -89,7 +89,7 @@ namespace Assets.CombatSystem
             // TODO: Healling vfx
         }
 
-        internal bool IsDead()
+        public bool IsDead()
         {
             return stats[FighterStats.HEALTH] <= 0;
         }

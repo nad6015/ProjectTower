@@ -10,6 +10,10 @@ public class DungeonExit : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        DungeonCleared?.Invoke();
+        Debug.Log(other.name);
+        if (other.tag == "Player")
+        {
+            DungeonCleared?.Invoke();
+        }
     }
 }

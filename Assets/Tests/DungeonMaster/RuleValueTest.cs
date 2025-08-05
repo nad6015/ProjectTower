@@ -1,4 +1,5 @@
 using Assets.DungeonGenerator;
+using Assets.Scripts.DungeonGenerator;
 using NUnit.Framework;
 using System.Collections.Generic;
 
@@ -21,14 +22,14 @@ public class RuleValueTest
     [Test]
     public void ShouldReturnFloatValue()
     {
-        Assert.That(ruleValue.Type == RuleValue.ValueType.NUMBER);
+        Assert.That(ruleValue.Type == ValueType.NUMBER);
         Assert.That(ruleValue.GetNumber() == 30);
     }
 
     [Test]
     public void ShouldReturnRangeValue()
     {
-        Assert.That(ruleValue.Type == RuleValue.ValueType.NUMBER);
+        Assert.That(ruleValue.Type == ValueType.NUMBER);
         Assert.That(ruleValue.GetNumber() == 30);
     }
 
@@ -42,7 +43,7 @@ public class RuleValueTest
         };
 
         ruleValue = new RuleValue(data);
-        Assert.That(ruleValue.Type != RuleValue.ValueType.STRING);
+        Assert.That(ruleValue.Type != ValueType.STRING);
         Assert.That(ruleValue.GetNumber() == -1f);
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 
-public class DungeonPlayability
+public class DungeonPlayabilityTest
 {
     [SetUp]
     public void Setup()
@@ -15,7 +15,7 @@ public class DungeonPlayability
     }
 
     [UnityTest]
-    [Repeat(10)] // TODO: Increase to 500
+    [Repeat(10)]
     public IEnumerator ShouldReachDungeonEnd()
     {
         yield return new WaitForSeconds(1f);
@@ -33,6 +33,6 @@ public class DungeonPlayability
 
     private bool HasReachedDestination(Transform agent, Transform endpoint)
     {
-        return Vector3.Distance(endpoint.position, agent.position) < 1;
+        return agent != null && endpoint != null && Vector3.Distance(endpoint.position, agent.position) < 1;
     }
 }

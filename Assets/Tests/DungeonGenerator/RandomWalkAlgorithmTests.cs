@@ -8,11 +8,11 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
-using UnityEngine.TestTools.Utils;
 
 public class RandomWalkTests
 {
     readonly DungeonComponents components = Resources.Load<DungeonComponents>("DevComponents");
+    readonly TextAsset paramFile = Resources.Load<TextAsset>("TestParameters");
 
     [SetUp]
     public void SetUp()
@@ -21,7 +21,7 @@ public class RandomWalkTests
     }
 
     [UnityTest]
-    public IEnumerator ShouldGenerateTwoRoomDungeon()
+    public IEnumerator ShouldGenerateDungeonWithSpecifiedRoomNumber()
     {
         yield return TestSetUp();
         List<DungeonRoom> rooms = FindRooms();
@@ -40,82 +40,35 @@ public class RandomWalkTests
     }
 
     [UnityTest]
-    public IEnumerator ShouldCreateRightAlignedRooms()
-    {
-        yield return TestSetUp();
-
-        List<DungeonRoom> rooms = FindRooms();
-
-        Bounds room1 = rooms[0].Bounds;
-        Bounds room2 = rooms[1].Bounds;
-
-        Vector3Int dir = Vector3Int.RoundToInt((room2.min - room1.min).normalized);
-
-        Assert.That(room1.center.z == 0);
-
-        Assert.That(room2.center.x > room1.center.x);
-        Assert.That(room2.center.z >= room1.min.z);
-        Assert.That(room2.center.z <= room1.max.z);
-
-        Assert.That(dir, Is.EqualTo(Vector3Int.right).Using(Vector3EqualityComparer.Instance));
-    }
-
-    [UnityTest]
-    public IEnumerator ShouldCreateUpAlignedRooms()
-    {
-        yield return TestSetUp(DungeonAxis.VERTICAL);
-
-        List<DungeonRoom> rooms = FindRooms();
-
-        Bounds room1 = rooms[0].Bounds;
-        Bounds room2 = rooms[1].Bounds;
-
-        Vector3Int dir = Vector3Int.RoundToInt((room2.min - room1.min).normalized);
-
-        Assert.That(room1.center.x == 0);
-
-        Assert.That(room2.center.z > room1.center.z);
-        Assert.That(room2.center.x >= room1.min.x);
-        Assert.That(room2.center.x <= room1.max.x);
-
-        Assert.That(dir, Is.EqualTo(Vector3Int.forward).Using(Vector3EqualityComparer.Instance));
-    }
-
-    [UnityTest]
     public IEnumerator ShouldGenerateCompleteDungeon()
     {
-        yield return TestSetUp(DungeonAxis.DEFAULT, 10);
+        yield return TestSetUp(10);
 
         List<DungeonRoom> rooms = FindRooms();
         DungeonCorridor[] corridors = GameObject.FindObjectsByType<DungeonCorridor>(FindObjectsSortMode.None);
-
-        Debug.Log(corridors.Length);
 
         Assert.That(rooms.Count == 10);
         Assert.That(corridors.Length >= 5);
     }
 
-    private IEnumerator TestSetUp(DungeonAxis axis = DungeonAxis.HORIZONTAL, int maxRoomCount = 2)
+    private IEnumerator TestSetUp(int roomCount = 2)
     {
         Transform parent = GameObject.FindGameObjectWithTag("DungeonGenerator").transform;
         yield return new WaitForSeconds(1);
 
-        Dungeon dungeon = new(CreateParameters(axis, maxRoomCount), components);
+        DungeonParameters parameters = CreateParameters(roomCount);
+        parameters.ModifyParameter("roomCount", roomCount);
+
+        Dungeon dungeon = new(parameters, components);
         RandomWalk algorithm = new(parent);
         algorithm.GenerateDungeon(dungeon);
 
         yield return new WaitForSeconds(1);
     }
 
-    private DungeonParameters CreateParameters(DungeonAxis axis, int maxRooms)
+    private DungeonParameters CreateParameters(int maxRooms)
     {
-        var dungeonSplit = axis switch
-        {
-            DungeonAxis.HORIZONTAL => 1,
-            DungeonAxis.VERTICAL => 0,
-            _ => 0.5f,
-        };
-        return new DungeonParameters(new Vector2(200, 200), new Vector2(15, 15), new Vector2(15, 15), new(2, 2), 0, 0, dungeonSplit, 0, 0, 0, 0, maxRooms);
+        return new DungeonParameters(paramFile.name);
     }
 
     private List<DungeonRoom> FindRooms()

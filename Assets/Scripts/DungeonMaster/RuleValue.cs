@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
+using ValueType = Assets.Scripts.DungeonGenerator.ValueType;
 
 namespace Assets.DungeonGenerator
 {
@@ -75,13 +75,6 @@ namespace Assets.DungeonGenerator
             {
                 return default;
             }
-        }
-
-        public enum ValueType
-        {
-            NUMBER = 0,
-            RANGE = 1,
-            STRING = 2
         }
     }
 }

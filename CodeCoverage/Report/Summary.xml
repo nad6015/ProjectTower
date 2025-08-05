@@ -1,50 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CoverageReport scope="Summary">
   <Summary>
-    <Generatedon>10/07/2025 - 20:49:50</Generatedon>
+    <Generatedon>05/08/2025 - 11:10:05</Generatedon>
     <Parser>MultiReportParser (2x OpenCoverParser)</Parser>
     <Assemblies>4</Assemblies>
-    <Classes>20</Classes>
-    <Files>20</Files>
-    <Coveredlines>270</Coveredlines>
-    <Uncoveredlines>569</Uncoveredlines>
-    <Coverablelines>839</Coverablelines>
-    <Totallines>3639</Totallines>
-    <Linecoverage>32.1</Linecoverage>
+    <Classes>37</Classes>
+    <Files>37</Files>
+    <Coveredlines>284</Coveredlines>
+    <Uncoveredlines>1061</Uncoveredlines>
+    <Coverablelines>1345</Coverablelines>
+    <Totallines>4761</Totallines>
+    <Linecoverage>21.1</Linecoverage>
     <Coveredbranches>0</Coveredbranches>
     <Totalbranches>0</Totalbranches>
-    <Coveredmethods>54</Coveredmethods>
-    <Totalmethods>191</Totalmethods>
-    <Methodcoverage>28.2</Methodcoverage>
+    <Coveredmethods>62</Coveredmethods>
+    <Totalmethods>279</Totalmethods>
+    <Methodcoverage>22.2</Methodcoverage>
   </Summary>
   <Coverage>
-    <Assembly name="Assembly-CSharp" classes="8" coverage="8.2" coveredlines="28" coverablelines="341" totallines="1688" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="8" totalmethods="85" methodcoverage="9.4">
+    <Assembly name="Assembly-CSharp" classes="10" coverage="3.7" coveredlines="15" coverablelines="398" totallines="1826" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="94" methodcoverage="4.2">
+      <Class name="Assets.PointUtils" coverage="0" coveredlines="0" coverablelines="21" totallines="58" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="5" methodcoverage="0" />
       <Class name="AttackAction" coverage="0" coveredlines="0" coverablelines="11" totallines="32" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="3" methodcoverage="0" />
       <Class name="AvoidTargetAction" coverage="0" coveredlines="0" coverablelines="16" totallines="42" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="3" methodcoverage="0" />
-      <Class name="CharacterAudioPlayer" coverage="100" coveredlines="9" coverablelines="9" totallines="28" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="3" methodcoverage="100" />
-      <Class name="EnemyController" coverage="100" coveredlines="14" coverablelines="14" totallines="49" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="3" methodcoverage="100" />
-      <Class name="GameManager" coverage="0" coveredlines="0" coverablelines="4" totallines="16" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="2" methodcoverage="0" />
+      <Class name="EnemyController" coverage="78.5" coveredlines="11" coverablelines="14" totallines="52" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="3" methodcoverage="66.6" />
+      <Class name="HealthBar" coverage="28.5" coveredlines="4" coverablelines="14" totallines="33" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="3" methodcoverage="66.6" />
       <Class name="InputSystemActions" coverage="0" coveredlines="0" coverablelines="266" totallines="1464" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="63" methodcoverage="0" />
       <Class name="NewPlayableBehaviour" coverage="0" coveredlines="0" coverablelines="10" totallines="36" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="5" methodcoverage="0" />
-      <Class name="TestPlayer" coverage="45.4" coveredlines="5" coverablelines="11" totallines="21" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="3" methodcoverage="66.6" />
+      <Class name="PlayerHUD" coverage="0" coveredlines="0" coverablelines="10" totallines="27" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="2" methodcoverage="0" />
+      <Class name="RandomPatrolAction" coverage="0" coveredlines="0" coverablelines="29" totallines="65" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="5" methodcoverage="0" />
+      <Class name="TestPlayer" coverage="0" coveredlines="0" coverablelines="7" totallines="17" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="2" methodcoverage="0" />
     </Assembly>
-    <Assembly name="CombatSystem" classes="2" coverage="68" coveredlines="49" coverablelines="72" totallines="121" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="8" totalmethods="10" methodcoverage="80">
-      <Class name="Assets.CombatSystem.Fighter" coverage="66.1" coveredlines="45" coverablelines="68" totallines="109" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="6" totalmethods="8" methodcoverage="75" />
-      <Class name="Weapon" coverage="100" coveredlines="4" coverablelines="4" totallines="12" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="2" methodcoverage="100" />
+    <Assembly name="CombatSystem" classes="5" coverage="29" coveredlines="25" coverablelines="86" totallines="199" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" totalmethods="19" methodcoverage="26.3">
+      <Class name="Assets.Combat.NpcFighter" coverage="0" coveredlines="0" coverablelines="2" totallines="12" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="1" methodcoverage="0" />
+      <Class name="Assets.CombatSystem.Fighter" coverage="33.3" coveredlines="24" coverablelines="72" totallines="142" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="12" methodcoverage="33.3" />
+      <Class name="Assets.Scripts.Combat.Resources.Item" coverage="0" coveredlines="0" coverablelines="5" totallines="19" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="3" methodcoverage="0" />
+      <Class name="HealingItem" coverage="0" coveredlines="0" coverablelines="3" totallines="14" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="1" methodcoverage="0" />
+      <Class name="Weapon" coverage="25" coveredlines="1" coverablelines="4" totallines="12" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="2" methodcoverage="50" />
     </Assembly>
-    <Assembly name="PlayerCharacter" classes="6" coverage="30.9" coveredlines="104" coverablelines="336" totallines="1636" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="22" totalmethods="80" methodcoverage="27.5">
-      <Class name="Assets.PlayerCharacter.PlayerAction" coverage="63.6" coveredlines="7" coverablelines="11" totallines="31" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="3" methodcoverage="66.6" />
-      <Class name="Assets.PlayerCharacter.PlayerCamera" coverage="100" coveredlines="10" coverablelines="10" totallines="28" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="3" methodcoverage="100" />
-      <Class name="Assets.PlayerCharacter.PlayerController" coverage="100" coveredlines="23" coverablelines="23" totallines="46" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="4" methodcoverage="100" />
+    <Assembly name="PlayerCharacter" classes="7" coverage="1" coveredlines="4" coverablelines="370" totallines="1723" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="90" methodcoverage="3.3">
+      <Class name="Assets.PlayerCharacter.PlayableFighter" coverage="6.8" coveredlines="2" coverablelines="29" totallines="52" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="4" methodcoverage="25" />
+      <Class name="Assets.PlayerCharacter.PlayerAction" coverage="0" coveredlines="0" coverablelines="6" totallines="31" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="3" methodcoverage="0" />
+      <Class name="Assets.PlayerCharacter.PlayerCamera" coverage="9" coveredlines="1" coverablelines="11" totallines="33" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="7" methodcoverage="14.2" />
+      <Class name="Assets.PlayerCharacter.PlayerController" coverage="3.1" coveredlines="1" coverablelines="32" totallines="76" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="6" methodcoverage="16.6" />
       <Class name="Assets.PlayerCharacter.PlayerInventory" coverage="0" coveredlines="0" coverablelines="3" totallines="18" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="1" methodcoverage="0" />
-      <Class name="Assets.PlayerCharacter.PlayerMovement" coverage="100" coveredlines="23" coverablelines="23" totallines="49" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="6" totalmethods="6" methodcoverage="100" />
-      <Class name="InputSystemActions" coverage="15.4" coveredlines="41" coverablelines="266" totallines="1464" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="7" totalmethods="63" methodcoverage="11.1" />
+      <Class name="Assets.PlayerCharacter.PlayerMovement" coverage="0" coveredlines="0" coverablelines="23" totallines="49" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="6" methodcoverage="0" />
+      <Class name="InputSystemActions" coverage="0" coveredlines="0" coverablelines="266" totallines="1464" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="63" methodcoverage="0" />
     </Assembly>
-    <Assembly name="Tests" classes="4" coverage="98.8" coveredlines="89" coverablelines="90" totallines="194" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="16" totalmethods="16" methodcoverage="100">
-      <Class name="CameraTests" coverage="100" coveredlines="5" coverablelines="5" totallines="24" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="2" methodcoverage="100" />
-      <Class name="CharacterMovementTest" coverage="97.3" coveredlines="37" coverablelines="38" totallines="69" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="4" methodcoverage="100" />
-      <Class name="DungeonPlayability" coverage="100" coveredlines="18" coverablelines="18" totallines="42" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="4" methodcoverage="100" />
-      <Class name="GraphTests" coverage="100" coveredlines="29" coverablelines="29" totallines="59" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="6" totalmethods="6" methodcoverage="100" />
+    <Assembly name="Tests" classes="15" coverage="48.8" coveredlines="240" coverablelines="491" totallines="1013" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="50" totalmethods="76" methodcoverage="65.7">
+      <Class name="Assets.Tests.DungeonGenerator.DungeonParametersTest" coverage="70.8" coveredlines="17" coverablelines="24" totallines="54" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="3" methodcoverage="100" />
+      <Class name="CharacterMovementTest" coverage="23" coveredlines="9" coverablelines="39" totallines="71" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="4" methodcoverage="50" />
+      <Class name="DungeonComponentsTest" coverage="18.7" coveredlines="3" coverablelines="16" totallines="37" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="3" methodcoverage="33.3" />
+      <Class name="DungeonGeneratorTest" coverage="18.7" coveredlines="3" coverablelines="16" totallines="50" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="3" methodcoverage="33.3" />
+      <Class name="DungeonMasterRulesetTest" coverage="100" coveredlines="43" coverablelines="43" totallines="77" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="4" methodcoverage="100" />
+      <Class name="DungeonMasterRuleTest" coverage="100" coveredlines="20" coverablelines="20" totallines="53" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" totalmethods="5" methodcoverage="100" />
+      <Class name="DungeonMasterTests" coverage="6.1" coveredlines="4" coverablelines="65" totallines="130" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="9" methodcoverage="11.1" />
+      <Class name="DungeonPlayabilityTest" coverage="18.7" coveredlines="3" coverablelines="16" totallines="38" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="1" totalmethods="3" methodcoverage="33.3" />
+      <Class name="GameSceneManagerTests" coverage="100" coveredlines="17" coverablelines="17" totallines="41" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="3" methodcoverage="100" />
+      <Class name="GraphTests" coverage="61.7" coveredlines="55" coverablelines="89" totallines="153" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="11" totalmethods="13" methodcoverage="84.6" />
+      <Class name="PlayerCameraTests" coverage="16.6" coveredlines="9" coverablelines="54" totallines="103" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="6" methodcoverage="33.3" />
+      <Class name="PlayerControllerTests" coverage="28.5" coveredlines="4" coverablelines="14" totallines="35" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="4" methodcoverage="50" />
+      <Class name="RandomWalkTests" coverage="42.8" coveredlines="18" coverablelines="42" totallines="81" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" totalmethods="7" methodcoverage="71.4" />
+      <Class name="RuleConditionTest" coverage="100" coveredlines="18" coverablelines="18" totallines="41" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="5" totalmethods="5" methodcoverage="100" />
+      <Class name="RuleValueTest" coverage="94.4" coveredlines="17" coverablelines="18" totallines="49" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="4" totalmethods="4" methodcoverage="100" />
     </Assembly>
   </Coverage>
 </CoverageReport>

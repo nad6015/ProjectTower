@@ -16,7 +16,7 @@ namespace Assets.DungeonGenerator
         {
             _algorithms = new List<IDungeonAlgorithm>()
             {
-                new MissionGrammar(),
+                new GraphGrammar(),
                 new RandomWalk(transform)
             };
         }

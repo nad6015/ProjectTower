@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <coverage version="1">
+  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/PointUtils.cs">
+    <lineToCover lineNumber="15" covered="false" />
+    <lineToCover lineNumber="16" covered="false" />
+    <lineToCover lineNumber="17" covered="false" />
+    <lineToCover lineNumber="19" covered="false" />
+    <lineToCover lineNumber="20" covered="false" />
+    <lineToCover lineNumber="23" covered="false" />
+    <lineToCover lineNumber="24" covered="false" />
+    <lineToCover lineNumber="25" covered="false" />
+    <lineToCover lineNumber="28" covered="false" />
+    <lineToCover lineNumber="29" covered="false" />
+    <lineToCover lineNumber="30" covered="false" />
+    <lineToCover lineNumber="39" covered="false" />
+    <lineToCover lineNumber="40" covered="false" />
+    <lineToCover lineNumber="41" covered="false" />
+    <lineToCover lineNumber="42" covered="false" />
+    <lineToCover lineNumber="43" covered="false" />
+    <lineToCover lineNumber="52" covered="false" />
+    <lineToCover lineNumber="53" covered="false" />
+    <lineToCover lineNumber="54" covered="false" />
+    <lineToCover lineNumber="55" covered="false" />
+    <lineToCover lineNumber="56" covered="false" />
+  </file>
   <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Scripts/BehaviorGraphActions/AttackAction.cs">
     <lineToCover lineNumber="16" covered="false" />
     <lineToCover lineNumber="17" covered="false" />
@@ -31,38 +54,37 @@
     <lineToCover lineNumber="39" covered="false" />
     <lineToCover lineNumber="40" covered="false" />
   </file>
-  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Scripts/Character/CharacterAudioPlayer.cs">
-    <lineToCover lineNumber="14" covered="true" />
-    <lineToCover lineNumber="15" covered="true" />
-    <lineToCover lineNumber="16" covered="true" />
-    <lineToCover lineNumber="19" covered="true" />
-    <lineToCover lineNumber="21" covered="true" />
-    <lineToCover lineNumber="24" covered="true" />
-    <lineToCover lineNumber="25" covered="true" />
-    <lineToCover lineNumber="26" covered="true" />
-    <lineToCover lineNumber="27" covered="true" />
-  </file>
   <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Scripts/Enemies/EnemyController.cs">
-    <lineToCover lineNumber="9" covered="true" />
-    <lineToCover lineNumber="17" covered="true" />
-    <lineToCover lineNumber="18" covered="true" />
-    <lineToCover lineNumber="19" covered="true" />
+    <lineToCover lineNumber="11" covered="true" />
     <lineToCover lineNumber="20" covered="true" />
+    <lineToCover lineNumber="21" covered="true" />
+    <lineToCover lineNumber="22" covered="true" />
     <lineToCover lineNumber="23" covered="true" />
-    <lineToCover lineNumber="24" covered="true" />
     <lineToCover lineNumber="26" covered="true" />
     <lineToCover lineNumber="27" covered="true" />
-    <lineToCover lineNumber="28" covered="true" />
+    <lineToCover lineNumber="29" covered="true" />
     <lineToCover lineNumber="30" covered="true" />
-    <lineToCover lineNumber="45" covered="true" />
-    <lineToCover lineNumber="47" covered="true" />
-    <lineToCover lineNumber="48" covered="true" />
+    <lineToCover lineNumber="31" covered="true" />
+    <lineToCover lineNumber="33" covered="true" />
+    <lineToCover lineNumber="48" covered="false" />
+    <lineToCover lineNumber="50" covered="false" />
+    <lineToCover lineNumber="51" covered="false" />
   </file>
-  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Scripts/GameManager.cs">
-    <lineToCover lineNumber="7" covered="false" />
-    <lineToCover lineNumber="9" covered="false" />
-    <lineToCover lineNumber="13" covered="false" />
+  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/HealthBar.cs">
+    <lineToCover lineNumber="13" covered="true" />
+    <lineToCover lineNumber="14" covered="true" />
     <lineToCover lineNumber="15" covered="false" />
+    <lineToCover lineNumber="17" covered="false" />
+    <lineToCover lineNumber="18" covered="false" />
+    <lineToCover lineNumber="19" covered="false" />
+    <lineToCover lineNumber="22" covered="true" />
+    <lineToCover lineNumber="24" covered="true" />
+    <lineToCover lineNumber="25" covered="false" />
+    <lineToCover lineNumber="26" covered="false" />
+    <lineToCover lineNumber="29" covered="false" />
+    <lineToCover lineNumber="30" covered="false" />
+    <lineToCover lineNumber="31" covered="false" />
+    <lineToCover lineNumber="32" covered="false" />
   </file>
   <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/InputSystemActions.cs">
     <lineToCover lineNumber="20" covered="false" />
@@ -344,144 +366,239 @@
     <lineToCover lineNumber="33" covered="false" />
     <lineToCover lineNumber="35" covered="false" />
   </file>
-  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/TestPlayer.cs">
-    <lineToCover lineNumber="7" covered="true" />
-    <lineToCover lineNumber="9" covered="true" />
-    <lineToCover lineNumber="10" covered="true" />
-    <lineToCover lineNumber="11" covered="true" />
-    <lineToCover lineNumber="12" covered="true" />
+  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/PlayerHUD.cs">
+    <lineToCover lineNumber="14" covered="false" />
     <lineToCover lineNumber="15" covered="false" />
     <lineToCover lineNumber="16" covered="false" />
-    <lineToCover lineNumber="17" covered="false" />
     <lineToCover lineNumber="18" covered="false" />
     <lineToCover lineNumber="19" covered="false" />
     <lineToCover lineNumber="20" covered="false" />
+    <lineToCover lineNumber="23" covered="false" />
+    <lineToCover lineNumber="24" covered="false" />
+    <lineToCover lineNumber="25" covered="false" />
+    <lineToCover lineNumber="26" covered="false" />
   </file>
-  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Scripts/Combat/Fighter.cs">
-    <lineToCover lineNumber="9" covered="true" />
-    <lineToCover lineNumber="12" covered="true" />
-    <lineToCover lineNumber="17" covered="true" />
-    <lineToCover lineNumber="20" covered="true" />
-    <lineToCover lineNumber="24" covered="true" />
-    <lineToCover lineNumber="27" covered="true" />
-    <lineToCover lineNumber="30" covered="true" />
-    <lineToCover lineNumber="31" covered="true" />
-    <lineToCover lineNumber="32" covered="true" />
-    <lineToCover lineNumber="33" covered="true" />
-    <lineToCover lineNumber="34" covered="true" />
-    <lineToCover lineNumber="36" covered="true" />
+  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/RandomPatrolAction.cs">
+    <lineToCover lineNumber="19" covered="false" />
+    <lineToCover lineNumber="20" covered="false" />
+    <lineToCover lineNumber="21" covered="false" />
+    <lineToCover lineNumber="22" covered="false" />
+    <lineToCover lineNumber="24" covered="false" />
+    <lineToCover lineNumber="25" covered="false" />
+    <lineToCover lineNumber="26" covered="false" />
+    <lineToCover lineNumber="27" covered="false" />
+    <lineToCover lineNumber="30" covered="false" />
+    <lineToCover lineNumber="31" covered="false" />
+    <lineToCover lineNumber="32" covered="false" />
+    <lineToCover lineNumber="33" covered="false" />
+    <lineToCover lineNumber="36" covered="false" />
     <lineToCover lineNumber="37" covered="false" />
     <lineToCover lineNumber="38" covered="false" />
-    <lineToCover lineNumber="39" covered="false" />
-    <lineToCover lineNumber="41" covered="true" />
-    <lineToCover lineNumber="42" covered="true" />
-    <lineToCover lineNumber="43" covered="true" />
-    <lineToCover lineNumber="44" covered="true" />
-    <lineToCover lineNumber="45" covered="true" />
-    <lineToCover lineNumber="47" covered="true" />
-    <lineToCover lineNumber="48" covered="true" />
-    <lineToCover lineNumber="49" covered="true" />
-    <lineToCover lineNumber="50" covered="true" />
-    <lineToCover lineNumber="52" covered="true" />
-    <lineToCover lineNumber="55" covered="false" />
-    <lineToCover lineNumber="56" covered="false" />
+    <lineToCover lineNumber="40" covered="false" />
+    <lineToCover lineNumber="41" covered="false" />
+    <lineToCover lineNumber="42" covered="false" />
+    <lineToCover lineNumber="45" covered="false" />
+    <lineToCover lineNumber="46" covered="false" />
+    <lineToCover lineNumber="49" covered="false" />
+    <lineToCover lineNumber="52" covered="false" />
+    <lineToCover lineNumber="53" covered="false" />
+    <lineToCover lineNumber="54" covered="false" />
     <lineToCover lineNumber="57" covered="false" />
     <lineToCover lineNumber="58" covered="false" />
-    <lineToCover lineNumber="59" covered="false" />
-    <lineToCover lineNumber="60" covered="false" />
     <lineToCover lineNumber="61" covered="false" />
     <lineToCover lineNumber="62" covered="false" />
     <lineToCover lineNumber="63" covered="false" />
+  </file>
+  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/TestPlayer.cs">
+    <lineToCover lineNumber="8" covered="false" />
+    <lineToCover lineNumber="9" covered="false" />
+    <lineToCover lineNumber="10" covered="false" />
+    <lineToCover lineNumber="11" covered="false" />
+    <lineToCover lineNumber="14" covered="false" />
+    <lineToCover lineNumber="15" covered="false" />
+    <lineToCover lineNumber="16" covered="false" />
+  </file>
+  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Scripts/Combat/NpcFighter.cs">
+    <lineToCover lineNumber="8" covered="false" />
+    <lineToCover lineNumber="10" covered="false" />
+  </file>
+  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Scripts/Combat/Fighter.cs">
+    <lineToCover lineNumber="13" covered="true" />
+    <lineToCover lineNumber="16" covered="true" />
+    <lineToCover lineNumber="25" covered="true" />
+    <lineToCover lineNumber="27" covered="true" />
+    <lineToCover lineNumber="30" covered="true" />
+    <lineToCover lineNumber="31" covered="true" />
+    <lineToCover lineNumber="39" covered="true" />
+    <lineToCover lineNumber="40" covered="true" />
+    <lineToCover lineNumber="41" covered="true" />
+    <lineToCover lineNumber="43" covered="true" />
+    <lineToCover lineNumber="44" covered="true" />
+    <lineToCover lineNumber="46" covered="true" />
+    <lineToCover lineNumber="48" covered="true" />
+    <lineToCover lineNumber="49" covered="false" />
+    <lineToCover lineNumber="50" covered="false" />
+    <lineToCover lineNumber="51" covered="false" />
+    <lineToCover lineNumber="53" covered="true" />
+    <lineToCover lineNumber="54" covered="true" />
+    <lineToCover lineNumber="56" covered="true" />
+    <lineToCover lineNumber="57" covered="true" />
+    <lineToCover lineNumber="59" covered="true" />
+    <lineToCover lineNumber="62" covered="false" />
+    <lineToCover lineNumber="63" covered="false" />
+    <lineToCover lineNumber="64" covered="false" />
+    <lineToCover lineNumber="65" covered="false" />
     <lineToCover lineNumber="66" covered="false" />
     <lineToCover lineNumber="67" covered="false" />
     <lineToCover lineNumber="68" covered="false" />
-    <lineToCover lineNumber="71" covered="true" />
-    <lineToCover lineNumber="72" covered="true" />
-    <lineToCover lineNumber="73" covered="true" />
-    <lineToCover lineNumber="76" covered="true" />
-    <lineToCover lineNumber="77" covered="true" />
-    <lineToCover lineNumber="78" covered="true" />
-    <lineToCover lineNumber="79" covered="true" />
-    <lineToCover lineNumber="80" covered="true" />
-    <lineToCover lineNumber="81" covered="true" />
+    <lineToCover lineNumber="69" covered="false" />
+    <lineToCover lineNumber="70" covered="false" />
+    <lineToCover lineNumber="73" covered="false" />
+    <lineToCover lineNumber="74" covered="false" />
+    <lineToCover lineNumber="75" covered="false" />
+    <lineToCover lineNumber="76" covered="false" />
+    <lineToCover lineNumber="78" covered="false" />
+    <lineToCover lineNumber="79" covered="false" />
+    <lineToCover lineNumber="80" covered="false" />
+    <lineToCover lineNumber="81" covered="false" />
     <lineToCover lineNumber="82" covered="false" />
-    <lineToCover lineNumber="83" covered="false" />
-    <lineToCover lineNumber="84" covered="false" />
     <lineToCover lineNumber="85" covered="false" />
     <lineToCover lineNumber="86" covered="false" />
     <lineToCover lineNumber="87" covered="false" />
-    <lineToCover lineNumber="88" covered="false" />
-    <lineToCover lineNumber="89" covered="false" />
-    <lineToCover lineNumber="90" covered="true" />
-    <lineToCover lineNumber="92" covered="true" />
-    <lineToCover lineNumber="93" covered="true" />
-    <lineToCover lineNumber="94" covered="true" />
-    <lineToCover lineNumber="95" covered="true" />
+    <lineToCover lineNumber="90" covered="false" />
+    <lineToCover lineNumber="93" covered="false" />
+    <lineToCover lineNumber="94" covered="false" />
+    <lineToCover lineNumber="95" covered="false" />
     <lineToCover lineNumber="98" covered="true" />
     <lineToCover lineNumber="99" covered="true" />
     <lineToCover lineNumber="100" covered="true" />
     <lineToCover lineNumber="101" covered="true" />
     <lineToCover lineNumber="102" covered="true" />
-    <lineToCover lineNumber="104" covered="true" />
-    <lineToCover lineNumber="105" covered="true" />
-    <lineToCover lineNumber="106" covered="true" />
-    <lineToCover lineNumber="107" covered="true" />
+    <lineToCover lineNumber="103" covered="true" />
+    <lineToCover lineNumber="112" covered="false" />
+    <lineToCover lineNumber="113" covered="false" />
+    <lineToCover lineNumber="115" covered="false" />
+    <lineToCover lineNumber="116" covered="false" />
+    <lineToCover lineNumber="117" covered="false" />
+    <lineToCover lineNumber="118" covered="false" />
+    <lineToCover lineNumber="119" covered="false" />
+    <lineToCover lineNumber="122" covered="false" />
+    <lineToCover lineNumber="123" covered="false" />
+    <lineToCover lineNumber="124" covered="false" />
+    <lineToCover lineNumber="125" covered="false" />
+    <lineToCover lineNumber="126" covered="false" />
+    <lineToCover lineNumber="127" covered="false" />
+    <lineToCover lineNumber="128" covered="false" />
+    <lineToCover lineNumber="131" covered="false" />
+    <lineToCover lineNumber="132" covered="false" />
+    <lineToCover lineNumber="133" covered="false" />
+    <lineToCover lineNumber="136" covered="false" />
+    <lineToCover lineNumber="137" covered="false" />
+    <lineToCover lineNumber="138" covered="false" />
   </file>
-  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Scripts/Combat/Weapon.cs">
+  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Scripts/Combat/Resources/PickupItem.cs">
+    <lineToCover lineNumber="9" covered="false" />
+    <lineToCover lineNumber="13" covered="false" />
+    <lineToCover lineNumber="15" covered="false" />
+    <lineToCover lineNumber="16" covered="false" />
+    <lineToCover lineNumber="17" covered="false" />
+  </file>
+  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Scripts/Combat/Resources/HealingItem.cs">
+    <lineToCover lineNumber="11" covered="false" />
+    <lineToCover lineNumber="12" covered="false" />
+    <lineToCover lineNumber="13" covered="false" />
+  </file>
+  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Scripts/Combat/Resources/Weapon.cs">
     <lineToCover lineNumber="6" covered="true" />
-    <lineToCover lineNumber="9" covered="true" />
-    <lineToCover lineNumber="10" covered="true" />
-    <lineToCover lineNumber="11" covered="true" />
+    <lineToCover lineNumber="9" covered="false" />
+    <lineToCover lineNumber="10" covered="false" />
+    <lineToCover lineNumber="11" covered="false" />
   </file>
-  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Scripts/PlayerCharacter/PlayerAction.cs">
-    <lineToCover lineNumber="14" covered="true" />
+  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Scripts/PlayerCharacter/PlayableFighter.cs">
+    <lineToCover lineNumber="11" covered="true" />
     <lineToCover lineNumber="15" covered="true" />
-    <lineToCover lineNumber="16" covered="true" />
+    <lineToCover lineNumber="18" covered="false" />
     <lineToCover lineNumber="19" covered="false" />
     <lineToCover lineNumber="20" covered="false" />
     <lineToCover lineNumber="21" covered="false" />
+    <lineToCover lineNumber="24" covered="false" />
+    <lineToCover lineNumber="25" covered="false" />
+    <lineToCover lineNumber="26" covered="false" />
+    <lineToCover lineNumber="27" covered="false" />
+    <lineToCover lineNumber="28" covered="false" />
+    <lineToCover lineNumber="29" covered="false" />
+    <lineToCover lineNumber="31" covered="false" />
+    <lineToCover lineNumber="32" covered="false" />
+    <lineToCover lineNumber="33" covered="false" />
+    <lineToCover lineNumber="35" covered="false" />
+    <lineToCover lineNumber="36" covered="false" />
+    <lineToCover lineNumber="37" covered="false" />
+    <lineToCover lineNumber="40" covered="false" />
+    <lineToCover lineNumber="41" covered="false" />
+    <lineToCover lineNumber="42" covered="false" />
+    <lineToCover lineNumber="43" covered="false" />
+    <lineToCover lineNumber="44" covered="false" />
+    <lineToCover lineNumber="45" covered="false" />
+    <lineToCover lineNumber="46" covered="false" />
+    <lineToCover lineNumber="47" covered="false" />
+    <lineToCover lineNumber="48" covered="false" />
+    <lineToCover lineNumber="49" covered="false" />
+    <lineToCover lineNumber="50" covered="false" />
+  </file>
+  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Scripts/PlayerCharacter/PlayerAction.cs">
+    <lineToCover lineNumber="14" covered="false" />
+    <lineToCover lineNumber="16" covered="false" />
+    <lineToCover lineNumber="19" covered="false" />
     <lineToCover lineNumber="23" covered="false" />
-    <lineToCover lineNumber="26" covered="true" />
-    <lineToCover lineNumber="27" covered="true" />
-    <lineToCover lineNumber="28" covered="true" />
-    <lineToCover lineNumber="29" covered="true" />
+    <lineToCover lineNumber="26" covered="false" />
+    <lineToCover lineNumber="29" covered="false" />
   </file>
   <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Scripts/PlayerCharacter/PlayerCamera.cs">
-    <lineToCover lineNumber="8" covered="true" />
-    <lineToCover lineNumber="10" covered="true" />
-    <lineToCover lineNumber="12" covered="true" />
-    <lineToCover lineNumber="16" covered="true" />
-    <lineToCover lineNumber="17" covered="true" />
-    <lineToCover lineNumber="19" covered="true" />
-    <lineToCover lineNumber="20" covered="true" />
-    <lineToCover lineNumber="24" covered="true" />
-    <lineToCover lineNumber="25" covered="true" />
-    <lineToCover lineNumber="26" covered="true" />
+    <lineToCover lineNumber="9" covered="false" />
+    <lineToCover lineNumber="12" covered="false" />
+    <lineToCover lineNumber="15" covered="true" />
+    <lineToCover lineNumber="21" covered="false" />
+    <lineToCover lineNumber="22" covered="false" />
+    <lineToCover lineNumber="24" covered="false" />
+    <lineToCover lineNumber="25" covered="false" />
+    <lineToCover lineNumber="26" covered="false" />
+    <lineToCover lineNumber="29" covered="false" />
+    <lineToCover lineNumber="30" covered="false" />
+    <lineToCover lineNumber="31" covered="false" />
   </file>
   <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Scripts/PlayerCharacter/PlayerController.cs">
-    <lineToCover lineNumber="9" covered="true" />
-    <lineToCover lineNumber="16" covered="true" />
-    <lineToCover lineNumber="17" covered="true" />
-    <lineToCover lineNumber="18" covered="true" />
-    <lineToCover lineNumber="20" covered="true" />
-    <lineToCover lineNumber="21" covered="true" />
-    <lineToCover lineNumber="22" covered="true" />
-    <lineToCover lineNumber="25" covered="true" />
-    <lineToCover lineNumber="26" covered="true" />
-    <lineToCover lineNumber="27" covered="true" />
-    <lineToCover lineNumber="28" covered="true" />
-    <lineToCover lineNumber="30" covered="true" />
-    <lineToCover lineNumber="31" covered="true" />
-    <lineToCover lineNumber="32" covered="true" />
-    <lineToCover lineNumber="33" covered="true" />
-    <lineToCover lineNumber="36" covered="true" />
-    <lineToCover lineNumber="37" covered="true" />
-    <lineToCover lineNumber="38" covered="true" />
-    <lineToCover lineNumber="39" covered="true" />
-    <lineToCover lineNumber="41" covered="true" />
-    <lineToCover lineNumber="42" covered="true" />
-    <lineToCover lineNumber="43" covered="true" />
-    <lineToCover lineNumber="44" covered="true" />
+    <lineToCover lineNumber="12" covered="true" />
+    <lineToCover lineNumber="26" covered="false" />
+    <lineToCover lineNumber="27" covered="false" />
+    <lineToCover lineNumber="28" covered="false" />
+    <lineToCover lineNumber="30" covered="false" />
+    <lineToCover lineNumber="31" covered="false" />
+    <lineToCover lineNumber="32" covered="false" />
+    <lineToCover lineNumber="34" covered="false" />
+    <lineToCover lineNumber="35" covered="false" />
+    <lineToCover lineNumber="38" covered="false" />
+    <lineToCover lineNumber="39" covered="false" />
+    <lineToCover lineNumber="40" covered="false" />
+    <lineToCover lineNumber="41" covered="false" />
+    <lineToCover lineNumber="43" covered="false" />
+    <lineToCover lineNumber="44" covered="false" />
+    <lineToCover lineNumber="46" covered="false" />
+    <lineToCover lineNumber="49" covered="false" />
+    <lineToCover lineNumber="50" covered="false" />
+    <lineToCover lineNumber="51" covered="false" />
+    <lineToCover lineNumber="52" covered="false" />
+    <lineToCover lineNumber="54" covered="false" />
+    <lineToCover lineNumber="55" covered="false" />
+    <lineToCover lineNumber="57" covered="false" />
+    <lineToCover lineNumber="60" covered="false" />
+    <lineToCover lineNumber="61" covered="false" />
+    <lineToCover lineNumber="62" covered="false" />
+    <lineToCover lineNumber="65" covered="false" />
+    <lineToCover lineNumber="66" covered="false" />
+    <lineToCover lineNumber="69" covered="false" />
+    <lineToCover lineNumber="70" covered="false" />
+    <lineToCover lineNumber="71" covered="false" />
+    <lineToCover lineNumber="74" covered="false" />
   </file>
   <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Scripts/PlayerCharacter/PlayerInventory.cs">
     <lineToCover lineNumber="14" covered="false" />
@@ -489,61 +606,61 @@
     <lineToCover lineNumber="16" covered="false" />
   </file>
   <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Scripts/PlayerCharacter/PlayerMovement.cs">
-    <lineToCover lineNumber="9" covered="true" />
-    <lineToCover lineNumber="16" covered="true" />
-    <lineToCover lineNumber="17" covered="true" />
-    <lineToCover lineNumber="18" covered="true" />
-    <lineToCover lineNumber="19" covered="true" />
-    <lineToCover lineNumber="21" covered="true" />
-    <lineToCover lineNumber="22" covered="true" />
-    <lineToCover lineNumber="23" covered="true" />
-    <lineToCover lineNumber="26" covered="true" />
-    <lineToCover lineNumber="27" covered="true" />
-    <lineToCover lineNumber="28" covered="true" />
-    <lineToCover lineNumber="29" covered="true" />
-    <lineToCover lineNumber="30" covered="true" />
-    <lineToCover lineNumber="32" covered="true" />
-    <lineToCover lineNumber="35" covered="true" />
-    <lineToCover lineNumber="36" covered="true" />
-    <lineToCover lineNumber="37" covered="true" />
-    <lineToCover lineNumber="38" covered="true" />
-    <lineToCover lineNumber="41" covered="true" />
-    <lineToCover lineNumber="42" covered="true" />
-    <lineToCover lineNumber="44" covered="true" />
-    <lineToCover lineNumber="46" covered="true" />
-    <lineToCover lineNumber="47" covered="true" />
+    <lineToCover lineNumber="9" covered="false" />
+    <lineToCover lineNumber="16" covered="false" />
+    <lineToCover lineNumber="17" covered="false" />
+    <lineToCover lineNumber="18" covered="false" />
+    <lineToCover lineNumber="19" covered="false" />
+    <lineToCover lineNumber="21" covered="false" />
+    <lineToCover lineNumber="22" covered="false" />
+    <lineToCover lineNumber="23" covered="false" />
+    <lineToCover lineNumber="26" covered="false" />
+    <lineToCover lineNumber="27" covered="false" />
+    <lineToCover lineNumber="28" covered="false" />
+    <lineToCover lineNumber="29" covered="false" />
+    <lineToCover lineNumber="30" covered="false" />
+    <lineToCover lineNumber="32" covered="false" />
+    <lineToCover lineNumber="35" covered="false" />
+    <lineToCover lineNumber="36" covered="false" />
+    <lineToCover lineNumber="37" covered="false" />
+    <lineToCover lineNumber="38" covered="false" />
+    <lineToCover lineNumber="41" covered="false" />
+    <lineToCover lineNumber="42" covered="false" />
+    <lineToCover lineNumber="44" covered="false" />
+    <lineToCover lineNumber="46" covered="false" />
+    <lineToCover lineNumber="47" covered="false" />
   </file>
   <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Scripts/PlayerCharacter/InputSystemActions.cs">
-    <lineToCover lineNumber="20" covered="true" />
-    <lineToCover lineNumber="21" covered="true" />
-    <lineToCover lineNumber="22" covered="true" />
-    <lineToCover lineNumber="23" covered="true" />
-    <lineToCover lineNumber="1081" covered="true" />
-    <lineToCover lineNumber="1082" covered="true" />
-    <lineToCover lineNumber="1083" covered="true" />
-    <lineToCover lineNumber="1084" covered="true" />
-    <lineToCover lineNumber="1085" covered="true" />
-    <lineToCover lineNumber="1086" covered="true" />
-    <lineToCover lineNumber="1087" covered="true" />
-    <lineToCover lineNumber="1088" covered="true" />
-    <lineToCover lineNumber="1089" covered="true" />
-    <lineToCover lineNumber="1090" covered="true" />
-    <lineToCover lineNumber="1092" covered="true" />
-    <lineToCover lineNumber="1093" covered="true" />
-    <lineToCover lineNumber="1094" covered="true" />
-    <lineToCover lineNumber="1095" covered="true" />
-    <lineToCover lineNumber="1096" covered="true" />
-    <lineToCover lineNumber="1097" covered="true" />
-    <lineToCover lineNumber="1098" covered="true" />
-    <lineToCover lineNumber="1099" covered="true" />
-    <lineToCover lineNumber="1100" covered="true" />
-    <lineToCover lineNumber="1101" covered="true" />
-    <lineToCover lineNumber="1102" covered="true" />
-    <lineToCover lineNumber="1103" covered="true" />
-    <lineToCover lineNumber="1106" covered="true" />
-    <lineToCover lineNumber="1107" covered="true" />
-    <lineToCover lineNumber="1108" covered="true" />
-    <lineToCover lineNumber="1109" covered="true" />
+    <lineToCover lineNumber="20" covered="false" />
+    <lineToCover lineNumber="21" covered="false" />
+    <lineToCover lineNumber="22" covered="false" />
+    <lineToCover lineNumber="23" covered="false" />
+    <lineToCover lineNumber="1081" covered="false" />
+    <lineToCover lineNumber="1082" covered="false" />
+    <lineToCover lineNumber="1083" covered="false" />
+    <lineToCover lineNumber="1084" covered="false" />
+    <lineToCover lineNumber="1085" covered="false" />
+    <lineToCover lineNumber="1086" covered="false" />
+    <lineToCover lineNumber="1087" covered="false" />
+    <lineToCover lineNumber="1088" covered="false" />
+    <lineToCover lineNumber="1089" covered="false" />
+    <lineToCover lineNumber="1090" covered="false" />
+    <lineToCover lineNumber="1092" covered="false" />
+    <lineToCover lineNumber="1093" covered="false" />
+    <lineToCover lineNumber="1094" covered="false" />
+    <lineToCover lineNumber="1095" covered="false" />
+    <lineToCover lineNumber="1096" covered="false" />
+    <lineToCover lineNumber="1097" covered="false" />
+    <lineToCover lineNumber="1098" covered="false" />
+    <lineToCover lineNumber="1099" covered="false" />
+    <lineToCover lineNumber="1100" covered="false" />
+    <lineToCover lineNumber="1101" covered="false" />
+    <lineToCover lineNumber="1102" covered="false" />
+    <lineToCover lineNumber="1103" covered="false" />
+    <lineToCover lineNumber="1106" covered="false" />
+    <lineToCover lineNumber="1107" covered="false" />
+    <lineToCover lineNumber="1108" covered="false" />
+    <lineToCover lineNumber="1109" covered="false" />
     <lineToCover lineNumber="1112" covered="false" />
     <lineToCover lineNumber="1113" covered="false" />
     <lineToCover lineNumber="1114" covered="false" />
@@ -574,11 +691,11 @@
     <lineToCover lineNumber="1163" covered="false" />
     <lineToCover lineNumber="1164" covered="false" />
     <lineToCover lineNumber="1165" covered="false" />
-    <lineToCover lineNumber="1169" covered="true" />
-    <lineToCover lineNumber="1182" covered="true" />
-    <lineToCover lineNumber="1183" covered="true" />
+    <lineToCover lineNumber="1169" covered="false" />
+    <lineToCover lineNumber="1182" covered="false" />
+    <lineToCover lineNumber="1183" covered="false" />
     <lineToCover lineNumber="1184" covered="false" />
-    <lineToCover lineNumber="1185" covered="true" />
+    <lineToCover lineNumber="1185" covered="false" />
     <lineToCover lineNumber="1186" covered="false" />
     <lineToCover lineNumber="1187" covered="false" />
     <lineToCover lineNumber="1188" covered="false" />
@@ -660,8 +777,8 @@
     <lineToCover lineNumber="1271" covered="false" />
     <lineToCover lineNumber="1272" covered="false" />
     <lineToCover lineNumber="1273" covered="false" />
-    <lineToCover lineNumber="1275" covered="true" />
-    <lineToCover lineNumber="1279" covered="true" />
+    <lineToCover lineNumber="1275" covered="false" />
+    <lineToCover lineNumber="1279" covered="false" />
     <lineToCover lineNumber="1293" covered="false" />
     <lineToCover lineNumber="1294" covered="false" />
     <lineToCover lineNumber="1295" covered="false" />
@@ -755,88 +872,144 @@
     <lineToCover lineNumber="1390" covered="false" />
     <lineToCover lineNumber="1391" covered="false" />
     <lineToCover lineNumber="1393" covered="false" />
-    <lineToCover lineNumber="1394" covered="true" />
+    <lineToCover lineNumber="1394" covered="false" />
     <lineToCover lineNumber="1398" covered="false" />
     <lineToCover lineNumber="1399" covered="false" />
     <lineToCover lineNumber="1400" covered="false" />
     <lineToCover lineNumber="1401" covered="false" />
-    <lineToCover lineNumber="1403" covered="true" />
+    <lineToCover lineNumber="1403" covered="false" />
     <lineToCover lineNumber="1407" covered="false" />
     <lineToCover lineNumber="1408" covered="false" />
     <lineToCover lineNumber="1409" covered="false" />
     <lineToCover lineNumber="1410" covered="false" />
-    <lineToCover lineNumber="1412" covered="true" />
+    <lineToCover lineNumber="1412" covered="false" />
     <lineToCover lineNumber="1416" covered="false" />
     <lineToCover lineNumber="1417" covered="false" />
     <lineToCover lineNumber="1418" covered="false" />
     <lineToCover lineNumber="1419" covered="false" />
-    <lineToCover lineNumber="1421" covered="true" />
+    <lineToCover lineNumber="1421" covered="false" />
     <lineToCover lineNumber="1425" covered="false" />
     <lineToCover lineNumber="1426" covered="false" />
     <lineToCover lineNumber="1427" covered="false" />
     <lineToCover lineNumber="1428" covered="false" />
-    <lineToCover lineNumber="1430" covered="true" />
+    <lineToCover lineNumber="1430" covered="false" />
     <lineToCover lineNumber="1434" covered="false" />
     <lineToCover lineNumber="1435" covered="false" />
     <lineToCover lineNumber="1436" covered="false" />
     <lineToCover lineNumber="1437" covered="false" />
   </file>
-  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/CameraTests.cs">
-    <lineToCover lineNumber="11" covered="true" />
-    <lineToCover lineNumber="13" covered="true" />
-    <lineToCover lineNumber="19" covered="true" />
+  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonGenerator/DungeonParametersTest.cs">
+    <lineToCover lineNumber="16" covered="true" />
+    <lineToCover lineNumber="17" covered="true" />
+    <lineToCover lineNumber="18" covered="true" />
     <lineToCover lineNumber="22" covered="true" />
     <lineToCover lineNumber="23" covered="true" />
+    <lineToCover lineNumber="24" covered="true" />
+    <lineToCover lineNumber="26" covered="true" />
+    <lineToCover lineNumber="28" covered="true" />
+    <lineToCover lineNumber="29" covered="true" />
+    <lineToCover lineNumber="31" covered="true" />
+    <lineToCover lineNumber="32" covered="true" />
+    <lineToCover lineNumber="33" covered="true" />
+    <lineToCover lineNumber="37" covered="true" />
+    <lineToCover lineNumber="38" covered="true" />
+    <lineToCover lineNumber="39" covered="true" />
+    <lineToCover lineNumber="41" covered="true" />
+    <lineToCover lineNumber="42" covered="true" />
+    <lineToCover lineNumber="44" covered="false" />
+    <lineToCover lineNumber="45" covered="false" />
+    <lineToCover lineNumber="47" covered="false" />
+    <lineToCover lineNumber="48" covered="false" />
+    <lineToCover lineNumber="50" covered="false" />
+    <lineToCover lineNumber="51" covered="false" />
+    <lineToCover lineNumber="52" covered="false" />
   </file>
-  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/CharacterMovementTest.cs">
-    <lineToCover lineNumber="12" covered="true" />
+  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/PlayerCharacter/CharacterMovementTest.cs">
+    <lineToCover lineNumber="11" covered="true" />
+    <lineToCover lineNumber="17" covered="true" />
     <lineToCover lineNumber="18" covered="true" />
     <lineToCover lineNumber="19" covered="true" />
     <lineToCover lineNumber="20" covered="true" />
     <lineToCover lineNumber="21" covered="true" />
-    <lineToCover lineNumber="22" covered="true" />
+    <lineToCover lineNumber="23" covered="true" />
     <lineToCover lineNumber="24" covered="true" />
     <lineToCover lineNumber="25" covered="true" />
-    <lineToCover lineNumber="26" covered="true" />
-    <lineToCover lineNumber="30" covered="true" />
-    <lineToCover lineNumber="31" covered="true" />
-    <lineToCover lineNumber="32" covered="true" />
-    <lineToCover lineNumber="33" covered="true" />
-    <lineToCover lineNumber="34" covered="true" />
-    <lineToCover lineNumber="35" covered="true" />
-    <lineToCover lineNumber="36" covered="true" />
-    <lineToCover lineNumber="37" covered="true" />
-    <lineToCover lineNumber="39" covered="true" />
-    <lineToCover lineNumber="40" covered="true" />
-    <lineToCover lineNumber="42" covered="true" />
-    <lineToCover lineNumber="43" covered="true" />
-    <lineToCover lineNumber="44" covered="true" />
-    <lineToCover lineNumber="45" covered="true" />
-    <lineToCover lineNumber="46" covered="true" />
-    <lineToCover lineNumber="47" covered="true" />
-    <lineToCover lineNumber="49" covered="true" />
-    <lineToCover lineNumber="50" covered="true" />
-    <lineToCover lineNumber="51" covered="true" />
-    <lineToCover lineNumber="55" covered="true" />
-    <lineToCover lineNumber="56" covered="true" />
-    <lineToCover lineNumber="57" covered="true" />
-    <lineToCover lineNumber="59" covered="true" />
-    <lineToCover lineNumber="61" covered="true" />
-    <lineToCover lineNumber="62" covered="true" />
-    <lineToCover lineNumber="63" covered="true" />
-    <lineToCover lineNumber="64" covered="true" />
-    <lineToCover lineNumber="67" covered="true" />
-    <lineToCover lineNumber="68" covered="false" />
+    <lineToCover lineNumber="29" covered="false" />
+    <lineToCover lineNumber="30" covered="false" />
+    <lineToCover lineNumber="32" covered="false" />
+    <lineToCover lineNumber="33" covered="false" />
+    <lineToCover lineNumber="35" covered="false" />
+    <lineToCover lineNumber="36" covered="false" />
+    <lineToCover lineNumber="37" covered="false" />
+    <lineToCover lineNumber="38" covered="false" />
+    <lineToCover lineNumber="39" covered="false" />
+    <lineToCover lineNumber="40" covered="false" />
+    <lineToCover lineNumber="42" covered="false" />
+    <lineToCover lineNumber="44" covered="false" />
+    <lineToCover lineNumber="45" covered="false" />
+    <lineToCover lineNumber="46" covered="false" />
+    <lineToCover lineNumber="47" covered="false" />
+    <lineToCover lineNumber="48" covered="false" />
+    <lineToCover lineNumber="49" covered="false" />
+    <lineToCover lineNumber="51" covered="false" />
+    <lineToCover lineNumber="52" covered="false" />
+    <lineToCover lineNumber="53" covered="false" />
+    <lineToCover lineNumber="57" covered="false" />
+    <lineToCover lineNumber="58" covered="false" />
+    <lineToCover lineNumber="59" covered="false" />
+    <lineToCover lineNumber="61" covered="false" />
+    <lineToCover lineNumber="63" covered="false" />
+    <lineToCover lineNumber="64" covered="false" />
+    <lineToCover lineNumber="65" covered="false" />
+    <lineToCover lineNumber="66" covered="false" />
+    <lineToCover lineNumber="69" covered="false" />
+    <lineToCover lineNumber="70" covered="false" />
   </file>
-  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonPlayabilityTest.cs">
-    <lineToCover lineNumber="11" covered="true" />
+  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonGenerator/DungeonComponentsTest.cs">
+    <lineToCover lineNumber="13" covered="true" />
+    <lineToCover lineNumber="14" covered="true" />
+    <lineToCover lineNumber="15" covered="true" />
+    <lineToCover lineNumber="19" covered="false" />
+    <lineToCover lineNumber="20" covered="false" />
+    <lineToCover lineNumber="21" covered="false" />
+    <lineToCover lineNumber="22" covered="false" />
+    <lineToCover lineNumber="25" covered="false" />
+    <lineToCover lineNumber="26" covered="false" />
+    <lineToCover lineNumber="27" covered="false" />
+    <lineToCover lineNumber="29" covered="false" />
+    <lineToCover lineNumber="30" covered="false" />
+    <lineToCover lineNumber="31" covered="false" />
+    <lineToCover lineNumber="34" covered="false" />
+    <lineToCover lineNumber="35" covered="false" />
+    <lineToCover lineNumber="36" covered="false" />
+  </file>
+  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonGenerator/DungeonGeneratorTest.cs">
     <lineToCover lineNumber="14" covered="true" />
     <lineToCover lineNumber="15" covered="true" />
     <lineToCover lineNumber="16" covered="true" />
+    <lineToCover lineNumber="20" covered="false" />
+    <lineToCover lineNumber="29" covered="false" />
+    <lineToCover lineNumber="30" covered="false" />
+    <lineToCover lineNumber="31" covered="false" />
+    <lineToCover lineNumber="35" covered="false" />
+    <lineToCover lineNumber="36" covered="false" />
+    <lineToCover lineNumber="39" covered="false" />
+    <lineToCover lineNumber="40" covered="false" />
+    <lineToCover lineNumber="42" covered="false" />
+    <lineToCover lineNumber="44" covered="false" />
+    <lineToCover lineNumber="47" covered="false" />
+    <lineToCover lineNumber="48" covered="false" />
+    <lineToCover lineNumber="49" covered="false" />
+  </file>
+  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonMaster/DungeonMasterRulesetTest.cs">
+    <lineToCover lineNumber="15" covered="true" />
+    <lineToCover lineNumber="16" covered="true" />
     <lineToCover lineNumber="17" covered="true" />
+    <lineToCover lineNumber="21" covered="true" />
+    <lineToCover lineNumber="22" covered="true" />
+    <lineToCover lineNumber="23" covered="true" />
     <lineToCover lineNumber="24" covered="true" />
     <lineToCover lineNumber="25" covered="true" />
-    <lineToCover lineNumber="26" covered="true" />
     <lineToCover lineNumber="29" covered="true" />
     <lineToCover lineNumber="30" covered="true" />
     <lineToCover lineNumber="31" covered="true" />
@@ -844,31 +1017,182 @@
     <lineToCover lineNumber="33" covered="true" />
     <lineToCover lineNumber="34" covered="true" />
     <lineToCover lineNumber="35" covered="true" />
+    <lineToCover lineNumber="36" covered="true" />
     <lineToCover lineNumber="38" covered="true" />
     <lineToCover lineNumber="40" covered="true" />
     <lineToCover lineNumber="41" covered="true" />
+    <lineToCover lineNumber="42" covered="true" />
+    <lineToCover lineNumber="43" covered="true" />
+    <lineToCover lineNumber="44" covered="true" />
+    <lineToCover lineNumber="45" covered="true" />
+    <lineToCover lineNumber="47" covered="true" />
+    <lineToCover lineNumber="49" covered="true" />
+    <lineToCover lineNumber="51" covered="true" />
+    <lineToCover lineNumber="52" covered="true" />
+    <lineToCover lineNumber="54" covered="true" />
+    <lineToCover lineNumber="55" covered="true" />
+    <lineToCover lineNumber="56" covered="true" />
+    <lineToCover lineNumber="57" covered="true" />
+    <lineToCover lineNumber="61" covered="true" />
+    <lineToCover lineNumber="62" covered="true" />
+    <lineToCover lineNumber="63" covered="true" />
+    <lineToCover lineNumber="65" covered="true" />
+    <lineToCover lineNumber="66" covered="true" />
+    <lineToCover lineNumber="68" covered="true" />
+    <lineToCover lineNumber="69" covered="true" />
+    <lineToCover lineNumber="71" covered="true" />
+    <lineToCover lineNumber="72" covered="true" />
+    <lineToCover lineNumber="74" covered="true" />
+    <lineToCover lineNumber="75" covered="true" />
+    <lineToCover lineNumber="76" covered="true" />
+  </file>
+  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonMaster/DungeonMasterRuleTest.cs">
+    <lineToCover lineNumber="11" covered="true" />
+    <lineToCover lineNumber="12" covered="true" />
+    <lineToCover lineNumber="18" covered="true" />
+    <lineToCover lineNumber="24" covered="true" />
+    <lineToCover lineNumber="25" covered="true" />
+    <lineToCover lineNumber="29" covered="true" />
+    <lineToCover lineNumber="30" covered="true" />
+    <lineToCover lineNumber="31" covered="true" />
+    <lineToCover lineNumber="35" covered="true" />
+    <lineToCover lineNumber="36" covered="true" />
+    <lineToCover lineNumber="37" covered="true" />
+    <lineToCover lineNumber="41" covered="true" />
+    <lineToCover lineNumber="42" covered="true" />
+    <lineToCover lineNumber="43" covered="true" />
+    <lineToCover lineNumber="44" covered="true" />
+    <lineToCover lineNumber="45" covered="true" />
+    <lineToCover lineNumber="49" covered="true" />
+    <lineToCover lineNumber="50" covered="true" />
+    <lineToCover lineNumber="51" covered="true" />
+    <lineToCover lineNumber="52" covered="true" />
+  </file>
+  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonMaster/DungeonMasterTests.cs">
+    <lineToCover lineNumber="19" covered="true" />
+    <lineToCover lineNumber="20" covered="true" />
+    <lineToCover lineNumber="21" covered="true" />
+    <lineToCover lineNumber="22" covered="true" />
+    <lineToCover lineNumber="26" covered="false" />
+    <lineToCover lineNumber="27" covered="false" />
+    <lineToCover lineNumber="29" covered="false" />
+    <lineToCover lineNumber="31" covered="false" />
+    <lineToCover lineNumber="32" covered="false" />
+    <lineToCover lineNumber="34" covered="false" />
+    <lineToCover lineNumber="36" covered="false" />
+    <lineToCover lineNumber="37" covered="false" />
+    <lineToCover lineNumber="41" covered="false" />
+    <lineToCover lineNumber="42" covered="false" />
+    <lineToCover lineNumber="44" covered="false" />
+    <lineToCover lineNumber="45" covered="false" />
+    <lineToCover lineNumber="47" covered="false" />
+    <lineToCover lineNumber="49" covered="false" />
+    <lineToCover lineNumber="51" covered="false" />
+    <lineToCover lineNumber="52" covered="false" />
+    <lineToCover lineNumber="54" covered="false" />
+    <lineToCover lineNumber="56" covered="false" />
+    <lineToCover lineNumber="58" covered="false" />
+    <lineToCover lineNumber="59" covered="false" />
+    <lineToCover lineNumber="60" covered="false" />
+    <lineToCover lineNumber="61" covered="false" />
+    <lineToCover lineNumber="63" covered="false" />
+    <lineToCover lineNumber="65" covered="false" />
+    <lineToCover lineNumber="66" covered="false" />
+    <lineToCover lineNumber="68" covered="false" />
+    <lineToCover lineNumber="69" covered="false" />
+    <lineToCover lineNumber="71" covered="false" />
+    <lineToCover lineNumber="72" covered="false" />
+    <lineToCover lineNumber="73" covered="false" />
+    <lineToCover lineNumber="74" covered="false" />
+    <lineToCover lineNumber="78" covered="false" />
+    <lineToCover lineNumber="79" covered="false" />
+    <lineToCover lineNumber="81" covered="false" />
+    <lineToCover lineNumber="83" covered="false" />
+    <lineToCover lineNumber="85" covered="false" />
+    <lineToCover lineNumber="87" covered="false" />
+    <lineToCover lineNumber="89" covered="false" />
+    <lineToCover lineNumber="90" covered="false" />
+    <lineToCover lineNumber="94" covered="false" />
+    <lineToCover lineNumber="95" covered="false" />
+    <lineToCover lineNumber="96" covered="false" />
+    <lineToCover lineNumber="97" covered="false" />
+    <lineToCover lineNumber="101" covered="false" />
+    <lineToCover lineNumber="102" covered="false" />
+    <lineToCover lineNumber="103" covered="false" />
+    <lineToCover lineNumber="104" covered="false" />
+    <lineToCover lineNumber="108" covered="false" />
+    <lineToCover lineNumber="109" covered="false" />
+    <lineToCover lineNumber="110" covered="false" />
+    <lineToCover lineNumber="111" covered="false" />
+    <lineToCover lineNumber="115" covered="false" />
+    <lineToCover lineNumber="116" covered="false" />
+    <lineToCover lineNumber="120" covered="false" />
+    <lineToCover lineNumber="121" covered="false" />
+    <lineToCover lineNumber="122" covered="false" />
+    <lineToCover lineNumber="125" covered="false" />
+    <lineToCover lineNumber="126" covered="false" />
+    <lineToCover lineNumber="127" covered="false" />
+    <lineToCover lineNumber="128" covered="false" />
+    <lineToCover lineNumber="129" covered="false" />
+  </file>
+  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonGenerator/DungeonPlayabilityTest.cs">
+    <lineToCover lineNumber="13" covered="true" />
+    <lineToCover lineNumber="14" covered="true" />
+    <lineToCover lineNumber="15" covered="true" />
+    <lineToCover lineNumber="20" covered="false" />
+    <lineToCover lineNumber="21" covered="false" />
+    <lineToCover lineNumber="22" covered="false" />
+    <lineToCover lineNumber="23" covered="false" />
+    <lineToCover lineNumber="26" covered="false" />
+    <lineToCover lineNumber="27" covered="false" />
+    <lineToCover lineNumber="28" covered="false" />
+    <lineToCover lineNumber="30" covered="false" />
+    <lineToCover lineNumber="31" covered="false" />
+    <lineToCover lineNumber="32" covered="false" />
+    <lineToCover lineNumber="35" covered="false" />
+    <lineToCover lineNumber="36" covered="false" />
+    <lineToCover lineNumber="37" covered="false" />
+  </file>
+  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/GameSceneManagerTests.cs">
+    <lineToCover lineNumber="15" covered="true" />
+    <lineToCover lineNumber="16" covered="true" />
+    <lineToCover lineNumber="17" covered="true" />
+    <lineToCover lineNumber="18" covered="true" />
+    <lineToCover lineNumber="22" covered="true" />
+    <lineToCover lineNumber="23" covered="true" />
+    <lineToCover lineNumber="24" covered="true" />
+    <lineToCover lineNumber="25" covered="true" />
+    <lineToCover lineNumber="27" covered="true" />
+    <lineToCover lineNumber="28" covered="true" />
+    <lineToCover lineNumber="32" covered="true" />
+    <lineToCover lineNumber="33" covered="true" />
+    <lineToCover lineNumber="34" covered="true" />
+    <lineToCover lineNumber="35" covered="true" />
+    <lineToCover lineNumber="37" covered="true" />
+    <lineToCover lineNumber="39" covered="true" />
+    <lineToCover lineNumber="40" covered="true" />
   </file>
   <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/GraphTests.cs">
-    <lineToCover lineNumber="9" covered="true" />
-    <lineToCover lineNumber="13" covered="true" />
-    <lineToCover lineNumber="17" covered="true" />
+    <lineToCover lineNumber="10" covered="true" />
+    <lineToCover lineNumber="14" covered="true" />
     <lineToCover lineNumber="18" covered="true" />
     <lineToCover lineNumber="19" covered="true" />
     <lineToCover lineNumber="20" covered="true" />
-    <lineToCover lineNumber="24" covered="true" />
+    <lineToCover lineNumber="21" covered="true" />
     <lineToCover lineNumber="25" covered="true" />
     <lineToCover lineNumber="26" covered="true" />
     <lineToCover lineNumber="27" covered="true" />
     <lineToCover lineNumber="28" covered="true" />
     <lineToCover lineNumber="29" covered="true" />
-    <lineToCover lineNumber="33" covered="true" />
+    <lineToCover lineNumber="30" covered="true" />
     <lineToCover lineNumber="34" covered="true" />
-    <lineToCover lineNumber="36" covered="true" />
+    <lineToCover lineNumber="35" covered="true" />
     <lineToCover lineNumber="37" covered="true" />
     <lineToCover lineNumber="38" covered="true" />
-    <lineToCover lineNumber="40" covered="true" />
+    <lineToCover lineNumber="39" covered="true" />
     <lineToCover lineNumber="41" covered="true" />
     <lineToCover lineNumber="42" covered="true" />
+    <lineToCover lineNumber="43" covered="true" />
     <lineToCover lineNumber="44" covered="true" />
     <lineToCover lineNumber="48" covered="true" />
     <lineToCover lineNumber="49" covered="true" />
@@ -878,5 +1202,221 @@
     <lineToCover lineNumber="56" covered="true" />
     <lineToCover lineNumber="57" covered="true" />
     <lineToCover lineNumber="58" covered="true" />
+    <lineToCover lineNumber="62" covered="true" />
+    <lineToCover lineNumber="63" covered="true" />
+    <lineToCover lineNumber="64" covered="true" />
+    <lineToCover lineNumber="66" covered="true" />
+    <lineToCover lineNumber="67" covered="true" />
+    <lineToCover lineNumber="68" covered="true" />
+    <lineToCover lineNumber="70" covered="true" />
+    <lineToCover lineNumber="71" covered="true" />
+    <lineToCover lineNumber="75" covered="true" />
+    <lineToCover lineNumber="76" covered="true" />
+    <lineToCover lineNumber="78" covered="true" />
+    <lineToCover lineNumber="79" covered="true" />
+    <lineToCover lineNumber="83" covered="true" />
+    <lineToCover lineNumber="84" covered="true" />
+    <lineToCover lineNumber="86" covered="true" />
+    <lineToCover lineNumber="88" covered="true" />
+    <lineToCover lineNumber="90" covered="true" />
+    <lineToCover lineNumber="92" covered="true" />
+    <lineToCover lineNumber="94" covered="true" />
+    <lineToCover lineNumber="95" covered="true" />
+    <lineToCover lineNumber="100" covered="true" />
+    <lineToCover lineNumber="101" covered="true" />
+    <lineToCover lineNumber="102" covered="true" />
+    <lineToCover lineNumber="107" covered="true" />
+    <lineToCover lineNumber="108" covered="true" />
+    <lineToCover lineNumber="109" covered="true" />
+    <lineToCover lineNumber="112" covered="false" />
+    <lineToCover lineNumber="113" covered="false" />
+    <lineToCover lineNumber="114" covered="false" />
+    <lineToCover lineNumber="116" covered="false" />
+    <lineToCover lineNumber="117" covered="false" />
+    <lineToCover lineNumber="119" covered="false" />
+    <lineToCover lineNumber="120" covered="false" />
+    <lineToCover lineNumber="121" covered="false" />
+    <lineToCover lineNumber="122" covered="false" />
+    <lineToCover lineNumber="123" covered="false" />
+    <lineToCover lineNumber="124" covered="false" />
+    <lineToCover lineNumber="125" covered="false" />
+    <lineToCover lineNumber="126" covered="false" />
+    <lineToCover lineNumber="128" covered="false" />
+    <lineToCover lineNumber="129" covered="false" />
+    <lineToCover lineNumber="130" covered="false" />
+    <lineToCover lineNumber="131" covered="false" />
+    <lineToCover lineNumber="134" covered="false" />
+    <lineToCover lineNumber="135" covered="false" />
+    <lineToCover lineNumber="136" covered="false" />
+    <lineToCover lineNumber="137" covered="false" />
+    <lineToCover lineNumber="138" covered="false" />
+    <lineToCover lineNumber="140" covered="false" />
+    <lineToCover lineNumber="141" covered="false" />
+    <lineToCover lineNumber="142" covered="false" />
+    <lineToCover lineNumber="143" covered="false" />
+    <lineToCover lineNumber="144" covered="false" />
+    <lineToCover lineNumber="145" covered="false" />
+    <lineToCover lineNumber="146" covered="false" />
+    <lineToCover lineNumber="147" covered="false" />
+    <lineToCover lineNumber="149" covered="false" />
+    <lineToCover lineNumber="150" covered="false" />
+    <lineToCover lineNumber="151" covered="false" />
+    <lineToCover lineNumber="152" covered="false" />
+  </file>
+  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/PlayerCharacter/PlayerCameraTests.cs">
+    <lineToCover lineNumber="12" covered="true" />
+    <lineToCover lineNumber="19" covered="true" />
+    <lineToCover lineNumber="20" covered="true" />
+    <lineToCover lineNumber="21" covered="true" />
+    <lineToCover lineNumber="22" covered="true" />
+    <lineToCover lineNumber="23" covered="true" />
+    <lineToCover lineNumber="25" covered="true" />
+    <lineToCover lineNumber="26" covered="true" />
+    <lineToCover lineNumber="27" covered="true" />
+    <lineToCover lineNumber="31" covered="false" />
+    <lineToCover lineNumber="32" covered="false" />
+    <lineToCover lineNumber="34" covered="false" />
+    <lineToCover lineNumber="35" covered="false" />
+    <lineToCover lineNumber="37" covered="false" />
+    <lineToCover lineNumber="38" covered="false" />
+    <lineToCover lineNumber="40" covered="false" />
+    <lineToCover lineNumber="42" covered="false" />
+    <lineToCover lineNumber="43" covered="false" />
+    <lineToCover lineNumber="44" covered="false" />
+    <lineToCover lineNumber="46" covered="false" />
+    <lineToCover lineNumber="47" covered="false" />
+    <lineToCover lineNumber="51" covered="false" />
+    <lineToCover lineNumber="52" covered="false" />
+    <lineToCover lineNumber="54" covered="false" />
+    <lineToCover lineNumber="55" covered="false" />
+    <lineToCover lineNumber="57" covered="false" />
+    <lineToCover lineNumber="59" covered="false" />
+    <lineToCover lineNumber="61" covered="false" />
+    <lineToCover lineNumber="62" covered="false" />
+    <lineToCover lineNumber="63" covered="false" />
+    <lineToCover lineNumber="65" covered="false" />
+    <lineToCover lineNumber="70" covered="false" />
+    <lineToCover lineNumber="72" covered="false" />
+    <lineToCover lineNumber="73" covered="false" />
+    <lineToCover lineNumber="75" covered="false" />
+    <lineToCover lineNumber="76" covered="false" />
+    <lineToCover lineNumber="79" covered="false" />
+    <lineToCover lineNumber="80" covered="false" />
+    <lineToCover lineNumber="81" covered="false" />
+    <lineToCover lineNumber="83" covered="false" />
+    <lineToCover lineNumber="84" covered="false" />
+    <lineToCover lineNumber="88" covered="false" />
+    <lineToCover lineNumber="89" covered="false" />
+    <lineToCover lineNumber="90" covered="false" />
+    <lineToCover lineNumber="91" covered="false" />
+    <lineToCover lineNumber="92" covered="false" />
+    <lineToCover lineNumber="95" covered="false" />
+    <lineToCover lineNumber="96" covered="false" />
+    <lineToCover lineNumber="97" covered="false" />
+    <lineToCover lineNumber="98" covered="false" />
+    <lineToCover lineNumber="99" covered="false" />
+    <lineToCover lineNumber="100" covered="false" />
+    <lineToCover lineNumber="101" covered="false" />
+    <lineToCover lineNumber="102" covered="false" />
+  </file>
+  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/PlayerCharacter/PlayerControllerTests.cs">
+    <lineToCover lineNumber="10" covered="true" />
+    <lineToCover lineNumber="16" covered="true" />
+    <lineToCover lineNumber="17" covered="true" />
+    <lineToCover lineNumber="18" covered="true" />
+    <lineToCover lineNumber="22" covered="false" />
+    <lineToCover lineNumber="23" covered="false" />
+    <lineToCover lineNumber="25" covered="false" />
+    <lineToCover lineNumber="26" covered="false" />
+    <lineToCover lineNumber="27" covered="false" />
+    <lineToCover lineNumber="30" covered="false" />
+    <lineToCover lineNumber="31" covered="false" />
+    <lineToCover lineNumber="32" covered="false" />
+    <lineToCover lineNumber="33" covered="false" />
+    <lineToCover lineNumber="34" covered="false" />
+  </file>
+  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonGenerator/RandomWalkAlgorithmTests.cs">
+    <lineToCover lineNumber="14" covered="true" />
+    <lineToCover lineNumber="15" covered="true" />
+    <lineToCover lineNumber="19" covered="true" />
+    <lineToCover lineNumber="20" covered="true" />
+    <lineToCover lineNumber="21" covered="true" />
+    <lineToCover lineNumber="25" covered="false" />
+    <lineToCover lineNumber="26" covered="false" />
+    <lineToCover lineNumber="27" covered="false" />
+    <lineToCover lineNumber="28" covered="false" />
+    <lineToCover lineNumber="30" covered="false" />
+    <lineToCover lineNumber="31" covered="false" />
+    <lineToCover lineNumber="33" covered="false" />
+    <lineToCover lineNumber="35" covered="false" />
+    <lineToCover lineNumber="36" covered="false" />
+    <lineToCover lineNumber="38" covered="false" />
+    <lineToCover lineNumber="39" covered="false" />
+    <lineToCover lineNumber="40" covered="false" />
+    <lineToCover lineNumber="44" covered="true" />
+    <lineToCover lineNumber="45" covered="true" />
+    <lineToCover lineNumber="47" covered="false" />
+    <lineToCover lineNumber="48" covered="false" />
+    <lineToCover lineNumber="50" covered="false" />
+    <lineToCover lineNumber="51" covered="false" />
+    <lineToCover lineNumber="52" covered="false" />
+    <lineToCover lineNumber="55" covered="true" />
+    <lineToCover lineNumber="56" covered="true" />
+    <lineToCover lineNumber="57" covered="true" />
+    <lineToCover lineNumber="59" covered="true" />
+    <lineToCover lineNumber="60" covered="true" />
+    <lineToCover lineNumber="62" covered="true" />
+    <lineToCover lineNumber="63" covered="true" />
+    <lineToCover lineNumber="64" covered="true" />
+    <lineToCover lineNumber="66" covered="false" />
+    <lineToCover lineNumber="67" covered="false" />
+    <lineToCover lineNumber="70" covered="true" />
+    <lineToCover lineNumber="71" covered="true" />
+    <lineToCover lineNumber="72" covered="true" />
+    <lineToCover lineNumber="75" covered="false" />
+    <lineToCover lineNumber="76" covered="false" />
+    <lineToCover lineNumber="78" covered="false" />
+    <lineToCover lineNumber="79" covered="false" />
+    <lineToCover lineNumber="80" covered="false" />
+  </file>
+  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonMaster/RuleConditionTest.cs">
+    <lineToCover lineNumber="11" covered="true" />
+    <lineToCover lineNumber="12" covered="true" />
+    <lineToCover lineNumber="13" covered="true" />
+    <lineToCover lineNumber="17" covered="true" />
+    <lineToCover lineNumber="18" covered="true" />
+    <lineToCover lineNumber="19" covered="true" />
+    <lineToCover lineNumber="23" covered="true" />
+    <lineToCover lineNumber="24" covered="true" />
+    <lineToCover lineNumber="25" covered="true" />
+    <lineToCover lineNumber="29" covered="true" />
+    <lineToCover lineNumber="30" covered="true" />
+    <lineToCover lineNumber="31" covered="true" />
+    <lineToCover lineNumber="32" covered="true" />
+    <lineToCover lineNumber="36" covered="true" />
+    <lineToCover lineNumber="37" covered="true" />
+    <lineToCover lineNumber="38" covered="true" />
+    <lineToCover lineNumber="39" covered="true" />
+    <lineToCover lineNumber="40" covered="true" />
+  </file>
+  <file path="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonMaster/RuleValueTest.cs">
+    <lineToCover lineNumber="12" covered="true" />
+    <lineToCover lineNumber="13" covered="true" />
+    <lineToCover lineNumber="19" covered="true" />
+    <lineToCover lineNumber="20" covered="true" />
+    <lineToCover lineNumber="24" covered="true" />
+    <lineToCover lineNumber="25" covered="true" />
+    <lineToCover lineNumber="26" covered="true" />
+    <lineToCover lineNumber="27" covered="true" />
+    <lineToCover lineNumber="31" covered="true" />
+    <lineToCover lineNumber="32" covered="true" />
+    <lineToCover lineNumber="33" covered="true" />
+    <lineToCover lineNumber="34" covered="true" />
+    <lineToCover lineNumber="38" covered="true" />
+    <lineToCover lineNumber="39" covered="true" />
+    <lineToCover lineNumber="45" covered="true" />
+    <lineToCover lineNumber="46" covered="true" />
+    <lineToCover lineNumber="47" covered="true" />
+    <lineToCover lineNumber="48" covered="false" />
   </file>
 </coverage>

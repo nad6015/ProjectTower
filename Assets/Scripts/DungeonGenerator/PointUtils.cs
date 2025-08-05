@@ -11,10 +11,10 @@ namespace Assets.DungeonGenerator
         /// <param name="minSize">min size</param>
         /// <param name="maxSize">max size</param>
         /// <returns>a random size</returns>
-        public static Vector3 RandomSize(Vector2 minSize, Vector2 maxSize)
+        public static Vector3 RandomSize(Vector3 minSize, Vector3 maxSize)
         {
             float width = Random.Range(minSize.x, maxSize.x);
-            float height = Random.Range(minSize.y, maxSize.y);
+            float height = Random.Range(minSize.z, maxSize.z);
 
             return new Vector3(width, 0, height);
         }

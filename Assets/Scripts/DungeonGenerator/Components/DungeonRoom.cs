@@ -1,5 +1,6 @@
 using Assets.DungeonGenerator;
 using Assets.DungeonGenerator.Components;
+using Assets.Scripts.DungeonGenerator.DataStructures;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -105,14 +106,16 @@ namespace Assets.Scripts.DungeonGenerator.Components
 
         internal void Populate(Dungeon dungeon)
         {
-            DungeonParameters parameters = dungeon.Parameters;
-            if (Random.value > parameters.enemySpawnRate)
+            float spawnRate = dungeon.Parameter("enemySpawnRate").Value();
+            Range<float> enemiesPerRoom = dungeon.Parameter("enemiesPerRoom").Range();
+
+            if (Random.value > spawnRate)
             {
                 return;
             }
-            int count = Random.Range(parameters.minEnemiesPerRoom, parameters.maxEnemiesPerRoom);
+            int count = Mathf.RoundToInt(Random.Range(enemiesPerRoom.min, enemiesPerRoom.max));
 
-            Contents.Add(dungeon.Components.enemies[0].gameObject, count);
+            Contents.Add(dungeon.Components.enemies[0], count);
         }
     }
 }
