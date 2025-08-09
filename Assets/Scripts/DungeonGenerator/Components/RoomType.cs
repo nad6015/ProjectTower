@@ -9,6 +9,8 @@ namespace Assets.Scripts.DungeonGenerator.Components
         COMBAT,
         AMBUSH,
         END,
-        ITEM
+        ITEM,
+        MINI_BOSS,
+        REST_POINT
     }
 }

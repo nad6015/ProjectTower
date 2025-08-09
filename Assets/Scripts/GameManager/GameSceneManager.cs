@@ -23,7 +23,7 @@ namespace Assets.GameManager
         /// Loads a new scene with a transition.
         /// </summary>
         /// <param name="scene">the scene to load.</param>
-        public void SceneTransition(GameScene scene)
+        public static void SceneTransition(GameScene scene)
         {
             // TODO: Probably want scene transition options like fade to black
             switch (scene)

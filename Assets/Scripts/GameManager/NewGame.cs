@@ -6,11 +6,11 @@ using UnityEngine.UIElements;
 public class NewGame : MonoBehaviour
 {
     [SerializeField]
-    //private DungeonExit _exit;
-    
+    private DungeonExit _exit;
+
     void Awake()
     {
-        //_exit.
+        _exit.DungeonCleared += OnDungeonCleared;
     }
 
     private void OnEnable()
@@ -19,7 +19,7 @@ public class NewGame : MonoBehaviour
         //_enterDungeon.clicked += EnterDungeonClicked;
     }
 
-    private void EnterDungeonClicked()
+    private void OnDungeonCleared()
     {
         SceneManager.LoadScene("MainGame");
     }

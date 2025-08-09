@@ -39,6 +39,7 @@ namespace Assets.DungeonGenerator
 
                 if (_dungeonRooms.LastNode.Type != RoomType.END)
                 {
+                    Debug.Log(_dungeonRooms.Count);
                     var end = _dungeonRooms.FindMatching(new List<DungeonFlowNode>() { new("end") });
                     _dungeonRooms.Remove(end[0]);
                     _dungeonRooms.Add(_dungeonRooms.LastNode, end[0]);

@@ -21,6 +21,7 @@ namespace Assets.PlayerCharacter
         private InputSystemActions actions;
         private PlayerMovement playerMovement;
         private PlayerAction playerAction;
+        public event Action<InputAction.CallbackContext> OnInteract;
 
         void Awake()
         {
@@ -42,7 +43,9 @@ namespace Assets.PlayerCharacter
 
             actions.Player.Attack.Enable();
             actions.Player.Attack.performed += AttackPerformed;
-            //actions.Player.Attack.canceled += playerAction.OnAttackCancelled;
+
+            actions.Player.Interact.Enable();
+            actions.Player.Interact.performed += InteractPerformed;
         }
 
         private void OnDisable()
@@ -53,12 +56,19 @@ namespace Assets.PlayerCharacter
 
             actions.Player.Attack.Disable();
             actions.Player.Attack.performed -= AttackPerformed;
-            //actions.Player.Attack.canceled -= playerAction.OnAttackCancelled;
+
+            actions.Player.Interact.Disable();
+            actions.Player.Interact.performed -= InteractPerformed;
         }
 
         private void AttackPerformed(InputAction.CallbackContext context)
         {
             OnAttackPerformed?.Invoke(context);
+        }
+
+        private void InteractPerformed(InputAction.CallbackContext context)
+        {
+            OnInteract?.Invoke(context);
         }
 
         private void OnTriggerEnter(Collider other)

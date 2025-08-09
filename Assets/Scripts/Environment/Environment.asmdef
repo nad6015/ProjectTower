@@ -1,8 +1,9 @@
 {
-    "name": "GameManager",
+    "name": "Enviroment",
     "rootNamespace": "",
     "references": [
-        "GUID:420b08d418bac8e4babc8c1f6acc8e7f"
+        "GUID:d55e6bac66764cd48a4277bded8a3d54",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

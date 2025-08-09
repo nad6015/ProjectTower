@@ -189,7 +189,7 @@ namespace Assets.DungeonGenerator
                 for (int j = 0; j < pattern.Count; j++)
                 {
                     T nextNodeToSearchFor = pattern[j];
-                    Debug.Log("current node: " + node + ", node to find: " + nextNodeToSearchFor + ", last node in pattern");
+
                     if (node.Equals(nextNodeToSearchFor) && matchingPattern.Count == 0)
                     {
                         lastNodeInPattern = node;
@@ -197,7 +197,6 @@ namespace Assets.DungeonGenerator
                     }
                     else if (matchingPattern.Count > 0 && _graph[lastNodeInPattern].Contains(nextNodeToSearchFor))
                     {
-                        Debug.Log("next node: " + nextNodeToSearchFor + " found. Replacing last node: " + lastNodeInPattern);
                         int index = _graph[lastNodeInPattern].IndexOf(nextNodeToSearchFor);
 
                         matchingPattern.Add(_graph[lastNodeInPattern][index]);
@@ -210,7 +209,7 @@ namespace Assets.DungeonGenerator
                         break;
                     }
                 }
-                Debug.Log("matching count: " + matchingPattern.Count + ", pattern: " + pattern.Count);
+
                 if (matchingPattern.Count == pattern.Count)
                 {
                     break;
@@ -240,16 +239,20 @@ namespace Assets.DungeonGenerator
                 var item = nodes[i];
                 var linkedNodes = _graph[item];
 
-                foreach (var node in linkedNodes)
+                for (int j = 0; j < linkedNodes.Count; j++)
                 {
-                    _graph[node].Remove(item);
+                    T node = linkedNodes[j];
+                    if (_graph.ContainsKey(node))
+                    {
+                        _graph[node].Remove(item);
+                    }
                     Add(node, replacer[i]);
                 }
 
                 linkedNodes.RemoveAll(n => nodes.Contains(n));
-                
+
                 _graph.Remove(item);
-                
+
                 Add(replacer[i], linkedNodes.ToArray());
 
                 lastNode = replacer[i];

@@ -85,6 +85,27 @@
           "type": "rest-point"
         }
       ]
+    },
+    {
+      "matches": [
+        {
+          "type": "mini-boss"
+        }
+      ],
+      "replacer": [
+        {
+          "type": "item"
+        },
+        {
+          "type": "combat"
+        },
+        {
+          "type": "explore"
+        },
+        {
+          "type": "rest-point"
+        }
+      ]
     }
   ]
 }

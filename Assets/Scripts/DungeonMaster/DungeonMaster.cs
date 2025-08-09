@@ -29,13 +29,11 @@ namespace Assets.DungeonGenerator
         private Dungeon _currentDungeon;
         private DungeonParameters _dungeonParams;
         private DungeonParameters _nextDungeonParams;
-        private GameSceneManager _sceneManager;
         private Dictionary<string, float> _gameData;
 
         public void Start()
         {
             _dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();
-            _sceneManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameSceneManager>();
 
             Ruleset = new DungeonMasterRuleset("TestRuleset");
             _dungeonParams = new DungeonParameters(FindByName("DefaultDungeonParameters").name);
@@ -78,11 +76,7 @@ namespace Assets.DungeonGenerator
         {
             if (_player.GetComponent<PlayableFighter>().IsDead())
             {
-                _sceneManager.SceneTransition(GameSceneManager.GameScene.GAME_LOST);
-            }
-            else
-            {
-                _sceneManager.SceneTransition(GameSceneManager.GameScene.GAME_WON);
+                GameSceneManager.SceneTransition(GameSceneManager.GameScene.GAME_LOST);
             }
         }
 
