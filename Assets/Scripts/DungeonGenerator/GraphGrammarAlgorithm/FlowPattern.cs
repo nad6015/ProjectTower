@@ -7,8 +7,8 @@ namespace Assets.DungeonGenerator
 {
     public class FlowPattern
     {
-        public List<DungeonFlowNode> Matches { get; }
-        public List<DungeonFlowNode> Replacer { get; }
+        public List<DungeonNode> Matches { get; }
+        public List<DungeonNode> Replacer { get; }
 
         public FlowPattern(JToken jMatches, JToken jReplacer)
         {
@@ -18,13 +18,13 @@ namespace Assets.DungeonGenerator
             foreach (var node in jReplacer)
             {
                 var json = JsonConvert.DeserializeObject<Dictionary<string, string>>(node.ToString());
-                DungeonFlowNode room = new(json["type"]);
+                DungeonNode room = new(json["type"]);
                 Replacer.Add(room);
             }
 
             foreach (var node in jMatches)
             {
-                Matches.Add(node.ToObject<DungeonFlowNode>());
+                Matches.Add(node.ToObject<DungeonNode>());
             }
         }
     }

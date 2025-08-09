@@ -7,7 +7,7 @@ namespace Assets.DungeonGenerator
 {
     public class DungeonFlow
     {
-        public Graph<DungeonFlowNode> FlowTemplate { get; }
+        public DungeonLayout FlowTemplate { get; }
         public List<FlowPattern> Flows { get; }
 
         public DungeonFlow(JToken baseFlow, JToken dungeonPatterns)
@@ -15,12 +15,12 @@ namespace Assets.DungeonGenerator
             FlowTemplate = new();
             Flows = new();
 
-            DungeonFlowNode lastRoom = null;
+            DungeonNode lastRoom = null;
 
             foreach (JToken jNode in baseFlow.Children())
             {
                 var json = JsonConvert.DeserializeObject<Dictionary<string, string>>(jNode.ToString());
-                DungeonFlowNode room = new(json["type"]);
+                DungeonNode room = new(json["type"]);
 
                 FlowTemplate.Add(room);
 

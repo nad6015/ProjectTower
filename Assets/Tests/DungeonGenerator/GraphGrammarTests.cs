@@ -27,13 +27,13 @@ public class GraphGrammarTests
     {
         TestSetUp();
 
-        Graph<DungeonFlowNode> rooms = dungeon.Flow.FlowTemplate;
+        DungeonLayout rooms = dungeon.Flow.FlowTemplate;
         
         Assert.That(rooms.Count == 3);
 
-        DungeonFlowNode firstNode = rooms.FirstNode;
-        DungeonFlowNode secondNode = rooms[firstNode][0];
-        DungeonFlowNode thirdNode = rooms[secondNode][1];
+        DungeonNode firstNode = rooms.FirstNode;
+        DungeonNode secondNode = rooms[firstNode][0];
+        DungeonNode thirdNode = rooms[secondNode][1];
 
         Debug.Log(thirdNode.Type);
 
@@ -47,18 +47,18 @@ public class GraphGrammarTests
     {
         TestSetUp(5);
 
-        Graph<DungeonFlowNode> rooms = dungeon.Flow.FlowTemplate;
+        DungeonLayout rooms = dungeon.Flow.FlowTemplate;
         Assert.That(rooms.Count == 3);
 
         algorithm.GenerateDungeon(dungeon);
 
         rooms = dungeon.Rooms;
 
-        DungeonFlowNode firstNode = rooms.FirstNode;
-        DungeonFlowNode secondNode = rooms[firstNode][0];
-        DungeonFlowNode thirdNode = rooms[secondNode][1];
-        DungeonFlowNode fourthNode = rooms[thirdNode][1];
-        DungeonFlowNode fifthNode = rooms[fourthNode][1];
+        DungeonNode firstNode = rooms.FirstNode;
+        DungeonNode secondNode = rooms[firstNode][0];
+        DungeonNode thirdNode = rooms[secondNode][1];
+        DungeonNode fourthNode = rooms[thirdNode][1];
+        DungeonNode fifthNode = rooms[fourthNode][1];
 
 
         Assert.That(rooms.Count == 5);

@@ -3,26 +3,28 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using NUnit.Framework;
+using UnityEditor.Graphs;
 
 namespace Assets.DungeonGenerator
 {
-    public class Graph<T>
+    public class DungeonLayout
     {
         public int Count { get { return _graph.Count; } }
 
-        public T FirstNode { get; private set; }
-        public T LastNode { get; private set; }
+        public DungeonNode FirstNode { get; private set; }
+        public DungeonNode LastNode { get; private set; }
 
         // The internal data representation of the graph.
         // Each node T has a list of the nodes connected to it.
-        private readonly Dictionary<T, List<T>> _graph;
+        private readonly Dictionary<int, DungeonNode> _graph;
 
         /// <summary>
         /// Constructor. Creates an empty graph.
         /// </summary>
-        public Graph()
+        public DungeonLayout()
         {
-            _graph = new Dictionary<T, List<T>>();
+            _graph = new();
         }
 
         /// <summary>
@@ -30,13 +32,12 @@ namespace Assets.DungeonGenerator
         /// If the node already exists in the graph, this is a no-op function.
         /// </summary>
         /// <param name="node"> the new node to add.</param>
-        public void Add(T node)
+        public void Add(DungeonNode node)
         {
             // TODO: TEST FOR NULL NODE
-            if (node != null && !_graph.ContainsKey(node))
+            if (node != null && !_graph.ContainsValue(node))
             {
-                _graph[node] = new List<T>();
-
+                _graph[node.Id] = node;
                 if (FirstNode == null)
                 {
                     FirstNode = node;
@@ -55,7 +56,7 @@ namespace Assets.DungeonGenerator
         /// </summary>
         /// <param name="node">the new node to add.</param>
         /// <param name="connectedNodes">the nodes connected to this new node.</param>
-        public void Add(T node, params T[] connectedNodes)
+        public void Add(DungeonNode node, params DungeonNode[] connectedNodes)
         {
             if (node == null)
             {
@@ -69,7 +70,7 @@ namespace Assets.DungeonGenerator
                 return;
             }
 
-            List<T> nodes = _graph[node];
+            List<DungeonNode> nodes = node.LinkedNodes;
 
             foreach (var connectedNode in connectedNodes)
             {
@@ -79,9 +80,9 @@ namespace Assets.DungeonGenerator
                     nodes.Add(connectedNode);
                 }
 
-                if (connectedNode != null && !_graph[connectedNode].Contains(node))
+                if (connectedNode != null && !connectedNode.LinkedNodes.Contains(node))
                 {
-                    _graph[connectedNode].Add(node);
+                    connectedNode.LinkedNodes.Add(node);
                 }
             }
         }
@@ -91,9 +92,9 @@ namespace Assets.DungeonGenerator
         /// </summary>
         /// <param name="node"></param>
         /// <returns>true if the node is in the graph.</returns>
-        public bool Contains(T node)
+        public bool Contains(DungeonNode node)
         {
-            return _graph.ContainsKey(node);
+            return _graph.ContainsValue(node);
         }
 
         /// <summary>
@@ -101,9 +102,9 @@ namespace Assets.DungeonGenerator
         /// </summary>
         /// <param name="node"></param>
         /// <returns>a list of the neighbouring nodes.</returns>
-        public List<T> GetLinkedNodes(T node)
+        public List<DungeonNode> GetLinkedNodes(DungeonNode node)
         {
-            return _graph[node];
+            return node.LinkedNodes;
         }
 
         /// <summary>
@@ -116,14 +117,16 @@ namespace Assets.DungeonGenerator
             {
                 return false;
             }
-            HashSet<T> visitedNodes = new();
-            T firstNode = _graph.First().Key;
+            HashSet<DungeonNode> visitedNodes = new();
+            DungeonNode firstNode = _graph.First().Value;
             visitedNodes.Add(firstNode);
             VisitNode(firstNode, visitedNodes);
+            Debug.Log(visitedNodes.Count);
+            Debug.Log(Count);
             return visitedNodes.Count == Count;
         }
 
-        public Dictionary<T, List<T>>.Enumerator GetEnumerator()
+        public Dictionary<int, DungeonNode>.Enumerator GetEnumerator()
         {
             return _graph.GetEnumerator();
         }
@@ -132,11 +135,11 @@ namespace Assets.DungeonGenerator
         /// Allows direct indexing of the underlying dictionary. 
         /// Returns the specified node's linked nodes.
         /// </summary>
-        public List<T> this[T key]
+        public List<DungeonNode> this[DungeonNode key]
         {
             get
             {
-                return _graph[key];
+                return key.LinkedNodes;
             }
         }
 
@@ -152,19 +155,20 @@ namespace Assets.DungeonGenerator
         /// Removes a node in the graph.
         /// </summary>
         /// <param name="node"></param>
-        public void Remove(T node)
+        public void Remove(DungeonNode node)
         {
-            foreach (T child in _graph[node])
+            foreach (DungeonNode child in node.LinkedNodes)
             {
-                _graph[child].Remove(node);
+                child.LinkedNodes.Remove(node);
             }
-            _graph.Remove(node); // TODO: Test that all instances of the node is removed from grpah
+            _graph.Remove(node.Id); // TODO: Test that all instances of the node is removed from grpah
         }
 
-        private void VisitNode(T node, HashSet<T> visitedNodes)
+        private void VisitNode(DungeonNode node, HashSet<DungeonNode> visitedNodes)
         {
-            foreach (var item in _graph[node])
+            foreach (var item in node.LinkedNodes)
             {
+                Debug.Log(item);
                 if (visitedNodes.Contains(item))
                 {
                     continue;
@@ -179,33 +183,33 @@ namespace Assets.DungeonGenerator
         /// </summary>
         /// <param name="pattern">the node pattern to match</param>
         /// <returns>the first node of the matching set</returns>
-        public List<T> FindMatching(List<T> pattern)
+        public List<DungeonNode> FindMatching(List<DungeonNode> pattern)
         {
-            List<T> matchingPattern = new();
-            T lastNodeInPattern = default;
+            List<DungeonNode> matchingPattern = new();
+            DungeonNode lastNodeInPattern = null;
 
-            foreach (var node in _graph.Keys)
+            foreach (var node in _graph.Values)
             {
                 for (int j = 0; j < pattern.Count; j++)
                 {
-                    T nextNodeToSearchFor = pattern[j];
+                    DungeonNode nextNodeToSearchFor = pattern[j];
 
-                    if (node.Equals(nextNodeToSearchFor) && matchingPattern.Count == 0)
+                    if (node.IsSameType(nextNodeToSearchFor) && matchingPattern.Count == 0)
                     {
                         lastNodeInPattern = node;
                         matchingPattern.Add(node);
                     }
-                    else if (matchingPattern.Count > 0 && _graph[lastNodeInPattern].Contains(nextNodeToSearchFor))
+                    else if (matchingPattern.Count > 0 && null != lastNodeInPattern.LinkedNodes.Find(n => n.IsSameType(nextNodeToSearchFor)))
                     {
-                        int index = _graph[lastNodeInPattern].IndexOf(nextNodeToSearchFor);
+                        DungeonNode foundNode = lastNodeInPattern.LinkedNodes.Find(n => n.IsSameType(nextNodeToSearchFor));
 
-                        matchingPattern.Add(_graph[lastNodeInPattern][index]);
-                        lastNodeInPattern = _graph[lastNodeInPattern][index];
+                        matchingPattern.Add(foundNode);
+                        lastNodeInPattern = foundNode;
                     }
                     else
                     {
                         matchingPattern.Clear();
-                        lastNodeInPattern = default;
+                        lastNodeInPattern = null;
                         break;
                     }
                 }
@@ -224,58 +228,64 @@ namespace Assets.DungeonGenerator
         /// </summary>
         /// <param name="nodes">a set of nodes within this graph.</param>
         /// <param name="replacer">a set of nodes to replace them with.</param>
-        public void Replace(List<T> nodes, List<T> replacer)
+        public void Replace(List<DungeonNode> nodes, List<DungeonNode> replacer)
         {
-            T lastNode = default;
-
-            if (replacer.Count < nodes.Count)
+            DungeonNode lastNode = default;
+            int count = Mathf.Min(replacer.Count, nodes.Count);
+            foreach (var item in _graph)
             {
-                return; // NO-OP
+                Debug.Log(item);
             }
-
             // Replaces the existing nodes
-            for (int i = 0; i < nodes.Count; i++)
+            for (int i = 0; i < count; i++)
             {
                 var item = nodes[i];
-                var linkedNodes = _graph[item];
-
-                for (int j = 0; j < linkedNodes.Count; j++)
-                {
-                    T node = linkedNodes[j];
-                    if (_graph.ContainsKey(node))
-                    {
-                        _graph[node].Remove(item);
-                    }
-                    Add(node, replacer[i]);
-                }
-
-                linkedNodes.RemoveAll(n => nodes.Contains(n));
-
-                _graph.Remove(item);
-
-                Add(replacer[i], linkedNodes.ToArray());
-
-                lastNode = replacer[i];
+                item.Copy(replacer[i]);
+                lastNode = item;
             }
 
             // Extends the existing nodes.
             if (replacer.Count > nodes.Count)
             {
-                int index = replacer.IndexOf(lastNode) + 1;
-                for (int i = index; i < replacer.Count; i++)
+                var nodes2 = lastNode.LinkedNodes;
+                
+                for (int i = count; i < replacer.Count; i++)
                 {
+                    Debug.Log(replacer[i]);
+                    Debug.Log(lastNode);
+                    Add(replacer[i], lastNode);
                     Add(lastNode, replacer[i]);
                     lastNode = replacer[i];
                 }
-            }
-
-            foreach (var item in _graph)
-            {
-                foreach (var i in item.Value)
+                Debug.Log(_graph.Count);
+                foreach (var item in _graph)
                 {
-                    Debug.Log($"{item.Key}: {i}");
+                    Debug.Log(item);
                 }
             }
+            else if (replacer.Count < nodes.Count)
+            {
+                List<DungeonNode> allNodes = new();
+
+                for (int i = 0; i < nodes.Count; i++)
+                {
+                    var node = nodes[i];
+                    var linkedNodes = node.LinkedNodes;
+                    allNodes.AddRange(linkedNodes);
+
+                    Remove(node);
+                    allNodes.Remove(node);
+                    lastNode.LinkedNodes.Remove(node);
+                }
+
+                Add(lastNode, allNodes.ToArray());
+            }
+        }
+
+        //TODO: Write test for this method
+        public DungeonNode FindById(int v)
+        {
+            return _graph.ContainsKey(v) ? _graph[v] : null;
         }
     }
 }

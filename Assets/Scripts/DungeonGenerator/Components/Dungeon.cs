@@ -18,7 +18,7 @@ namespace Assets.DungeonGenerator.Components
 
         private readonly DungeonParameters _parameters;
         internal Dictionary<string, DungeonRoom> DungeonRooms { get; }
-        public Graph<DungeonFlowNode> Rooms { get; private set; }
+        public DungeonLayout Rooms { get; private set; }
         public DungeonFlow Flow { get { return _parameters.GetLayout(); } }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Assets.DungeonGenerator.Components
             return _parameters.GetParameter(name);
         }
 
-        internal void SetRooms(Graph<DungeonFlowNode> dungeonRooms)
+        internal void SetRooms(DungeonLayout dungeonRooms)
         {
             Rooms = dungeonRooms;
         }

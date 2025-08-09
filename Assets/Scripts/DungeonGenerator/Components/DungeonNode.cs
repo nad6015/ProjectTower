@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Assets.Scripts.DungeonGenerator.Components
 {
-    public class DungeonFlowNode
+    public class DungeonNode
     {
-     
-        public RoomType Type { get; }
+        private static int _nodeId = 0;
+        public RoomType Type { get; private set; }
+        public int Id { get; private set; }
+        public List<DungeonNode> LinkedNodes { get; private set; }
 
-        public DungeonFlowNode(string type)
+        public DungeonNode(string type)
         {
+            LinkedNodes = new List<DungeonNode>();
             switch (type.ToLower())
             {
                 case "explore":
@@ -47,22 +51,45 @@ namespace Assets.Scripts.DungeonGenerator.Components
                     break;
                 }
             }
+            Id = _nodeId++;
+        }
+
+        public DungeonNode(RoomType type)
+        {
+            LinkedNodes = new List<DungeonNode>();
+            Type = type;
+            Id = _nodeId++;
         }
 
         public override bool Equals(object obj)
         {
-            return obj is DungeonFlowNode room &&
-                   Type == room.Type;
+            return obj is DungeonNode room &&
+                   Type == room.Type && Id == room.Id;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Type);
+            return HashCode.Combine(Type, Id);
         }
 
         public override string ToString()
         {
-            return Type.ToString();
+            return "Node ID: " + Id + ", Node Type: " + Type.ToString();
+        }
+
+        public bool IsSameType(DungeonNode other)
+        {
+            return Type == other.Type;
+        }
+
+        public void Copy(DungeonNode other)
+        {
+            Type = other.Type;
+        }
+
+        public static void Reset()
+        {
+            _nodeId = 0;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Assets.DungeonGenerator
 {
     public class GraphGrammar : IDungeonAlgorithm
     {
-        private Graph<DungeonFlowNode> _dungeonRooms = new();
+        private DungeonLayout _dungeonRooms = new();
 
         /// <summary>
         /// <inheritdoc/>
@@ -40,7 +40,7 @@ namespace Assets.DungeonGenerator
                 if (_dungeonRooms.LastNode.Type != RoomType.END)
                 {
                     Debug.Log(_dungeonRooms.Count);
-                    var end = _dungeonRooms.FindMatching(new List<DungeonFlowNode>() { new("end") });
+                    var end = _dungeonRooms.FindMatching(new List<DungeonNode>() { new("end") });
                     _dungeonRooms.Remove(end[0]);
                     _dungeonRooms.Add(_dungeonRooms.LastNode, end[0]);
                 }
