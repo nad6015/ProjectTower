@@ -183,7 +183,7 @@ namespace Assets.DungeonGenerator
         /// </summary>
         /// <param name="pattern">the node pattern to match</param>
         /// <returns>the first node of the matching set</returns>
-        public List<DungeonNode> FindMatching(List<DungeonNode> pattern)
+        public List<DungeonNode> FindMatching(List<RoomType> pattern)
         {
             List<DungeonNode> matchingPattern = new();
             DungeonNode lastNodeInPattern = null;
@@ -192,16 +192,16 @@ namespace Assets.DungeonGenerator
             {
                 for (int j = 0; j < pattern.Count; j++)
                 {
-                    DungeonNode nextNodeToSearchFor = pattern[j];
+                    RoomType patternType = pattern[j];
 
-                    if (node.IsSameType(nextNodeToSearchFor) && matchingPattern.Count == 0)
+                    if (node.IsSameType(patternType) && matchingPattern.Count == 0)
                     {
                         lastNodeInPattern = node;
                         matchingPattern.Add(node);
                     }
-                    else if (matchingPattern.Count > 0 && null != lastNodeInPattern.LinkedNodes.Find(n => n.IsSameType(nextNodeToSearchFor)))
+                    else if (matchingPattern.Count > 0 && null != lastNodeInPattern.LinkedNodes.Find(n => n.IsSameType(patternType)))
                     {
-                        DungeonNode foundNode = lastNodeInPattern.LinkedNodes.Find(n => n.IsSameType(nextNodeToSearchFor));
+                        DungeonNode foundNode = lastNodeInPattern.LinkedNodes.Find(n => n.IsSameType(patternType));
 
                         matchingPattern.Add(foundNode);
                         lastNodeInPattern = foundNode;
@@ -228,7 +228,7 @@ namespace Assets.DungeonGenerator
         /// </summary>
         /// <param name="nodes">a set of nodes within this graph.</param>
         /// <param name="replacer">a set of nodes to replace them with.</param>
-        public void Replace(List<DungeonNode> nodes, List<DungeonNode> replacer)
+        public void Replace(List<DungeonNode> nodes, List<RoomType> replacer)
         {
             DungeonNode lastNode = default;
             int count = Mathf.Min(replacer.Count, nodes.Count);
@@ -240,7 +240,7 @@ namespace Assets.DungeonGenerator
             for (int i = 0; i < count; i++)
             {
                 var item = nodes[i];
-                item.Copy(replacer[i]);
+                item.ChangeType(replacer[i]);
                 lastNode = item;
             }
 
@@ -248,19 +248,14 @@ namespace Assets.DungeonGenerator
             if (replacer.Count > nodes.Count)
             {
                 var nodes2 = lastNode.LinkedNodes;
-                
+
                 for (int i = count; i < replacer.Count; i++)
                 {
-                    Debug.Log(replacer[i]);
-                    Debug.Log(lastNode);
-                    Add(replacer[i], lastNode);
-                    Add(lastNode, replacer[i]);
-                    lastNode = replacer[i];
-                }
-                Debug.Log(_graph.Count);
-                foreach (var item in _graph)
-                {
-                    Debug.Log(item);
+                    var replacementNode = new DungeonNode(replacer[i]);
+
+                    Add(replacementNode, lastNode);
+                    Add(lastNode, replacementNode);
+                    lastNode = replacementNode;
                 }
             }
             else if (replacer.Count < nodes.Count)

@@ -77,16 +77,28 @@ namespace Assets.Scripts.DungeonGenerator.Components
             return "Node ID: " + Id + ", Node Type: " + Type.ToString();
         }
 
-        public bool IsSameType(DungeonNode other)
+        /// <summary>
+        /// Checks if this dungeon node has the same room type as the given room type.
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public bool IsSameType(RoomType type)
         {
-            return Type == other.Type;
+            return Type == type;
         }
 
-        public void Copy(DungeonNode other)
+        /// <summary>
+        /// Changes this dungeon node's room type.
+        /// </summary>
+        /// <param name="type">the new type</param>
+        public void ChangeType(RoomType type)
         {
-            Type = other.Type;
+            Type = type;
         }
 
+        /// <summary>
+        /// Reset the class' static id. Useful when regenerating a dungeon.
+        /// </summary>
         public static void Reset()
         {
             _nodeId = 0;
