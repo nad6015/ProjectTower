@@ -15,7 +15,8 @@ namespace Assets.DungeonGenerator.Components
     {
         public int Count { get { return _parameters.Count; } }
 
-        private Dictionary<string, DungeonParameter> _parameters;
+        private readonly Dictionary<string, DungeonParameter> _parameters;
+        private readonly DungeonFlow _layout;
 
         /// <summary>
         /// Constructs dungeon parameters from a JSON file.
@@ -34,6 +35,8 @@ namespace Assets.DungeonGenerator.Components
                 DungeonParameter dungeonParameter = new(JsonConvert.DeserializeObject<Dictionary<string, object>>(jRule.ToString()));
                 _parameters.Add(dungeonParameter.Id, dungeonParameter);
             }
+
+            _layout = new(rulesJson["baseDungeon"], rulesJson["dungeonPatterns"]);
         }
 
         public DungeonParameter GetParameter(string dungeonParams)
@@ -44,6 +47,11 @@ namespace Assets.DungeonGenerator.Components
         public void ModifyParameter(string paramName, int value)
         {
             _parameters[paramName].Modify(value);
+        }
+
+        internal DungeonFlow GetLayout()
+        {
+            return _layout;
         }
     }
 

@@ -287,6 +287,5 @@ namespace Assets.DungeonGenerator
             }
             return true;
         }
-
     }
 }

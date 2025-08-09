@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections;
+﻿using Assets.Scripts.DungeonGenerator.Components;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEditor.Graphs;
 using UnityEngine;
-
+using System.Linq;
 
 namespace Assets.DungeonGenerator
 {
     public class Graph<T>
     {
         public int Count { get { return _graph.Count; } }
+
+        public T FirstNode { get; private set; }
+        public T LastNode { get; private set; }
 
         // The internal data representation of the graph.
         // Each node T has a list of the nodes connected to it.
@@ -35,6 +36,15 @@ namespace Assets.DungeonGenerator
             if (node != null && !_graph.ContainsKey(node))
             {
                 _graph[node] = new List<T>();
+
+                if (FirstNode == null)
+                {
+                    FirstNode = node;
+                }
+                else
+                {
+                    LastNode = node;
+                }
             }
         }
 
@@ -144,7 +154,11 @@ namespace Assets.DungeonGenerator
         /// <param name="node"></param>
         public void Remove(T node)
         {
-            _graph.Remove(node);
+            foreach (T child in _graph[node])
+            {
+                _graph[child].Remove(node);
+            }
+            _graph.Remove(node); // TODO: Test that all instances of the node is removed from grpah
         }
 
         private void VisitNode(T node, HashSet<T> visitedNodes)
@@ -157,6 +171,107 @@ namespace Assets.DungeonGenerator
                 }
                 visitedNodes.Add(item);
                 VisitNode(item, visitedNodes);
+            }
+        }
+
+        /// <summary>
+        /// Finds and returns the first node of a set matching the given list of nodes.
+        /// </summary>
+        /// <param name="pattern">the node pattern to match</param>
+        /// <returns>the first node of the matching set</returns>
+        public List<T> FindMatching(List<T> pattern)
+        {
+            List<T> matchingPattern = new();
+            T lastNodeInPattern = default;
+
+            foreach (var node in _graph.Keys)
+            {
+                for (int j = 0; j < pattern.Count; j++)
+                {
+                    T nextNodeToSearchFor = pattern[j];
+                    Debug.Log("current node: " + node + ", node to find: " + nextNodeToSearchFor + ", last node in pattern");
+                    if (node.Equals(nextNodeToSearchFor) && matchingPattern.Count == 0)
+                    {
+                        lastNodeInPattern = node;
+                        matchingPattern.Add(node);
+                    }
+                    else if (matchingPattern.Count > 0 && _graph[lastNodeInPattern].Contains(nextNodeToSearchFor))
+                    {
+                        Debug.Log("next node: " + nextNodeToSearchFor + " found. Replacing last node: " + lastNodeInPattern);
+                        int index = _graph[lastNodeInPattern].IndexOf(nextNodeToSearchFor);
+
+                        matchingPattern.Add(_graph[lastNodeInPattern][index]);
+                        lastNodeInPattern = _graph[lastNodeInPattern][index];
+                    }
+                    else
+                    {
+                        matchingPattern.Clear();
+                        lastNodeInPattern = default;
+                        break;
+                    }
+                }
+                Debug.Log("matching count: " + matchingPattern.Count + ", pattern: " + pattern.Count);
+                if (matchingPattern.Count == pattern.Count)
+                {
+                    break;
+                }
+            }
+            return matchingPattern;
+        }
+
+        /// <summary>
+        /// Replaces the given nodes with the the nodes in the replacer list.
+        /// If the number of replacement nodes are less than the nodes to replace, then this function does nothing.
+        /// </summary>
+        /// <param name="nodes">a set of nodes within this graph.</param>
+        /// <param name="replacer">a set of nodes to replace them with.</param>
+        public void Replace(List<T> nodes, List<T> replacer)
+        {
+            T lastNode = default;
+
+            if (replacer.Count < nodes.Count)
+            {
+                return; // NO-OP
+            }
+
+            // Replaces the existing nodes
+            for (int i = 0; i < nodes.Count; i++)
+            {
+                var item = nodes[i];
+                var linkedNodes = _graph[item];
+
+                foreach (var node in linkedNodes)
+                {
+                    _graph[node].Remove(item);
+                    Add(node, replacer[i]);
+                }
+
+                linkedNodes.RemoveAll(n => nodes.Contains(n));
+                
+                _graph.Remove(item);
+                
+                Add(replacer[i], linkedNodes.ToArray());
+
+                lastNode = replacer[i];
+            }
+
+            // Extends the existing nodes.
+            if (replacer.Count > nodes.Count)
+            {
+                int index = replacer.IndexOf(lastNode) + 1;
+                for (int i = index; i < replacer.Count; i++)
+                {
+                    Add(lastNode, replacer[i]);
+                    lastNode = replacer[i];
+                }
+            }
+
+            foreach (var item in _graph)
+            {
+                foreach (var i in item.Value)
+                {
+                    Debug.Log($"{item.Key}: {i}");
+                }
             }
         }
     }

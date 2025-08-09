@@ -43,5 +43,48 @@
       }
     },
     { "id": "roomCount", "type": "number", "value": 10, "locked": true }
+  ],
+  "baseDungeon": [
+    {
+      "type": "start"
+    },
+    {
+      "type": "explore"
+    },
+    {
+      "type": "combat"
+    },
+    {
+      "type": "item"
+    },
+    {
+      "type": "end"
+    }
+  ],
+  "dungeonPatterns": [
+    {
+      "matches": [
+        {
+          "type": "explore"
+        },
+        {
+          "type": "combat"
+        }
+      ],
+      "replacer": [
+        {
+          "type": "combat"
+        },
+        {
+          "type": "mini-boss"
+        },
+        {
+          "type": "explore"
+        },
+        {
+          "type": "rest-point"
+        }
+      ]
+    }
   ]
 }

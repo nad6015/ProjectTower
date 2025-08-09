@@ -24,11 +24,6 @@ namespace Assets.DungeonGenerator
             return new Vector3(vector.x, y, vector.z);
         }
 
-        internal static Vector3 Vec2ToVec3(Vector2 vector)
-        {
-            return new Vector3(vector.x, 1, vector.y);
-        }
-
         /// <summary>
         /// Returns a point between two points. Ignores the y component of the Vector3.
         /// </summary>

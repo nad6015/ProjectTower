@@ -16,8 +16,10 @@ namespace Assets.DungeonGenerator.Components
         public DungeonComponents Components { get; private set; }
         public Vector3 CorridorSize { get { return Parameter("corridorSize").Vector(); } }
 
-        private DungeonParameters _parameters;
+        private readonly DungeonParameters _parameters;
         internal Dictionary<string, DungeonRoom> DungeonRooms { get; }
+        public Graph<DungeonFlowNode> Rooms { get; private set; }
+        public DungeonFlow Flow { get { return _parameters.GetLayout(); } }
 
         /// <summary>
         /// Constructs a new dungeon.
@@ -32,6 +34,11 @@ namespace Assets.DungeonGenerator.Components
         internal DungeonParameter Parameter(string name)
         {
             return _parameters.GetParameter(name);
+        }
+
+        internal void SetRooms(Graph<DungeonFlowNode> dungeonRooms)
+        {
+            Rooms = dungeonRooms;
         }
     }
 }

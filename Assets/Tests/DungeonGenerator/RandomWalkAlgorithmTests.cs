@@ -56,7 +56,7 @@ public class RandomWalkTests
         Transform parent = GameObject.FindGameObjectWithTag("DungeonGenerator").transform;
         yield return new WaitForSeconds(1);
 
-        DungeonParameters parameters = CreateParameters(roomCount);
+        DungeonParameters parameters = CreateParameters();
         parameters.ModifyParameter("roomCount", roomCount);
 
         Dungeon dungeon = new(parameters, components);
@@ -66,7 +66,7 @@ public class RandomWalkTests
         yield return new WaitForSeconds(1);
     }
 
-    private DungeonParameters CreateParameters(int maxRooms)
+    private DungeonParameters CreateParameters()
     {
         return new DungeonParameters(paramFile.name);
     }

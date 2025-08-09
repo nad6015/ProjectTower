@@ -1,37 +1,37 @@
 {
   "summary": {
-    "generatedon": "2025-08-05T10:10:05Z",
+    "generatedon": "2025-08-06T22:27:23Z",
     "parser": "MultiReportParser (2x OpenCoverParser)",
     "assemblies": 4,
-    "classes": 37,
-    "files": 37,
-    "coveredlines": 284,
-    "uncoveredlines": 1061,
-    "coverablelines": 1345,
-    "totallines": 4761,
-    "linecoverage": 21.1,
+    "classes": 38,
+    "files": 38,
+    "coveredlines": 23,
+    "uncoveredlines": 1372,
+    "coverablelines": 1395,
+    "totallines": 4855,
+    "linecoverage": 1.6,
     "coveredbranches": 0,
     "totalbranches": 0,
-    "coveredmethods": 62,
-    "totalmethods": 279,
-    "methodcoverage": 22.2
+    "coveredmethods": 11,
+    "totalmethods": 286,
+    "methodcoverage": 3.8
  },
   "coverage": {
     "assemblies": [
-      { "name": "Assembly-CSharp", "classes": 10, "coverage": 3.7, "coveredlines": 15, "coverablelines": 398, "totallines": 1826, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 4.2, "coveredmethods": 4, "totalmethods": 94, "classesinassembly": [
+      { "name": "Assembly-CSharp", "classes": 10, "coverage": 0.2, "coveredlines": 1, "coverablelines": 398, "totallines": 1826, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 1, "coveredmethods": 1, "totalmethods": 94, "classesinassembly": [
         { "name": "Assets.PointUtils", "coverage": 0, "coveredlines": 0, "coverablelines": 21, "totallines": 58, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 5 },
         { "name": "AttackAction", "coverage": 0, "coveredlines": 0, "coverablelines": 11, "totallines": 32, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 3 },
         { "name": "AvoidTargetAction", "coverage": 0, "coveredlines": 0, "coverablelines": 16, "totallines": 42, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 3 },
-        { "name": "EnemyController", "coverage": 78.5, "coveredlines": 11, "coverablelines": 14, "totallines": 52, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 66.6, "coveredmethods": 2, "totalmethods": 3 },
-        { "name": "HealthBar", "coverage": 28.5, "coveredlines": 4, "coverablelines": 14, "totallines": 33, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 66.6, "coveredmethods": 2, "totalmethods": 3 },
+        { "name": "EnemyController", "coverage": 7.1, "coveredlines": 1, "coverablelines": 14, "totallines": 52, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 33.3, "coveredmethods": 1, "totalmethods": 3 },
+        { "name": "HealthBar", "coverage": 0, "coveredlines": 0, "coverablelines": 14, "totallines": 33, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 3 },
         { "name": "InputSystemActions", "coverage": 0, "coveredlines": 0, "coverablelines": 266, "totallines": 1464, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 63 },
         { "name": "NewPlayableBehaviour", "coverage": 0, "coveredlines": 0, "coverablelines": 10, "totallines": 36, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 5 },
         { "name": "PlayerHUD", "coverage": 0, "coveredlines": 0, "coverablelines": 10, "totallines": 27, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 2 },
         { "name": "RandomPatrolAction", "coverage": 0, "coveredlines": 0, "coverablelines": 29, "totallines": 65, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 5 },
         { "name": "TestPlayer", "coverage": 0, "coveredlines": 0, "coverablelines": 7, "totallines": 17, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 2 } ] },
-      { "name": "CombatSystem", "classes": 5, "coverage": 29, "coveredlines": 25, "coverablelines": 86, "totallines": 199, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 26.3, "coveredmethods": 5, "totalmethods": 19, "classesinassembly": [
+      { "name": "CombatSystem", "classes": 5, "coverage": 8.1, "coveredlines": 7, "coverablelines": 86, "totallines": 199, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 10.5, "coveredmethods": 2, "totalmethods": 19, "classesinassembly": [
         { "name": "Assets.Combat.NpcFighter", "coverage": 0, "coveredlines": 0, "coverablelines": 2, "totallines": 12, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 1 },
-        { "name": "Assets.CombatSystem.Fighter", "coverage": 33.3, "coveredlines": 24, "coverablelines": 72, "totallines": 142, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 33.3, "coveredmethods": 4, "totalmethods": 12 },
+        { "name": "Assets.CombatSystem.Fighter", "coverage": 8.3, "coveredlines": 6, "coverablelines": 72, "totallines": 142, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 8.3, "coveredmethods": 1, "totalmethods": 12 },
         { "name": "Assets.Scripts.Combat.Resources.Item", "coverage": 0, "coveredlines": 0, "coverablelines": 5, "totallines": 19, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 3 },
         { "name": "HealingItem", "coverage": 0, "coveredlines": 0, "coverablelines": 3, "totallines": 14, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 1 },
         { "name": "Weapon", "coverage": 25, "coveredlines": 1, "coverablelines": 4, "totallines": 12, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 50, "coveredmethods": 1, "totalmethods": 2 } ] },
@@ -43,21 +43,22 @@
         { "name": "Assets.PlayerCharacter.PlayerInventory", "coverage": 0, "coveredlines": 0, "coverablelines": 3, "totallines": 18, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 1 },
         { "name": "Assets.PlayerCharacter.PlayerMovement", "coverage": 0, "coveredlines": 0, "coverablelines": 23, "totallines": 49, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 6 },
         { "name": "InputSystemActions", "coverage": 0, "coveredlines": 0, "coverablelines": 266, "totallines": 1464, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 63 } ] },
-      { "name": "Tests", "classes": 15, "coverage": 48.8, "coveredlines": 240, "coverablelines": 491, "totallines": 1013, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 65.7, "coveredmethods": 50, "totalmethods": 76, "classesinassembly": [
-        { "name": "Assets.Tests.DungeonGenerator.DungeonParametersTest", "coverage": 70.8, "coveredlines": 17, "coverablelines": 24, "totallines": 54, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 3, "totalmethods": 3 },
-        { "name": "CharacterMovementTest", "coverage": 23, "coveredlines": 9, "coverablelines": 39, "totallines": 71, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 50, "coveredmethods": 2, "totalmethods": 4 },
-        { "name": "DungeonComponentsTest", "coverage": 18.7, "coveredlines": 3, "coverablelines": 16, "totallines": 37, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 33.3, "coveredmethods": 1, "totalmethods": 3 },
-        { "name": "DungeonGeneratorTest", "coverage": 18.7, "coveredlines": 3, "coverablelines": 16, "totallines": 50, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 33.3, "coveredmethods": 1, "totalmethods": 3 },
-        { "name": "DungeonMasterRulesetTest", "coverage": 100, "coveredlines": 43, "coverablelines": 43, "totallines": 77, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 4, "totalmethods": 4 },
-        { "name": "DungeonMasterRuleTest", "coverage": 100, "coveredlines": 20, "coverablelines": 20, "totallines": 53, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 5, "totalmethods": 5 },
-        { "name": "DungeonMasterTests", "coverage": 6.1, "coveredlines": 4, "coverablelines": 65, "totallines": 130, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 11.1, "coveredmethods": 1, "totalmethods": 9 },
-        { "name": "DungeonPlayabilityTest", "coverage": 18.7, "coveredlines": 3, "coverablelines": 16, "totallines": 38, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 33.3, "coveredmethods": 1, "totalmethods": 3 },
-        { "name": "GameSceneManagerTests", "coverage": 100, "coveredlines": 17, "coverablelines": 17, "totallines": 41, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 3, "totalmethods": 3 },
-        { "name": "GraphTests", "coverage": 61.7, "coveredlines": 55, "coverablelines": 89, "totallines": 153, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 84.6, "coveredmethods": 11, "totalmethods": 13 },
-        { "name": "PlayerCameraTests", "coverage": 16.6, "coveredlines": 9, "coverablelines": 54, "totallines": 103, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 33.3, "coveredmethods": 2, "totalmethods": 6 },
-        { "name": "PlayerControllerTests", "coverage": 28.5, "coveredlines": 4, "coverablelines": 14, "totallines": 35, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 50, "coveredmethods": 2, "totalmethods": 4 },
-        { "name": "RandomWalkTests", "coverage": 42.8, "coveredlines": 18, "coverablelines": 42, "totallines": 81, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 71.4, "coveredmethods": 5, "totalmethods": 7 },
-        { "name": "RuleConditionTest", "coverage": 100, "coveredlines": 18, "coverablelines": 18, "totallines": 41, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 5, "totalmethods": 5 },
-        { "name": "RuleValueTest", "coverage": 94.4, "coveredlines": 17, "coverablelines": 18, "totallines": 49, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 100, "coveredmethods": 4, "totalmethods": 4 } ] } ]
+      { "name": "Tests", "classes": 16, "coverage": 2, "coveredlines": 11, "coverablelines": 541, "totallines": 1107, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 6, "coveredmethods": 5, "totalmethods": 83, "classesinassembly": [
+        { "name": "Assets.Tests.DungeonGenerator.DungeonParametersTest", "coverage": 0, "coveredlines": 0, "coverablelines": 24, "totallines": 54, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 3 },
+        { "name": "CharacterMovementTest", "coverage": 0, "coveredlines": 0, "coverablelines": 39, "totallines": 71, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 4 },
+        { "name": "DungeonComponentsTest", "coverage": 0, "coveredlines": 0, "coverablelines": 16, "totallines": 37, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 3 },
+        { "name": "DungeonGeneratorTest", "coverage": 0, "coveredlines": 0, "coverablelines": 16, "totallines": 50, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 3 },
+        { "name": "DungeonMasterRulesetTest", "coverage": 0, "coveredlines": 0, "coverablelines": 43, "totallines": 77, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 4 },
+        { "name": "DungeonMasterRuleTest", "coverage": 0, "coveredlines": 0, "coverablelines": 20, "totallines": 53, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 5 },
+        { "name": "DungeonMasterTests", "coverage": 0, "coveredlines": 0, "coverablelines": 65, "totallines": 130, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 9 },
+        { "name": "DungeonPlayabilityTest", "coverage": 0, "coveredlines": 0, "coverablelines": 16, "totallines": 38, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 3 },
+        { "name": "GameSceneManagerTests", "coverage": 0, "coveredlines": 0, "coverablelines": 17, "totallines": 41, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 3 },
+        { "name": "GraphGrammarTests", "coverage": 22, "coveredlines": 11, "coverablelines": 50, "totallines": 94, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 71.4, "coveredmethods": 5, "totalmethods": 7 },
+        { "name": "GraphTests", "coverage": 0, "coveredlines": 0, "coverablelines": 89, "totallines": 153, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 13 },
+        { "name": "PlayerCameraTests", "coverage": 0, "coveredlines": 0, "coverablelines": 54, "totallines": 103, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 6 },
+        { "name": "PlayerControllerTests", "coverage": 0, "coveredlines": 0, "coverablelines": 14, "totallines": 35, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 4 },
+        { "name": "RandomWalkTests", "coverage": 0, "coveredlines": 0, "coverablelines": 42, "totallines": 81, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 7 },
+        { "name": "RuleConditionTest", "coverage": 0, "coveredlines": 0, "coverablelines": 18, "totallines": 41, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 5 },
+        { "name": "RuleValueTest", "coverage": 0, "coveredlines": 0, "coverablelines": 18, "totallines": 49, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 4 } ] } ]
   }
 }

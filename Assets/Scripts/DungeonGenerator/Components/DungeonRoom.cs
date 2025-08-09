@@ -1,6 +1,7 @@
 using Assets.DungeonGenerator;
 using Assets.DungeonGenerator.Components;
 using Assets.Scripts.DungeonGenerator.DataStructures;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,8 +10,9 @@ namespace Assets.Scripts.DungeonGenerator.Components
     public class DungeonRoom : MonoBehaviour
     {
         public Bounds Bounds { get; private set; }
-
         public Dictionary<GameObject, int> Contents { get; internal set; }
+
+
         private List<GameObject> walls;
 
         private void Awake()
@@ -109,13 +111,67 @@ namespace Assets.Scripts.DungeonGenerator.Components
             float spawnRate = dungeon.Parameter("enemySpawnRate").Value();
             Range<float> enemiesPerRoom = dungeon.Parameter("enemiesPerRoom").Range();
 
-            if (Random.value > spawnRate)
+            if (UnityEngine.Random.value > spawnRate)
             {
                 return;
             }
-            int count = Mathf.RoundToInt(Random.Range(enemiesPerRoom.min, enemiesPerRoom.max));
+            int count = Mathf.RoundToInt(UnityEngine.Random.Range(enemiesPerRoom.min, enemiesPerRoom.max));
 
             Contents.Add(dungeon.Components.enemies[0], count);
+        }
+    }
+
+    public class DungeonFlowNode
+    {
+     
+        public RoomType Type { get; }
+
+        public DungeonFlowNode(string type)
+        {
+            switch (type.ToLower())
+            {
+                case "explore":
+                {
+                    Type = RoomType.EXPLORE;
+                    break;
+                }
+                case "combat":
+                {
+                    Type = RoomType.COMBAT;
+                    break;
+                }
+                case "item":
+                {
+                    Type = RoomType.ITEM;
+                    break;
+                }
+                case "start":
+                {
+                    Type = RoomType.START;
+                    break;
+                }
+                case "end":
+                {
+                    Type = RoomType.END;
+                    break;
+                }
+            }
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is DungeonFlowNode room &&
+                   Type == room.Type;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Type);
+        }
+
+        public override string ToString()
+        {
+            return Type.ToString();
         }
     }
 }

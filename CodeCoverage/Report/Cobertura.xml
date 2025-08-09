@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage line-rate="0.211152416356877" branch-rate="1" lines-covered="284" lines-valid="1345" branches-covered="0" branches-valid="0" complexity="0" version="0" timestamp="1754392205">
+<coverage line-rate="0.0164874551971326" branch-rate="1" lines-covered="23" lines-valid="1395" branches-covered="0" branches-valid="0" complexity="0" version="0" timestamp="1754522843">
   <sources />
   <packages>
-    <package name="Assembly-CSharp" line-rate="0.0376884422110553" branch-rate="1" complexity="0">
+    <package name="Assembly-CSharp" line-rate="0.00251256281407035" branch-rate="1" complexity="0">
       <classes>
         <class name="Assets.PointUtils" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/PointUtils.cs" line-rate="0" branch-rate="1" complexity="NaN">
           <methods>
@@ -163,20 +163,20 @@
             <line number="40" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="EnemyController" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Scripts/Enemies/EnemyController.cs" line-rate="0.785714285714286" branch-rate="1" complexity="0">
+        <class name="EnemyController" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Scripts/Enemies/EnemyController.cs" line-rate="0.0714285714285714" branch-rate="1" complexity="0">
           <methods>
-            <method name="Start" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="Start" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="20" hits="5" branch="false" />
-                <line number="21" hits="5" branch="false" />
-                <line number="22" hits="5" branch="false" />
-                <line number="23" hits="5" branch="false" />
-                <line number="26" hits="5" branch="false" />
-                <line number="27" hits="5" branch="false" />
-                <line number="29" hits="5" branch="false" />
-                <line number="30" hits="5" branch="false" />
-                <line number="31" hits="5" branch="false" />
-                <line number="33" hits="5" branch="false" />
+                <line number="20" hits="0" branch="false" />
+                <line number="21" hits="0" branch="false" />
+                <line number="22" hits="0" branch="false" />
+                <line number="23" hits="0" branch="false" />
+                <line number="26" hits="0" branch="false" />
+                <line number="27" hits="0" branch="false" />
+                <line number="29" hits="0" branch="false" />
+                <line number="30" hits="0" branch="false" />
+                <line number="31" hits="0" branch="false" />
+                <line number="33" hits="0" branch="false" />
               </lines>
             </method>
             <method name="Hit" signature="()" line-rate="0" branch-rate="1" complexity="0">
@@ -188,43 +188,43 @@
             </method>
             <method name="EnemyController" signature="()" line-rate="1" branch-rate="1" complexity="0">
               <lines>
-                <line number="11" hits="22" branch="false" />
+                <line number="11" hits="1" branch="false" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="11" hits="22" branch="false" />
-            <line number="20" hits="5" branch="false" />
-            <line number="21" hits="5" branch="false" />
-            <line number="22" hits="5" branch="false" />
-            <line number="23" hits="5" branch="false" />
-            <line number="26" hits="5" branch="false" />
-            <line number="27" hits="5" branch="false" />
-            <line number="29" hits="5" branch="false" />
-            <line number="30" hits="5" branch="false" />
-            <line number="31" hits="5" branch="false" />
-            <line number="33" hits="5" branch="false" />
+            <line number="11" hits="1" branch="false" />
+            <line number="20" hits="0" branch="false" />
+            <line number="21" hits="0" branch="false" />
+            <line number="22" hits="0" branch="false" />
+            <line number="23" hits="0" branch="false" />
+            <line number="26" hits="0" branch="false" />
+            <line number="27" hits="0" branch="false" />
+            <line number="29" hits="0" branch="false" />
+            <line number="30" hits="0" branch="false" />
+            <line number="31" hits="0" branch="false" />
+            <line number="33" hits="0" branch="false" />
             <line number="48" hits="0" branch="false" />
             <line number="50" hits="0" branch="false" />
             <line number="51" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="HealthBar" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/HealthBar.cs" line-rate="0.285714285714286" branch-rate="1" complexity="0">
+        <class name="HealthBar" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/HealthBar.cs" line-rate="0" branch-rate="1" complexity="0">
           <methods>
-            <method name="Start" signature="()" line-rate="0.333333333333333" branch-rate="1" complexity="0">
+            <method name="Start" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="13" hits="5" branch="false" />
-                <line number="14" hits="5" branch="false" />
+                <line number="13" hits="0" branch="false" />
+                <line number="14" hits="0" branch="false" />
                 <line number="15" hits="0" branch="false" />
                 <line number="17" hits="0" branch="false" />
                 <line number="18" hits="0" branch="false" />
                 <line number="19" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="Update" signature="()" line-rate="0.5" branch-rate="1" complexity="0">
+            <method name="Update" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="22" hits="10" branch="false" />
-                <line number="24" hits="10" branch="false" />
+                <line number="22" hits="0" branch="false" />
+                <line number="24" hits="0" branch="false" />
                 <line number="25" hits="0" branch="false" />
                 <line number="26" hits="0" branch="false" />
               </lines>
@@ -239,14 +239,14 @@
             </method>
           </methods>
           <lines>
-            <line number="13" hits="5" branch="false" />
-            <line number="14" hits="5" branch="false" />
+            <line number="13" hits="0" branch="false" />
+            <line number="14" hits="0" branch="false" />
             <line number="15" hits="0" branch="false" />
             <line number="17" hits="0" branch="false" />
             <line number="18" hits="0" branch="false" />
             <line number="19" hits="0" branch="false" />
-            <line number="22" hits="10" branch="false" />
-            <line number="24" hits="10" branch="false" />
+            <line number="22" hits="0" branch="false" />
+            <line number="24" hits="0" branch="false" />
             <line number="25" hits="0" branch="false" />
             <line number="26" hits="0" branch="false" />
             <line number="29" hits="0" branch="false" />
@@ -1468,7 +1468,7 @@
         </class>
       </classes>
     </package>
-    <package name="CombatSystem" line-rate="0.290697674418605" branch-rate="1" complexity="0">
+    <package name="CombatSystem" line-rate="0.0813953488372093" branch-rate="1" complexity="0">
       <classes>
         <class name="Assets.Combat.NpcFighter" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Scripts/Combat/NpcFighter.cs" line-rate="0" branch-rate="1" complexity="0">
           <methods>
@@ -1484,29 +1484,29 @@
             <line number="10" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="Assets.CombatSystem.Fighter" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Scripts/Combat/Fighter.cs" line-rate="0.333333333333333" branch-rate="1" complexity="0">
+        <class name="Assets.CombatSystem.Fighter" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Scripts/Combat/Fighter.cs" line-rate="0.0833333333333333" branch-rate="1" complexity="0">
           <methods>
-            <method name="Awake" signature="()" line-rate="0.785714285714286" branch-rate="1" complexity="0">
+            <method name="Awake" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="39" hits="5" branch="false" />
-                <line number="40" hits="5" branch="false" />
-                <line number="41" hits="5" branch="false" />
-                <line number="43" hits="5" branch="false" />
-                <line number="44" hits="5" branch="false" />
-                <line number="46" hits="5" branch="false" />
-                <line number="48" hits="5" branch="false" />
+                <line number="39" hits="0" branch="false" />
+                <line number="40" hits="0" branch="false" />
+                <line number="41" hits="0" branch="false" />
+                <line number="43" hits="0" branch="false" />
+                <line number="44" hits="0" branch="false" />
+                <line number="46" hits="0" branch="false" />
+                <line number="48" hits="0" branch="false" />
                 <line number="49" hits="0" branch="false" />
                 <line number="50" hits="0" branch="false" />
                 <line number="51" hits="0" branch="false" />
-                <line number="53" hits="5" branch="false" />
-                <line number="54" hits="5" branch="false" />
-                <line number="56" hits="5" branch="false" />
-                <line number="57" hits="5" branch="false" />
+                <line number="53" hits="0" branch="false" />
+                <line number="54" hits="0" branch="false" />
+                <line number="56" hits="0" branch="false" />
+                <line number="57" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="GetStat" signature="(Assets.CombatSystem.FighterStats)" line-rate="1" branch-rate="1" complexity="NaN">
+            <method name="GetStat" signature="(Assets.CombatSystem.FighterStats)" line-rate="0" branch-rate="1" complexity="NaN">
               <lines>
-                <line number="59" hits="5" branch="false" />
+                <line number="59" hits="0" branch="false" />
               </lines>
             </method>
             <method name="Attack" signature="()" line-rate="0" branch-rate="1" complexity="0">
@@ -1550,14 +1550,14 @@
                 <line number="95" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="Update" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="Update" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="98" hits="10" branch="false" />
-                <line number="99" hits="10" branch="false" />
-                <line number="100" hits="10" branch="false" />
-                <line number="101" hits="10" branch="false" />
-                <line number="102" hits="10" branch="false" />
-                <line number="103" hits="10" branch="false" />
+                <line number="98" hits="0" branch="false" />
+                <line number="99" hits="0" branch="false" />
+                <line number="100" hits="0" branch="false" />
+                <line number="101" hits="0" branch="false" />
+                <line number="102" hits="0" branch="false" />
+                <line number="103" hits="0" branch="false" />
               </lines>
             </method>
             <method name="OnTriggerEnter" signature="(UnityEngine.Collider)" line-rate="0" branch-rate="1" complexity="NaN">
@@ -1598,37 +1598,37 @@
             </method>
             <method name="Fighter" signature="()" line-rate="1" branch-rate="1" complexity="0">
               <lines>
-                <line number="13" hits="34" branch="false" />
-                <line number="16" hits="34" branch="false" />
-                <line number="25" hits="34" branch="false" />
-                <line number="27" hits="34" branch="false" />
-                <line number="30" hits="34" branch="false" />
-                <line number="31" hits="34" branch="false" />
+                <line number="13" hits="3" branch="false" />
+                <line number="16" hits="3" branch="false" />
+                <line number="25" hits="3" branch="false" />
+                <line number="27" hits="3" branch="false" />
+                <line number="30" hits="3" branch="false" />
+                <line number="31" hits="3" branch="false" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="13" hits="34" branch="false" />
-            <line number="16" hits="34" branch="false" />
-            <line number="25" hits="34" branch="false" />
-            <line number="27" hits="34" branch="false" />
-            <line number="30" hits="34" branch="false" />
-            <line number="31" hits="34" branch="false" />
-            <line number="39" hits="5" branch="false" />
-            <line number="40" hits="5" branch="false" />
-            <line number="41" hits="5" branch="false" />
-            <line number="43" hits="5" branch="false" />
-            <line number="44" hits="5" branch="false" />
-            <line number="46" hits="5" branch="false" />
-            <line number="48" hits="5" branch="false" />
+            <line number="13" hits="3" branch="false" />
+            <line number="16" hits="3" branch="false" />
+            <line number="25" hits="3" branch="false" />
+            <line number="27" hits="3" branch="false" />
+            <line number="30" hits="3" branch="false" />
+            <line number="31" hits="3" branch="false" />
+            <line number="39" hits="0" branch="false" />
+            <line number="40" hits="0" branch="false" />
+            <line number="41" hits="0" branch="false" />
+            <line number="43" hits="0" branch="false" />
+            <line number="44" hits="0" branch="false" />
+            <line number="46" hits="0" branch="false" />
+            <line number="48" hits="0" branch="false" />
             <line number="49" hits="0" branch="false" />
             <line number="50" hits="0" branch="false" />
             <line number="51" hits="0" branch="false" />
-            <line number="53" hits="5" branch="false" />
-            <line number="54" hits="5" branch="false" />
-            <line number="56" hits="5" branch="false" />
-            <line number="57" hits="5" branch="false" />
-            <line number="59" hits="5" branch="false" />
+            <line number="53" hits="0" branch="false" />
+            <line number="54" hits="0" branch="false" />
+            <line number="56" hits="0" branch="false" />
+            <line number="57" hits="0" branch="false" />
+            <line number="59" hits="0" branch="false" />
             <line number="62" hits="0" branch="false" />
             <line number="63" hits="0" branch="false" />
             <line number="64" hits="0" branch="false" />
@@ -1654,12 +1654,12 @@
             <line number="93" hits="0" branch="false" />
             <line number="94" hits="0" branch="false" />
             <line number="95" hits="0" branch="false" />
-            <line number="98" hits="10" branch="false" />
-            <line number="99" hits="10" branch="false" />
-            <line number="100" hits="10" branch="false" />
-            <line number="101" hits="10" branch="false" />
-            <line number="102" hits="10" branch="false" />
-            <line number="103" hits="10" branch="false" />
+            <line number="98" hits="0" branch="false" />
+            <line number="99" hits="0" branch="false" />
+            <line number="100" hits="0" branch="false" />
+            <line number="101" hits="0" branch="false" />
+            <line number="102" hits="0" branch="false" />
+            <line number="103" hits="0" branch="false" />
             <line number="112" hits="0" branch="false" />
             <line number="113" hits="0" branch="false" />
             <line number="115" hits="0" branch="false" />
@@ -1737,12 +1737,12 @@
             </method>
             <method name="Weapon" signature="()" line-rate="1" branch-rate="1" complexity="0">
               <lines>
-                <line number="6" hits="13" branch="false" />
+                <line number="6" hits="3" branch="false" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="6" hits="13" branch="false" />
+            <line number="6" hits="3" branch="false" />
             <line number="9" hits="0" branch="false" />
             <line number="10" hits="0" branch="false" />
             <line number="11" hits="0" branch="false" />
@@ -1795,14 +1795,14 @@
             </method>
             <method name="PlayableFighter" signature="()" line-rate="1" branch-rate="1" complexity="0">
               <lines>
-                <line number="11" hits="12" branch="false" />
-                <line number="15" hits="12" branch="false" />
+                <line number="11" hits="2" branch="false" />
+                <line number="15" hits="2" branch="false" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="11" hits="12" branch="false" />
-            <line number="15" hits="12" branch="false" />
+            <line number="11" hits="2" branch="false" />
+            <line number="15" hits="2" branch="false" />
             <line number="18" hits="0" branch="false" />
             <line number="19" hits="0" branch="false" />
             <line number="20" hits="0" branch="false" />
@@ -1902,14 +1902,14 @@
             </method>
             <method name="PlayerCamera" signature="()" line-rate="1" branch-rate="1" complexity="0">
               <lines>
-                <line number="15" hits="2" branch="false" />
+                <line number="15" hits="1" branch="false" />
               </lines>
             </method>
           </methods>
           <lines>
             <line number="9" hits="0" branch="false" />
             <line number="12" hits="0" branch="false" />
-            <line number="15" hits="2" branch="false" />
+            <line number="15" hits="1" branch="false" />
             <line number="21" hits="0" branch="false" />
             <line number="22" hits="0" branch="false" />
             <line number="24" hits="0" branch="false" />
@@ -1975,12 +1975,12 @@
             </method>
             <method name="PlayerController" signature="()" line-rate="1" branch-rate="1" complexity="0">
               <lines>
-                <line number="12" hits="12" branch="false" />
+                <line number="12" hits="2" branch="false" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="12" hits="12" branch="false" />
+            <line number="12" hits="2" branch="false" />
             <line number="26" hits="0" branch="false" />
             <line number="27" hits="0" branch="false" />
             <line number="28" hits="0" branch="false" />
@@ -3128,37 +3128,37 @@
         </class>
       </classes>
     </package>
-    <package name="Tests" line-rate="0.488798370672098" branch-rate="1" complexity="0">
+    <package name="Tests" line-rate="0.0203327171903882" branch-rate="1" complexity="0">
       <classes>
-        <class name="Assets.Tests.DungeonGenerator.DungeonParametersTest" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonGenerator/DungeonParametersTest.cs" line-rate="0.708333333333333" branch-rate="1" complexity="0">
+        <class name="Assets.Tests.DungeonGenerator.DungeonParametersTest" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonGenerator/DungeonParametersTest.cs" line-rate="0" branch-rate="1" complexity="0">
           <methods>
-            <method name="SetUp" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="SetUp" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="16" hits="2" branch="false" />
-                <line number="17" hits="2" branch="false" />
-                <line number="18" hits="2" branch="false" />
+                <line number="16" hits="0" branch="false" />
+                <line number="17" hits="0" branch="false" />
+                <line number="18" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="ShouldGetAnyParameter" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="ShouldGetAnyParameter" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="22" hits="1" branch="false" />
-                <line number="23" hits="1" branch="false" />
-                <line number="24" hits="1" branch="false" />
-                <line number="26" hits="1" branch="false" />
-                <line number="28" hits="1" branch="false" />
-                <line number="29" hits="1" branch="false" />
-                <line number="31" hits="1" branch="false" />
-                <line number="32" hits="1" branch="false" />
-                <line number="33" hits="1" branch="false" />
+                <line number="22" hits="0" branch="false" />
+                <line number="23" hits="0" branch="false" />
+                <line number="24" hits="0" branch="false" />
+                <line number="26" hits="0" branch="false" />
+                <line number="28" hits="0" branch="false" />
+                <line number="29" hits="0" branch="false" />
+                <line number="31" hits="0" branch="false" />
+                <line number="32" hits="0" branch="false" />
+                <line number="33" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="ShouldIgnoreDuplicateParameters" signature="()" line-rate="0.416666666666667" branch-rate="1" complexity="0">
+            <method name="ShouldIgnoreDuplicateParameters" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="37" hits="1" branch="false" />
-                <line number="38" hits="1" branch="false" />
-                <line number="39" hits="1" branch="false" />
-                <line number="41" hits="1" branch="false" />
-                <line number="42" hits="1" branch="false" />
+                <line number="37" hits="0" branch="false" />
+                <line number="38" hits="0" branch="false" />
+                <line number="39" hits="0" branch="false" />
+                <line number="41" hits="0" branch="false" />
+                <line number="42" hits="0" branch="false" />
                 <line number="44" hits="0" branch="false" />
                 <line number="45" hits="0" branch="false" />
                 <line number="47" hits="0" branch="false" />
@@ -3170,23 +3170,23 @@
             </method>
           </methods>
           <lines>
-            <line number="16" hits="2" branch="false" />
-            <line number="17" hits="2" branch="false" />
-            <line number="18" hits="2" branch="false" />
-            <line number="22" hits="1" branch="false" />
-            <line number="23" hits="1" branch="false" />
-            <line number="24" hits="1" branch="false" />
-            <line number="26" hits="1" branch="false" />
-            <line number="28" hits="1" branch="false" />
-            <line number="29" hits="1" branch="false" />
-            <line number="31" hits="1" branch="false" />
-            <line number="32" hits="1" branch="false" />
-            <line number="33" hits="1" branch="false" />
-            <line number="37" hits="1" branch="false" />
-            <line number="38" hits="1" branch="false" />
-            <line number="39" hits="1" branch="false" />
-            <line number="41" hits="1" branch="false" />
-            <line number="42" hits="1" branch="false" />
+            <line number="16" hits="0" branch="false" />
+            <line number="17" hits="0" branch="false" />
+            <line number="18" hits="0" branch="false" />
+            <line number="22" hits="0" branch="false" />
+            <line number="23" hits="0" branch="false" />
+            <line number="24" hits="0" branch="false" />
+            <line number="26" hits="0" branch="false" />
+            <line number="28" hits="0" branch="false" />
+            <line number="29" hits="0" branch="false" />
+            <line number="31" hits="0" branch="false" />
+            <line number="32" hits="0" branch="false" />
+            <line number="33" hits="0" branch="false" />
+            <line number="37" hits="0" branch="false" />
+            <line number="38" hits="0" branch="false" />
+            <line number="39" hits="0" branch="false" />
+            <line number="41" hits="0" branch="false" />
+            <line number="42" hits="0" branch="false" />
             <line number="44" hits="0" branch="false" />
             <line number="45" hits="0" branch="false" />
             <line number="47" hits="0" branch="false" />
@@ -3196,23 +3196,23 @@
             <line number="52" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="CharacterMovementTest" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/PlayerCharacter/CharacterMovementTest.cs" line-rate="0.230769230769231" branch-rate="1" complexity="0">
+        <class name="CharacterMovementTest" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/PlayerCharacter/CharacterMovementTest.cs" line-rate="0" branch-rate="1" complexity="0">
           <methods>
-            <method name="Setup" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="Setup" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="17" hits="2" branch="false" />
-                <line number="18" hits="2" branch="false" />
-                <line number="19" hits="2" branch="false" />
-                <line number="20" hits="2" branch="false" />
-                <line number="21" hits="2" branch="false" />
-                <line number="23" hits="2" branch="false" />
-                <line number="24" hits="2" branch="false" />
-                <line number="25" hits="2" branch="false" />
+                <line number="17" hits="0" branch="false" />
+                <line number="18" hits="0" branch="false" />
+                <line number="19" hits="0" branch="false" />
+                <line number="20" hits="0" branch="false" />
+                <line number="21" hits="0" branch="false" />
+                <line number="23" hits="0" branch="false" />
+                <line number="24" hits="0" branch="false" />
+                <line number="25" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="CharacterMovementTest" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="CharacterMovementTest" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="11" hits="1" branch="false" />
+                <line number="11" hits="0" branch="false" />
               </lines>
             </method>
             <method name="ShouldBeAbleToAttackEnemy" signature="()" line-rate="0" branch-rate="1" complexity="0">
@@ -3255,15 +3255,15 @@
             </method>
           </methods>
           <lines>
-            <line number="11" hits="1" branch="false" />
-            <line number="17" hits="2" branch="false" />
-            <line number="18" hits="2" branch="false" />
-            <line number="19" hits="2" branch="false" />
-            <line number="20" hits="2" branch="false" />
-            <line number="21" hits="2" branch="false" />
-            <line number="23" hits="2" branch="false" />
-            <line number="24" hits="2" branch="false" />
-            <line number="25" hits="2" branch="false" />
+            <line number="11" hits="0" branch="false" />
+            <line number="17" hits="0" branch="false" />
+            <line number="18" hits="0" branch="false" />
+            <line number="19" hits="0" branch="false" />
+            <line number="20" hits="0" branch="false" />
+            <line number="21" hits="0" branch="false" />
+            <line number="23" hits="0" branch="false" />
+            <line number="24" hits="0" branch="false" />
+            <line number="25" hits="0" branch="false" />
             <line number="29" hits="0" branch="false" />
             <line number="30" hits="0" branch="false" />
             <line number="32" hits="0" branch="false" />
@@ -3296,13 +3296,13 @@
             <line number="70" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="DungeonComponentsTest" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonGenerator/DungeonComponentsTest.cs" line-rate="0.1875" branch-rate="1" complexity="0">
+        <class name="DungeonComponentsTest" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonGenerator/DungeonComponentsTest.cs" line-rate="0" branch-rate="1" complexity="0">
           <methods>
-            <method name="Setup" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="Setup" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="13" hits="1" branch="false" />
-                <line number="14" hits="1" branch="false" />
-                <line number="15" hits="1" branch="false" />
+                <line number="13" hits="0" branch="false" />
+                <line number="14" hits="0" branch="false" />
+                <line number="15" hits="0" branch="false" />
               </lines>
             </method>
             <method name="HasReachedDestination" signature="(UnityEngine.Transform, UnityEngine.Transform)" line-rate="0" branch-rate="1" complexity="NaN">
@@ -3328,9 +3328,9 @@
             </method>
           </methods>
           <lines>
-            <line number="13" hits="1" branch="false" />
-            <line number="14" hits="1" branch="false" />
-            <line number="15" hits="1" branch="false" />
+            <line number="13" hits="0" branch="false" />
+            <line number="14" hits="0" branch="false" />
+            <line number="15" hits="0" branch="false" />
             <line number="19" hits="0" branch="false" />
             <line number="20" hits="0" branch="false" />
             <line number="21" hits="0" branch="false" />
@@ -3346,13 +3346,13 @@
             <line number="36" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="DungeonGeneratorTest" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonGenerator/DungeonGeneratorTest.cs" line-rate="0.1875" branch-rate="1" complexity="0">
+        <class name="DungeonGeneratorTest" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonGenerator/DungeonGeneratorTest.cs" line-rate="0" branch-rate="1" complexity="0">
           <methods>
-            <method name="Setup" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="Setup" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="14" hits="2" branch="false" />
-                <line number="15" hits="2" branch="false" />
-                <line number="16" hits="2" branch="false" />
+                <line number="14" hits="0" branch="false" />
+                <line number="15" hits="0" branch="false" />
+                <line number="16" hits="0" branch="false" />
               </lines>
             </method>
             <method name="ShouldClearAllDungeonComponents" signature="()" line-rate="0" branch-rate="1" complexity="0">
@@ -3378,9 +3378,9 @@
             </method>
           </methods>
           <lines>
-            <line number="14" hits="2" branch="false" />
-            <line number="15" hits="2" branch="false" />
-            <line number="16" hits="2" branch="false" />
+            <line number="14" hits="0" branch="false" />
+            <line number="15" hits="0" branch="false" />
+            <line number="16" hits="0" branch="false" />
             <line number="20" hits="0" branch="false" />
             <line number="29" hits="0" branch="false" />
             <line number="30" hits="0" branch="false" />
@@ -3396,181 +3396,181 @@
             <line number="49" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="DungeonMasterRulesetTest" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonMaster/DungeonMasterRulesetTest.cs" line-rate="1" branch-rate="1" complexity="0">
+        <class name="DungeonMasterRulesetTest" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonMaster/DungeonMasterRulesetTest.cs" line-rate="0" branch-rate="1" complexity="0">
           <methods>
-            <method name="SetUp" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="SetUp" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="15" hits="3" branch="false" />
-                <line number="16" hits="3" branch="false" />
-                <line number="17" hits="3" branch="false" />
+                <line number="15" hits="0" branch="false" />
+                <line number="16" hits="0" branch="false" />
+                <line number="17" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="ShouldLoopThroughRuleset" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="ShouldLoopThroughRuleset" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="21" hits="1" branch="false" />
-                <line number="22" hits="1" branch="false" />
-                <line number="23" hits="4" branch="false" />
-                <line number="24" hits="1" branch="false" />
-                <line number="25" hits="1" branch="false" />
+                <line number="21" hits="0" branch="false" />
+                <line number="22" hits="0" branch="false" />
+                <line number="23" hits="0" branch="false" />
+                <line number="24" hits="0" branch="false" />
+                <line number="25" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="ShouldHaveRulesAfterParsingJson" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="ShouldHaveRulesAfterParsingJson" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="29" hits="1" branch="false" />
-                <line number="30" hits="1" branch="false" />
-                <line number="31" hits="1" branch="false" />
-                <line number="32" hits="3" branch="false" />
-                <line number="33" hits="3" branch="false" />
-                <line number="34" hits="1" branch="false" />
-                <line number="35" hits="1" branch="false" />
-                <line number="36" hits="1" branch="false" />
-                <line number="38" hits="3" branch="false" />
-                <line number="40" hits="1" branch="false" />
-                <line number="41" hits="1" branch="false" />
-                <line number="42" hits="1" branch="false" />
-                <line number="43" hits="1" branch="false" />
-                <line number="44" hits="1" branch="false" />
-                <line number="45" hits="1" branch="false" />
-                <line number="47" hits="1" branch="false" />
-                <line number="49" hits="1" branch="false" />
-                <line number="51" hits="1" branch="false" />
-                <line number="52" hits="1" branch="false" />
-                <line number="54" hits="1" branch="false" />
-                <line number="55" hits="1" branch="false" />
-                <line number="56" hits="1" branch="false" />
-                <line number="57" hits="1" branch="false" />
+                <line number="29" hits="0" branch="false" />
+                <line number="30" hits="0" branch="false" />
+                <line number="31" hits="0" branch="false" />
+                <line number="32" hits="0" branch="false" />
+                <line number="33" hits="0" branch="false" />
+                <line number="34" hits="0" branch="false" />
+                <line number="35" hits="0" branch="false" />
+                <line number="36" hits="0" branch="false" />
+                <line number="38" hits="0" branch="false" />
+                <line number="40" hits="0" branch="false" />
+                <line number="41" hits="0" branch="false" />
+                <line number="42" hits="0" branch="false" />
+                <line number="43" hits="0" branch="false" />
+                <line number="44" hits="0" branch="false" />
+                <line number="45" hits="0" branch="false" />
+                <line number="47" hits="0" branch="false" />
+                <line number="49" hits="0" branch="false" />
+                <line number="51" hits="0" branch="false" />
+                <line number="52" hits="0" branch="false" />
+                <line number="54" hits="0" branch="false" />
+                <line number="55" hits="0" branch="false" />
+                <line number="56" hits="0" branch="false" />
+                <line number="57" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="ShouldIgnoreDuplicateRules" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="ShouldIgnoreDuplicateRules" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="61" hits="1" branch="false" />
-                <line number="62" hits="1" branch="false" />
-                <line number="63" hits="1" branch="false" />
-                <line number="65" hits="1" branch="false" />
-                <line number="66" hits="1" branch="false" />
-                <line number="68" hits="11" branch="false" />
-                <line number="69" hits="4" branch="false" />
-                <line number="71" hits="4" branch="false" />
-                <line number="72" hits="4" branch="false" />
-                <line number="74" hits="1" branch="false" />
-                <line number="75" hits="1" branch="false" />
-                <line number="76" hits="1" branch="false" />
+                <line number="61" hits="0" branch="false" />
+                <line number="62" hits="0" branch="false" />
+                <line number="63" hits="0" branch="false" />
+                <line number="65" hits="0" branch="false" />
+                <line number="66" hits="0" branch="false" />
+                <line number="68" hits="0" branch="false" />
+                <line number="69" hits="0" branch="false" />
+                <line number="71" hits="0" branch="false" />
+                <line number="72" hits="0" branch="false" />
+                <line number="74" hits="0" branch="false" />
+                <line number="75" hits="0" branch="false" />
+                <line number="76" hits="0" branch="false" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="15" hits="3" branch="false" />
-            <line number="16" hits="3" branch="false" />
-            <line number="17" hits="3" branch="false" />
-            <line number="21" hits="1" branch="false" />
-            <line number="22" hits="1" branch="false" />
-            <line number="23" hits="4" branch="false" />
-            <line number="24" hits="1" branch="false" />
-            <line number="25" hits="1" branch="false" />
-            <line number="29" hits="1" branch="false" />
-            <line number="30" hits="1" branch="false" />
-            <line number="31" hits="1" branch="false" />
-            <line number="32" hits="3" branch="false" />
-            <line number="33" hits="3" branch="false" />
-            <line number="34" hits="1" branch="false" />
-            <line number="35" hits="1" branch="false" />
-            <line number="36" hits="1" branch="false" />
-            <line number="38" hits="3" branch="false" />
-            <line number="40" hits="1" branch="false" />
-            <line number="41" hits="1" branch="false" />
-            <line number="42" hits="1" branch="false" />
-            <line number="43" hits="1" branch="false" />
-            <line number="44" hits="1" branch="false" />
-            <line number="45" hits="1" branch="false" />
-            <line number="47" hits="1" branch="false" />
-            <line number="49" hits="1" branch="false" />
-            <line number="51" hits="1" branch="false" />
-            <line number="52" hits="1" branch="false" />
-            <line number="54" hits="1" branch="false" />
-            <line number="55" hits="1" branch="false" />
-            <line number="56" hits="1" branch="false" />
-            <line number="57" hits="1" branch="false" />
-            <line number="61" hits="1" branch="false" />
-            <line number="62" hits="1" branch="false" />
-            <line number="63" hits="1" branch="false" />
-            <line number="65" hits="1" branch="false" />
-            <line number="66" hits="1" branch="false" />
-            <line number="68" hits="11" branch="false" />
-            <line number="69" hits="4" branch="false" />
-            <line number="71" hits="4" branch="false" />
-            <line number="72" hits="4" branch="false" />
-            <line number="74" hits="1" branch="false" />
-            <line number="75" hits="1" branch="false" />
-            <line number="76" hits="1" branch="false" />
+            <line number="15" hits="0" branch="false" />
+            <line number="16" hits="0" branch="false" />
+            <line number="17" hits="0" branch="false" />
+            <line number="21" hits="0" branch="false" />
+            <line number="22" hits="0" branch="false" />
+            <line number="23" hits="0" branch="false" />
+            <line number="24" hits="0" branch="false" />
+            <line number="25" hits="0" branch="false" />
+            <line number="29" hits="0" branch="false" />
+            <line number="30" hits="0" branch="false" />
+            <line number="31" hits="0" branch="false" />
+            <line number="32" hits="0" branch="false" />
+            <line number="33" hits="0" branch="false" />
+            <line number="34" hits="0" branch="false" />
+            <line number="35" hits="0" branch="false" />
+            <line number="36" hits="0" branch="false" />
+            <line number="38" hits="0" branch="false" />
+            <line number="40" hits="0" branch="false" />
+            <line number="41" hits="0" branch="false" />
+            <line number="42" hits="0" branch="false" />
+            <line number="43" hits="0" branch="false" />
+            <line number="44" hits="0" branch="false" />
+            <line number="45" hits="0" branch="false" />
+            <line number="47" hits="0" branch="false" />
+            <line number="49" hits="0" branch="false" />
+            <line number="51" hits="0" branch="false" />
+            <line number="52" hits="0" branch="false" />
+            <line number="54" hits="0" branch="false" />
+            <line number="55" hits="0" branch="false" />
+            <line number="56" hits="0" branch="false" />
+            <line number="57" hits="0" branch="false" />
+            <line number="61" hits="0" branch="false" />
+            <line number="62" hits="0" branch="false" />
+            <line number="63" hits="0" branch="false" />
+            <line number="65" hits="0" branch="false" />
+            <line number="66" hits="0" branch="false" />
+            <line number="68" hits="0" branch="false" />
+            <line number="69" hits="0" branch="false" />
+            <line number="71" hits="0" branch="false" />
+            <line number="72" hits="0" branch="false" />
+            <line number="74" hits="0" branch="false" />
+            <line number="75" hits="0" branch="false" />
+            <line number="76" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="DungeonMasterRuleTest" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonMaster/DungeonMasterRuleTest.cs" line-rate="1" branch-rate="1" complexity="0">
+        <class name="DungeonMasterRuleTest" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonMaster/DungeonMasterRuleTest.cs" line-rate="0" branch-rate="1" complexity="0">
           <methods>
-            <method name="SetUp" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="SetUp" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="11" hits="4" branch="false" />
-                <line number="12" hits="4" branch="false" />
-                <line number="18" hits="4" branch="false" />
-                <line number="24" hits="4" branch="false" />
-                <line number="25" hits="4" branch="false" />
+                <line number="11" hits="0" branch="false" />
+                <line number="12" hits="0" branch="false" />
+                <line number="18" hits="0" branch="false" />
+                <line number="24" hits="0" branch="false" />
+                <line number="25" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="ShouldReturnTrueIfAllConditionsAreMet" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="ShouldReturnTrueIfAllConditionsAreMet" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="29" hits="1" branch="false" />
-                <line number="30" hits="1" branch="false" />
-                <line number="31" hits="1" branch="false" />
+                <line number="29" hits="0" branch="false" />
+                <line number="30" hits="0" branch="false" />
+                <line number="31" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="ShouldReturnFalseIfOneConditionIsNotMet" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="ShouldReturnFalseIfOneConditionIsNotMet" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="35" hits="1" branch="false" />
-                <line number="36" hits="1" branch="false" />
-                <line number="37" hits="1" branch="false" />
+                <line number="35" hits="0" branch="false" />
+                <line number="36" hits="0" branch="false" />
+                <line number="37" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="ShouldReturnNullRuleValueIfConditionsNotMet" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="ShouldReturnNullRuleValueIfConditionsNotMet" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="41" hits="1" branch="false" />
-                <line number="42" hits="1" branch="false" />
-                <line number="43" hits="1" branch="false" />
-                <line number="44" hits="1" branch="false" />
-                <line number="45" hits="1" branch="false" />
+                <line number="41" hits="0" branch="false" />
+                <line number="42" hits="0" branch="false" />
+                <line number="43" hits="0" branch="false" />
+                <line number="44" hits="0" branch="false" />
+                <line number="45" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="ShouldReturnRuleValueIfConditionsMet" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="ShouldReturnRuleValueIfConditionsMet" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="49" hits="1" branch="false" />
-                <line number="50" hits="1" branch="false" />
-                <line number="51" hits="1" branch="false" />
-                <line number="52" hits="1" branch="false" />
+                <line number="49" hits="0" branch="false" />
+                <line number="50" hits="0" branch="false" />
+                <line number="51" hits="0" branch="false" />
+                <line number="52" hits="0" branch="false" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="11" hits="4" branch="false" />
-            <line number="12" hits="4" branch="false" />
-            <line number="18" hits="4" branch="false" />
-            <line number="24" hits="4" branch="false" />
-            <line number="25" hits="4" branch="false" />
-            <line number="29" hits="1" branch="false" />
-            <line number="30" hits="1" branch="false" />
-            <line number="31" hits="1" branch="false" />
-            <line number="35" hits="1" branch="false" />
-            <line number="36" hits="1" branch="false" />
-            <line number="37" hits="1" branch="false" />
-            <line number="41" hits="1" branch="false" />
-            <line number="42" hits="1" branch="false" />
-            <line number="43" hits="1" branch="false" />
-            <line number="44" hits="1" branch="false" />
-            <line number="45" hits="1" branch="false" />
-            <line number="49" hits="1" branch="false" />
-            <line number="50" hits="1" branch="false" />
-            <line number="51" hits="1" branch="false" />
-            <line number="52" hits="1" branch="false" />
+            <line number="11" hits="0" branch="false" />
+            <line number="12" hits="0" branch="false" />
+            <line number="18" hits="0" branch="false" />
+            <line number="24" hits="0" branch="false" />
+            <line number="25" hits="0" branch="false" />
+            <line number="29" hits="0" branch="false" />
+            <line number="30" hits="0" branch="false" />
+            <line number="31" hits="0" branch="false" />
+            <line number="35" hits="0" branch="false" />
+            <line number="36" hits="0" branch="false" />
+            <line number="37" hits="0" branch="false" />
+            <line number="41" hits="0" branch="false" />
+            <line number="42" hits="0" branch="false" />
+            <line number="43" hits="0" branch="false" />
+            <line number="44" hits="0" branch="false" />
+            <line number="45" hits="0" branch="false" />
+            <line number="49" hits="0" branch="false" />
+            <line number="50" hits="0" branch="false" />
+            <line number="51" hits="0" branch="false" />
+            <line number="52" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="DungeonMasterTests" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonMaster/DungeonMasterTests.cs" line-rate="0.0615384615384615" branch-rate="1" complexity="0">
+        <class name="DungeonMasterTests" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonMaster/DungeonMasterTests.cs" line-rate="0" branch-rate="1" complexity="0">
           <methods>
             <method name="TestSetUp" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
@@ -3581,12 +3581,12 @@
                 <line number="129" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="SetUp" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="SetUp" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="19" hits="7" branch="false" />
-                <line number="20" hits="7" branch="false" />
-                <line number="21" hits="7" branch="false" />
-                <line number="22" hits="7" branch="false" />
+                <line number="19" hits="0" branch="false" />
+                <line number="20" hits="0" branch="false" />
+                <line number="21" hits="0" branch="false" />
+                <line number="22" hits="0" branch="false" />
               </lines>
             </method>
             <method name="ShouldGenerateNewDungeonOnClear" signature="()" line-rate="0" branch-rate="1" complexity="0">
@@ -3675,10 +3675,10 @@
             </method>
           </methods>
           <lines>
-            <line number="19" hits="7" branch="false" />
-            <line number="20" hits="7" branch="false" />
-            <line number="21" hits="7" branch="false" />
-            <line number="22" hits="7" branch="false" />
+            <line number="19" hits="0" branch="false" />
+            <line number="20" hits="0" branch="false" />
+            <line number="21" hits="0" branch="false" />
+            <line number="22" hits="0" branch="false" />
             <line number="26" hits="0" branch="false" />
             <line number="27" hits="0" branch="false" />
             <line number="29" hits="0" branch="false" />
@@ -3742,13 +3742,13 @@
             <line number="129" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="DungeonPlayabilityTest" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonGenerator/DungeonPlayabilityTest.cs" line-rate="0.1875" branch-rate="1" complexity="0">
+        <class name="DungeonPlayabilityTest" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonGenerator/DungeonPlayabilityTest.cs" line-rate="0" branch-rate="1" complexity="0">
           <methods>
-            <method name="Setup" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="Setup" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="13" hits="1" branch="false" />
-                <line number="14" hits="1" branch="false" />
-                <line number="15" hits="1" branch="false" />
+                <line number="13" hits="0" branch="false" />
+                <line number="14" hits="0" branch="false" />
+                <line number="15" hits="0" branch="false" />
               </lines>
             </method>
             <method name="HasReachedDestination" signature="(UnityEngine.Transform, UnityEngine.Transform)" line-rate="0" branch-rate="1" complexity="NaN">
@@ -3774,9 +3774,9 @@
             </method>
           </methods>
           <lines>
-            <line number="13" hits="1" branch="false" />
-            <line number="14" hits="1" branch="false" />
-            <line number="15" hits="1" branch="false" />
+            <line number="13" hits="0" branch="false" />
+            <line number="14" hits="0" branch="false" />
+            <line number="15" hits="0" branch="false" />
             <line number="20" hits="0" branch="false" />
             <line number="21" hits="0" branch="false" />
             <line number="22" hits="0" branch="false" />
@@ -3792,157 +3792,291 @@
             <line number="37" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="GameSceneManagerTests" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/GameSceneManagerTests.cs" line-rate="1" branch-rate="1" complexity="0">
+        <class name="GameSceneManagerTests" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/GameSceneManagerTests.cs" line-rate="0" branch-rate="1" complexity="0">
           <methods>
-            <method name="GameManagerPersistsBetweenScenes" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="GameManagerPersistsBetweenScenes" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="32" hits="1" branch="false" />
-                <line number="33" hits="1" branch="false" />
-                <line number="34" hits="1" branch="false" />
-                <line number="35" hits="1" branch="false" />
-                <line number="37" hits="1" branch="false" />
-                <line number="39" hits="1" branch="false" />
-                <line number="40" hits="1" branch="false" />
+                <line number="32" hits="0" branch="false" />
+                <line number="33" hits="0" branch="false" />
+                <line number="34" hits="0" branch="false" />
+                <line number="35" hits="0" branch="false" />
+                <line number="37" hits="0" branch="false" />
+                <line number="39" hits="0" branch="false" />
+                <line number="40" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="GameManagerStartsANewGame" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="GameManagerStartsANewGame" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="22" hits="1" branch="false" />
-                <line number="23" hits="1" branch="false" />
-                <line number="24" hits="1" branch="false" />
-                <line number="25" hits="1" branch="false" />
-                <line number="27" hits="1" branch="false" />
-                <line number="28" hits="1" branch="false" />
+                <line number="22" hits="0" branch="false" />
+                <line number="23" hits="0" branch="false" />
+                <line number="24" hits="0" branch="false" />
+                <line number="25" hits="0" branch="false" />
+                <line number="27" hits="0" branch="false" />
+                <line number="28" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="SetUp" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="SetUp" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="15" hits="2" branch="false" />
-                <line number="16" hits="2" branch="false" />
-                <line number="17" hits="2" branch="false" />
-                <line number="18" hits="2" branch="false" />
+                <line number="15" hits="0" branch="false" />
+                <line number="16" hits="0" branch="false" />
+                <line number="17" hits="0" branch="false" />
+                <line number="18" hits="0" branch="false" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="15" hits="2" branch="false" />
-            <line number="16" hits="2" branch="false" />
-            <line number="17" hits="2" branch="false" />
-            <line number="18" hits="2" branch="false" />
-            <line number="22" hits="1" branch="false" />
-            <line number="23" hits="1" branch="false" />
-            <line number="24" hits="1" branch="false" />
-            <line number="25" hits="1" branch="false" />
-            <line number="27" hits="1" branch="false" />
-            <line number="28" hits="1" branch="false" />
-            <line number="32" hits="1" branch="false" />
-            <line number="33" hits="1" branch="false" />
-            <line number="34" hits="1" branch="false" />
-            <line number="35" hits="1" branch="false" />
-            <line number="37" hits="1" branch="false" />
-            <line number="39" hits="1" branch="false" />
-            <line number="40" hits="1" branch="false" />
+            <line number="15" hits="0" branch="false" />
+            <line number="16" hits="0" branch="false" />
+            <line number="17" hits="0" branch="false" />
+            <line number="18" hits="0" branch="false" />
+            <line number="22" hits="0" branch="false" />
+            <line number="23" hits="0" branch="false" />
+            <line number="24" hits="0" branch="false" />
+            <line number="25" hits="0" branch="false" />
+            <line number="27" hits="0" branch="false" />
+            <line number="28" hits="0" branch="false" />
+            <line number="32" hits="0" branch="false" />
+            <line number="33" hits="0" branch="false" />
+            <line number="34" hits="0" branch="false" />
+            <line number="35" hits="0" branch="false" />
+            <line number="37" hits="0" branch="false" />
+            <line number="39" hits="0" branch="false" />
+            <line number="40" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="GraphTests" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/GraphTests.cs" line-rate="0.617977528089888" branch-rate="1" complexity="0">
+        <class name="GraphGrammarTests" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonGenerator/GraphGrammarTests.cs" line-rate="0.22" branch-rate="1" complexity="0">
           <methods>
             <method name="SetUp" signature="()" line-rate="1" branch-rate="1" complexity="0">
               <lines>
-                <line number="14" hits="39" branch="false" />
-              </lines>
-            </method>
-            <method name="ShouldAddNode" signature="()" line-rate="1" branch-rate="1" complexity="0">
-              <lines>
-                <line number="18" hits="1" branch="false" />
-                <line number="19" hits="1" branch="false" />
                 <line number="20" hits="1" branch="false" />
                 <line number="21" hits="1" branch="false" />
+                <line number="22" hits="1" branch="false" />
               </lines>
             </method>
-            <method name="ShouldAddNodeIdempotently" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="CreateParameters" signature="()" line-rate="0.666666666666667" branch-rate="1" complexity="0">
               <lines>
-                <line number="25" hits="1" branch="false" />
+                <line number="90" hits="1" branch="false" />
+                <line number="91" hits="1" branch="false" />
+                <line number="92" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="GraphGrammarTests" signature="()" line-rate="1" branch-rate="1" complexity="0">
+              <lines>
+                <line number="14" hits="1" branch="false" />
+                <line number="15" hits="1" branch="false" />
+              </lines>
+            </method>
+            <method name="ShouldGenerateCompleteDungeon" signature="()" line-rate="0" branch-rate="1" complexity="0">
+              <lines>
+                <line number="69" hits="0" branch="false" />
+                <line number="70" hits="0" branch="false" />
+                <line number="71" hits="0" branch="false" />
+                <line number="73" hits="0" branch="false" />
+                <line number="74" hits="0" branch="false" />
+                <line number="75" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="ShouldLoadBaseDungeon" signature="()" line-rate="0.181818181818182" branch-rate="1" complexity="0">
+              <lines>
                 <line number="26" hits="1" branch="false" />
                 <line number="27" hits="1" branch="false" />
-                <line number="28" hits="1" branch="false" />
-                <line number="29" hits="1" branch="false" />
-                <line number="30" hits="1" branch="false" />
+                <line number="29" hits="0" branch="false" />
+                <line number="31" hits="0" branch="false" />
+                <line number="32" hits="0" branch="false" />
+                <line number="33" hits="0" branch="false" />
+                <line number="35" hits="0" branch="false" />
+                <line number="37" hits="0" branch="false" />
+                <line number="38" hits="0" branch="false" />
+                <line number="39" hits="0" branch="false" />
+                <line number="40" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="ShouldAddNodeWithLinkedNodes" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="ShouldRewriteBaseDungeon" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="34" hits="1" branch="false" />
-                <line number="35" hits="1" branch="false" />
-                <line number="37" hits="1" branch="false" />
-                <line number="38" hits="1" branch="false" />
-                <line number="39" hits="1" branch="false" />
-                <line number="41" hits="1" branch="false" />
-                <line number="42" hits="1" branch="false" />
-                <line number="43" hits="1" branch="false" />
-                <line number="44" hits="1" branch="false" />
+                <line number="44" hits="0" branch="false" />
+                <line number="45" hits="0" branch="false" />
+                <line number="46" hits="0" branch="false" />
+                <line number="48" hits="0" branch="false" />
+                <line number="50" hits="0" branch="false" />
+                <line number="52" hits="0" branch="false" />
+                <line number="53" hits="0" branch="false" />
+                <line number="54" hits="0" branch="false" />
+                <line number="55" hits="0" branch="false" />
+                <line number="56" hits="0" branch="false" />
+                <line number="58" hits="0" branch="false" />
+                <line number="60" hits="0" branch="false" />
+                <line number="61" hits="0" branch="false" />
+                <line number="62" hits="0" branch="false" />
+                <line number="63" hits="0" branch="false" />
+                <line number="64" hits="0" branch="false" />
+                <line number="65" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="ShouldAddNodeWithLinkedNodesIdempotently" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="TestSetUp" signature="()" line-rate="0.25" branch-rate="1" complexity="0">
               <lines>
-                <line number="48" hits="1" branch="false" />
-                <line number="49" hits="1" branch="false" />
-                <line number="51" hits="1" branch="false" />
-                <line number="52" hits="1" branch="false" />
-                <line number="54" hits="1" branch="false" />
-                <line number="56" hits="1" branch="false" />
-                <line number="57" hits="1" branch="false" />
-                <line number="58" hits="1" branch="false" />
-              </lines>
-            </method>
-            <method name="ShouldAddNodeWithLinkToExistingNode" signature="()" line-rate="1" branch-rate="1" complexity="0">
-              <lines>
-                <line number="62" hits="1" branch="false" />
-                <line number="63" hits="1" branch="false" />
-                <line number="64" hits="1" branch="false" />
-                <line number="66" hits="1" branch="false" />
-                <line number="67" hits="1" branch="false" />
-                <line number="68" hits="1" branch="false" />
-                <line number="70" hits="1" branch="false" />
-                <line number="71" hits="1" branch="false" />
-              </lines>
-            </method>
-            <method name="ShouldNotLinkedNodeWithItself" signature="()" line-rate="1" branch-rate="1" complexity="0">
-              <lines>
-                <line number="75" hits="1" branch="false" />
-                <line number="76" hits="1" branch="false" />
                 <line number="78" hits="1" branch="false" />
                 <line number="79" hits="1" branch="false" />
+                <line number="80" hits="0" branch="false" />
+                <line number="82" hits="0" branch="false" />
+                <line number="83" hits="0" branch="false" />
+                <line number="84" hits="0" branch="false" />
+                <line number="86" hits="0" branch="false" />
+                <line number="87" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="ShouldNotAddNullValues" signature="()" line-rate="1" branch-rate="1" complexity="0">
+          </methods>
+          <lines>
+            <line number="14" hits="1" branch="false" />
+            <line number="15" hits="1" branch="false" />
+            <line number="20" hits="1" branch="false" />
+            <line number="21" hits="1" branch="false" />
+            <line number="22" hits="1" branch="false" />
+            <line number="26" hits="1" branch="false" />
+            <line number="27" hits="1" branch="false" />
+            <line number="29" hits="0" branch="false" />
+            <line number="31" hits="0" branch="false" />
+            <line number="32" hits="0" branch="false" />
+            <line number="33" hits="0" branch="false" />
+            <line number="35" hits="0" branch="false" />
+            <line number="37" hits="0" branch="false" />
+            <line number="38" hits="0" branch="false" />
+            <line number="39" hits="0" branch="false" />
+            <line number="40" hits="0" branch="false" />
+            <line number="44" hits="0" branch="false" />
+            <line number="45" hits="0" branch="false" />
+            <line number="46" hits="0" branch="false" />
+            <line number="48" hits="0" branch="false" />
+            <line number="50" hits="0" branch="false" />
+            <line number="52" hits="0" branch="false" />
+            <line number="53" hits="0" branch="false" />
+            <line number="54" hits="0" branch="false" />
+            <line number="55" hits="0" branch="false" />
+            <line number="56" hits="0" branch="false" />
+            <line number="58" hits="0" branch="false" />
+            <line number="60" hits="0" branch="false" />
+            <line number="61" hits="0" branch="false" />
+            <line number="62" hits="0" branch="false" />
+            <line number="63" hits="0" branch="false" />
+            <line number="64" hits="0" branch="false" />
+            <line number="65" hits="0" branch="false" />
+            <line number="69" hits="0" branch="false" />
+            <line number="70" hits="0" branch="false" />
+            <line number="71" hits="0" branch="false" />
+            <line number="73" hits="0" branch="false" />
+            <line number="74" hits="0" branch="false" />
+            <line number="75" hits="0" branch="false" />
+            <line number="78" hits="1" branch="false" />
+            <line number="79" hits="1" branch="false" />
+            <line number="80" hits="0" branch="false" />
+            <line number="82" hits="0" branch="false" />
+            <line number="83" hits="0" branch="false" />
+            <line number="84" hits="0" branch="false" />
+            <line number="86" hits="0" branch="false" />
+            <line number="87" hits="0" branch="false" />
+            <line number="90" hits="1" branch="false" />
+            <line number="91" hits="1" branch="false" />
+            <line number="92" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="GraphTests" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/GraphTests.cs" line-rate="0" branch-rate="1" complexity="0">
+          <methods>
+            <method name="SetUp" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="83" hits="1" branch="false" />
-                <line number="84" hits="1" branch="false" />
-                <line number="86" hits="1" branch="false" />
-                <line number="88" hits="1" branch="false" />
-                <line number="90" hits="1" branch="false" />
-                <line number="92" hits="1" branch="false" />
-                <line number="94" hits="1" branch="false" />
-                <line number="95" hits="1" branch="false" />
+                <line number="14" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="ShouldReturnIsConnectedTrueIfGraphIsFullyLinked" signature="(Assets.DungeonGenerator.Graph[String])" line-rate="1" branch-rate="1" complexity="NaN">
+            <method name="ShouldAddNode" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="100" hits="3" branch="false" />
-                <line number="101" hits="3" branch="false" />
-                <line number="102" hits="3" branch="false" />
+                <line number="18" hits="0" branch="false" />
+                <line number="19" hits="0" branch="false" />
+                <line number="20" hits="0" branch="false" />
+                <line number="21" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="ShouldReturnIsConnectedFalseIfGraphIsNotFullyLinked" signature="(Assets.DungeonGenerator.Graph[String])" line-rate="1" branch-rate="1" complexity="NaN">
+            <method name="ShouldAddNodeIdempotently" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="107" hits="3" branch="false" />
-                <line number="108" hits="3" branch="false" />
-                <line number="109" hits="3" branch="false" />
+                <line number="25" hits="0" branch="false" />
+                <line number="26" hits="0" branch="false" />
+                <line number="27" hits="0" branch="false" />
+                <line number="28" hits="0" branch="false" />
+                <line number="29" hits="0" branch="false" />
+                <line number="30" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="GraphTests" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="ShouldAddNodeWithLinkedNodes" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="10" hits="1" branch="false" />
+                <line number="34" hits="0" branch="false" />
+                <line number="35" hits="0" branch="false" />
+                <line number="37" hits="0" branch="false" />
+                <line number="38" hits="0" branch="false" />
+                <line number="39" hits="0" branch="false" />
+                <line number="41" hits="0" branch="false" />
+                <line number="42" hits="0" branch="false" />
+                <line number="43" hits="0" branch="false" />
+                <line number="44" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="ShouldAddNodeWithLinkedNodesIdempotently" signature="()" line-rate="0" branch-rate="1" complexity="0">
+              <lines>
+                <line number="48" hits="0" branch="false" />
+                <line number="49" hits="0" branch="false" />
+                <line number="51" hits="0" branch="false" />
+                <line number="52" hits="0" branch="false" />
+                <line number="54" hits="0" branch="false" />
+                <line number="56" hits="0" branch="false" />
+                <line number="57" hits="0" branch="false" />
+                <line number="58" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="ShouldAddNodeWithLinkToExistingNode" signature="()" line-rate="0" branch-rate="1" complexity="0">
+              <lines>
+                <line number="62" hits="0" branch="false" />
+                <line number="63" hits="0" branch="false" />
+                <line number="64" hits="0" branch="false" />
+                <line number="66" hits="0" branch="false" />
+                <line number="67" hits="0" branch="false" />
+                <line number="68" hits="0" branch="false" />
+                <line number="70" hits="0" branch="false" />
+                <line number="71" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="ShouldNotLinkedNodeWithItself" signature="()" line-rate="0" branch-rate="1" complexity="0">
+              <lines>
+                <line number="75" hits="0" branch="false" />
+                <line number="76" hits="0" branch="false" />
+                <line number="78" hits="0" branch="false" />
+                <line number="79" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="ShouldNotAddNullValues" signature="()" line-rate="0" branch-rate="1" complexity="0">
+              <lines>
+                <line number="83" hits="0" branch="false" />
+                <line number="84" hits="0" branch="false" />
+                <line number="86" hits="0" branch="false" />
+                <line number="88" hits="0" branch="false" />
+                <line number="90" hits="0" branch="false" />
+                <line number="92" hits="0" branch="false" />
+                <line number="94" hits="0" branch="false" />
+                <line number="95" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="ShouldReturnIsConnectedTrueIfGraphIsFullyLinked" signature="(Assets.DungeonGenerator.Graph[String])" line-rate="0" branch-rate="1" complexity="NaN">
+              <lines>
+                <line number="100" hits="0" branch="false" />
+                <line number="101" hits="0" branch="false" />
+                <line number="102" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="ShouldReturnIsConnectedFalseIfGraphIsNotFullyLinked" signature="(Assets.DungeonGenerator.Graph[String])" line-rate="0" branch-rate="1" complexity="NaN">
+              <lines>
+                <line number="107" hits="0" branch="false" />
+                <line number="108" hits="0" branch="false" />
+                <line number="109" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="GraphTests" signature="()" line-rate="0" branch-rate="1" complexity="0">
+              <lines>
+                <line number="10" hits="0" branch="false" />
               </lines>
             </method>
             <method name="CompleteGraphs" signature="()" line-rate="0" branch-rate="1" complexity="0">
@@ -3989,61 +4123,61 @@
             </method>
           </methods>
           <lines>
-            <line number="10" hits="1" branch="false" />
-            <line number="14" hits="39" branch="false" />
-            <line number="18" hits="1" branch="false" />
-            <line number="19" hits="1" branch="false" />
-            <line number="20" hits="1" branch="false" />
-            <line number="21" hits="1" branch="false" />
-            <line number="25" hits="1" branch="false" />
-            <line number="26" hits="1" branch="false" />
-            <line number="27" hits="1" branch="false" />
-            <line number="28" hits="1" branch="false" />
-            <line number="29" hits="1" branch="false" />
-            <line number="30" hits="1" branch="false" />
-            <line number="34" hits="1" branch="false" />
-            <line number="35" hits="1" branch="false" />
-            <line number="37" hits="1" branch="false" />
-            <line number="38" hits="1" branch="false" />
-            <line number="39" hits="1" branch="false" />
-            <line number="41" hits="1" branch="false" />
-            <line number="42" hits="1" branch="false" />
-            <line number="43" hits="1" branch="false" />
-            <line number="44" hits="1" branch="false" />
-            <line number="48" hits="1" branch="false" />
-            <line number="49" hits="1" branch="false" />
-            <line number="51" hits="1" branch="false" />
-            <line number="52" hits="1" branch="false" />
-            <line number="54" hits="1" branch="false" />
-            <line number="56" hits="1" branch="false" />
-            <line number="57" hits="1" branch="false" />
-            <line number="58" hits="1" branch="false" />
-            <line number="62" hits="1" branch="false" />
-            <line number="63" hits="1" branch="false" />
-            <line number="64" hits="1" branch="false" />
-            <line number="66" hits="1" branch="false" />
-            <line number="67" hits="1" branch="false" />
-            <line number="68" hits="1" branch="false" />
-            <line number="70" hits="1" branch="false" />
-            <line number="71" hits="1" branch="false" />
-            <line number="75" hits="1" branch="false" />
-            <line number="76" hits="1" branch="false" />
-            <line number="78" hits="1" branch="false" />
-            <line number="79" hits="1" branch="false" />
-            <line number="83" hits="1" branch="false" />
-            <line number="84" hits="1" branch="false" />
-            <line number="86" hits="1" branch="false" />
-            <line number="88" hits="1" branch="false" />
-            <line number="90" hits="1" branch="false" />
-            <line number="92" hits="1" branch="false" />
-            <line number="94" hits="1" branch="false" />
-            <line number="95" hits="1" branch="false" />
-            <line number="100" hits="3" branch="false" />
-            <line number="101" hits="3" branch="false" />
-            <line number="102" hits="3" branch="false" />
-            <line number="107" hits="3" branch="false" />
-            <line number="108" hits="3" branch="false" />
-            <line number="109" hits="3" branch="false" />
+            <line number="10" hits="0" branch="false" />
+            <line number="14" hits="0" branch="false" />
+            <line number="18" hits="0" branch="false" />
+            <line number="19" hits="0" branch="false" />
+            <line number="20" hits="0" branch="false" />
+            <line number="21" hits="0" branch="false" />
+            <line number="25" hits="0" branch="false" />
+            <line number="26" hits="0" branch="false" />
+            <line number="27" hits="0" branch="false" />
+            <line number="28" hits="0" branch="false" />
+            <line number="29" hits="0" branch="false" />
+            <line number="30" hits="0" branch="false" />
+            <line number="34" hits="0" branch="false" />
+            <line number="35" hits="0" branch="false" />
+            <line number="37" hits="0" branch="false" />
+            <line number="38" hits="0" branch="false" />
+            <line number="39" hits="0" branch="false" />
+            <line number="41" hits="0" branch="false" />
+            <line number="42" hits="0" branch="false" />
+            <line number="43" hits="0" branch="false" />
+            <line number="44" hits="0" branch="false" />
+            <line number="48" hits="0" branch="false" />
+            <line number="49" hits="0" branch="false" />
+            <line number="51" hits="0" branch="false" />
+            <line number="52" hits="0" branch="false" />
+            <line number="54" hits="0" branch="false" />
+            <line number="56" hits="0" branch="false" />
+            <line number="57" hits="0" branch="false" />
+            <line number="58" hits="0" branch="false" />
+            <line number="62" hits="0" branch="false" />
+            <line number="63" hits="0" branch="false" />
+            <line number="64" hits="0" branch="false" />
+            <line number="66" hits="0" branch="false" />
+            <line number="67" hits="0" branch="false" />
+            <line number="68" hits="0" branch="false" />
+            <line number="70" hits="0" branch="false" />
+            <line number="71" hits="0" branch="false" />
+            <line number="75" hits="0" branch="false" />
+            <line number="76" hits="0" branch="false" />
+            <line number="78" hits="0" branch="false" />
+            <line number="79" hits="0" branch="false" />
+            <line number="83" hits="0" branch="false" />
+            <line number="84" hits="0" branch="false" />
+            <line number="86" hits="0" branch="false" />
+            <line number="88" hits="0" branch="false" />
+            <line number="90" hits="0" branch="false" />
+            <line number="92" hits="0" branch="false" />
+            <line number="94" hits="0" branch="false" />
+            <line number="95" hits="0" branch="false" />
+            <line number="100" hits="0" branch="false" />
+            <line number="101" hits="0" branch="false" />
+            <line number="102" hits="0" branch="false" />
+            <line number="107" hits="0" branch="false" />
+            <line number="108" hits="0" branch="false" />
+            <line number="109" hits="0" branch="false" />
             <line number="112" hits="0" branch="false" />
             <line number="113" hits="0" branch="false" />
             <line number="114" hits="0" branch="false" />
@@ -4080,23 +4214,23 @@
             <line number="152" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="PlayerCameraTests" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/PlayerCharacter/PlayerCameraTests.cs" line-rate="0.166666666666667" branch-rate="1" complexity="0">
+        <class name="PlayerCameraTests" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/PlayerCharacter/PlayerCameraTests.cs" line-rate="0" branch-rate="1" complexity="0">
           <methods>
-            <method name="Setup" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="Setup" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="19" hits="2" branch="false" />
-                <line number="20" hits="2" branch="false" />
-                <line number="21" hits="2" branch="false" />
-                <line number="22" hits="2" branch="false" />
-                <line number="23" hits="2" branch="false" />
-                <line number="25" hits="2" branch="false" />
-                <line number="26" hits="2" branch="false" />
-                <line number="27" hits="2" branch="false" />
+                <line number="19" hits="0" branch="false" />
+                <line number="20" hits="0" branch="false" />
+                <line number="21" hits="0" branch="false" />
+                <line number="22" hits="0" branch="false" />
+                <line number="23" hits="0" branch="false" />
+                <line number="25" hits="0" branch="false" />
+                <line number="26" hits="0" branch="false" />
+                <line number="27" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="PlayerCameraTests" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="PlayerCameraTests" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="12" hits="1" branch="false" />
+                <line number="12" hits="0" branch="false" />
               </lines>
             </method>
             <method name="MovePlayer" signature="()" line-rate="0" branch-rate="1" complexity="0">
@@ -4162,15 +4296,15 @@
             </method>
           </methods>
           <lines>
-            <line number="12" hits="1" branch="false" />
-            <line number="19" hits="2" branch="false" />
-            <line number="20" hits="2" branch="false" />
-            <line number="21" hits="2" branch="false" />
-            <line number="22" hits="2" branch="false" />
-            <line number="23" hits="2" branch="false" />
-            <line number="25" hits="2" branch="false" />
-            <line number="26" hits="2" branch="false" />
-            <line number="27" hits="2" branch="false" />
+            <line number="12" hits="0" branch="false" />
+            <line number="19" hits="0" branch="false" />
+            <line number="20" hits="0" branch="false" />
+            <line number="21" hits="0" branch="false" />
+            <line number="22" hits="0" branch="false" />
+            <line number="23" hits="0" branch="false" />
+            <line number="25" hits="0" branch="false" />
+            <line number="26" hits="0" branch="false" />
+            <line number="27" hits="0" branch="false" />
             <line number="31" hits="0" branch="false" />
             <line number="32" hits="0" branch="false" />
             <line number="34" hits="0" branch="false" />
@@ -4218,18 +4352,18 @@
             <line number="102" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="PlayerControllerTests" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/PlayerCharacter/PlayerControllerTests.cs" line-rate="0.285714285714286" branch-rate="1" complexity="0">
+        <class name="PlayerControllerTests" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/PlayerCharacter/PlayerControllerTests.cs" line-rate="0" branch-rate="1" complexity="0">
           <methods>
-            <method name="Setup" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="Setup" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="16" hits="1" branch="false" />
-                <line number="17" hits="1" branch="false" />
-                <line number="18" hits="1" branch="false" />
+                <line number="16" hits="0" branch="false" />
+                <line number="17" hits="0" branch="false" />
+                <line number="18" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="PlayerControllerTests" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="PlayerControllerTests" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="10" hits="1" branch="false" />
+                <line number="10" hits="0" branch="false" />
               </lines>
             </method>
             <method name="ShouldSpawnCamera" signature="()" line-rate="0" branch-rate="1" complexity="0">
@@ -4252,10 +4386,10 @@
             </method>
           </methods>
           <lines>
-            <line number="10" hits="1" branch="false" />
-            <line number="16" hits="1" branch="false" />
-            <line number="17" hits="1" branch="false" />
-            <line number="18" hits="1" branch="false" />
+            <line number="10" hits="0" branch="false" />
+            <line number="16" hits="0" branch="false" />
+            <line number="17" hits="0" branch="false" />
+            <line number="18" hits="0" branch="false" />
             <line number="22" hits="0" branch="false" />
             <line number="23" hits="0" branch="false" />
             <line number="25" hits="0" branch="false" />
@@ -4268,20 +4402,20 @@
             <line number="34" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="RandomWalkTests" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonGenerator/RandomWalkAlgorithmTests.cs" line-rate="0.428571428571429" branch-rate="1" complexity="0">
+        <class name="RandomWalkTests" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonGenerator/RandomWalkAlgorithmTests.cs" line-rate="0" branch-rate="1" complexity="0">
           <methods>
-            <method name="SetUp" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="SetUp" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="19" hits="2" branch="false" />
-                <line number="20" hits="2" branch="false" />
-                <line number="21" hits="2" branch="false" />
+                <line number="19" hits="0" branch="false" />
+                <line number="20" hits="0" branch="false" />
+                <line number="21" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="CreateParameters" signature="(System.Int32)" line-rate="1" branch-rate="1" complexity="NaN">
+            <method name="CreateParameters" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="70" hits="1" branch="false" />
-                <line number="71" hits="1" branch="false" />
-                <line number="72" hits="1" branch="false" />
+                <line number="70" hits="0" branch="false" />
+                <line number="71" hits="0" branch="false" />
+                <line number="72" hits="0" branch="false" />
               </lines>
             </method>
             <method name="FindRooms" signature="()" line-rate="0" branch-rate="1" complexity="0">
@@ -4293,16 +4427,16 @@
                 <line number="80" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="RandomWalkTests" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="RandomWalkTests" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="14" hits="1" branch="false" />
-                <line number="15" hits="1" branch="false" />
+                <line number="14" hits="0" branch="false" />
+                <line number="15" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="ShouldGenerateCompleteDungeon" signature="()" line-rate="0.285714285714286" branch-rate="1" complexity="0">
+            <method name="ShouldGenerateCompleteDungeon" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="44" hits="1" branch="false" />
-                <line number="45" hits="1" branch="false" />
+                <line number="44" hits="0" branch="false" />
+                <line number="45" hits="0" branch="false" />
                 <line number="47" hits="0" branch="false" />
                 <line number="48" hits="0" branch="false" />
                 <line number="50" hits="0" branch="false" />
@@ -4326,27 +4460,27 @@
                 <line number="40" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="TestSetUp" signature="()" line-rate="0.8" branch-rate="1" complexity="0">
+            <method name="TestSetUp" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="55" hits="1" branch="false" />
-                <line number="56" hits="1" branch="false" />
-                <line number="57" hits="1" branch="false" />
-                <line number="59" hits="1" branch="false" />
-                <line number="60" hits="1" branch="false" />
-                <line number="62" hits="1" branch="false" />
-                <line number="63" hits="1" branch="false" />
-                <line number="64" hits="1" branch="false" />
+                <line number="55" hits="0" branch="false" />
+                <line number="56" hits="0" branch="false" />
+                <line number="57" hits="0" branch="false" />
+                <line number="59" hits="0" branch="false" />
+                <line number="60" hits="0" branch="false" />
+                <line number="62" hits="0" branch="false" />
+                <line number="63" hits="0" branch="false" />
+                <line number="64" hits="0" branch="false" />
                 <line number="66" hits="0" branch="false" />
                 <line number="67" hits="0" branch="false" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="14" hits="1" branch="false" />
-            <line number="15" hits="1" branch="false" />
-            <line number="19" hits="2" branch="false" />
-            <line number="20" hits="2" branch="false" />
-            <line number="21" hits="2" branch="false" />
+            <line number="14" hits="0" branch="false" />
+            <line number="15" hits="0" branch="false" />
+            <line number="19" hits="0" branch="false" />
+            <line number="20" hits="0" branch="false" />
+            <line number="21" hits="0" branch="false" />
             <line number="25" hits="0" branch="false" />
             <line number="26" hits="0" branch="false" />
             <line number="27" hits="0" branch="false" />
@@ -4359,26 +4493,26 @@
             <line number="38" hits="0" branch="false" />
             <line number="39" hits="0" branch="false" />
             <line number="40" hits="0" branch="false" />
-            <line number="44" hits="1" branch="false" />
-            <line number="45" hits="1" branch="false" />
+            <line number="44" hits="0" branch="false" />
+            <line number="45" hits="0" branch="false" />
             <line number="47" hits="0" branch="false" />
             <line number="48" hits="0" branch="false" />
             <line number="50" hits="0" branch="false" />
             <line number="51" hits="0" branch="false" />
             <line number="52" hits="0" branch="false" />
-            <line number="55" hits="1" branch="false" />
-            <line number="56" hits="1" branch="false" />
-            <line number="57" hits="1" branch="false" />
-            <line number="59" hits="1" branch="false" />
-            <line number="60" hits="1" branch="false" />
-            <line number="62" hits="1" branch="false" />
-            <line number="63" hits="1" branch="false" />
-            <line number="64" hits="1" branch="false" />
+            <line number="55" hits="0" branch="false" />
+            <line number="56" hits="0" branch="false" />
+            <line number="57" hits="0" branch="false" />
+            <line number="59" hits="0" branch="false" />
+            <line number="60" hits="0" branch="false" />
+            <line number="62" hits="0" branch="false" />
+            <line number="63" hits="0" branch="false" />
+            <line number="64" hits="0" branch="false" />
             <line number="66" hits="0" branch="false" />
             <line number="67" hits="0" branch="false" />
-            <line number="70" hits="1" branch="false" />
-            <line number="71" hits="1" branch="false" />
-            <line number="72" hits="1" branch="false" />
+            <line number="70" hits="0" branch="false" />
+            <line number="71" hits="0" branch="false" />
+            <line number="72" hits="0" branch="false" />
             <line number="75" hits="0" branch="false" />
             <line number="76" hits="0" branch="false" />
             <line number="78" hits="0" branch="false" />
@@ -4386,123 +4520,123 @@
             <line number="80" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="RuleConditionTest" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonMaster/RuleConditionTest.cs" line-rate="1" branch-rate="1" complexity="0">
+        <class name="RuleConditionTest" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonMaster/RuleConditionTest.cs" line-rate="0" branch-rate="1" complexity="0">
           <methods>
-            <method name="SetUp" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="SetUp" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="11" hits="4" branch="false" />
-                <line number="12" hits="4" branch="false" />
-                <line number="13" hits="4" branch="false" />
+                <line number="11" hits="0" branch="false" />
+                <line number="12" hits="0" branch="false" />
+                <line number="13" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="ShouldReturnTrueIfConditionIsMet" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="ShouldReturnTrueIfConditionIsMet" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="17" hits="1" branch="false" />
-                <line number="18" hits="1" branch="false" />
-                <line number="19" hits="1" branch="false" />
+                <line number="17" hits="0" branch="false" />
+                <line number="18" hits="0" branch="false" />
+                <line number="19" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="ShouldReturnFalseIfConditionIsNotMet" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="ShouldReturnFalseIfConditionIsNotMet" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="23" hits="1" branch="false" />
-                <line number="24" hits="1" branch="false" />
-                <line number="25" hits="1" branch="false" />
+                <line number="23" hits="0" branch="false" />
+                <line number="24" hits="0" branch="false" />
+                <line number="25" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="ShouldHandleGreaterThanOperator" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="ShouldHandleGreaterThanOperator" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="29" hits="1" branch="false" />
-                <line number="30" hits="1" branch="false" />
-                <line number="31" hits="1" branch="false" />
-                <line number="32" hits="1" branch="false" />
+                <line number="29" hits="0" branch="false" />
+                <line number="30" hits="0" branch="false" />
+                <line number="31" hits="0" branch="false" />
+                <line number="32" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="ShouldHandleLessThanOperator" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="ShouldHandleLessThanOperator" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="36" hits="1" branch="false" />
-                <line number="37" hits="1" branch="false" />
-                <line number="38" hits="1" branch="false" />
-                <line number="39" hits="1" branch="false" />
-                <line number="40" hits="1" branch="false" />
+                <line number="36" hits="0" branch="false" />
+                <line number="37" hits="0" branch="false" />
+                <line number="38" hits="0" branch="false" />
+                <line number="39" hits="0" branch="false" />
+                <line number="40" hits="0" branch="false" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="11" hits="4" branch="false" />
-            <line number="12" hits="4" branch="false" />
-            <line number="13" hits="4" branch="false" />
-            <line number="17" hits="1" branch="false" />
-            <line number="18" hits="1" branch="false" />
-            <line number="19" hits="1" branch="false" />
-            <line number="23" hits="1" branch="false" />
-            <line number="24" hits="1" branch="false" />
-            <line number="25" hits="1" branch="false" />
-            <line number="29" hits="1" branch="false" />
-            <line number="30" hits="1" branch="false" />
-            <line number="31" hits="1" branch="false" />
-            <line number="32" hits="1" branch="false" />
-            <line number="36" hits="1" branch="false" />
-            <line number="37" hits="1" branch="false" />
-            <line number="38" hits="1" branch="false" />
-            <line number="39" hits="1" branch="false" />
-            <line number="40" hits="1" branch="false" />
+            <line number="11" hits="0" branch="false" />
+            <line number="12" hits="0" branch="false" />
+            <line number="13" hits="0" branch="false" />
+            <line number="17" hits="0" branch="false" />
+            <line number="18" hits="0" branch="false" />
+            <line number="19" hits="0" branch="false" />
+            <line number="23" hits="0" branch="false" />
+            <line number="24" hits="0" branch="false" />
+            <line number="25" hits="0" branch="false" />
+            <line number="29" hits="0" branch="false" />
+            <line number="30" hits="0" branch="false" />
+            <line number="31" hits="0" branch="false" />
+            <line number="32" hits="0" branch="false" />
+            <line number="36" hits="0" branch="false" />
+            <line number="37" hits="0" branch="false" />
+            <line number="38" hits="0" branch="false" />
+            <line number="39" hits="0" branch="false" />
+            <line number="40" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="RuleValueTest" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonMaster/RuleValueTest.cs" line-rate="0.944444444444444" branch-rate="1" complexity="0">
+        <class name="RuleValueTest" filename="P:/uni/final_project/Game/The Tower - Final Project/Assets/Tests/DungeonMaster/RuleValueTest.cs" line-rate="0" branch-rate="1" complexity="0">
           <methods>
-            <method name="SetUp" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="SetUp" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="12" hits="3" branch="false" />
-                <line number="13" hits="3" branch="false" />
-                <line number="19" hits="3" branch="false" />
-                <line number="20" hits="3" branch="false" />
+                <line number="12" hits="0" branch="false" />
+                <line number="13" hits="0" branch="false" />
+                <line number="19" hits="0" branch="false" />
+                <line number="20" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="ShouldReturnFloatValue" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="ShouldReturnFloatValue" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="24" hits="1" branch="false" />
-                <line number="25" hits="1" branch="false" />
-                <line number="26" hits="1" branch="false" />
-                <line number="27" hits="1" branch="false" />
+                <line number="24" hits="0" branch="false" />
+                <line number="25" hits="0" branch="false" />
+                <line number="26" hits="0" branch="false" />
+                <line number="27" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="ShouldReturnRangeValue" signature="()" line-rate="1" branch-rate="1" complexity="0">
+            <method name="ShouldReturnRangeValue" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="31" hits="1" branch="false" />
-                <line number="32" hits="1" branch="false" />
-                <line number="33" hits="1" branch="false" />
-                <line number="34" hits="1" branch="false" />
+                <line number="31" hits="0" branch="false" />
+                <line number="32" hits="0" branch="false" />
+                <line number="33" hits="0" branch="false" />
+                <line number="34" hits="0" branch="false" />
               </lines>
             </method>
-            <method name="ShouldReturnNullIfValueIsNotOfTypeT" signature="()" line-rate="0.833333333333333" branch-rate="1" complexity="0">
+            <method name="ShouldReturnNullIfValueIsNotOfTypeT" signature="()" line-rate="0" branch-rate="1" complexity="0">
               <lines>
-                <line number="38" hits="1" branch="false" />
-                <line number="39" hits="1" branch="false" />
-                <line number="45" hits="1" branch="false" />
-                <line number="46" hits="1" branch="false" />
-                <line number="47" hits="1" branch="false" />
+                <line number="38" hits="0" branch="false" />
+                <line number="39" hits="0" branch="false" />
+                <line number="45" hits="0" branch="false" />
+                <line number="46" hits="0" branch="false" />
+                <line number="47" hits="0" branch="false" />
                 <line number="48" hits="0" branch="false" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="12" hits="3" branch="false" />
-            <line number="13" hits="3" branch="false" />
-            <line number="19" hits="3" branch="false" />
-            <line number="20" hits="3" branch="false" />
-            <line number="24" hits="1" branch="false" />
-            <line number="25" hits="1" branch="false" />
-            <line number="26" hits="1" branch="false" />
-            <line number="27" hits="1" branch="false" />
-            <line number="31" hits="1" branch="false" />
-            <line number="32" hits="1" branch="false" />
-            <line number="33" hits="1" branch="false" />
-            <line number="34" hits="1" branch="false" />
-            <line number="38" hits="1" branch="false" />
-            <line number="39" hits="1" branch="false" />
-            <line number="45" hits="1" branch="false" />
-            <line number="46" hits="1" branch="false" />
-            <line number="47" hits="1" branch="false" />
+            <line number="12" hits="0" branch="false" />
+            <line number="13" hits="0" branch="false" />
+            <line number="19" hits="0" branch="false" />
+            <line number="20" hits="0" branch="false" />
+            <line number="24" hits="0" branch="false" />
+            <line number="25" hits="0" branch="false" />
+            <line number="26" hits="0" branch="false" />
+            <line number="27" hits="0" branch="false" />
+            <line number="31" hits="0" branch="false" />
+            <line number="32" hits="0" branch="false" />
+            <line number="33" hits="0" branch="false" />
+            <line number="34" hits="0" branch="false" />
+            <line number="38" hits="0" branch="false" />
+            <line number="39" hits="0" branch="false" />
+            <line number="45" hits="0" branch="false" />
+            <line number="46" hits="0" branch="false" />
+            <line number="47" hits="0" branch="false" />
             <line number="48" hits="0" branch="false" />
           </lines>
         </class>
