@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.DungeonGenerator;
+using System;
 using System.Collections.Generic;
 
 namespace Assets.Scripts.DungeonGenerator.Components
@@ -13,44 +14,7 @@ namespace Assets.Scripts.DungeonGenerator.Components
         public DungeonNode(string type)
         {
             LinkedNodes = new List<DungeonNode>();
-            switch (type.ToLower())
-            {
-                case "explore":
-                {
-                    Type = RoomType.EXPLORE;
-                    break;
-                }
-                case "combat":
-                {
-                    Type = RoomType.COMBAT;
-                    break;
-                }
-                case "mini-boss":
-                {
-                    Type = RoomType.MINI_BOSS;
-                    break;
-                }
-                case "rest-point":
-                {
-                    Type = RoomType.REST_POINT;
-                    break;
-                }
-                case "item":
-                {
-                    Type = RoomType.ITEM;
-                    break;
-                }
-                case "start":
-                {
-                    Type = RoomType.START;
-                    break;
-                }
-                case "end":
-                {
-                    Type = RoomType.END;
-                    break;
-                }
-            }
+            Type = JsonUtils.ConvertToEnum<RoomType>(type);
             Id = _nodeId++;
         }
 
@@ -63,8 +27,7 @@ namespace Assets.Scripts.DungeonGenerator.Components
 
         public override bool Equals(object obj)
         {
-            return obj is DungeonNode room &&
-                   Type == room.Type && Id == room.Id;
+            return obj is DungeonNode room && Type == room.Type && Id == room.Id;
         }
 
         public override int GetHashCode()
@@ -80,7 +43,7 @@ namespace Assets.Scripts.DungeonGenerator.Components
         /// <summary>
         /// Checks if this dungeon node has the same room type as the given room type.
         /// </summary>
-        /// <param name="other"></param>
+        /// <param name="type"></param>
         /// <returns></returns>
         public bool IsSameType(RoomType type)
         {

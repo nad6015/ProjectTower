@@ -1,8 +1,6 @@
 ﻿using Assets.DungeonGenerator.Components;
 using Assets.Scripts.DungeonGenerator.Components;
-using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 namespace Assets.DungeonGenerator
@@ -25,21 +23,29 @@ namespace Assets.DungeonGenerator
             DungeonFlow dungeonFlow = dungeon.Flow;
             _dungeonRooms = dungeonFlow.FlowTemplate;
             List<FlowPattern> flows = dungeonFlow.Flows;
+            int loopCount = 0;
+            int roomCount = Mathf.RoundToInt(dungeon.Parameter("roomCount").Value());
 
-            while (_dungeonRooms.Count < dungeon.Parameter("roomCount").Value()) // TODO: Condition is met
+            while (_dungeonRooms.Count < roomCount && loopCount < roomCount)
             {
+                loopCount++;
                 foreach (var flow in flows)
                 {
                     var rooms = _dungeonRooms.FindMatching(flow.Matches);
                     if (rooms.Count == flow.Matches.Count)
                     {
                         _dungeonRooms.Replace(rooms, flow.Replacer);
+                        loopCount=0;
+                        Debug.Log("HI");
+                    }
+                    else
+                    {
+                        flow.Matches.ForEach(r => Debug.Log(r));
                     }
                 }
 
                 if (_dungeonRooms.LastNode.Type != RoomType.END)
                 {
-                    Debug.Log(_dungeonRooms.Count);
                     var end = _dungeonRooms.FindMatching(new List<RoomType>() { RoomType.END });
                     _dungeonRooms.Remove(end[0]);
                     _dungeonRooms.Add(_dungeonRooms.LastNode, end[0]);

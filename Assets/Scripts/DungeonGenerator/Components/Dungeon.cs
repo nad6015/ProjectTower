@@ -29,6 +29,7 @@ namespace Assets.DungeonGenerator.Components
         {
             _parameters = parameters;
             Components = components;
+            Rooms = new();
         }
 
         internal DungeonParameter Parameter(string name)

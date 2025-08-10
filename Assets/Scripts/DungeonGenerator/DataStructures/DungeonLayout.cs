@@ -232,10 +232,7 @@ namespace Assets.DungeonGenerator
         {
             DungeonNode lastNode = default;
             int count = Mathf.Min(replacer.Count, nodes.Count);
-            foreach (var item in _graph)
-            {
-                Debug.Log(item);
-            }
+            
             // Replaces the existing nodes
             for (int i = 0; i < count; i++)
             {
@@ -247,8 +244,6 @@ namespace Assets.DungeonGenerator
             // Extends the existing nodes.
             if (replacer.Count > nodes.Count)
             {
-                var nodes2 = lastNode.LinkedNodes;
-
                 for (int i = count; i < replacer.Count; i++)
                 {
                     var replacementNode = new DungeonNode(replacer[i]);

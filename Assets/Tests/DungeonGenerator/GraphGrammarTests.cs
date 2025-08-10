@@ -1,13 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using Assets.DungeonGenerator;
 using Assets.DungeonGenerator.Components;
 using Assets.Scripts.DungeonGenerator.Components;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.TestTools;
 
 public class GraphGrammarTests
 {
@@ -20,6 +16,7 @@ public class GraphGrammarTests
     public void SetUp()
     {
         SceneManager.LoadScene("Scenes/Tests/RandomWalkAlgorithm");
+        DungeonNode.Reset();
     }
 
     [Test]
@@ -34,8 +31,6 @@ public class GraphGrammarTests
         DungeonNode firstNode = rooms.FirstNode;
         DungeonNode secondNode = rooms[firstNode][0];
         DungeonNode thirdNode = rooms[secondNode][1];
-
-        Debug.Log(thirdNode.Type);
 
         Assert.That(firstNode.Type == RoomType.START);
         Assert.That(secondNode.Type == RoomType.EXPLORE);

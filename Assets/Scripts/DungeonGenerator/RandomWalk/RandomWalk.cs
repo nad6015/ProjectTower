@@ -66,7 +66,6 @@ namespace Assets.DungeonGenerator
 
             Bounds lastRoom = RandomRoom(Vector3.zero, Vector3.zero, dir, dir.x != 0);
             _roomBounds.Add(lastRoom, null);
-            Debug.Log(lastRoom);
 
             while (_roomBounds.Count < _dungeon.Parameter("roomCount").Value())
             {

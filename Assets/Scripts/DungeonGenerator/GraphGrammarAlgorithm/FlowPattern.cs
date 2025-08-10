@@ -1,7 +1,5 @@
 ﻿using Assets.Scripts.DungeonGenerator.Components;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
 using System.Collections.Generic;
 
 namespace Assets.DungeonGenerator
@@ -16,25 +14,14 @@ namespace Assets.DungeonGenerator
             Replacer = new();
             Matches = new();
 
-            foreach (var node in jReplacer)
+            foreach (var replacer in jReplacer)
             {
-                var json = JsonConvert.DeserializeObject<Dictionary<string, string>>(node.ToString());
-
-                try
-                {
-                    RoomType roomType = RoomType.GENERIC;
-                    Enum.Parse(typeof(RoomType), json["type"], true);
-                    Replacer.Add(roomType);
-                }
-                catch
-                {
-                    Replacer.Add(RoomType.GENERIC);
-                }
+                Replacer.Add(JsonUtils.ConvertToEnum<RoomType>(replacer));
             }
 
-            foreach (var node in jMatches)
+            foreach (var match in jMatches)
             {
-                Matches.Add(node.ToObject<RoomType>());
+                Matches.Add(JsonUtils.ConvertToEnum<RoomType>(match));
             }
         }
     }

@@ -110,7 +110,7 @@ namespace Assets.Scripts.DungeonGenerator.Components
             float spawnRate = dungeon.Parameter("enemySpawnRate").Value();
             Range<float> enemiesPerRoom = dungeon.Parameter("enemiesPerRoom").Range();
 
-            if (UnityEngine.Random.value > spawnRate)
+            if (UnityEngine.Random.value > spawnRate || dungeon.Components.enemies.Count == 0)
             {
                 return;
             }

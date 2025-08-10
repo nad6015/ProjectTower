@@ -1,5 +1,4 @@
 using System.Collections;
-using Assets.CombatSystem;
 using Assets.DungeonGenerator;
 using Assets.PlayerCharacter;
 using NUnit.Framework;
@@ -82,11 +81,10 @@ public class DungeonMasterTests
 
         dungeonMaster.OnDungeonCleared();
 
-        Assert.That(dungeonMaster.State == DungeonMasterState.GAME_END);
+        Assert.That(dungeonMaster.State == DungeonMasterState.GENERATE_DUNGEON);
 
         yield return new WaitForSeconds(1f);
-
-        Assert.That(SceneManager.GetActiveScene().name == "GameWon");
+        Assert.That(dungeonMaster.State == DungeonMasterState.GAME_END);
     }
 
     [UnityTest]

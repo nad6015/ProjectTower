@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts.DungeonGenerator.Components;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 
@@ -19,8 +18,7 @@ namespace Assets.DungeonGenerator
 
             foreach (JToken jNode in baseFlow.Children())
             {
-                var json = JsonConvert.DeserializeObject<Dictionary<string, string>>(jNode.ToString());
-                DungeonNode room = new(json["type"]);
+                DungeonNode room = new(JsonUtils.ConvertToEnum<RoomType>(jNode));
 
                 FlowTemplate.Add(room);
 
@@ -36,11 +34,6 @@ namespace Assets.DungeonGenerator
             {
                 Flows.Add(new FlowPattern(pattern["matches"], pattern["replacer"]));
             }
-        }
-
-        internal bool ConditionMet()
-        {
-            return false;
         }
     }
 }

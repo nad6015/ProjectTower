@@ -51,7 +51,7 @@ namespace Assets.DungeonGenerator
             }
             catch (InvalidCastException)
             {
-                return default;
+                return -1;
             }
         }
 

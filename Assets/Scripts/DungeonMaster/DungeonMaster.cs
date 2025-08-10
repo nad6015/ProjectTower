@@ -37,6 +37,7 @@ namespace Assets.DungeonGenerator
 
             Ruleset = new DungeonMasterRuleset("TestRuleset");
             _dungeonParams = new DungeonParameters(FindByName("DefaultDungeonParameters").name);
+            Debug.Log(_dungeonParams);
             _gameData = new();
 
             Random.InitState(_randomSeed);
