@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using Assets.DungeonGenerator;
 using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 

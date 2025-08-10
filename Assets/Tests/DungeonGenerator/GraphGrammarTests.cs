@@ -47,7 +47,7 @@ public class GraphGrammarTests
 
         algorithm.GenerateDungeon(dungeon);
 
-        rooms = dungeon.Rooms;
+        rooms = dungeon.Layout;
 
         DungeonNode firstNode = rooms.FirstNode;
         DungeonNode secondNode = rooms[firstNode][0];

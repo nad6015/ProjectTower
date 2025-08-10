@@ -6,6 +6,7 @@ using Assets.Scripts.DungeonGenerator.Components;
 
 namespace Assets.DungeonGenerator
 {
+    using static Codice.Client.Commands.WkTree.WorkspaceTreeNode;
     using Random = UnityEngine.Random;
 
     /// <summary>
@@ -67,8 +68,29 @@ namespace Assets.DungeonGenerator
             Bounds lastRoom = RandomRoom(Vector3.zero, Vector3.zero, dir, dir.x != 0);
             _roomBounds.Add(lastRoom, null);
 
-            while (_roomBounds.Count < _dungeon.Parameter("roomCount").Value())
+            DungeonLayout layout = _dungeon.Layout;
+            DungeonNode node = layout.FirstNode;
+            node.Bounds = lastRoom;
+            HashSet<DungeonNode> builtNodes = new() { node };
+
+            while (_roomBounds.Count < layout.Count)
             {
+                foreach (var i in layout)
+                {
+                    LinkNodes(i.Value, dir, negativeDirOffset, builtNodes);
+                }
+            }
+        }
+
+        void LinkNodes(DungeonNode node, Vector3 dir, float negativeDirOffset, HashSet<DungeonNode> nodes)
+        {
+            var lastRoom = node.Bounds;
+            foreach (var n in node.LinkedNodes)
+            {
+                if (nodes.Contains(n))
+                {
+                    continue;
+                }
                 Bounds nextRoom;
                 Bounds corridor;
 
@@ -93,12 +115,13 @@ namespace Assets.DungeonGenerator
                     corridor = CreateCorridor(nextRoom, lastRoom, lastRoom.min.z - nextRoom.max.z, false);
                 }
 
-                // If a room already exists in that area, then loop again.
+                // If a room or a corridor already exists in that area, then loop again.
                 if (CanPlaceRoom(nextRoom, corridor))
                 {
                     _corridors.Add(corridor, null);
                     _roomBounds.Add(nextRoom, null);
-                    lastRoom = nextRoom;
+                    n.Bounds = nextRoom;
+                    nodes.Add(n);
                 }
 
                 dir = RandomDirection();
@@ -111,14 +134,14 @@ namespace Assets.DungeonGenerator
         private void ConstructDungeon()
         {
             // Dictionary upsert code referenced from - https://stackoverflow.com/questions/1243717/how-to-update-the-value-stored-in-dictionary-in-c
-            for (int i = 0; i < _roomBounds.Count; i++)
+            foreach (var node in _dungeon.Layout)
             {
-                var roomBounds = _roomBounds.ElementAt(i);
-                DungeonRoom room = DungeonRoom.Create(roomBounds.Key, i);
+                var roomBounds = node.Value.Bounds;
+                DungeonRoom room = DungeonRoom.Create(node.Value);
                 room.Construct(_components);
                 room.Populate(_dungeon);
                 room.transform.SetParent(_dungeonTransform);
-                _roomBounds[roomBounds.Key] = room;
+                _roomBounds[roomBounds] = room;
             }
 
             for (int i = 0; i < _corridors.Count; i++)
@@ -209,7 +232,7 @@ namespace Assets.DungeonGenerator
         private Bounds RandomRoom(Vector3 min, Vector3 max, Vector3 dir, bool isHorizontal)
         {
             Range<Vector3> roomSizeParam = _dungeon.Parameter("roomSize").VectorRange();
-            float roomOffset = roomSizeParam.max.magnitude /2f; // Distance between rooms
+            float roomOffset = roomSizeParam.max.magnitude / 2f; // Distance between rooms
             Vector3 roomSize = PointUtils.RandomSize(roomSizeParam.min, roomSizeParam.max);
             Vector3 roomCenter = PointUtils.RandomPointWithinRange(min, max);
 

@@ -73,6 +73,21 @@
           "type": "item"
         }
       ]
+    },
+    {
+      "matches": [
+        {
+          "type": "combat"
+        },
+        {
+          "type": "item"
+        }
+      ],
+      "replacer": [
+        {
+          "type": "mini-boss"
+        }
+      ]
     }
   ]
 }

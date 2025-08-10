@@ -1,6 +1,5 @@
 using Assets.DungeonGenerator;
 using Assets.DungeonGenerator.Components;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,10 +7,10 @@ namespace Assets.Scripts.DungeonGenerator.Components
 {
     public class DungeonRoom : MonoBehaviour
     {
-        public Bounds Bounds { get; private set; }
+        public Bounds Bounds { get { return DungeonNode.Bounds; } }
         public Dictionary<GameObject, int> Contents { get; internal set; }
-
-
+        public DungeonNode DungeonNode { get; private set; }
+        public RoomType Type { get { return DungeonNode.Type; } }
         private List<GameObject> walls;
 
         private void Awake()
@@ -94,12 +93,12 @@ namespace Assets.Scripts.DungeonGenerator.Components
             }
         }
 
-        public static DungeonRoom Create(Bounds bounds, int i)
+        public static DungeonRoom Create(DungeonNode node)
         {
             // Create gameobject code referenced from  - https://discussions.unity.com/t/how-do-you-create-an-empty-gameobject-in-code-and-add-it-to-the-scene/86380/4
-            GameObject gameObj = new("Room " + i);
+            GameObject gameObj = new("Room " + node.Id);
             DungeonRoom dungeonRoom = gameObj.AddComponent<DungeonRoom>();
-            dungeonRoom.Bounds = bounds;
+            dungeonRoom.DungeonNode = node;
             dungeonRoom.walls = new List<GameObject>();
 
             return dungeonRoom;

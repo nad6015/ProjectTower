@@ -1,6 +1,7 @@
 ﻿using Assets.DungeonGenerator;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Scripts.DungeonGenerator.Components
 {
@@ -10,19 +11,14 @@ namespace Assets.Scripts.DungeonGenerator.Components
         public RoomType Type { get; private set; }
         public int Id { get; private set; }
         public List<DungeonNode> LinkedNodes { get; private set; }
-
-        public DungeonNode(string type)
-        {
-            LinkedNodes = new List<DungeonNode>();
-            Type = JsonUtils.ConvertToEnum<RoomType>(type);
-            Id = _nodeId++;
-        }
+        public Bounds Bounds { get; internal set; }
 
         public DungeonNode(RoomType type)
         {
             LinkedNodes = new List<DungeonNode>();
             Type = type;
             Id = _nodeId++;
+            Bounds = new();
         }
 
         public override bool Equals(object obj)

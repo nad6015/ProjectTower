@@ -73,12 +73,12 @@ public class DungeonMasterTests
     }
 
     [UnityTest]
-    public IEnumerator ShouldLoadWinSceneIfConditionsMet()
+    public IEnumerator ShouldLoadLoseSceneIfConditionsMet()
     {
         TestSetUp();
 
         yield return new WaitForSeconds(1f);
-
+        
         dungeonMaster.OnDungeonCleared();
 
         Assert.That(dungeonMaster.State == DungeonMasterState.GENERATE_DUNGEON);
@@ -113,8 +113,6 @@ public class DungeonMasterTests
     {
         TestSetUp();
 
-       
-        
         yield return null;
         Assert.Fail();
     }

@@ -1,10 +1,7 @@
 ﻿using Assets.Scripts.DungeonGenerator.Components;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using NUnit.Framework;
-using UnityEditor.Graphs;
 
 namespace Assets.DungeonGenerator
 {
@@ -42,10 +39,8 @@ namespace Assets.DungeonGenerator
                 {
                     FirstNode = node;
                 }
-                else
-                {
-                    LastNode = node;
-                }
+
+                LastNode = node;
             }
         }
 
@@ -168,7 +163,6 @@ namespace Assets.DungeonGenerator
         {
             foreach (var item in node.LinkedNodes)
             {
-                Debug.Log(item);
                 if (visitedNodes.Contains(item))
                 {
                     continue;
@@ -232,7 +226,7 @@ namespace Assets.DungeonGenerator
         {
             DungeonNode lastNode = default;
             int count = Mathf.Min(replacer.Count, nodes.Count);
-            
+
             // Replaces the existing nodes
             for (int i = 0; i < count; i++)
             {

@@ -7,7 +7,7 @@ namespace Assets.DungeonGenerator
 {
     public class GraphGrammar : IDungeonAlgorithm
     {
-        private DungeonLayout _dungeonRooms = new();
+        private DungeonLayout _layout = new();
 
         /// <summary>
         /// <inheritdoc/>
@@ -21,22 +21,21 @@ namespace Assets.DungeonGenerator
         public void GenerateDungeon(Dungeon dungeon)
         {
             DungeonFlow dungeonFlow = dungeon.Flow;
-            _dungeonRooms = dungeonFlow.FlowTemplate;
+            _layout = dungeonFlow.FlowTemplate;
             List<FlowPattern> flows = dungeonFlow.Flows;
             int loopCount = 0;
             int roomCount = Mathf.RoundToInt(dungeon.Parameter("roomCount").Value());
 
-            while (_dungeonRooms.Count < roomCount && loopCount < roomCount)
+            while (_layout.Count < roomCount && loopCount < roomCount)
             {
                 loopCount++;
                 foreach (var flow in flows)
                 {
-                    var rooms = _dungeonRooms.FindMatching(flow.Matches);
+                    var rooms = _layout.FindMatching(flow.Matches);
                     if (rooms.Count == flow.Matches.Count)
                     {
-                        _dungeonRooms.Replace(rooms, flow.Replacer);
-                        loopCount=0;
-                        Debug.Log("HI");
+                        _layout.Replace(rooms, flow.Replacer);
+                        loopCount = 0;
                     }
                     else
                     {
@@ -44,14 +43,14 @@ namespace Assets.DungeonGenerator
                     }
                 }
 
-                if (_dungeonRooms.LastNode.Type != RoomType.END)
+                if (_layout.LastNode.Type != RoomType.END)
                 {
-                    var end = _dungeonRooms.FindMatching(new List<RoomType>() { RoomType.END });
-                    _dungeonRooms.Remove(end[0]);
-                    _dungeonRooms.Add(_dungeonRooms.LastNode, end[0]);
+                    var end = _layout.FindMatching(new List<RoomType>() { RoomType.END });
+                    _layout.Remove(end[0]);
+                    _layout.Add(_layout.LastNode, end[0]);
                 }
             }
-            dungeon.SetRooms(_dungeonRooms);
+            dungeon.SetRooms(_layout);
         }
 
         /// <summary>
@@ -59,7 +58,7 @@ namespace Assets.DungeonGenerator
         /// </summary>
         public void ClearDungeon()
         {
-            _dungeonRooms.RemoveAll();
+            _layout.RemoveAll();
         }
     }
 }
