@@ -10,43 +10,32 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private float speed = 5;
 
-    private NavMeshAgent agent;
-    private BehaviorGraphAgent graphAgent;
-    private Fighter self;
-    private Animator animator;
+    private NavMeshAgent _agent;
+    private BehaviorGraphAgent _graphAgent;
+    private Fighter _fighter;
+    private Animator _animator;
     
 
     void Start()
     {
-        self = GetComponent<NpcFighter>();
-        agent = GetComponent<NavMeshAgent>();
-        graphAgent = GetComponent<BehaviorGraphAgent>();
+        _fighter = GetComponent<NpcFighter>();
+        _agent = GetComponent<NavMeshAgent>();
+        _graphAgent = GetComponent<BehaviorGraphAgent>();
 
+        _graphAgent.BlackboardReference.SetVariableValue("Speed", speed);
+        _graphAgent.BlackboardReference.SetVariableValue("Health", (float)_fighter.GetStat(FighterStats.HEALTH));
 
-        graphAgent.BlackboardReference.SetVariableValue("Speed", speed);
-        graphAgent.BlackboardReference.SetVariableValue("Health", (float)self.GetStat(FighterStats.HEALTH));
-
-        animator = GetComponentInChildren<Animator>();
-        animator.SetFloat("MotionSpeed", 1);
-        animator.SetFloat("Speed", speed);
-
+        _animator = GetComponentInChildren<Animator>();
+        _animator.SetFloat("MotionSpeed", 1);
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    GameObject target = collision.gameObject;
-    //    if (target.GetComponent<Fighter>() != null)
-    //    {
-    //        Debug.Log("eNEMY IS ATTACKING");
-    //        target.GetComponent<Animator>().SetTrigger("Injured");
-    //        self.Attack(target.GetComponent<Fighter>());
-    //    }
-    //    GetComponent<Rigidbody>().isKinematic = true;
-    //}
+    private void Update()
+    {
+        _animator.SetFloat("Speed", _agent.velocity.magnitude);
+    }
 
     public void Hit()
     {
-        //GetComponent<Rigidbody>().isKinematic = false;
-        self.Attack();
+        _fighter.Attack();
     }
 }

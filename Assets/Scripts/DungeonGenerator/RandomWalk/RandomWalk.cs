@@ -135,13 +135,13 @@ namespace Assets.DungeonGenerator
         {
             // Dictionary upsert code referenced from - https://stackoverflow.com/questions/1243717/how-to-update-the-value-stored-in-dictionary-in-c
             foreach (var node in _dungeon.Layout)
-                    {
+            {
                 var roomBounds = node.Value.Bounds;
                 DungeonRoom room = DungeonRoom.Create(node.Value);
-                        room.Construct(_components);
-                        room.Populate(_dungeon);
-                        room.transform.SetParent(_dungeonTransform);
-                        _roomBounds[roomBounds] = room;
+                room.Construct(_components);
+                room.Populate(_dungeon);
+                room.transform.SetParent(_dungeonTransform);
+                _roomBounds[roomBounds] = room;
             }
 
             for (int i = 0; i < _corridors.Count; i++)
@@ -232,7 +232,7 @@ namespace Assets.DungeonGenerator
         private Bounds RandomRoom(Vector3 min, Vector3 max, Vector3 dir, bool isHorizontal)
         {
             Range<Vector3> roomSizeParam = _dungeon.Parameter("roomSize").VectorRange();
-            float roomOffset = roomSizeParam.max.magnitude / 2f; // Distance between rooms
+            float roomOffset = Random.Range(3f, 6f); // Distance between rooms
             Vector3 roomSize = PointUtils.RandomSize(roomSizeParam.min, roomSizeParam.max);
             Vector3 roomCenter = PointUtils.RandomPointWithinRange(min, max);
 

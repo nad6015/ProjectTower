@@ -8,12 +8,14 @@ using Assets;
 using UnityEngine.AI;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "RandomPatrol", story: "[Agent] patrols area", category: "Action/Navigation", id: "1d8f569d2b61141f3aa096165522ca0d")]
+[NodeDescription(name: "RandomPatrol", story: "[Agent] randomly patrols its current room", category: "Action", id: "1d8f569d2b61141f3aa096165522ca0d")]
 public partial class RandomPatrolAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
+    [SerializeReference] public BlackboardVariable<float> Speed = new BlackboardVariable<float>(1.0f);
     private Vector3 _patrolPoint;
     private NavMeshAgent _navMeshAgent;
+    private Animator _animator;
 
     protected override Status OnStart()
     {
@@ -21,14 +23,22 @@ public partial class RandomPatrolAction : Action
         {
             return Status.Failure;
         }
+
         DungeonRoom room = FindClosestRoom();
+        
         if (room == null)
         {
             return Status.Failure;
         }
+        
+        GameObject gameObject = Agent.Value;
 
-        _navMeshAgent = Agent.Value.GetComponent<NavMeshAgent>();
-        _patrolPoint = Agent.Value.transform.position + PointUtils.RandomPointWithinBounds(room.Bounds);
+        _navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
+        _animator = gameObject.GetComponentInChildren<Animator>();
+
+        _patrolPoint = PointUtils.RandomPointWithinBounds(room.Bounds);
+        _navMeshAgent.destination = _patrolPoint;
+       
         return Status.Running;
     }
 
@@ -36,20 +46,21 @@ public partial class RandomPatrolAction : Action
     {
         if (HasReachedDestination(_navMeshAgent.transform, _navMeshAgent.transform.position))
         {
-
+            return Status.Success;
         }
-        return Status.Success;
+        return Status.Running;
     }
 
     protected override void OnEnd()
     {
+        _animator.SetFloat("Speed", 0);
     }
 
     private DungeonRoom FindClosestRoom()
     {
         RaycastHit hit;
         
-        if (Physics.SphereCast(Agent.Value.transform.position, 5, Vector3.down, out hit))
+        if (Physics.Raycast(Agent.Value.transform.position, Vector3.down, out hit))
         {
             return hit.collider.GetComponentInParent<DungeonRoom>();
         }

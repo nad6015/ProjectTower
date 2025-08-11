@@ -79,6 +79,7 @@ GameObject:
   - component: {fileID: 353777729234021114}
   - component: {fileID: 1122762451330811552}
   - component: {fileID: 8589072062742688946}
+  - component: {fileID: 2553989433121075861}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -188,6 +189,14 @@ MonoBehaviour:
   _hitbox: {fileID: 1306059890358619907}
   _attackCooldown: 0.5
   maxCombo: 3
+--- !u!81 &2553989433121075861
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927581186806867705}
+  m_Enabled: 1
 --- !u!1 &7207584777591427513
 GameObject:
   m_ObjectHideFlags: 0

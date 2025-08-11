@@ -69,6 +69,10 @@ namespace Assets.DungeonGenerator
 
             foreach (var connectedNode in connectedNodes)
             {
+                if (nodes.Count > 2)
+                {
+                    break;
+                }
                 Add(connectedNode);
                 if (connectedNode != null && !nodes.Contains(connectedNode))
                 {
