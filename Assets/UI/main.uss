@@ -1,3 +1,24 @@
 .unity-progress-bar {
-	background-color: red;
+    background-color: #CBCBCB;
+    padding: 0px;
+    height:24px;
+    border-radius: 8px;
 }
+
+.unity-progress-bar__progress {
+    background-color: #C01919;
+    margin: 0px;
+    border-radius: 8px;
+}
+
+.unity-progress-bar__background
+{
+    border-width:0px;
+    border-radius: 8px;
+}
+
+.unity-progress-bar__title-container
+{
+    border-radius: 8px;
+}
+

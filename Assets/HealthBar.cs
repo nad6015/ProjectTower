@@ -5,15 +5,18 @@ using UnityEngine.UIElements;
 public class HealthBar : MonoBehaviour
 {
     [SerializeField]
-    Fighter _fighter;
+    private float _yOffset = 3;
 
-    ProgressBar _progressBar;
-    IPanel _panel;
+    private Fighter _fighter;
+    private ProgressBar _progressBar;
+    private IPanel _panel;
+
     void Start()
     {
+        _fighter = GetComponentInParent<Fighter>();
         _fighter.OnHealthChange += UpdateHealthBar;
+
         _progressBar = GetComponent<UIDocument>().rootVisualElement.Q<ProgressBar>();
-        
         _progressBar.highValue = _fighter.GetStat(FighterStats.HEALTH);
         _progressBar.lowValue = 0;
     }
@@ -21,8 +24,11 @@ public class HealthBar : MonoBehaviour
     private void Update()
     {
         // WorldSpace To Panel Code referenced from - https://www.whatupgames.com/blog/create-a-health-bar-that-hovers-over-the-player-with-ui-toolkit
-        Vector2 pos = RuntimePanelUtils.CameraTransformWorldToPanel(_progressBar.panel, _fighter.transform.position + Vector3.up, Camera.main);
-        _progressBar.transform.position = pos;
+        Vector2 pos = RuntimePanelUtils.CameraTransformWorldToPanel(_progressBar.panel, 
+            _fighter.transform.position + (_yOffset * Vector3.up), 
+            Camera.main);
+
+        _progressBar.transform.position = new(pos.x - (_progressBar.contentRect.width / 2f), pos.y);
     }
 
     private void UpdateHealthBar()
