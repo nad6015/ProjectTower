@@ -6,7 +6,6 @@ using Assets.Scripts.DungeonGenerator.Components;
 
 namespace Assets.DungeonGenerator
 {
-    using static Codice.Client.Commands.WkTree.WorkspaceTreeNode;
     using Random = UnityEngine.Random;
 
     /// <summary>
@@ -120,6 +119,7 @@ namespace Assets.DungeonGenerator
                 {
                     _corridors.Add(corridor, null);
                     _roomBounds.Add(nextRoom, null);
+                    Debug.Log("nextRoom = " + nextRoom);
                     n.Bounds = nextRoom;
                     nodes.Add(n);
                 }
@@ -135,13 +135,13 @@ namespace Assets.DungeonGenerator
         {
             // Dictionary upsert code referenced from - https://stackoverflow.com/questions/1243717/how-to-update-the-value-stored-in-dictionary-in-c
             foreach (var node in _dungeon.Layout)
-            {
+                    {
                 var roomBounds = node.Value.Bounds;
                 DungeonRoom room = DungeonRoom.Create(node.Value);
-                room.Construct(_components);
-                room.Populate(_dungeon);
-                room.transform.SetParent(_dungeonTransform);
-                _roomBounds[roomBounds] = room;
+                        room.Construct(_components);
+                        room.Populate(_dungeon);
+                        room.transform.SetParent(_dungeonTransform);
+                        _roomBounds[roomBounds] = room;
             }
 
             for (int i = 0; i < _corridors.Count; i++)

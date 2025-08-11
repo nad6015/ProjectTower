@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using Assets.DungeonGenerator;
 using Assets.DungeonGenerator.Components;
 using Assets.Scripts.DungeonGenerator.Components;
@@ -66,7 +65,7 @@ public class RandomWalkTests
     }
 
     [UnityTest]
-    public IEnumerator ShouldCreateDungeonsWithBranches()
+    public IEnumerator ShouldCreateDungeonsWithRoomsThatBranch()
     {
         yield return TestSetUp(7, 1);
 
@@ -105,24 +104,26 @@ public class RandomWalkTests
             }
         }
 
+        yield return new WaitForSeconds(10f);
+
         Assert.That(start != null);
         Assert.That(exploreCount == 5);
-        Assert.That(treasureCount == 5);
+        Assert.That(treasureCount == 1);
         Assert.That(end != null);
     }
 
     private IEnumerator TestSetUp(int roomCount = 2, int branchCount = 0)
     {
-        DungeonNode.Reset();
-        Transform parent = GameObject.FindGameObjectWithTag("DungeonGenerator").transform;
-        yield return new WaitForSeconds(1);
+        DungeonGenerator dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();
+        
+        dungeonGenerator.ClearDungeon();
 
         DungeonParameters parameters = new DungeonParameters(paramFile.name);
         parameters.ModifyParameter("roomCount", roomCount);
         Dungeon dungeon = new(parameters, components);
 
         dungeon.SetRooms(CreateLayout(roomCount, branchCount));
-        RandomWalk algorithm = new(parent);
+        RandomWalk algorithm = new(dungeonGenerator.transform);
         algorithm.GenerateDungeon(dungeon);
 
         yield return new WaitForSeconds(1);
@@ -138,18 +139,22 @@ public class RandomWalkTests
 
     private DungeonLayout CreateLayout(int roomCount, int branchCount)
     {
+        DungeonNode.Reset();
         DungeonLayout layout = new DungeonLayout();
         layout.Add(new DungeonNode(RoomType.START));
         DungeonNode lastNode = layout.LastNode;
+        int randomIndex1 = Random.Range(1, roomCount - 2);
+        int randomIndex2 = Random.Range(1, roomCount - 2); // TODO: Fix/Tidy up test
 
-        for (int i = 0; i < roomCount - 2; i++)
+        for (int i = 1; i < roomCount - 1; i++)
         {
             DungeonNode node = new DungeonNode(RoomType.EXPLORE);
 
-            if (branchCount > 0)
+            if (i == randomIndex1 || i == randomIndex2)
             {
                 for (int j = 0; j < branchCount; j++)
                 {
+                    
                     layout.Add(node, new DungeonNode(RoomType.TREASURE));
                 }
             }
