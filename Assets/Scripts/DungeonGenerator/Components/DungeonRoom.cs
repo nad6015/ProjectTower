@@ -36,9 +36,11 @@ namespace Assets.Scripts.DungeonGenerator.Components
 
             float maxX = Bounds.max.x;
             float maxZ = Bounds.max.z;
+           
+            float angle = 90f;
 
             // Place the top and bottom walls
-            for (int i = 0; i < width + 1; i++)
+            for (int i = 0; i < width; i++)
             {
                 float wallX = minX + i;
 
@@ -54,7 +56,7 @@ namespace Assets.Scripts.DungeonGenerator.Components
             }
 
             // Place left and right walls
-            for (int i = 0; i < height + 1; i++)
+            for (int i = 0; i < height; i++)
             {
                 float z = minZ + i;
 
