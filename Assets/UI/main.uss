@@ -22,3 +22,7 @@
     border-radius: 8px;
 }
 
+.status-bar
+{
+	width: 100%;
+}

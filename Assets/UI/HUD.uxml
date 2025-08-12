@@ -1,3 +1,34 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <engine:ProgressBar value="0" title="0/0" name="HealthBar" style="width: 50%;" />
+    <engine:Template name="StatBar" src="project://database/Assets/UI/StatBar.uxml?fileID=9197481963319205126&amp;guid=6f9628197757fd74d9389bf6f68a4c97&amp;type=3#StatBar" />
+    <Style src="project://database/Assets/UI/HUD.uss?fileID=7433441132597879392&amp;guid=62557e5f0d444ee4bb37807378158ffc&amp;type=3#HUD" />
+    <engine:VisualElement style="flex-grow: 1; flex-direction: row; align-items: flex-end; align-self: auto; align-content: auto; justify-content: flex-start;">
+        <engine:VisualElement name="VisualElement" style="flex-grow: 1; height: auto; align-items: flex-start; justify-content: space-between; width: auto; align-content: auto;">
+            <engine:VisualElement picking-mode="Ignore" name="healthbar" style="flex-grow: 0; flex-direction: row; background-position-y: center 0; background-position-x: center 0; -unity-background-scale-mode: scale-and-crop; -unity-text-align: middle-center; align-items: center; justify-content: flex-start; align-self: auto; align-content: auto; height: auto;">
+                <engine:VisualElement name="VisualElement" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/UI/heart.png?fileID=2800000&amp;guid=c6ffcb40bb1eea8459b600deb9e01f76&amp;type=3#heart&quot;); height: 33px; width: 37px; -unity-background-scale-mode: scale-to-fit; align-content: auto; align-items: auto; justify-content: center; background-size: 100% 100%; align-self: center; flex-shrink: 0; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; background-color: rgba(0, 0, 0, 0); -unity-background-image-tint-color: rgb(192, 25, 25);" />
+                <engine:Instance template="StatBar" name="TemplateContainer" class="bar" />
+            </engine:VisualElement>
+            <engine:VisualElement picking-mode="Ignore" name="staminabar" style="flex-grow: 0; flex-direction: row; background-position-y: center 0; background-position-x: center 0; -unity-background-scale-mode: scale-and-crop; -unity-text-align: middle-center; align-items: center; justify-content: flex-start; align-self: auto; align-content: auto;">
+                <engine:VisualElement name="VisualElement" class="stamina" style="flex-grow: 0; height: 33px; width: 37px; align-content: auto; align-items: auto; justify-content: center; align-self: center; flex-shrink: 0; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; background-image: url(&quot;project://database/Assets/UI/heart.png?fileID=2800000&amp;guid=c6ffcb40bb1eea8459b600deb9e01f76&amp;type=3#heart&quot;);" />
+                <engine:Instance template="StatBar" name="TemplateContainer" class="bar stamina" />
+            </engine:VisualElement>
+            <engine:VisualElement picking-mode="Ignore" name="manabar" style="flex-grow: 0; flex-direction: row; background-position-y: center 0; background-position-x: center 0; -unity-background-scale-mode: scale-and-crop; -unity-text-align: middle-center; align-items: center; justify-content: flex-start; align-self: auto; align-content: auto; height: auto;">
+                <engine:VisualElement name="VisualElement" class="mana" style="flex-grow: 0; height: 33px; width: 37px; align-content: auto; align-items: auto; justify-content: center; align-self: center; flex-shrink: 0; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; background-image: url(&quot;project://database/Assets/UI/heart.png?fileID=2800000&amp;guid=c6ffcb40bb1eea8459b600deb9e01f76&amp;type=3#heart&quot;);" />
+                <engine:Instance template="StatBar" name="TemplateContainer" class="bar mana" />
+            </engine:VisualElement>
+        </engine:VisualElement>
+        <engine:VisualElement name="ItemSelector" style="flex-grow: 0; height: 225px; width: 225px; align-items: auto; align-content: auto;">
+            <engine:VisualElement name="ItemBox01" class="item-box active-item" style="background-image: none; align-self: auto; bottom: auto; left: 25%; top: 5%;">
+                <engine:VisualElement class="item-icon" style="background-image: url(&quot;project://database/Assets/UI/Bastardschwert%20Type%2002.png?fileID=2800000&amp;guid=b0f9c61f2f3cf3740903ac0dfd40a75b&amp;type=3#Bastardschwert Type 02&quot;);" />
+            </engine:VisualElement>
+            <engine:VisualElement name="ItemBox02" class="item-box" style="background-image: none; align-self: auto; bottom: 35%; left: 50%; right: auto;">
+                <engine:VisualElement class="item-icon" />
+            </engine:VisualElement>
+            <engine:VisualElement name="ItemBox03" class="item-box" style="background-image: none; align-self: auto; bottom: 7.5%; left: 25%;">
+                <engine:VisualElement class="item-icon" />
+            </engine:VisualElement>
+            <engine:VisualElement name="ItemBox04" class="item-box" style="background-image: none; align-self: auto; bottom: 35%; left: 0;">
+                <engine:VisualElement class="item-icon" />
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
 </engine:UXML>

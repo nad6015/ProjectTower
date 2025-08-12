@@ -9,7 +9,6 @@ public class HealthBar : MonoBehaviour
 
     private Fighter _fighter;
     private ProgressBar _progressBar;
-    private IPanel _panel;
 
     void Start()
     {

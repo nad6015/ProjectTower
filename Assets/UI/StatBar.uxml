@@ -1,4 +1,4 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/main.uss?fileID=7433441132597879392&amp;guid=588e9ad8388a2104ba49914bd7cd95db&amp;type=3#main" />
-    <engine:ProgressBar value="100" style="width: 107px; height: 21px;" />
+    <engine:ProgressBar value="100" name="ProgressBar" class="status-bar" style="align-items: stretch; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
 </engine:UXML>

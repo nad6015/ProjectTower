@@ -1,0 +1,79 @@
+.bar {
+    width: 200px;
+}
+
+.health-bar .status-bar .unity-progress-bar__progress {
+    background-color: rgb(70, 143, 84);
+    -unity-background-image-tint-color: rgb(70, 143, 84);
+}
+
+.stamina .status-bar .unity-progress-bar__progress {
+    background-color: rgb(70, 143, 84);
+}
+
+.mana .status-bar .unity-progress-bar__progress {
+    background-color: rgb(98, 165, 227);
+    -unity-background-image-tint-color: rgb(98, 165, 227);
+}
+
+.stamina {
+    -unity-background-image-tint-color: rgb(70, 143, 84);
+}
+
+.mana {
+    -unity-background-image-tint-color: rgb(98, 165, 227);
+}
+
+.item-box {
+    width: 75px;
+    height: 75px;
+    flex-grow: 1;
+    background-color: rgb(217, 217, 217);
+    rotate: 45deg;
+    justify-content: center;
+    align-items: center;
+    border-top-width: 4px;
+    border-right-width: 4px;
+    border-bottom-width: 4px;
+    border-left-width: 4px;
+    border-left-color: rgb(164, 164, 164);
+    border-right-color: rgb(164, 164, 164);
+    border-top-color: rgb(164, 164, 164);
+    border-bottom-color: rgb(164, 164, 164);
+    position: absolute;
+    align-content: auto;
+}
+
+.mana .status-bar .unity-progress-bar__progress {
+    background-color: rgb(98, 165, 227);
+    -unity-background-image-tint-color: rgb(70, 143, 84);
+}
+
+.item-icon {
+    width: 75%;
+    height: 75%;
+    align-content: auto;
+    flex-direction: column;
+    max-width: 75%;
+    max-height: 75%;
+    rotate: -45deg;
+    position: absolute;
+    flex-grow: 1;
+    background-image: url("project://database/Assets/UI/heart.png?fileID=2800000&guid=c6ffcb40bb1eea8459b600deb9e01f76&type=3#heart");
+    align-self: auto;
+    justify-content: center;
+    align-items: center;
+    top: 10px;
+    left: 10px;
+}
+
+.active-item {
+    border-left-color: rgb(10, 86, 125);
+    border-right-color: rgb(10, 86, 125);
+    border-top-color: rgb(10, 86, 125);
+    border-bottom-color: rgb(10, 86, 125);
+    border-top-width: 4px;
+    border-right-width: 4px;
+    border-bottom-width: 4px;
+    border-left-width: 4px;
+}
