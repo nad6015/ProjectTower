@@ -72,13 +72,7 @@ namespace Assets.DungeonGenerator
             node.Bounds = lastRoom;
             HashSet<DungeonNode> builtNodes = new() { node };
 
-            while (_roomBounds.Count < layout.Count)
-            {
-                foreach (var i in layout)
-                {
-                    LinkNodes(i.Value, dir, negativeDirOffset, builtNodes);
-                }
-            }
+            LinkNodes(layout.FirstNode, dir, negativeDirOffset, builtNodes);
         }
 
         void LinkNodes(DungeonNode node, Vector3 dir, float negativeDirOffset, HashSet<DungeonNode> nodes)
@@ -90,41 +84,44 @@ namespace Assets.DungeonGenerator
                 {
                     continue;
                 }
-                Bounds nextRoom;
-                Bounds corridor;
+                for (var i = 0; i < 4; i++)
+                {
+                    Bounds nextRoom;
+                    Bounds corridor;
 
-                if (dir == Vector3.right)
-                {
-                    nextRoom = RandomRoom(new(lastRoom.max.x, 0, lastRoom.min.z), lastRoom.max, dir, true);
-                    corridor = CreateCorridor(lastRoom, nextRoom, nextRoom.min.x - lastRoom.max.x, true);
-                }
-                else if (dir == Vector3.forward)
-                {
-                    nextRoom = RandomRoom(new(lastRoom.min.x, 0, lastRoom.max.z), lastRoom.max, dir, false);
-                    corridor = CreateCorridor(lastRoom, nextRoom, nextRoom.min.z - lastRoom.max.z, false);
-                }
-                else if (dir == Vector3.left)
-                {
-                    nextRoom = RandomRoom(new(lastRoom.min.x - negativeDirOffset, 0, lastRoom.min.z), lastRoom.max, dir, true);
-                    corridor = CreateCorridor(nextRoom, lastRoom, lastRoom.min.x - nextRoom.max.x, true);
-                }
-                else // dir == Vector3.down)
-                {
-                    nextRoom = RandomRoom(new(lastRoom.min.x, 0, lastRoom.min.z - negativeDirOffset), lastRoom.max, dir, false);
-                    corridor = CreateCorridor(nextRoom, lastRoom, lastRoom.min.z - nextRoom.max.z, false);
-                }
+                    if (dir == Vector3.right)
+                    {
+                        nextRoom = RandomRoom(new(lastRoom.max.x, 0, lastRoom.min.z), lastRoom.max, dir, true);
+                        corridor = CreateCorridor(lastRoom, nextRoom, nextRoom.min.x - lastRoom.max.x, true);
+                    }
+                    else if (dir == Vector3.forward)
+                    {
+                        nextRoom = RandomRoom(new(lastRoom.min.x, 0, lastRoom.max.z), lastRoom.max, dir, false);
+                        corridor = CreateCorridor(lastRoom, nextRoom, nextRoom.min.z - lastRoom.max.z, false);
+                    }
+                    else if (dir == Vector3.left)
+                    {
+                        nextRoom = RandomRoom(new(lastRoom.min.x - negativeDirOffset, 0, lastRoom.min.z), lastRoom.max, dir, true);
+                        corridor = CreateCorridor(nextRoom, lastRoom, lastRoom.min.x - nextRoom.max.x, true);
+                    }
+                    else // dir == Vector3.down)
+                    {
+                        nextRoom = RandomRoom(new(lastRoom.min.x, 0, lastRoom.min.z - negativeDirOffset), lastRoom.max, dir, false);
+                        corridor = CreateCorridor(nextRoom, lastRoom, lastRoom.min.z - nextRoom.max.z, false);
+                    }
+                    dir = RandomDirection();
+                    // If a room or a corridor already exists in that area, then loop again.
+                    if (CanPlaceRoom(nextRoom, corridor))
+                    {
+                        _corridors.Add(corridor, null);
+                        _roomBounds.Add(nextRoom, null);
+                        n.Bounds = nextRoom;
+                        nodes.Add(n);
 
-                // If a room or a corridor already exists in that area, then loop again.
-                if (CanPlaceRoom(nextRoom, corridor))
-                {
-                    _corridors.Add(corridor, null);
-                    _roomBounds.Add(nextRoom, null);
-                    Debug.Log("nextRoom = " + nextRoom);
-                    n.Bounds = nextRoom;
-                    nodes.Add(n);
+                        LinkNodes(n, dir, negativeDirOffset, nodes);
+                        break;
+                    }
                 }
-
-                dir = RandomDirection();
             }
         }
 
@@ -170,8 +167,7 @@ namespace Assets.DungeonGenerator
         {
             // Place dungeon exit point
             Bounds lastRoom = _roomBounds.Last().Key;
-            DungeonExit exit = GameObject.Instantiate(_components.exit, lastRoom.center,
-                Quaternion.identity, _dungeonTransform);
+            DungeonExit exit = GameObject.Instantiate(_components.exit, lastRoom.center, Quaternion.identity, _dungeonTransform);
             exit.name = "DungeonExit";
             _dungeon.DungeonExit = exit;
 
@@ -232,17 +228,17 @@ namespace Assets.DungeonGenerator
         private Bounds RandomRoom(Vector3 min, Vector3 max, Vector3 dir, bool isHorizontal)
         {
             Range<Vector3> roomSizeParam = _dungeon.Parameter("roomSize").VectorRange();
-            float roomOffset = Random.Range(3f, 6f); // Distance between rooms
+            float roomOffset = Random.Range(1f, 5f); // Distance between rooms
             Vector3 roomSize = PointUtils.RandomSize(roomSizeParam.min, roomSizeParam.max);
             Vector3 roomCenter = PointUtils.RandomPointWithinRange(min, max);
 
             if (isHorizontal)
             {
-                roomCenter.x += dir.x > 0 ? (Random.value * roomOffset) + roomSize.x : -((Random.value * roomOffset) + roomSize.x);
+                roomCenter.x += dir.x > 0 ? (roomOffset) + roomSize.x : -((roomOffset) + roomSize.x);
             }
             else
             {
-                roomCenter.z += dir.z > 0 ? (Random.value * roomOffset) + roomSize.z : -((Random.value * roomOffset) + roomSize.z);
+                roomCenter.z += dir.z > 0 ? (roomOffset) + roomSize.z : -((roomOffset) + roomSize.z);
             }
 
             return new Bounds(roomCenter, roomSize);

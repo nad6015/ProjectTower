@@ -15,7 +15,6 @@ public partial class RandomPatrolAction : Action
     [SerializeReference] public BlackboardVariable<float> Speed = new BlackboardVariable<float>(1.0f);
     private Vector3 _patrolPoint;
     private NavMeshAgent _navMeshAgent;
-    private Animator _animator;
 
     protected override Status OnStart()
     {
@@ -34,7 +33,6 @@ public partial class RandomPatrolAction : Action
         GameObject gameObject = Agent.Value;
 
         _navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
-        _animator = gameObject.GetComponentInChildren<Animator>();
 
         _patrolPoint = PointUtils.RandomPointWithinBounds(room.Bounds);
         _navMeshAgent.destination = _patrolPoint;
@@ -53,7 +51,7 @@ public partial class RandomPatrolAction : Action
 
     protected override void OnEnd()
     {
-        _animator.SetFloat("Speed", 0);
+        
     }
 
     private DungeonRoom FindClosestRoom()
