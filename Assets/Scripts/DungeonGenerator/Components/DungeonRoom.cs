@@ -1,7 +1,9 @@
 using Assets.DungeonGenerator;
 using Assets.DungeonGenerator.Components;
+using Assets.Scripts.DungeonGenerator.Components.Tiles;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Assets.Scripts.DungeonGenerator.Components
 {
@@ -18,15 +20,9 @@ namespace Assets.Scripts.DungeonGenerator.Components
             Contents = new();
         }
 
-        public void Construct(DungeonComponents components)
+        public void Construct(Tilemap3D tilemap)
         {
-            GameObject floorAsset = components.floorTile;
-            GameObject wallAsset = components.wallTile;
-
             transform.position = Bounds.min;
-            // Place the floor
-            GameObject floor = Instantiate(floorAsset, transform);
-            floor.transform.localScale = PointUtils.Vec2ToVec3(Bounds.size, 0.5f);
 
             float width = Bounds.size.x;
             float height = Bounds.size.z;
@@ -36,8 +32,15 @@ namespace Assets.Scripts.DungeonGenerator.Components
 
             float maxX = Bounds.max.x;
             float maxZ = Bounds.max.z;
-           
-            float angle = 90f;
+
+            // Place the floor
+            for (int i = 0; i < width; i++)
+            {
+                for (int j = 0; j < height; j++)
+                {
+                    tilemap.DrawFloor(minX + i, minZ + j, transform);
+                }
+            }
 
             // Place the top and bottom walls
             for (int i = 0; i < width; i++)
@@ -45,14 +48,10 @@ namespace Assets.Scripts.DungeonGenerator.Components
                 float wallX = minX + i;
 
                 // Bottom wall
-                GameObject wall = Instantiate(wallAsset, new Vector3(wallX, 0, minZ), Quaternion.identity, transform);
-                wall.name = "Wall Bottom";
-                walls.Add(wall);
+                walls.Add(tilemap.DrawHorizontalWall(wallX, minZ, transform));
 
                 // Top wall
-                wall = Instantiate(wallAsset, new Vector3(wallX, 0, maxZ), Quaternion.identity, transform);
-                wall.name = "Wall Top";
-                walls.Add(wall);
+                walls.Add(tilemap.DrawHorizontalWall(wallX, maxZ, transform));
             }
 
             // Place left and right walls
@@ -60,22 +59,27 @@ namespace Assets.Scripts.DungeonGenerator.Components
             {
                 float z = minZ + i;
 
-                GameObject wall = Instantiate(wallAsset, new Vector3(minX, 0, z), Quaternion.identity, transform);
-                wall.name = "Wall Left";
-                wall.transform.GetChild(0).Rotate(Vector3.up, 90);
-                walls.Add(wall);
+                // Left wall
+                walls.Add(tilemap.DrawVerticalWall(minX, z, transform));
 
-
-                wall = Instantiate(wallAsset, new Vector3(maxX, 0, z), Quaternion.identity, transform);
-                wall.name = "Wall Right";
-                wall.transform.GetChild(0).Rotate(Vector3.up, 90);
-                walls.Add(wall);
+                // Right wall
+                walls.Add(tilemap.DrawVerticalWall(maxX, z, transform));
             }
+
+            tilemap.DrawRoomCorner(minX, minZ, transform);
+            tilemap.DrawRoomCorner(minX, maxZ, transform);
+            tilemap.DrawRoomCorner(maxX, minZ, transform);
+            tilemap.DrawRoomCorner(maxX, maxZ, transform);
         }
 
-        public void Modify(DungeonCorridor corridor)
+        public void Modify(Bounds cBounds, Tilemap3D tilemap)
         {
-            Bounds cBounds = corridor.Bounds;
+            if (!cBounds.Intersects(Bounds))
+            {
+                return;
+            }
+
+            Vector3 firstPos = Vector3.zero;
 
             foreach (GameObject wall in walls)
             {
@@ -85,14 +89,29 @@ namespace Assets.Scripts.DungeonGenerator.Components
                     (Mathf.Approximately(position.z, cBounds.min.z) || Mathf.Approximately(position.z, cBounds.max.z)))
                 {
                     wall.SetActive(false);
+                    if (firstPos == Vector3.zero)
+                    {
+                        firstPos = position;
+                    }
                 }
 
                 if (position.z > cBounds.min.z && position.z < cBounds.max.z &&
                     (Mathf.Approximately(position.x, cBounds.min.x) || Mathf.Approximately(position.x, cBounds.max.x)))
                 {
                     wall.SetActive(false);
+                    if (firstPos == Vector3.zero)
+                    {
+                        firstPos = position;
+                    }
                 }
             }
+            bool isHorizontal = (Mathf.Approximately(firstPos.x, cBounds.min.x) || Mathf.Approximately(firstPos.x, cBounds.max.x));
+            tilemap.DrawCorridorArch(
+                isHorizontal ? cBounds.max.x : cBounds.min.x,
+                isHorizontal ? cBounds.min.z : cBounds.max.z,
+                isHorizontal, transform);
+
+            tilemap.DrawCorridorArch(cBounds.min.x, cBounds.min.z, isHorizontal, transform);
         }
 
         public static DungeonRoom Create(DungeonNode node)
@@ -111,11 +130,11 @@ namespace Assets.Scripts.DungeonGenerator.Components
             float spawnRate = dungeon.Parameter("enemySpawnRate").Value();
             Range<float> enemiesPerRoom = dungeon.Parameter("enemiesPerRoom").Range();
 
-            if (UnityEngine.Random.value > spawnRate || dungeon.Components.enemies.Count == 0)
+            if (Random.value > spawnRate || dungeon.Components.enemies.Count == 0)
             {
                 return;
             }
-            int count = Mathf.RoundToInt(UnityEngine.Random.Range(enemiesPerRoom.min, enemiesPerRoom.max));
+            int count = Mathf.RoundToInt(Random.Range(enemiesPerRoom.min, enemiesPerRoom.max));
 
             Contents.Add(dungeon.Components.enemies[0], count);
         }

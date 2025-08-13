@@ -140,15 +140,15 @@ public class RandomWalkTests
     private DungeonLayout CreateLayout(int roomCount, int branchCount)
     {
         DungeonNode.Reset();
-        DungeonLayout layout = new DungeonLayout();
-        layout.Add(new DungeonNode(RoomType.START));
+        DungeonLayout layout = new();
+        layout.Add(new(RoomType.START));
         DungeonNode lastNode = layout.LastNode;
         int randomIndex1 = Random.Range(1, roomCount - 2);
         int randomIndex2 = Random.Range(1, roomCount - 2); // TODO: Fix/Tidy up test
 
         for (int i = 1; i < roomCount - 1; i++)
         {
-            DungeonNode node = new DungeonNode(RoomType.EXPLORE);
+            DungeonNode node = new(RoomType.EXPLORE);
 
             if (i == randomIndex1 || i == randomIndex2)
             {

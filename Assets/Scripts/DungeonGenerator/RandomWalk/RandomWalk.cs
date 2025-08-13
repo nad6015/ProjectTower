@@ -135,7 +135,7 @@ namespace Assets.DungeonGenerator
             {
                 var roomBounds = node.Value.Bounds;
                 DungeonRoom room = DungeonRoom.Create(node.Value);
-                room.Construct(_components);
+                room.Construct(_components.tilemap);
                 room.Populate(_dungeon);
                 room.transform.SetParent(_dungeonTransform);
                 _roomBounds[roomBounds] = room;
@@ -154,7 +154,7 @@ namespace Assets.DungeonGenerator
             {
                 foreach (var corridor in _corridors.Values)
                 {
-                    room.Modify(corridor);
+                    room.Modify(corridor.Bounds, _components.tilemap);
                     corridor.Modify(room.Bounds);
                 }
             }

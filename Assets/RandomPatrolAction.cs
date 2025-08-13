@@ -12,7 +12,7 @@ using UnityEngine.AI;
 public partial class RandomPatrolAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
-    [SerializeReference] public BlackboardVariable<float> Speed = new BlackboardVariable<float>(1.0f);
+    [SerializeReference] public BlackboardVariable<float> Speed = new(1.0f);
     private Vector3 _patrolPoint;
     private NavMeshAgent _navMeshAgent;
 

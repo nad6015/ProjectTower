@@ -1,8 +1,7 @@
-﻿using Assets.Combat;
+﻿using Assets.Scripts.DungeonGenerator.Components.Tiles;
 using System.Collections.Generic;
-using Unity.AI.Navigation;
 using UnityEngine;
-
+    
 namespace Assets.DungeonGenerator
 {
     [CreateAssetMenu(fileName = "DungeonComponents", menuName = "Dungeon Components", order = 1)]
@@ -10,6 +9,7 @@ namespace Assets.DungeonGenerator
     {
         public GameObject wallTile;
         public GameObject floorTile;
+        public Tilemap3D tilemap;
 
         public GameObject corridorWall;
         public GameObject corridorFloor;

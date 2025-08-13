@@ -11,6 +11,7 @@ TagManager:
   - GameManager
   - PlayerSpawn
   - Item
+  - Tilemap
   layers:
   - Default
   - TransparentFX

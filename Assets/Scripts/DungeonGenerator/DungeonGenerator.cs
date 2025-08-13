@@ -2,6 +2,7 @@ using UnityEngine;
 using Assets.DungeonGenerator.Components;
 using Unity.AI.Navigation;
 using System.Collections.Generic;
+using Assets.Scripts.DungeonGenerator.Components;
 
 namespace Assets.DungeonGenerator
 {
@@ -44,7 +45,7 @@ namespace Assets.DungeonGenerator
             {
                 DestroyImmediate(transform.GetChild(0).gameObject);
             }
-
+            //DungeonNode.Reset();
         }
     }
 }
