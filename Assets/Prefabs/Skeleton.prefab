@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1751019968249137399}
   - component: {fileID: 2038346966450648583}
   - component: {fileID: 5656601000455613748}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,7 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22ba855b7d20f5348bed89d22269d181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fighter: {fileID: 5786447517652734510}
+  _yOffset: 3
 --- !u!1 &7743867000605054361
 GameObject:
   m_ObjectHideFlags: 0
