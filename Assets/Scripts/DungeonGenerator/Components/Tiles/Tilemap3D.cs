@@ -14,6 +14,13 @@ namespace Assets.Scripts.DungeonGenerator.Components.Tiles
         public GameObject roomCorner;
         public GameObject corridorArch;
 
+        private Shufflebag<GameObject> _floors;
+
+        public void OnEnable()
+        {
+            _floors = new(floorTiles);
+        }
+
         private Quaternion rotateY = Quaternion.AngleAxis(-90f, Vector3.up);
 
         /// <summary>
@@ -50,7 +57,7 @@ namespace Assets.Scripts.DungeonGenerator.Components.Tiles
         /// <returns></returns>
         public GameObject DrawFloor(float x, float z, Transform transform)
         {
-            return Draw(x, z, floorTiles[0], Quaternion.identity, transform);
+            return Draw(x, z, _floors.TakeItem(), Quaternion.identity, transform);
         }
 
         /// <summary>
@@ -66,7 +73,7 @@ namespace Assets.Scripts.DungeonGenerator.Components.Tiles
         {
             GameObject gameObject = Instantiate(tile, new Vector3(x, 0, z), Quaternion.identity, transform);
             var model = gameObject.transform.GetChild(0);
-            model.rotation = model.rotation * quaternion;
+            model.rotation *= quaternion;
             return gameObject;
         }
 
@@ -91,6 +98,32 @@ namespace Assets.Scripts.DungeonGenerator.Components.Tiles
         public GameObject DrawRoomCorner(float x, float z, Transform transform)
         {
             return Draw(x, z, roomCorner, Quaternion.identity, transform);
+        }
+    }
+
+    public class Shufflebag<T>
+    {
+        private List<T> _originalList;
+        private List<T> _shuffleBag;
+        public Shufflebag(List<T> originalList)
+        {
+            _originalList = new List<T>(originalList);
+            _shuffleBag = new List<T>(originalList);
+        }
+
+        public T TakeItem()
+        {
+            if (_shuffleBag.Count == 0)
+            {
+                _shuffleBag = new List<T>(_originalList);
+            }
+
+            int randomIndex = Mathf.RoundToInt(UnityEngine.Random.value * (_shuffleBag.Count - 1));
+
+            T item = _shuffleBag[randomIndex];
+            _shuffleBag.RemoveAt(randomIndex);
+
+            return item;
         }
     }
 }

@@ -38,7 +38,7 @@ namespace Assets.Scripts.DungeonGenerator.Components
             {
                 for (int j = 0; j < height; j++)
                 {
-                    tilemap.DrawFloor(minX + i, minZ + j, transform);
+                    tilemap.DrawFloor(minX + i, minZ + j, transform);   
                 }
             }
 
