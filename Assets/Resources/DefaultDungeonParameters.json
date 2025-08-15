@@ -2,30 +2,33 @@
   "params": [
     {
       "id": "roomSize",
-      "type": "range",
       "value": {
-        "min": {
-          "x": 15,
-          "z": 15
-        },
-        "max": {
-          "x": 25,
-          "z": 25
-        }
+        "type": "vectorRange",
+        "minX": 15,
+        "minY": 0,
+        "minZ": 15,
+
+        "maxX": 25,
+        "maxY": 0,
+        "maxZ": 25
       },
       "locked": false
     },
     {
       "id": "corridorSize",
-      "type": "vector",
       "value": {
+        "type": "vector",
         "x": 3,
+        "y": 0,
         "z": 3
       },
       "locked": false
     },
-    { "id": "enemySpawnRate", "type": "number", "value": 0.5, "locked": false },
-    { "id": "itemDropRate", "type": "number", "value": 0.5, "locked": false },
+    {
+      "id": "enemySpawnRate",
+      "value": { "type": "number", "value": 50 },
+      "locked": false
+    },
     {
       "id": "itemsPerRoom",
       "type": "range",

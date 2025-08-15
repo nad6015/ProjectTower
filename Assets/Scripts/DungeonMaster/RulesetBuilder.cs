@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Assets.DungeonGenerator.Components;
+using Assets.DungeonGenerator;
+using UnityEngine;
 
-namespace Assets.DungeonGenerator
+namespace Assets.DungeonMaster
 {
     public class RulesetBuilder
     {
@@ -13,15 +15,15 @@ namespace Assets.DungeonGenerator
             JsonUtils.ForEachIn(json["dungeonRules"], jRule =>
             {
                 DungeonParameter dungeonParameter = JsonUtils.ConvertToEnum<DungeonParameter>(jRule["parameter"]);
-
+                
                 if (!_rules.ContainsKey(dungeonParameter))
                 {
                     ValueRepresentation value = new(
-                        JsonUtils.ConvertToEnum<ValueType>(jRule["value"]), 
-                        JsonUtils.FlattenedJsonValues(jRule));
+                        JsonUtils.ConvertToEnum<ValueType>(jRule["value"]),
+                        JsonUtils.FlattenedJsonValues(jRule["value"]));
                     GameParameter gameParameter = JsonUtils.ConvertToEnum<GameParameter>(jRule["gameParam"]);
 
-                    _rules[dungeonParameter] = new DungeonRule(dungeonParameter, gameParameter, BuildConditions(jRule["conditions"]), value);
+                    _rules[dungeonParameter] = new DungeonRule(dungeonParameter, gameParameter, BuildConditions(jRule), value);
                 }
             });
 
@@ -39,7 +41,7 @@ namespace Assets.DungeonGenerator
                {
                    ValueRepresentation value = new(
                        JsonUtils.ConvertToEnum<ValueType>(jRule["value"]),
-                        JsonUtils.FlattenedJsonValues(jRule));
+                        JsonUtils.FlattenedJsonValues(jRule["value"]));
                    GameParameter gameParameter = JsonUtils.ConvertToEnum<GameParameter>(jRule["gameParam"]);
 
                    _rules[gameplayParameter] = new(gameplayParameter, gameParameter, BuildConditions(jRule), value);

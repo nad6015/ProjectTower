@@ -3,17 +3,18 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 namespace Assets.DungeonGenerator
 {
     public static class JsonUtils
     {
-        public static T ConvertToEnum<T>(JToken jToken)
+        public static T ConvertToEnum<T>(JToken jToken, string field = "type")
         {
             try
             {
-                var json = JsonConvert.DeserializeObject<Dictionary<string, string>>(jToken.ToString());
-               return (T)Enum.Parse(typeof(T), json["type"], true);
+                Debug.Log(jToken[field]);
+                return (T)Enum.Parse(typeof(T), jToken[field].ToString(), true);
             }
             catch
             {
@@ -27,7 +28,7 @@ namespace Assets.DungeonGenerator
             IList<JToken> jsonList = jsonField.Children().ToList();
 
             foreach (JToken item in jsonList)
-            { 
+            {
                 action(item);
             }
         }

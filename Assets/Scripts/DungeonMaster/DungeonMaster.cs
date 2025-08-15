@@ -5,8 +5,9 @@ using Assets.PlayerCharacter;
 using Assets.GameManager;
 using Assets.Combat;
 using Newtonsoft.Json.Linq;
+using Assets.DungeonGenerator;
 
-namespace Assets.DungeonGenerator
+namespace Assets.DungeonMaster
 {
     using Random = UnityEngine.Random;
 
@@ -27,7 +28,7 @@ namespace Assets.DungeonGenerator
 
         public int Floor { get; private set; }
 
-        private DungeonGenerator _dungeonGenerator;
+        private DungeonGenerator.DungeonGenerator _dungeonGenerator;
         private PlayerController _player;
         private Dungeon _currentDungeon;
         private DungeonRepresentation _dungeonParams;
@@ -40,7 +41,7 @@ namespace Assets.DungeonGenerator
 
         public void Start()
         {
-            _dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();
+            _dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator.DungeonGenerator>();
             _combatSystem = GameObject.FindGameObjectWithTag("CombatSystem").GetComponent<CombatSystem>();
             _gameData = new();
 

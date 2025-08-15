@@ -1,5 +1,6 @@
 using Assets.DungeonGenerator;
 using Assets.DungeonGenerator.Components;
+using Assets.DungeonMaster;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -32,14 +33,14 @@ public class DungeonRulesetTest
 
         Assert.That(ruleset.Count == 3);
         Assert.NotNull(rule);
-        Assert.That(rule.Parameter == DungeonParameter.ROOM_SIZE);
+        Assert.That(rule.Parameter == DungeonParameter.RoomSize);
         Assert.That(rule.GameParameter == GameParameter.ENEMIES_DEFEATED);
         Assert.That(rule.ConditionsMet(new()));
         Assert.NotNull(rule.Value());
 
         ValueRepresentation value = rule.Value();
 
-        Assert.That(value.Type == ValueType.RANGE);
+        Assert.That(value.Type == ValueType.Range);
 
         var range = value.Value<Range<int>>();
         Assert.That(range.min == 10);
@@ -53,12 +54,12 @@ public class DungeonRulesetTest
         int count = 0;
 
         JObject rulesJson = JObject.Parse(json.text);
-        IList<JToken> jRules = rulesJson["rules"].Children().ToList();
+        IList<JToken> jRules = rulesJson["dungeonRules"].Children().ToList();
 
         foreach (JToken jRule in jRules)
         {
             // If this rule is found, increase the count by one.
-            count += jRule["id"].ToString() == "RoomCount_Based_On_Prev_Dungeon" ? 1 : 0;
+            count += jRule["parameter"].ToString() == "roomCount" ? 1 : 0;
         }
 
         Assert.That(ruleset.Count < jRules.Count);

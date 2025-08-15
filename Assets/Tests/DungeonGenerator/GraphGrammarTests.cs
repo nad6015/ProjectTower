@@ -70,8 +70,8 @@ public class GraphGrammarTests
     private void TestSetUp(int roomCount = 2)
     {
         DungeonRepresentation parameters = new DungeonRepresentation(paramFile);
-        parameters.ModifyParameter(DungeonParameter.ROOM_COUNT,
-            new ValueRepresentation(ValueType.NUMBER, new() { { "value", roomCount.ToString() } }));
+        parameters.ModifyParameter(DungeonParameter.RoomCount,
+            new ValueRepresentation(ValueType.Number, new() { { "value", roomCount.ToString() } }));
 
         dungeon = new(parameters, components);
         algorithm = new();

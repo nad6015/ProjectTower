@@ -23,7 +23,7 @@ namespace Assets.DungeonGenerator
             _layout = dungeonFlow.FlowTemplate;
             List<FlowPattern> flows = dungeonFlow.Flows;
             int loopCount = 0;
-            int roomCount = dungeon.Parameter<int>(DungeonParameter.ROOM_COUNT);
+            int roomCount = dungeon.Parameter<int>(DungeonParameter.RoomCount);
 
             while (_layout.Count < roomCount && loopCount < roomCount)
             {

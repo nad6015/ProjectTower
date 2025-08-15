@@ -1,4 +1,4 @@
-using Assets.DungeonGenerator;
+using Assets.DungeonMaster;
 using NUnit.Framework;
 
 public class GreaterThanConditionTest

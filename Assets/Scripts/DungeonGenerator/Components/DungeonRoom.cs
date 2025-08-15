@@ -124,8 +124,8 @@ namespace Assets.DungeonGenerator.Components
 
         internal void Populate(Dungeon dungeon)
         {
-            float spawnRate = dungeon.Parameter<int>(DungeonParameter.SPAWN_RATE) / 100f;
-            Range<int> enemiesPerRoom = dungeon.Parameter<Range<int>>(DungeonParameter.ENEMIES_PER_ROOM);
+            float spawnRate = dungeon.Parameter<int>(DungeonParameter.SpawnRate) / 100f;
+            Range<int> enemiesPerRoom = dungeon.Parameter<Range<int>>(DungeonParameter.EnemiesPerRoom);
 
             if (Random.value > spawnRate || dungeon.Components.enemies.Count == 0)
             {

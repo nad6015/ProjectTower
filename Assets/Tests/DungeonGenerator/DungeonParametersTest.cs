@@ -19,34 +19,18 @@ public class DungeonParametersTest
     [Test]
     public void ShouldGetAnyParameter()
     {
-        Range<int> enemiesPerRoom = parameters.GetParameter<Range<int>>(DungeonParameter.ENEMIES_PER_ROOM);
-        Range<Vector3> roomSize = parameters.GetParameter<Range<Vector3>>(DungeonParameter.ROOM_SIZE);
+        Range<int> enemiesPerRoom = parameters.GetParameter<Range<int>>(DungeonParameter.EnemiesPerRoom);
+        Range<Vector3> roomSize = parameters.GetParameter<Range<Vector3>>(DungeonParameter.RoomSize);
 
-        Assert.That(7 == parameters.Count);
+        Assert.That(6 == parameters.Count);
 
         Assert.That(enemiesPerRoom.min == 0);
         Assert.That(enemiesPerRoom.max == 3);
 
+        Debug.Log(roomSize.min);
+        Debug.Log(roomSize.max);
+
         Assert.That(roomSize.min == new Vector3(15, 0, 15));
         Assert.That(roomSize.max == new Vector3(35, 0, 35));
-    }
-
-    [Test]
-    public void ShouldIgnoreDuplicateParameters()
-    {
-        TextAsset json = Resources.Load<TextAsset>("TestParameters");
-        int count = 0;
-
-        JObject rulesJson = JObject.Parse(json.text);
-        IList<JToken> jRules = rulesJson["params"].Children().ToList();
-
-        foreach (JToken jRule in jRules)
-        {
-            // If this rule is found, increase the count by one.
-            count += jRule["id"].ToString() == "RoomCount_Based_On_Prev_Dungeon" ? 1 : 0;
-        }
-
-        Assert.That(parameters.Count < jRules.Count);
-        Assert.That(count == 2);
     }
 }

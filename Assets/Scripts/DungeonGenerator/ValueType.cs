@@ -2,10 +2,10 @@
 {
     public enum ValueType
     {
-        NUMBER = 0,
-        RANGE = 1,
-        STRING = 2,
-        VECTOR3 = 3,
-        VECTOR3_RANGE = 4
+        Number = 0,
+        Range = 1,
+        String = 2,
+        Vector = 3,
+        VectorRange = 4
     }
 }

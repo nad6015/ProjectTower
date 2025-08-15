@@ -1,4 +1,5 @@
 using Assets.DungeonGenerator;
+using Assets.DungeonMaster;
 using NUnit.Framework;
 using System.Collections.Generic;
 
@@ -22,9 +23,9 @@ public class DungeonRuleTest
             new LessThanCondition(10)
         };
 
-        rule = new(DungeonParameter.ROOM_COUNT,
+        rule = new(DungeonParameter.RoomCount,
             GameParameter.ENEMIES_DEFEATED, conditons,
-            new(ValueType.RANGE, value));
+            new(ValueType.Range, value));
     }
 
     [Test]

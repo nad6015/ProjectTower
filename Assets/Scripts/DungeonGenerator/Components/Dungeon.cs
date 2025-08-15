@@ -10,7 +10,7 @@ namespace Assets.DungeonGenerator.Components
         public DungeonExit DungeonExit { get; internal set; }
         public SpawnPoint StartingPoint { get; internal set; }
         public DungeonComponents Components { get; private set; }
-        public Vector3 CorridorSize { get { return Parameter<Vector3>(DungeonParameter.CORRIDOR_SIZE); } }
+        public Vector3 CorridorSize { get { return Parameter<Vector3>(DungeonParameter.CorridorSize); } }
 
         private readonly DungeonRepresentation _parameters;
         public DungeonLayout Layout { get; private set; }

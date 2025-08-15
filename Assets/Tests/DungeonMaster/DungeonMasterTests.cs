@@ -1,5 +1,6 @@
 using System.Collections;
 using Assets.DungeonGenerator;
+using Assets.DungeonMaster;
 using Assets.PlayerCharacter;
 using NUnit.Framework;
 using UnityEngine;

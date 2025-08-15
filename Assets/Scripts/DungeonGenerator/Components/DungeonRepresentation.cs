@@ -23,13 +23,12 @@ namespace Assets.DungeonGenerator.Components
             _parameters = new Dictionary<DungeonParameter, ValueRepresentation>();
 
             JObject json = JObject.Parse(file.text);
-
             JsonUtils.ForEachIn(json["params"], jParam =>
             {
-                DungeonParameter dungeonParameter = JsonUtils.ConvertToEnum<DungeonParameter>(jParam["id"]); //TODO: Renameid to parameter
-                ValueType type = JsonUtils.ConvertToEnum<ValueType>(jParam["type"]);
+                DungeonParameter dungeonParameter = JsonUtils.ConvertToEnum<DungeonParameter>(jParam, "id"); //TODO: Renameid to parameter
 
-                _parameters.Add(dungeonParameter, new ValueRepresentation(type, JsonUtils.FlattenedJsonValues(jParam)));
+                ValueType type = JsonUtils.ConvertToEnum<ValueType>(jParam["value"]);
+                _parameters.Add(dungeonParameter, new ValueRepresentation(type, JsonUtils.FlattenedJsonValues(jParam["value"])));
             });
 
             _layout = new(json["baseDungeon"], json["dungeonPatterns"]);

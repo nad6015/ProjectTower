@@ -1,4 +1,4 @@
-﻿namespace Assets.DungeonGenerator
+﻿namespace Assets.DungeonMaster
 {
     public enum GameplayParameter
     {

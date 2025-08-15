@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.DungeonGenerator.Components
@@ -17,31 +18,32 @@ namespace Assets.DungeonGenerator.Components
             Type = type;
             switch (type)
             {
-                case ValueType.RANGE:
+                case ValueType.Range:
                 {
                     _value = new Range<int>(int.Parse(values[minParam]), int.Parse(values[maxParam]));
                     break;
                 }
-                case ValueType.STRING:
+                case ValueType.String:
                 {
                     _value = values[valueParam];
                     break;
                 }
-                case ValueType.NUMBER:
+                case ValueType.Number:
                 {
+                    Debug.Log(values[valueParam]);
                     _value = int.Parse(values[valueParam]);
                     break;
                 }
-                case ValueType.VECTOR3:
+                case ValueType.Vector:
                 {
                     _value = new Vector3(ToInt(values["x"]), ToInt(values["y"]), ToInt(values["z"]));
                     break;
                 }
-                case ValueType.VECTOR3_RANGE:
+                case ValueType.VectorRange:
                 {
                     _value = new Range<Vector3>(
                         new(ToInt(values["minX"]), ToInt(values["minY"]), ToInt(values["minZ"])),
-                        new(ToInt(values["minX"]), ToInt(values["minY"]), ToInt(values["minZ"]))
+                        new(ToInt(values["maxX"]), ToInt(values["maxY"]), ToInt(values["maxZ"]))
                         );
                     break;
                 }
@@ -55,7 +57,15 @@ namespace Assets.DungeonGenerator.Components
         /// <returns></returns>
         public T Value<T>()
         {
-            return (T)_value;
+            try
+            {
+                return (T)_value;
+
+            }
+            catch (InvalidCastException)
+            {
+                return default;
+            }
         }
 
         private int ToInt(string value)
@@ -72,7 +82,8 @@ namespace Assets.DungeonGenerator.Components
 
             switch (value.Type)
             {
-                case ValueType.STRING:{
+                case ValueType.String:
+                {
                     _value = value.Value<string>();
                     break;
                 }
