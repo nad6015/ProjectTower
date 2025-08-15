@@ -1,11 +1,8 @@
-using Assets.DungeonGenerator;
-using Assets.DungeonGenerator.Components;
-using Assets.Scripts.DungeonGenerator.Components.Tiles;
+using Assets.DungeonGenerator.Components.Tiles;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
-namespace Assets.Scripts.DungeonGenerator.Components
+namespace Assets.DungeonGenerator.Components
 {
     public class DungeonRoom : MonoBehaviour
     {
@@ -38,7 +35,7 @@ namespace Assets.Scripts.DungeonGenerator.Components
             {
                 for (int j = 0; j < height; j++)
                 {
-                    tilemap.DrawFloor(minX + i, minZ + j, transform);   
+                    tilemap.DrawFloor(minX + i, minZ + j, transform);
                 }
             }
 
@@ -105,7 +102,7 @@ namespace Assets.Scripts.DungeonGenerator.Components
                     }
                 }
             }
-            bool isHorizontal = (Mathf.Approximately(firstPos.x, cBounds.min.x) || Mathf.Approximately(firstPos.x, cBounds.max.x));
+            bool isHorizontal = Mathf.Approximately(firstPos.x, cBounds.min.x) || Mathf.Approximately(firstPos.x, cBounds.max.x);
             tilemap.DrawCorridorArch(
                 isHorizontal ? cBounds.max.x : cBounds.min.x,
                 isHorizontal ? cBounds.min.z : cBounds.max.z,
@@ -127,14 +124,14 @@ namespace Assets.Scripts.DungeonGenerator.Components
 
         internal void Populate(Dungeon dungeon)
         {
-            float spawnRate = dungeon.Parameter("enemySpawnRate").Value();
-            Range<float> enemiesPerRoom = dungeon.Parameter("enemiesPerRoom").Range();
+            float spawnRate = dungeon.Parameter<int>(DungeonParameter.SPAWN_RATE) / 100f;
+            Range<int> enemiesPerRoom = dungeon.Parameter<Range<int>>(DungeonParameter.ENEMIES_PER_ROOM);
 
             if (Random.value > spawnRate || dungeon.Components.enemies.Count == 0)
             {
                 return;
             }
-            int count = Mathf.RoundToInt(Random.Range(enemiesPerRoom.min, enemiesPerRoom.max));
+            int count = Random.Range(enemiesPerRoom.min, enemiesPerRoom.max);
 
             Contents.Add(dungeon.Components.enemies[0], count);
         }

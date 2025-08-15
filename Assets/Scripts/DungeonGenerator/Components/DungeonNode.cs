@@ -1,9 +1,8 @@
-﻿using Assets.DungeonGenerator;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts.DungeonGenerator.Components
+namespace Assets.DungeonGenerator.Components
 {
     public class DungeonNode
     {

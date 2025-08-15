@@ -1,4 +1,4 @@
-using Assets.CombatSystem;
+using Assets.Combat;
 using UnityEngine;
 
 namespace Assets.Scripts.Combat.Resources

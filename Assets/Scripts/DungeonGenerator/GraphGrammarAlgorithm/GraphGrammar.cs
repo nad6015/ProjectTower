@@ -1,5 +1,4 @@
 ﻿using Assets.DungeonGenerator.Components;
-using Assets.Scripts.DungeonGenerator.Components;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,7 +23,7 @@ namespace Assets.DungeonGenerator
             _layout = dungeonFlow.FlowTemplate;
             List<FlowPattern> flows = dungeonFlow.Flows;
             int loopCount = 0;
-            int roomCount = Mathf.RoundToInt(dungeon.Parameter("roomCount").Value());
+            int roomCount = dungeon.Parameter<int>(DungeonParameter.ROOM_COUNT);
 
             while (_layout.Count < roomCount && loopCount < roomCount)
             {

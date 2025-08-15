@@ -1,4 +1,4 @@
-using Assets.CombatSystem;
+using Assets.Combat;
 using Unity.Behavior;
 using UnityEngine;
 

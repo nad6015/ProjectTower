@@ -2,7 +2,6 @@
 using Assets.DungeonGenerator.Components;
 using System.Collections.Generic;
 using System.Linq;
-using Assets.Scripts.DungeonGenerator.Components;
 
 namespace Assets.DungeonGenerator
 {
@@ -61,7 +60,7 @@ namespace Assets.DungeonGenerator
         /// </summary>
         private void CreateDungeonRepresentation()
         {
-            float negativeDirOffset = _dungeon.Parameter("roomSize").VectorRange().max.magnitude;
+            float negativeDirOffset = _dungeon.Parameter<Range<Vector3>>(DungeonParameter.ROOM_SIZE).max.magnitude;
             Vector3 dir = RandomDirection();
 
             Bounds lastRoom = RandomRoom(Vector3.zero, Vector3.zero, dir, dir.x != 0);
@@ -145,7 +144,7 @@ namespace Assets.DungeonGenerator
             {
                 var corridor = _corridors.ElementAt(i);
                 DungeonCorridor dungeonCorridor = DungeonCorridor.Create(corridor.Key, i);
-                dungeonCorridor.Construct(_components, _dungeon.Parameter("corridorSize").Vector());
+                dungeonCorridor.Construct(_components, _dungeon.Parameter<Vector3>(DungeonParameter.CORRIDOR_SIZE));
                 dungeonCorridor.transform.SetParent(_dungeonTransform);
                 _corridors[corridor.Key] = dungeonCorridor;
             }
@@ -227,7 +226,7 @@ namespace Assets.DungeonGenerator
         /// <returns>the bounds of the room</returns>
         private Bounds RandomRoom(Vector3 min, Vector3 max, Vector3 dir, bool isHorizontal)
         {
-            Range<Vector3> roomSizeParam = _dungeon.Parameter("roomSize").VectorRange();
+            Range<Vector3> roomSizeParam = _dungeon.Parameter<Range<Vector3>>(DungeonParameter.ROOM_SIZE);
             float roomOffset = Random.Range(1f, 5f); // Distance between rooms
             Vector3 roomSize = PointUtils.RandomSize(roomSizeParam.min, roomSizeParam.max);
             Vector3 roomCenter = PointUtils.RandomPointWithinRange(min, max);

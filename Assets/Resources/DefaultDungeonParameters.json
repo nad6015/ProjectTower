@@ -42,7 +42,7 @@
         "max": 3
       }
     },
-    { "id": "roomCount", "type": "number", "value": 10, "locked": true }
+    { "id": "roomCount", "type": "number", "value": 3, "locked": true }
   ],
   "baseDungeon": [
     {

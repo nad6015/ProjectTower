@@ -1,4 +1,5 @@
 using Assets.DungeonGenerator.Components;
+using Assets.DungeonGenerator;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -7,19 +8,19 @@ using UnityEngine;
 
 public class DungeonParametersTest
 {
-    DungeonParameters parameters;
+    DungeonRepresentation parameters;
 
     [SetUp]
     public void SetUp()
     {
-        parameters = new("TestParameters");
+        parameters = new(Resources.Load<TextAsset>("TestParameters"));
     }
 
     [Test]
     public void ShouldGetAnyParameter()
     {
-        Range<float> enemiesPerRoom = parameters.GetParameter("enemiesPerRoom").Range();
-        Range<Vector3> roomSize = parameters.GetParameter("roomSize").VectorRange();
+        Range<int> enemiesPerRoom = parameters.GetParameter<Range<int>>(DungeonParameter.ENEMIES_PER_ROOM);
+        Range<Vector3> roomSize = parameters.GetParameter<Range<Vector3>>(DungeonParameter.ROOM_SIZE);
 
         Assert.That(7 == parameters.Count);
 

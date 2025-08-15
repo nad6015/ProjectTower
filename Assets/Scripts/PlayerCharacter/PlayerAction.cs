@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Assets.CombatSystem;
+using Assets.Combat;
 
 namespace Assets.PlayerCharacter
 {

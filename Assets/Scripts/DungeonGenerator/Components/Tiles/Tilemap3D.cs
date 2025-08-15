@@ -1,9 +1,7 @@
-using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Scripts.DungeonGenerator.Components.Tiles
+namespace Assets.DungeonGenerator.Components.Tiles
 {
     [CreateAssetMenu(fileName = "Tilemap3D", menuName = "Scriptable Objects/Tilemap3D")]
     public class Tilemap3D : ScriptableObject

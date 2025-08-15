@@ -1,4 +1,4 @@
-﻿namespace Assets.Scripts.DungeonGenerator.Components.Tiles
+﻿namespace Assets.DungeonGenerator.Components.Tiles
 {
     public enum AreaType
     {

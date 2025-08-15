@@ -2,7 +2,6 @@ using UnityEngine;
 using Assets.DungeonGenerator.Components;
 using Unity.AI.Navigation;
 using System.Collections.Generic;
-using Assets.Scripts.DungeonGenerator.Components;
 
 namespace Assets.DungeonGenerator
 {
@@ -26,7 +25,7 @@ namespace Assets.DungeonGenerator
         /// Generates a new dungeon using the provided dungeon parameters.
         /// </summary>
         /// <param name="parameters">the parameters for the dungeon.</param>
-        public Dungeon GenerateDungeon(DungeonParameters parameters)
+        public Dungeon GenerateDungeon(DungeonRepresentation parameters)
         {
             Dungeon dungeon = new(parameters, _components);
 

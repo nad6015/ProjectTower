@@ -1,59 +1,49 @@
 using Assets.DungeonGenerator;
-using Assets.Scripts.DungeonGenerator;
+using Assets.DungeonGenerator.Components;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class DungeonMasterRulesetTest
+public class DungeonRulesetTest
 {
-    DungeonMasterRuleset ruleset;
+    Dictionary<DungeonParameter, DungeonRule> ruleset;
 
     [SetUp]
     public void SetUp()
     {
-        ruleset = new("TestRuleset");
-    }
-
-    [Test]
-    public void ShouldLoopThroughRuleset()
-    {
-        int count = 0;
-        ruleset.ForEach(r => count++);
-        Assert.That(count == ruleset.Count);
+        JObject json = JObject.Parse(Resources.Load<TextAsset>("TestRuleset").text);
+        ruleset = RulesetBuilder.BuildDungeonRuleset(json);
     }
 
     [Test]
     public void ShouldHaveRulesAfterParsingJson()
     {
-        DungeonMasterRule rule = null;
-        ruleset.ForEach(r =>
+        DungeonRule rule = null;
+        foreach (var r in ruleset.Values)
         {
             if (rule == null)
             {
                 rule = r;
                 return;
             }
-        });
+        }
 
         Assert.That(ruleset.Count == 3);
         Assert.NotNull(rule);
-        Assert.That(rule.Id == "RoomCount_Based_On_Prev_Dungeon");
-        Assert.That(rule.ParamName == "RoomCount");
-        Assert.That(rule.ConditionsMet(3));
-        Assert.NotNull(rule.RuleValue());
+        Assert.That(rule.Parameter == DungeonParameter.ROOM_SIZE);
+        Assert.That(rule.GameParameter == GameParameter.ENEMIES_DEFEATED);
+        Assert.That(rule.ConditionsMet(new()));
+        Assert.NotNull(rule.Value());
 
-        RuleValue ruleValue = rule.RuleValue();
+        ValueRepresentation value = rule.Value();
 
-        Debug.Log(ruleValue.Type);
+        Assert.That(value.Type == ValueType.RANGE);
 
-        Assert.That(ruleValue.Type == ValueType.RANGE);
-        Debug.Log(ruleValue.GetRange());
-
-        var range = ruleValue.GetRange();
-        Assert.That(range.Item1 == 10);
-        Assert.That(range.Item2 == 10);
+        var range = value.Value<Range<int>>();
+        Assert.That(range.min == 10);
+        Assert.That(range.max == 10);
     }
 
     [Test]

@@ -1,4 +1,4 @@
-using Assets.CombatSystem;
+using Assets.Combat;
 using NUnit.Framework;
 using System.Collections;
 using UnityEngine;

@@ -1,31 +1,48 @@
 {
-  "rules": [
+  "gameplayRules": [
     {
-      "id": "RoomCount_Based_On_Prev_Dungeon",
-      "parameter": "RoomCount",
+      "id": "itemSpawn",
+      "parameter": "healingItem",
+      "gameParam": "health",
       "conditions": [
         {
           "operator": "<",
-          "operand": "4"
-        },
-        {
-          "operator": ">",
-          "operand": "2"
+          "operand": "3"
         }
       ],
       "value": {
-        "type": "range",
-        "min": "10",
-        "max": "10"
+        "type": "number",
+        "value": "10"
       }
-    },
+    }
+  ],
+  "dungeonRules": [
     {
-      "id": "DungeonTheme_Based_On_Prev_Dungeon",
-      "parameter": "DungeonTheme",
+      "id": "Introduce_New_Weapon",
+      "parameter": "roomFlow",
+      "gameParam": "weaponCount",
       "conditions": [
         {
           "operator": "==",
           "operand": "3"
+        },
+        {
+          "operator": "%",
+          "operand": "3"
+        }
+      ],
+      "value": {
+        "type": "string",
+        "value": "newWeapon"
+      }
+    },
+    {
+      "id": "Theme_Probability_Based_On_Elemental_Str",
+      "parameter": "staffWeaponType",
+      "gameParam": "theme",
+      "conditions": [
+        {
+          "operator": "not contains"
         }
       ],
       "value": {
@@ -34,41 +51,33 @@
       }
     },
     {
-      "id": "RoomSize_based_on_floor_clear_time",
-      "parameter": "RoomSize",
+      "id": "decrease_roomCount_based_on_floor_clear_time",
+      "parameter": "roomCount",
+      "gameParam": "clearTime",
       "conditions": [
         {
-          "operator": "<",
-          "operand": "4"
-        },
-        {
           "operator": ">",
-          "operand": "2"
+          "operand": "5"
         }
       ],
       "value": {
-        "type": "range",
-        "min": "10",
-        "max": "10"
+        "type": "value",
+        "value": "3"
       }
     },
     {
-      "id": "RoomCount_Based_On_Prev_Dungeon",
-      "parameter": "RoomCount",
+      "id": "increase_roomCount_based_on_floor_clear_time",
+      "parameter": "roomCount",
+      "gameParam": "clearTime",
       "conditions": [
         {
           "operator": "<",
-          "operand": "4"
-        },
-        {
-          "operator": ">",
-          "operand": "2"
+          "operand": "5"
         }
       ],
       "value": {
-        "type": "range",
-        "min": "10",
-        "max": "10"
+        "type": "value",
+        "value": "3"
       }
     }
   ]

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.CombatSystem
+namespace Assets.Combat
 {
     public abstract class Fighter : MonoBehaviour
     {

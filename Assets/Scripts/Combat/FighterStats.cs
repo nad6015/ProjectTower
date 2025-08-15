@@ -1,4 +1,4 @@
-namespace Assets.CombatSystem
+namespace Assets.Combat
 {
     public enum FighterStats
     {

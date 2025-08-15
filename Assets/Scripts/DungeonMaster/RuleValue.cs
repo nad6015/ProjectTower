@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using ValueType = Assets.Scripts.DungeonGenerator.ValueType;
 
 namespace Assets.DungeonGenerator
 {

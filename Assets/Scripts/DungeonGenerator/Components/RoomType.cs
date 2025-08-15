@@ -1,4 +1,4 @@
-namespace Assets.Scripts.DungeonGenerator.Components
+namespace Assets.DungeonGenerator.Components
 {
     public enum RoomType
     {

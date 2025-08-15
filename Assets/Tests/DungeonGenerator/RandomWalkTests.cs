@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Assets.DungeonGenerator;
 using Assets.DungeonGenerator.Components;
-using Assets.Scripts.DungeonGenerator.Components;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -118,8 +117,8 @@ public class RandomWalkTests
         
         dungeonGenerator.ClearDungeon();
 
-        DungeonParameters parameters = new DungeonParameters(paramFile.name);
-        parameters.ModifyParameter("roomCount", roomCount);
+        DungeonRepresentation parameters = new(paramFile);
+        //parameters.ModifyParameter(DungeonParameter.ROOM_COUNT, roomCount);
         Dungeon dungeon = new(parameters, components);
 
         dungeon.SetRooms(CreateLayout(roomCount, branchCount));

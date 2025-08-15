@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Assets.Scripts.DungeonGenerator.Components.Tiles
+namespace Assets.DungeonGenerator.Components.Tiles
 {
     [CreateAssetMenu(fileName = "DungeonTile", menuName = "Scriptable Objects/DungeonTile")]
     public class DungeonProp : ScriptableObject

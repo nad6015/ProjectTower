@@ -1,8 +1,8 @@
 using NUnit.Framework;
 using Assets.DungeonGenerator;
 using System.Collections.Generic;
-using Assets.Scripts.DungeonGenerator.Components;
 using UnityEngine;
+using Assets.DungeonGenerator.Components;
 
 public class GraphTests
 {

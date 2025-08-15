@@ -1,7 +1,7 @@
-﻿using Assets.Scripts.DungeonGenerator.Components.Tiles;
+﻿using Assets.DungeonGenerator.Components.Tiles;
 using System.Collections.Generic;
 using UnityEngine;
-    
+
 namespace Assets.DungeonGenerator
 {
     [CreateAssetMenu(fileName = "DungeonComponents", menuName = "Dungeon Components", order = 1)]

@@ -3,9 +3,9 @@ using Unity.Behavior;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
 using Unity.Properties;
-using Assets.Scripts.DungeonGenerator.Components;
 using Assets;
 using UnityEngine.AI;
+using Assets.DungeonGenerator.Components;
 
 [Serializable, GeneratePropertyBag]
 [NodeDescription(name: "RandomPatrol", story: "[Agent] randomly patrols its current room", category: "Action", id: "1d8f569d2b61141f3aa096165522ca0d")]

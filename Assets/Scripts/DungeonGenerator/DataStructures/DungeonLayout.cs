@@ -1,7 +1,7 @@
-﻿using Assets.Scripts.DungeonGenerator.Components;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Assets.DungeonGenerator.Components;
 
 namespace Assets.DungeonGenerator
 {

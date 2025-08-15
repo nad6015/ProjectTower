@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.DungeonGenerator.Components;
+﻿using Assets.DungeonGenerator.Components;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 

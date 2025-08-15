@@ -1,35 +1,34 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using Assets.DungeonGenerator.Components;
+using System.Collections.Generic;
 
 namespace Assets.DungeonGenerator
 {
     /// <summary>
     /// TODO
     /// </summary>
-    public class DungeonMasterRule
+    public abstract class Rule
     {
-        public string Id { get; private set; }
-        public string ParamName { get; private set; }
+        public GameParameter GameParameter { get; }
 
-        private List<RuleCondition> _conditions;
-        private RuleValue _value;
+        private List<ICondition> _conditions;
+        private ValueRepresentation _value;
         private bool _conditionsMet;
 
-        public DungeonMasterRule(string id, string parameter, List<RuleCondition> conditions, RuleValue value)
+        public Rule(GameParameter gameParameter, List<ICondition> conditions, ValueRepresentation value)
         {
-            Id = id;
-            ParamName = parameter;
+            GameParameter = gameParameter;
             _conditions = conditions;
             _value = value;
         }
 
-        public bool ConditionsMet(float val)
+        public bool ConditionsMet(Dictionary<GameParameter, int> statistics)
         {
             _conditionsMet = false;
+            int value = statistics[GameParameter];
 
             _conditions.ForEach(condition =>
             {
-                _conditionsMet = condition.IsMet(val);
+                _conditionsMet = condition.IsMet(value);
             });
             return _conditionsMet;
         }
@@ -38,7 +37,7 @@ namespace Assets.DungeonGenerator
         /// Gets the return value of the rule. Will return null until the rule's conditions are met.
         /// </summary>
         /// <returns>The rule's value</returns>
-        public RuleValue RuleValue()
+        public ValueRepresentation Value()
         {
             return _conditionsMet ? _value : null;
         }

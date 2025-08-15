@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using Unity.Behavior;
-using Assets.CombatSystem;
+using Assets.Combat;
 using Assets.Combat;
 using Assets;
 using System;

@@ -1,7 +1,3 @@
-using Assets.Scripts.DungeonGenerator.Components;
-using Assets.Scripts.DungeonGenerator.DataStructures;
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.DungeonGenerator.Components
@@ -14,9 +10,9 @@ namespace Assets.DungeonGenerator.Components
         public DungeonExit DungeonExit { get; internal set; }
         public SpawnPoint StartingPoint { get; internal set; }
         public DungeonComponents Components { get; private set; }
-        public Vector3 CorridorSize { get { return Parameter("corridorSize").Vector(); } }
+        public Vector3 CorridorSize { get { return Parameter<Vector3>(DungeonParameter.CORRIDOR_SIZE); } }
 
-        private readonly DungeonParameters _parameters;
+        private readonly DungeonRepresentation _parameters;
         public DungeonLayout Layout { get; private set; }
         public DungeonFlow Flow { get { return _parameters.GetLayout(); } }
 
@@ -24,16 +20,16 @@ namespace Assets.DungeonGenerator.Components
         /// Constructs a new dungeon.
         /// </summary>
         /// <param name="parameters">The parameters for this dungeon.</param>
-        public Dungeon(DungeonParameters parameters, DungeonComponents components)
+        public Dungeon(DungeonRepresentation parameters, DungeonComponents components)
         {
             _parameters = parameters;
             Components = components;
             Layout = new();
         }
 
-        internal DungeonParameter Parameter(string name)
+        public T Parameter<T>(DungeonParameter name)
         {
-            return _parameters.GetParameter(name);
+            return _parameters.GetParameter<T>(name);
         }
 
         public void SetRooms(DungeonLayout dungeonRooms)

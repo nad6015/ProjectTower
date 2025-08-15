@@ -1,6 +1,5 @@
 using Assets.DungeonGenerator;
 using Assets.DungeonGenerator.Components;
-using Assets.Scripts.DungeonGenerator.Components;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -25,7 +24,7 @@ public class GraphGrammarTests
         TestSetUp();
 
         DungeonLayout rooms = dungeon.Flow.FlowTemplate;
-        
+
         Assert.That(rooms.Count == 3);
 
         DungeonNode firstNode = rooms.FirstNode;
@@ -63,23 +62,18 @@ public class GraphGrammarTests
         Assert.That(thirdNode.Type == RoomType.COMBAT);
         Assert.That(fourthNode.Type == RoomType.ITEM);
         Assert.That(fifthNode.Type == RoomType.END);
-        
+
         Assert.That(rooms.FirstNode.Type == RoomType.START);
         Assert.That(rooms.LastNode.Type == RoomType.END);
     }
 
     private void TestSetUp(int roomCount = 2)
     {
-        DungeonParameters parameters = CreateParameters();
-        parameters.ModifyParameter("roomCount", roomCount);
+        DungeonRepresentation parameters = new DungeonRepresentation(paramFile);
+        parameters.ModifyParameter(DungeonParameter.ROOM_COUNT,
+            new ValueRepresentation(ValueType.NUMBER, new() { { "value", roomCount.ToString() } }));
 
         dungeon = new(parameters, components);
         algorithm = new();
     }
-
-    private DungeonParameters CreateParameters()
-    {
-        return new DungeonParameters(paramFile.name);
-    }
-
 }
