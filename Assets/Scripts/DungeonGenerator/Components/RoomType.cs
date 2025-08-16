@@ -2,15 +2,15 @@ namespace Assets.DungeonGenerator.Components
 {
     public enum RoomType
     {
-        GENERIC,
-        START,
-        EXPLORE,
-        TREASURE,
-        COMBAT,
-        AMBUSH,
-        END,
-        ITEM,
-        MINI_BOSS,
-        REST_POINT
+        Generic,
+        Start,
+        Explore,
+        Treasure,
+        Combat,
+        Ambush,
+        End,
+        Item,
+        MiniBoss,
+        RestPoint
     }
 }

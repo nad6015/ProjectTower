@@ -10,7 +10,7 @@ public class SpawnPoint : MonoBehaviour
 
     private void Start()
     {
-       if (_shouldSpawnOnStart)
+        if (_shouldSpawnOnStart)
         {
             Spawn();
         }
@@ -19,10 +19,11 @@ public class SpawnPoint : MonoBehaviour
     /// <summary>
     /// Spawns a new gameobject at this gameobject's position.
     /// </summary>
-    public void Spawn()
+    /// <returns>the object spawned.</returns>
+    public GameObject Spawn()
     {
         Vector3 spawnPoint = new(transform.position.x, transform.position.y, transform.position.z);
-        GameObject.Instantiate(_gameObjectToSpawn, spawnPoint, Quaternion.identity);
+        return GameObject.Instantiate(_gameObjectToSpawn, spawnPoint, Quaternion.identity);
     }
 
     /// <summary>

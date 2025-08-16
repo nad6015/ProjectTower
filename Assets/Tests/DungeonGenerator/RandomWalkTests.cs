@@ -58,9 +58,9 @@ public class RandomWalkTests
 
         List<DungeonRoom> rooms = FindRooms();
 
-        Assert.That(rooms[0].Type == RoomType.START);
-        Assert.That(rooms[1].Type == RoomType.EXPLORE);
-        Assert.That(rooms[2].Type == RoomType.END);
+        Assert.That(rooms[0].Type == RoomType.Start);
+        Assert.That(rooms[1].Type == RoomType.Explore);
+        Assert.That(rooms[2].Type == RoomType.End);
     }
 
     [UnityTest]
@@ -80,30 +80,28 @@ public class RandomWalkTests
         {
             switch (room.Type)
             {
-                case RoomType.TREASURE:
+                case RoomType.Treasure:
                 {
                     treasureCount++;
                     break;
                 }
-                case RoomType.EXPLORE:
+                case RoomType.Explore:
                 {
                     exploreCount++;
                     break;
                 }
-                case RoomType.END:
+                case RoomType.End:
                 {
                     end = room.DungeonNode;
                     break;
                 }
-                case RoomType.START:
+                case RoomType.Start:
                 {
                     start = room.DungeonNode;
                     break;
                 }
             }
         }
-
-        yield return new WaitForSeconds(10f);
 
         Assert.That(start != null);
         Assert.That(exploreCount == 5);
@@ -114,12 +112,13 @@ public class RandomWalkTests
     private IEnumerator TestSetUp(int roomCount = 2, int branchCount = 0)
     {
         DungeonGenerator dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();
-        
+
         dungeonGenerator.ClearDungeon();
 
-        DungeonRepresentation parameters = new(paramFile);
-        //parameters.ModifyParameter(DungeonParameter.ROOM_COUNT, roomCount);
-        Dungeon dungeon = new(parameters, components);
+        DungeonRepresentation dungeon = new(paramFile);
+        dungeon.ModifyParameter(DungeonParameter.RoomCount, new ValueRepresentation(ValueType.Number,
+            new() { { "value", roomCount.ToString() } }));
+        dungeon.SetComponents(components);
 
         dungeon.SetRooms(CreateLayout(roomCount, branchCount));
         RandomWalk algorithm = new(dungeonGenerator.transform);
@@ -140,21 +139,21 @@ public class RandomWalkTests
     {
         DungeonNode.Reset();
         DungeonLayout layout = new();
-        layout.Add(new(RoomType.START));
+        layout.Add(new(RoomType.Start));
         DungeonNode lastNode = layout.LastNode;
         int randomIndex1 = Random.Range(1, roomCount - 2);
         int randomIndex2 = Random.Range(1, roomCount - 2); // TODO: Fix/Tidy up test
 
         for (int i = 1; i < roomCount - 1; i++)
         {
-            DungeonNode node = new(RoomType.EXPLORE);
+            DungeonNode node = new(RoomType.Explore);
 
             if (i == randomIndex1 || i == randomIndex2)
             {
                 for (int j = 0; j < branchCount; j++)
                 {
-                    
-                    layout.Add(node, new DungeonNode(RoomType.TREASURE));
+
+                    layout.Add(node, new DungeonNode(RoomType.Treasure));
                 }
             }
 
@@ -162,7 +161,7 @@ public class RandomWalkTests
             lastNode = node;
         }
 
-        layout.Add(lastNode, new DungeonNode(RoomType.END));
+        layout.Add(lastNode, new DungeonNode(RoomType.End));
         return layout;
     }
 }

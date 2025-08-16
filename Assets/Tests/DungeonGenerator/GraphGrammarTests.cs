@@ -8,7 +8,7 @@ public class GraphGrammarTests
 {
     readonly DungeonComponents components = Resources.Load<DungeonComponents>("DevComponents");
     readonly TextAsset paramFile = Resources.Load<TextAsset>("TestParameters");
-    Dungeon dungeon;
+    DungeonRepresentation dungeon;
     GraphGrammar algorithm;
 
     [SetUp]
@@ -19,61 +19,42 @@ public class GraphGrammarTests
     }
 
     [Test]
-    public void ShouldLoadBaseDungeon()
-    {
-        TestSetUp();
-
-        DungeonLayout rooms = dungeon.Flow.FlowTemplate;
-
-        Assert.That(rooms.Count == 3);
-
-        DungeonNode firstNode = rooms.FirstNode;
-        DungeonNode secondNode = rooms[firstNode][0];
-        DungeonNode thirdNode = rooms[secondNode][1];
-
-        Assert.That(firstNode.Type == RoomType.START);
-        Assert.That(secondNode.Type == RoomType.EXPLORE);
-        Assert.That(thirdNode.Type == RoomType.END);
-    }
-
-    [Test]
-    public void ShouldRewriteBaseDungeon()
+    public void ShouldGenerateDungeonFromFlows()
     {
         TestSetUp(5);
 
-        DungeonLayout rooms = dungeon.Flow.FlowTemplate;
-        Assert.That(rooms.Count == 3);
+        DungeonLayout rooms = dungeon.Layout;
+        Assert.That(rooms.Count == 0);
 
         algorithm.GenerateDungeon(dungeon);
 
         rooms = dungeon.Layout;
 
+        Assert.That(rooms.Count == 5);
+
         DungeonNode firstNode = rooms.FirstNode;
         DungeonNode secondNode = rooms[firstNode][0];
         DungeonNode thirdNode = rooms[secondNode][1];
+        Debug.Log(rooms[thirdNode][0]);
         DungeonNode fourthNode = rooms[thirdNode][1];
         DungeonNode fifthNode = rooms[fourthNode][1];
 
+        Assert.That(firstNode.Type == RoomType.Start);
+        Assert.That(secondNode.Type == RoomType.Explore);
+        Assert.That(thirdNode.Type == RoomType.Combat);
+        Assert.That(fourthNode.Type == RoomType.Item);
+        Assert.That(fifthNode.Type == RoomType.End);
 
-        Assert.That(rooms.Count == 5);
-
-        Assert.That(firstNode.Type == RoomType.START);
-        Assert.That(secondNode.Type == RoomType.EXPLORE);
-        Assert.That(thirdNode.Type == RoomType.COMBAT);
-        Assert.That(fourthNode.Type == RoomType.ITEM);
-        Assert.That(fifthNode.Type == RoomType.END);
-
-        Assert.That(rooms.FirstNode.Type == RoomType.START);
-        Assert.That(rooms.LastNode.Type == RoomType.END);
+        Assert.That(rooms.FirstNode.Type == RoomType.Start);
+        Assert.That(rooms.LastNode.Type == RoomType.End);
     }
 
     private void TestSetUp(int roomCount = 2)
     {
-        DungeonRepresentation parameters = new DungeonRepresentation(paramFile);
-        parameters.ModifyParameter(DungeonParameter.RoomCount,
+        dungeon = new(paramFile);
+        dungeon.ModifyParameter(DungeonParameter.RoomCount,
             new ValueRepresentation(ValueType.Number, new() { { "value", roomCount.ToString() } }));
 
-        dungeon = new(parameters, components);
         algorithm = new();
     }
 }

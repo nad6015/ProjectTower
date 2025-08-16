@@ -24,15 +24,14 @@ namespace Assets.DungeonGenerator
         /// <summary>
         /// Generates a new dungeon using the provided dungeon parameters.
         /// </summary>
-        /// <param name="parameters">the parameters for the dungeon.</param>
-        public Dungeon GenerateDungeon(DungeonRepresentation parameters)
+        /// <param name="representation">the parameters for the dungeon.</param>
+        public Dungeon GenerateDungeon(DungeonRepresentation representation)
         {
-            Dungeon dungeon = new(parameters, _components);
-
-            _algorithms.ForEach(algorithm => algorithm.GenerateDungeon(dungeon));
+            representation.SetComponents(_components);
+            _algorithms.ForEach(algorithm => algorithm.GenerateDungeon(representation));
 
             GetComponent<NavMeshSurface>().BuildNavMesh();
-            return dungeon;
+            return representation.GetConstructedDungeon();
         }
 
         public void ClearDungeon()
@@ -44,7 +43,7 @@ namespace Assets.DungeonGenerator
             {
                 DestroyImmediate(transform.GetChild(0).gameObject);
             }
-            //DungeonNode.Reset();
+            DungeonNode.Reset();
         }
     }
 }

@@ -1,12 +1,11 @@
 using NUnit.Framework;
 using Assets.DungeonGenerator;
 using System.Collections.Generic;
-using UnityEngine;
 using Assets.DungeonGenerator.Components;
 
 public class GraphTests
 {
-    private readonly DungeonNode node = new(RoomType.GENERIC);
+    private readonly DungeonNode node = new(RoomType.Generic);
     private DungeonLayout graph;
 
     [SetUp]
@@ -35,8 +34,8 @@ public class GraphTests
     [Test]
     public void ShouldAddNodeWithLinkedNodes()
     {
-        var node2 = new DungeonNode(RoomType.EXPLORE);
-        var end = new DungeonNode(RoomType.END);
+        var node2 = new DungeonNode(RoomType.Explore);
+        var end = new DungeonNode(RoomType.End);
         graph.Add(node, node2, end);
 
         Assert.That(graph.Contains(node));
@@ -51,8 +50,8 @@ public class GraphTests
     [Test]
     public void ShouldAddNodeWithLinkedNodesIdempotently()
     {
-        var node2 = new DungeonNode(RoomType.EXPLORE);
-        var end = new DungeonNode(RoomType.END);
+        var node2 = new DungeonNode(RoomType.Explore);
+        var end = new DungeonNode(RoomType.End);
         graph.Add(node, node2, end);
 
         Assert.That(graph.Count == 3);
@@ -67,8 +66,8 @@ public class GraphTests
     [Test]
     public void ShouldAddNodeWithLinkToExistingNode()
     {
-        var node2 = new DungeonNode(RoomType.EXPLORE);
-        var end = new DungeonNode(RoomType.END);
+        var node2 = new DungeonNode(RoomType.Explore);
+        var end = new DungeonNode(RoomType.End);
 
         graph.Add(node, end);
         graph.Add(node2, node);
@@ -103,6 +102,7 @@ public class GraphTests
 
         Assert.That(graph.Count == 1);
     }
+    // TODO: Add tests that ensures all node have at most three neighbours
 
     // TODO: Review graph terminology. I think better naming could be utilised.
     [TestCaseSource("CompleteGraphs")]
@@ -125,15 +125,15 @@ public class GraphTests
 
         List<RoomType> pattern = new()
         {
-            RoomType.COMBAT, RoomType.EXPLORE, RoomType.ITEM
+            RoomType.Combat, RoomType.Explore, RoomType.Item
         };
 
         List<DungeonNode> foundNodes = graph.FindMatching(pattern);
 
         Assert.That(foundNodes.Count == 3);
-        Assert.That(foundNodes[0].IsSameType(RoomType.COMBAT));
-        Assert.That(foundNodes[1].IsSameType(RoomType.EXPLORE));
-        Assert.That(foundNodes[2].IsSameType(RoomType.ITEM));
+        Assert.That(foundNodes[0].IsSameType(RoomType.Combat));
+        Assert.That(foundNodes[1].IsSameType(RoomType.Explore));
+        Assert.That(foundNodes[2].IsSameType(RoomType.Item));
     }
 
 
@@ -145,12 +145,12 @@ public class GraphTests
 
         List<RoomType> pattern = new()
         {
-            RoomType.COMBAT, RoomType.EXPLORE, RoomType.ITEM, RoomType.MINI_BOSS
+            RoomType.Combat, RoomType.Explore, RoomType.Item, RoomType.MiniBoss
         };
 
         List<RoomType> replacer = new()
         {
-            RoomType.COMBAT, RoomType.AMBUSH,RoomType.TREASURE,RoomType.MINI_BOSS
+            RoomType.Combat, RoomType.Ambush,RoomType.Treasure,RoomType.MiniBoss
         };
 
         List<DungeonNode> foundNodes = graph.FindMatching(pattern);
@@ -160,10 +160,10 @@ public class GraphTests
         graph.Replace(foundNodes, replacer);
 
         Assert.That(graph.Count == count);
-        Assert.That(graph.FindById(5).IsSameType(RoomType.COMBAT));
-        Assert.That(graph.FindById(6).IsSameType(RoomType.AMBUSH));
-        Assert.That(graph.FindById(7).IsSameType(RoomType.TREASURE));
-        Assert.That(graph.FindById(8).IsSameType(RoomType.MINI_BOSS));
+        Assert.That(graph.FindById(5).IsSameType(RoomType.Combat));
+        Assert.That(graph.FindById(6).IsSameType(RoomType.Ambush));
+        Assert.That(graph.FindById(7).IsSameType(RoomType.Treasure));
+        Assert.That(graph.FindById(8).IsSameType(RoomType.MiniBoss));
 
         Assert.That(graph.IsConnected());
     }
@@ -176,10 +176,10 @@ public class GraphTests
 
         List<RoomType> pattern = new()
         {
-            RoomType.COMBAT, RoomType.EXPLORE, RoomType.ITEM
+            RoomType.Combat, RoomType.Explore, RoomType.Item
         };
 
-        List<RoomType> replacer = new() { RoomType.TREASURE };
+        List<RoomType> replacer = new() { RoomType.Treasure };
 
         List<DungeonNode> foundNodes = graph.FindMatching(pattern);
 
@@ -189,7 +189,7 @@ public class GraphTests
 
         Assert.That(graph.Count == count - 2);
 
-        Assert.That(graph.FindById(3).IsSameType(RoomType.TREASURE));
+        Assert.That(graph.FindById(3).IsSameType(RoomType.Treasure));
 
         Assert.That(graph.IsConnected());
     }
@@ -202,13 +202,13 @@ public class GraphTests
 
         List<RoomType> pattern = new()
         {
-            RoomType.ITEM, RoomType.EXPLORE, RoomType.COMBAT, RoomType.REST_POINT
+            RoomType.Item, RoomType.Explore, RoomType.Combat, RoomType.RestPoint
         };
 
         List<RoomType> replacer = new()
         {
-            RoomType.COMBAT, RoomType.AMBUSH, RoomType.TREASURE,
-            RoomType.MINI_BOSS, RoomType.REST_POINT, RoomType.COMBAT
+            RoomType.Combat, RoomType.Ambush, RoomType.Treasure,
+            RoomType.MiniBoss, RoomType.RestPoint, RoomType.Combat
         };
 
         List<DungeonNode> foundNodes = graph.FindMatching(pattern);
@@ -219,12 +219,12 @@ public class GraphTests
 
         Assert.That(graph.Count == count + 2);
 
-        Assert.That(graph.FindById(1).IsSameType(RoomType.COMBAT));
-        Assert.That(graph.FindById(2).IsSameType(RoomType.AMBUSH));
-        Assert.That(graph.FindById(3).IsSameType(RoomType.TREASURE));
-        Assert.That(graph.FindById(4).IsSameType(RoomType.MINI_BOSS));
-        Assert.That(graph.FindById(count).IsSameType(RoomType.REST_POINT));
-        Assert.That(graph.FindById(count + 1).IsSameType(RoomType.COMBAT));
+        Assert.That(graph.FindById(1).IsSameType(RoomType.Combat));
+        Assert.That(graph.FindById(2).IsSameType(RoomType.Ambush));
+        Assert.That(graph.FindById(3).IsSameType(RoomType.Treasure));
+        Assert.That(graph.FindById(4).IsSameType(RoomType.MiniBoss));
+        Assert.That(graph.FindById(count).IsSameType(RoomType.RestPoint));
+        Assert.That(graph.FindById(count + 1).IsSameType(RoomType.Combat));
 
         Assert.That(graph.IsConnected());
     }
@@ -232,7 +232,7 @@ public class GraphTests
     public static IEnumerable<DungeonLayout> CompleteGraphs()
     {
         DungeonLayout singleNodeGraph = new();
-        singleNodeGraph.Add(new DungeonNode(RoomType.GENERIC));
+        singleNodeGraph.Add(new DungeonNode(RoomType.Generic));
 
         yield return singleNodeGraph;
         yield return Create3NodeGraph();
@@ -245,11 +245,11 @@ public class GraphTests
         DungeonLayout threeNodeGraph = Create3NodeGraph();
 
         threeNodeGraph.Remove(threeNodeGraph[threeNodeGraph.LastNode][0]);
-        threeNodeGraph.Add(threeNodeGraph.LastNode, new DungeonNode(RoomType.GENERIC));
+        threeNodeGraph.Add(threeNodeGraph.LastNode, new DungeonNode(RoomType.Generic));
 
         DungeonLayout tenNodeGraph = Create10NodeGraph();
         threeNodeGraph.Remove(tenNodeGraph[tenNodeGraph.LastNode][0].LinkedNodes[0]);
-        threeNodeGraph.Add(tenNodeGraph.LastNode, new DungeonNode(RoomType.GENERIC));
+        threeNodeGraph.Add(tenNodeGraph.LastNode, new DungeonNode(RoomType.Generic));
 
         yield return emptyGraph;
         yield return threeNodeGraph;
@@ -259,9 +259,9 @@ public class GraphTests
     private static DungeonLayout Create3NodeGraph()
     {
         DungeonLayout threeNodeGraph = new();
-        var start = new DungeonNode(RoomType.START);
-        var node2 = new DungeonNode(RoomType.ITEM);
-        var end = new DungeonNode(RoomType.END);
+        var start = new DungeonNode(RoomType.Start);
+        var node2 = new DungeonNode(RoomType.Item);
+        var end = new DungeonNode(RoomType.End);
 
         threeNodeGraph.Add(start, node2);
         threeNodeGraph.Add(node2, end);
@@ -271,16 +271,16 @@ public class GraphTests
     private static DungeonLayout Create10NodeGraph()
     {
         DungeonLayout tenNodeGraph = new();
-        var start = new DungeonNode(RoomType.START);
-        var node2 = new DungeonNode(RoomType.ITEM);
-        var node3 = new DungeonNode(RoomType.EXPLORE);
-        var node4 = new DungeonNode(RoomType.COMBAT);
-        var node5 = new DungeonNode(RoomType.REST_POINT);
-        var node6 = new DungeonNode(RoomType.COMBAT);
-        var node7 = new DungeonNode(RoomType.EXPLORE);
-        var node8 = new DungeonNode(RoomType.ITEM);
-        var node9 = new DungeonNode(RoomType.MINI_BOSS);
-        var end = new DungeonNode(RoomType.END);
+        var start = new DungeonNode(RoomType.Start);
+        var node2 = new DungeonNode(RoomType.Item);
+        var node3 = new DungeonNode(RoomType.Explore);
+        var node4 = new DungeonNode(RoomType.Combat);
+        var node5 = new DungeonNode(RoomType.RestPoint);
+        var node6 = new DungeonNode(RoomType.Combat);
+        var node7 = new DungeonNode(RoomType.Explore);
+        var node8 = new DungeonNode(RoomType.Item);
+        var node9 = new DungeonNode(RoomType.MiniBoss);
+        var end = new DungeonNode(RoomType.End);
 
         tenNodeGraph.Add(start, node2);
         tenNodeGraph.Add(node2, node3);

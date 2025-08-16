@@ -5,13 +5,14 @@ TagManager:
   serializedVersion: 3
   tags:
   - DungeonGenerator
-  - BattleManager
   - DungeonMaster
   - Dungeon
   - GameManager
   - PlayerSpawn
   - Item
-  - Tilemap
+  - CombatSystem
+  - ResourceSystem
+  - DungeonExit
   layers:
   - Default
   - TransparentFX

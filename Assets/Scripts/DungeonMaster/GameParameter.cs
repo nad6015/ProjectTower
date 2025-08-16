@@ -2,7 +2,11 @@
 {
     public enum GameParameter
     {
-        ENEMIES_DEFEATED,
-        CLEAR_TIME
+        None,
+        ClearTime,
+        EnemiesDefeated,
+        CharacterHealth,
+        WeaponCount,
+        StaffWeaponType
     }
 }

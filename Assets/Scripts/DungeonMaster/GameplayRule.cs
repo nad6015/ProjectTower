@@ -1,5 +1,4 @@
-﻿using Assets.DungeonGenerator;
-using Assets.DungeonGenerator.Components;
+﻿using Assets.DungeonGenerator.Components;
 using System.Collections.Generic;
 
 namespace Assets.DungeonMaster

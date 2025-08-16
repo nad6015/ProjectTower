@@ -8,31 +8,31 @@ namespace Assets.PlayerCharacter
     [RequireComponent(typeof(CharacterController), typeof(PlayerAction), typeof(PlayerMovement))]
     public class PlayerController : MonoBehaviour
     {
+        public event Action<InputAction.CallbackContext> OnInteract;
+        public event Action<InputAction.CallbackContext> OnAttackPerformed;
         [SerializeField]
         private float _speed = 5;
         
         [SerializeField]
-        private PlayerCamera _camera;
 
-        public event Action<InputAction.CallbackContext> OnAttackPerformed;
+        private PlayerCamera _camera;
 
         private PlayableFighter _fighter;
 
         private InputSystemActions actions;
         private PlayerMovement playerMovement;
-        private PlayerAction playerAction;
-        public event Action<InputAction.CallbackContext> OnInteract;
+        private PlayerCamera _playerCamera;
+        
 
         void Awake()
         {
             playerMovement = GetComponent<PlayerMovement>();
             playerMovement.speed = _speed;
 
-            playerAction = GetComponent<PlayerAction>();
             actions = new InputSystemActions();
             _fighter = GetComponent<PlayableFighter>();
 
-            Instantiate(_camera);
+            _playerCamera = Instantiate(_camera);
         }
 
         private void OnEnable()

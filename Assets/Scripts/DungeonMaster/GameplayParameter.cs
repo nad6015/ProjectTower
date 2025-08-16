@@ -2,5 +2,8 @@
 {
     public enum GameplayParameter
     {
+        None,
+        EnemiesDefeated,
+        restorationItem
     }
 }

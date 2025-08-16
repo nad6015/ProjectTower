@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wallTile: {fileID: 3030302167426459883, guid: 8253c9a79c7889e44988a874c006ce5e, type: 3}
   floorTile: {fileID: 8031560325989942358, guid: 7328ee9a0623e28469aed37d4a8d1b80, type: 3}
+  tilemap: {fileID: 11400000, guid: e840b69a7ed95b049abe377e9a91da92, type: 2}
   corridorWall: {fileID: 3030302167426459883, guid: 8253c9a79c7889e44988a874c006ce5e, type: 3}
   corridorFloor: {fileID: 8031560325989942358, guid: 7328ee9a0623e28469aed37d4a8d1b80, type: 3}
-  enemy: {fileID: 7807404158470223261, guid: 94ba4e2304ec5bf44885dc354b291852, type: 3}
-  item: {fileID: 2374991623033447861, guid: 3a68e34b9cf70244d910afff8f8d8799, type: 3}
+  enemies: []
+  roomContent: []
   startingPoint: {fileID: 3787019230069511806, guid: 8c2054c93f9ef8942a91a03ff5d608b5, type: 3}
   exit: {fileID: 8684044341818389683, guid: 20f557f5c48279b4d9ec43df8dfe49e2, type: 3}

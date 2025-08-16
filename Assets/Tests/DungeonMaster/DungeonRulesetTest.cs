@@ -34,7 +34,7 @@ public class DungeonRulesetTest
         Assert.That(ruleset.Count == 3);
         Assert.NotNull(rule);
         Assert.That(rule.Parameter == DungeonParameter.RoomSize);
-        Assert.That(rule.GameParameter == GameParameter.ENEMIES_DEFEATED);
+        Assert.That(rule.GameParameter == GameParameter.EnemiesDefeated);
         Assert.That(rule.ConditionsMet(new()));
         Assert.NotNull(rule.Value());
 

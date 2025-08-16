@@ -1,7 +1,7 @@
 {
   "params": [
     {
-      "id": "roomSize",
+      "parameter": "roomSize",
       "value": {
         "type": "vectorRange",
         "minX": 15,
@@ -14,7 +14,7 @@
       "locked": false
     },
     {
-      "id": "corridorSize",
+      "parameter": "corridorSize",
       "value": {
         "type": "vector",
         "x": 3,
@@ -24,12 +24,12 @@
       "locked": false
     },
     {
-      "id": "spawnRate",
+      "parameter": "enemySpawnRate",
       "value": { "type": "number", "value": 50 },
       "locked": false
     },
     {
-      "id": "itemsPerRoom",
+      "parameter": "itemsPerRoom",
       "value": {
         "type": "range",
         "min": 0,
@@ -37,14 +37,18 @@
       }
     },
     {
-      "id": "enemiesPerRoom",
+      "parameter": "enemiesPerRoom",
       "value": {
         "type": "range",
         "min": 0,
         "max": 3
       }
     },
-    { "id": "roomCount", "value": { "type": "number", "value": 10 }, "locked": true }
+    {
+      "parameter": "roomCount",
+      "value": { "type": "number", "value": 10 },
+      "locked": true
+    }
   ],
   "baseDungeon": [
     {
@@ -73,21 +77,6 @@
         },
         {
           "type": "item"
-        }
-      ]
-    },
-    {
-      "matches": [
-        {
-          "type": "combat"
-        },
-        {
-          "type": "item"
-        }
-      ],
-      "replacer": [
-        {
-          "type": "mini-boss"
         }
       ]
     }

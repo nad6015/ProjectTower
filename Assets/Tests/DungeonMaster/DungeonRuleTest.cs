@@ -24,28 +24,28 @@ public class DungeonRuleTest
         };
 
         rule = new(DungeonParameter.RoomCount,
-            GameParameter.ENEMIES_DEFEATED, conditons,
+            GameParameter.EnemiesDefeated, conditons,
             new(ValueType.Range, value));
     }
 
     [Test]
     public void ShouldReturnTrueIfAllConditionsAreMet()
     {
-        gameStatistics.Add(GameParameter.ENEMIES_DEFEATED, 6);
+        gameStatistics.Add(GameParameter.EnemiesDefeated, 6);
         Assert.True(rule.ConditionsMet(gameStatistics));
     }
 
     [Test]
     public void ShouldReturnFalseIfOneConditionIsNotMet()
     {
-        gameStatistics.Add(GameParameter.ENEMIES_DEFEATED, 30);
+        gameStatistics.Add(GameParameter.EnemiesDefeated, 30);
         Assert.False(rule.ConditionsMet(gameStatistics));
     }
 
     [Test]
     public void ShouldReturnNullRuleValueIfConditionsNotMet()
     {
-        gameStatistics.Add(GameParameter.ENEMIES_DEFEATED, 30);
+        gameStatistics.Add(GameParameter.EnemiesDefeated, 30);
         Assert.Null(rule.Value());
         
         rule.ConditionsMet(gameStatistics);
@@ -55,7 +55,7 @@ public class DungeonRuleTest
     [Test]
     public void ShouldReturnRuleValueIfConditionsMet()
     {
-        gameStatistics.Add(GameParameter.ENEMIES_DEFEATED, 6);
+        gameStatistics.Add(GameParameter.EnemiesDefeated, 6);
         
         rule.ConditionsMet(gameStatistics);
         Assert.NotNull(rule.Value());

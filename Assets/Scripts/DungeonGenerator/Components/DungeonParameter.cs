@@ -2,11 +2,14 @@
 {
     public enum DungeonParameter
     {
+        None,
         CorridorSize,
         RoomSize,
-        SpawnRate,
+        EnemySpawnRate,
         ItemsPerRoom,
         EnemiesPerRoom,
-        RoomCount
+        RoomCount,
+        RoomFlow,
+        Theme
     }
 }

@@ -2,7 +2,6 @@
 using Newtonsoft.Json.Linq;
 using Assets.DungeonGenerator.Components;
 using Assets.DungeonGenerator;
-using UnityEngine;
 
 namespace Assets.DungeonMaster
 {
@@ -14,14 +13,14 @@ namespace Assets.DungeonMaster
 
             JsonUtils.ForEachIn(json["dungeonRules"], jRule =>
             {
-                DungeonParameter dungeonParameter = JsonUtils.ConvertToEnum<DungeonParameter>(jRule["parameter"]);
+                DungeonParameter dungeonParameter = JsonUtils.ConvertToEnum<DungeonParameter>(jRule, "parameter");
                 
                 if (!_rules.ContainsKey(dungeonParameter))
                 {
                     ValueRepresentation value = new(
                         JsonUtils.ConvertToEnum<ValueType>(jRule["value"]),
-                        JsonUtils.FlattenedJsonValues(jRule["value"]));
-                    GameParameter gameParameter = JsonUtils.ConvertToEnum<GameParameter>(jRule["gameParam"]);
+                        JsonUtils.ToDictionary(jRule["value"]));
+                    GameParameter gameParameter = JsonUtils.ConvertToEnum<GameParameter>(jRule, "gameParam");
 
                     _rules[dungeonParameter] = new DungeonRule(dungeonParameter, gameParameter, BuildConditions(jRule), value);
                 }
@@ -36,13 +35,13 @@ namespace Assets.DungeonMaster
 
             JsonUtils.ForEachIn(json["gameplayRules"], jRule =>
            {
-               GameplayParameter gameplayParameter = JsonUtils.ConvertToEnum<GameplayParameter>(jRule);
+               GameplayParameter gameplayParameter = JsonUtils.ConvertToEnum<GameplayParameter>(jRule, "parameter");
                if (!_rules.ContainsKey(gameplayParameter))
                {
                    ValueRepresentation value = new(
                        JsonUtils.ConvertToEnum<ValueType>(jRule["value"]),
-                        JsonUtils.FlattenedJsonValues(jRule["value"]));
-                   GameParameter gameParameter = JsonUtils.ConvertToEnum<GameParameter>(jRule["gameParam"]);
+                        JsonUtils.ToDictionary(jRule["value"]));
+                   GameParameter gameParameter = JsonUtils.ConvertToEnum<GameParameter>(jRule, "gameParam");
 
                    _rules[gameplayParameter] = new(gameplayParameter, gameParameter, BuildConditions(jRule), value);
                }

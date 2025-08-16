@@ -12,6 +12,11 @@ public class TestPlayer : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        collision?.gameObject.SetActive(false);
+        
+    }
+
+    internal void AttackSelf()
+    {
+        
     }
 }

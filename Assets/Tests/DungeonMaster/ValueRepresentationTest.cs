@@ -29,7 +29,7 @@ public class ValueRepresentationTest
     public void ShouldReturnRangeValue()
     {
         value = new ValueRepresentation(ValueType.Range, new() { { "min", "10" }, { "max", "10" } });
-        Range<int> range = new Range<int>(10, 10);
+        Range<int> range = new(10, 10);
 
         Assert.That(value.Type == ValueType.Range);
         Assert.That(value.Value<Range<int>>().min == range.min);

@@ -13,7 +13,8 @@
         "DungeonMaster",
         "GameManager",
         "Unity.Behavior",
-        "Unity.Behavior.Serialization"
+        "Unity.Behavior.Serialization",
+        "SerializableGUID"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -29,27 +29,26 @@ namespace Assets.DungeonMaster
         public int Floor { get; private set; }
 
         private DungeonGenerator.DungeonGenerator _dungeonGenerator;
-        private PlayerController _player;
+        private GameObject _player;
         private Dungeon _currentDungeon;
         private DungeonRepresentation _dungeonParams;
         private DungeonRepresentation _nextDungeonParams;
         private Dictionary<GameplayParameter, ValueRepresentation> _gameParams;
-        private Dictionary<GameParameter, int> _gameData;
+        private Dictionary<GameParameter, int> _floorStatistics;
         //private ResourceSystem _resourceSystem;
         private CombatSystem _combatSystem;
-        private GameStatistics _floorStatistics;
 
         public void Start()
         {
+            _floorStatistics = new();
             _dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator.DungeonGenerator>();
             _combatSystem = GameObject.FindGameObjectWithTag("CombatSystem").GetComponent<CombatSystem>();
-            _gameData = new();
 
-            JObject json = JObject.Parse(FindByName("DefaultDungeonRuleset").text);
+            JObject json = JObject.Parse(FindFile("DefaultDungeonRuleset", _rulesets).text);
             GenerationRuleset = RulesetBuilder.BuildDungeonRuleset(json);
             GameplayRuleset = RulesetBuilder.BuildGameplayParams(json);
 
-            _dungeonParams = new DungeonRepresentation(FindByName("DefaultDungeonParameters"));
+            _dungeonParams = new DungeonRepresentation(FindFile("DefaultDungeonParameters", _parameterFiles));
 
             _combatSystem.EnemyDefeated += OnEnemyDefeated;
             _combatSystem.PlayerDefeated += OnPlayerDefeated;
@@ -58,11 +57,11 @@ namespace Assets.DungeonMaster
             State = DungeonMasterState.GENERATE_DUNGEON;
         }
 
-
         public void OnDungeonCleared()
         {
             _dungeonParams = _nextDungeonParams;
             _nextDungeonParams = null;
+            _player.SetActive(false);
             State = DungeonMasterState.GENERATE_DUNGEON;
         }
 
@@ -101,7 +100,7 @@ namespace Assets.DungeonMaster
         {
             foreach (DungeonRule rule in GenerationRuleset.Values)
             {
-                if (rule.ConditionsMet(_gameData))
+                if (rule.ConditionsMet(_floorStatistics))
                 {
                     _nextDungeonParams.ModifyParameter(rule.Parameter, rule.Value());
                 }
@@ -109,7 +108,7 @@ namespace Assets.DungeonMaster
 
             foreach (GameplayRule rule in GameplayRuleset.Values)
             {
-                if (rule.ConditionsMet(_gameData))
+                if (rule.ConditionsMet(_floorStatistics))
                 {
                     _gameParams[rule.Parameter].Modify(rule.Value());
                 }
@@ -119,8 +118,8 @@ namespace Assets.DungeonMaster
         private void GenerateDungeon()
         {
             NewDungeon();
-            _currentDungeon.DungeonExit.DungeonCleared += OnDungeonCleared;
-            _player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+            GameObject.FindGameObjectWithTag("DungeonExit").GetComponent<DungeonExit>().DungeonCleared += OnDungeonCleared;
+            _player.SetActive(true);
             State = DungeonMasterState.RUNNING;
             Floor++;
         }
@@ -129,28 +128,28 @@ namespace Assets.DungeonMaster
         {
             _dungeonGenerator.ClearDungeon();
             _currentDungeon = _dungeonGenerator.GenerateDungeon(_dungeonParams);
-            GameObject startingPoint = GameObject.FindGameObjectWithTag("PlayerSpawn");
+            SpawnPoint startingPoint = GameObject.FindGameObjectWithTag("PlayerSpawn").GetComponent<SpawnPoint>();
 
             _nextDungeonParams = _dungeonParams;
 
             if (_player != null)
             {
-                _currentDungeon.StartingPoint.Spawn(_player.transform);
+                startingPoint.Spawn(_player.transform);
             }
             else
             {
-                startingPoint.GetComponent<SpawnPoint>().Spawn();
+                _player = startingPoint.Spawn();
             }
         }
 
-        private TextAsset FindByName(string v)
+        private TextAsset FindFile(string v, List<TextAsset> files)
         {
-            return _parameterFiles.Find(t => t.name.Contains(v));
+            return files.Find(t => t.name.Contains(v));
         }
 
         private void OnEnemyDefeated(NpcFighter fighter)
         {
-            _floorStatistics.enemiesDefeated++;
+            _floorStatistics[GameParameter.EnemiesDefeated]++;
         }
 
         private void OnPlayerDefeated(Fighter fighter)
@@ -159,8 +158,5 @@ namespace Assets.DungeonMaster
         }
     }
 
-    public struct GameStatistics
-    {
-        public int enemiesDefeated;
-    }
+
 }

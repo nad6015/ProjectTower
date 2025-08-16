@@ -19,8 +19,7 @@
       }
     },
     {
-      "id": "DungeonTheme_Based_On_Prev_Dungeon",
-      "parameter": "dungeonTheme",
+      "parameter": "theme",
       "conditions": [
         {
           "operator": "==",
@@ -33,7 +32,6 @@
       }
     },
     {
-      "id": "RoomSize_based_on_floor_clear_time",
       "parameter": "roomSize",
       "conditions": [
         {
@@ -52,7 +50,6 @@
       }
     },
     {
-      "id": "RoomCount_Based_On_Prev_Dungeon",
       "parameter": "roomCount",
       "conditions": [
         {

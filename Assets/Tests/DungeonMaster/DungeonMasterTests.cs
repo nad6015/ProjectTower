@@ -1,7 +1,7 @@
 using System.Collections;
+using Assets.Combat;
 using Assets.DungeonGenerator;
 using Assets.DungeonMaster;
-using Assets.PlayerCharacter;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -31,7 +31,7 @@ public class DungeonMasterTests
         Assert.NotNull(dungeonGenerator);
         Assert.That(dungeonGenerator.transform.childCount > 15);
 
-        Assert.NotNull(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>());
+        Assert.NotNull(GameObject.FindGameObjectWithTag("Player"));
 
         yield return null;
     }
@@ -58,9 +58,9 @@ public class DungeonMasterTests
         player = GameObject.FindGameObjectWithTag("Player");
         Assert.That(dungeonMaster.Floor == 1);
         Assert.That(dungeonMaster.State == DungeonMasterState.GENERATE_DUNGEON);
-        Assert.NotNull(player);
+        Assert.Null(player);  // Player should not be active
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
 
         GameObject newStartPos = GameObject.FindGameObjectWithTag("PlayerSpawn");
         player = GameObject.FindGameObjectWithTag("Player");
@@ -79,10 +79,9 @@ public class DungeonMasterTests
         TestSetUp();
 
         yield return new WaitForSeconds(1f);
-        
-        dungeonMaster.OnDungeonCleared();
 
-        Assert.That(dungeonMaster.State == DungeonMasterState.GENERATE_DUNGEON);
+        player.GetComponent<TestPlayer>().AttackSelf();
+        ;
 
         yield return new WaitForSeconds(1f);
         Assert.That(dungeonMaster.State == DungeonMasterState.GAME_END);

@@ -1,13 +1,12 @@
 {
   "params": [
     {
-      "id": "roomSize",
+      "parameter": "roomSize",
       "value": {
         "type": "vectorRange",
         "minX": 15,
         "minY": 0,
         "minZ": 15,
-
         "maxX": 25,
         "maxY": 0,
         "maxZ": 25
@@ -15,7 +14,7 @@
       "locked": false
     },
     {
-      "id": "corridorSize",
+      "parameter": "corridorSize",
       "value": {
         "type": "vector",
         "x": 3,
@@ -25,27 +24,31 @@
       "locked": false
     },
     {
-      "id": "enemySpawnRate",
+      "parameter": "enemySpawnRate",
       "value": { "type": "number", "value": 50 },
       "locked": false
     },
     {
-      "id": "itemsPerRoom",
-      "type": "range",
+      "parameter": "itemsPerRoom",
       "value": {
+        "type": "range",
         "min": 0,
         "max": 3
       }
     },
     {
-      "id": "enemiesPerRoom",
-      "type": "range",
+      "parameter": "enemiesPerRoom",
       "value": {
+        "type": "range",
         "min": 0,
         "max": 3
       }
     },
-    { "id": "roomCount", "type": "number", "value": 3, "locked": true }
+    {
+      "parameter": "roomCount",
+      "value": { "type": "number", "value": 10 },
+      "locked": true
+    }
   ],
   "baseDungeon": [
     {

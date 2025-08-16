@@ -30,7 +30,6 @@ namespace Assets.DungeonGenerator.Components
                 }
                 case ValueType.Number:
                 {
-                    Debug.Log(values[valueParam]);
                     _value = int.Parse(values[valueParam]);
                     break;
                 }
@@ -85,6 +84,11 @@ namespace Assets.DungeonGenerator.Components
                 case ValueType.String:
                 {
                     _value = value.Value<string>();
+                    break;
+                }
+                case ValueType.Number:
+                {
+                    _value = value.Value<int>();
                     break;
                 }
             }

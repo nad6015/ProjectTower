@@ -2,11 +2,10 @@
 using Assets.DungeonGenerator.Components;
 using System.Collections.Generic;
 using System.Linq;
+using Random = UnityEngine.Random;
 
 namespace Assets.DungeonGenerator
 {
-    using Random = UnityEngine.Random;
-
     /// <summary>
     /// Generates a dungeon using a random walk algorithm.
     /// </summary>
@@ -15,7 +14,7 @@ namespace Assets.DungeonGenerator
         private Dictionary<Bounds, DungeonRoom> _roomBounds;
         private Dictionary<Bounds, DungeonCorridor> _corridors;
 
-        private Dungeon _dungeon;
+        private DungeonRepresentation _dungeon;
         private DungeonComponents _components;
         private readonly Transform _dungeonTransform;
         private readonly List<Vector3> _shuffleBag;
@@ -36,7 +35,7 @@ namespace Assets.DungeonGenerator
         /// <inheritdoc/>
         /// </summary>
         /// 
-        public void GenerateDungeon(Dungeon dungeon)
+        public void GenerateDungeon(DungeonRepresentation dungeon)
         {
             _dungeon = dungeon;
             _components = dungeon.Components;
@@ -132,12 +131,13 @@ namespace Assets.DungeonGenerator
             // Dictionary upsert code referenced from - https://stackoverflow.com/questions/1243717/how-to-update-the-value-stored-in-dictionary-in-c
             foreach (var node in _dungeon.Layout)
             {
-                var roomBounds = node.Value.Bounds;
-                DungeonRoom room = DungeonRoom.Create(node.Value);
+                var roomBounds = node.Bounds;
+                DungeonRoom room = DungeonRoom.Create(node);
                 room.Construct(_components.tilemap);
                 room.Populate(_dungeon);
                 room.transform.SetParent(_dungeonTransform);
                 _roomBounds[roomBounds] = room;
+                _dungeon.AddDungeonRoom(room);
             }
 
             for (int i = 0; i < _corridors.Count; i++)
@@ -168,7 +168,6 @@ namespace Assets.DungeonGenerator
             Bounds lastRoom = _roomBounds.Last().Key;
             DungeonExit exit = GameObject.Instantiate(_components.exit, lastRoom.center, Quaternion.identity, _dungeonTransform);
             exit.name = "DungeonExit";
-            _dungeon.DungeonExit = exit;
 
             foreach (var room in _roomBounds.Values)
             {
@@ -188,7 +187,6 @@ namespace Assets.DungeonGenerator
                 Quaternion.identity, _dungeonTransform);
 
             startingPoint.name = "DungeonEntrypoint";
-            _dungeon.StartingPoint = startingPoint;
         }
 
         /// <summary>
@@ -202,19 +200,20 @@ namespace Assets.DungeonGenerator
         private Bounds CreateCorridor(Bounds b1, Bounds b2, float dist, bool isHorizontal)
         {
             Vector3 corridorCenter;
+            Vector3 corridorSize = _dungeon.Parameter<Vector3>(DungeonParameter.CorridorSize);
             if (isHorizontal)
             {
-                float zOffset = _dungeon.CorridorSize.z / 2f;
+                float zOffset = corridorSize.z / 2f;
                 corridorCenter = PointUtils.RandomPointWithinRange(new(b1.max.x, 0, Mathf.Max(b1.min.z, b2.min.z) + zOffset), new(b1.max.x, 0, Mathf.Min(b1.max.z, b2.max.z) - zOffset));
                 corridorCenter.x += (dist / 2f);
             }
             else
             {
-                float xOffset = _dungeon.CorridorSize.x / 2f;
+                float xOffset = corridorSize.x / 2f;
                 corridorCenter = PointUtils.RandomPointWithinRange(new(Mathf.Max(b1.min.x, b2.min.x) + xOffset, 0, b1.max.z), new(Mathf.Min(b1.max.x, b2.max.x) - xOffset, 0, b1.max.z));
                 corridorCenter.z += (dist / 2f);
             }
-            return new Bounds(corridorCenter, new(isHorizontal ? dist : _dungeon.CorridorSize.x, 0, isHorizontal ? _dungeon.CorridorSize.z : dist));
+            return new Bounds(corridorCenter, new(isHorizontal ? dist : corridorSize.x, 0, isHorizontal ? corridorSize.z : dist));
         }
 
         /// <summary>

@@ -1,9 +1,8 @@
 {
   "gameplayRules": [
     {
-      "id": "itemSpawn",
-      "parameter": "healingItem",
-      "gameParam": "health",
+      "parameter": "restorationItem",
+      "gameParam": "characterHealth",
       "conditions": [
         {
           "operator": "<",
@@ -18,7 +17,6 @@
   ],
   "dungeonRules": [
     {
-      "id": "Introduce_New_Weapon",
       "parameter": "roomFlow",
       "gameParam": "weaponCount",
       "conditions": [
@@ -37,9 +35,8 @@
       }
     },
     {
-      "id": "Theme_Probability_Based_On_Elemental_Str",
-      "parameter": "staffWeaponType",
-      "gameParam": "theme",
+      "parameter": "theme",
+      "gameParam": "staffWeaponType",
       "conditions": [
         {
           "operator": "not contains"
@@ -51,22 +48,6 @@
       }
     },
     {
-      "id": "decrease_roomCount_based_on_floor_clear_time",
-      "parameter": "roomCount",
-      "gameParam": "clearTime",
-      "conditions": [
-        {
-          "operator": ">",
-          "operand": "5"
-        }
-      ],
-      "value": {
-        "type": "value",
-        "value": "3"
-      }
-    },
-    {
-      "id": "increase_roomCount_based_on_floor_clear_time",
       "parameter": "roomCount",
       "gameParam": "clearTime",
       "conditions": [

@@ -25,6 +25,11 @@ namespace Assets.DungeonMaster
         public bool ConditionsMet(Dictionary<GameParameter, int> statistics)
         {
             _conditionsMet = false;
+            if (!statistics.ContainsKey(GameParameter))
+            { 
+                return false;
+            }
+
             int value = statistics[GameParameter];
 
             _conditions.ForEach(condition =>

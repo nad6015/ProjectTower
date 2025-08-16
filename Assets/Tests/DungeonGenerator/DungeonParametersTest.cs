@@ -19,8 +19,8 @@ public class DungeonParametersTest
     [Test]
     public void ShouldGetAnyParameter()
     {
-        Range<int> enemiesPerRoom = parameters.GetParameter<Range<int>>(DungeonParameter.EnemiesPerRoom);
-        Range<Vector3> roomSize = parameters.GetParameter<Range<Vector3>>(DungeonParameter.RoomSize);
+        Range<int> enemiesPerRoom = parameters.Parameter<Range<int>>(DungeonParameter.EnemiesPerRoom);
+        Range<Vector3> roomSize = parameters.Parameter<Range<Vector3>>(DungeonParameter.RoomSize);
 
         Assert.That(6 == parameters.Count);
 

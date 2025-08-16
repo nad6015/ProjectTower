@@ -3,7 +3,6 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace Assets.DungeonGenerator
 {
@@ -13,7 +12,6 @@ namespace Assets.DungeonGenerator
         {
             try
             {
-                Debug.Log(jToken[field]);
                 return (T)Enum.Parse(typeof(T), jToken[field].ToString(), true);
             }
             catch
@@ -38,7 +36,7 @@ namespace Assets.DungeonGenerator
             return int.Parse(jToken.ToString());
         }
 
-        public static Dictionary<string, string> FlattenedJsonValues(JToken jParam)
+        public static Dictionary<string, string> ToDictionary(JToken jParam)
         {
             return jParam.ToObject<Dictionary<string, string>>();
         }
