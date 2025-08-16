@@ -25,12 +25,7 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        _animator.SetFloat("Speed", _fighter.IsAttacking() ? 0 : _agent.velocity.magnitude);
-    }
-
-    public void Hit()
-    {
-
+        _animator.SetFloat("Speed", _fighter.IsAttacking() ? 1 : _agent.velocity.magnitude);
     }
 
     internal void Attack()

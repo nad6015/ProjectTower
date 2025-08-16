@@ -204,23 +204,29 @@ namespace Assets.DungeonGenerator
 
             if (isHorizontal)
             {
-                int minX = Mathf.RoundToInt(b1.max.x);
-                int maxX = Mathf.CeilToInt(b2.min.x);
+                int minX = Mathf.FloorToInt(b1.max.x);
+                int maxX = Mathf.FloorToInt(b2.min.x + Tilemap3D.TileUnit);
 
                 float minZ = Mathf.Max(b1.min.z, b2.min.z);
                 float maxZ = Mathf.Min(b1.max.z, b2.max.z) - corridorSize.z;
                 float z = Random.Range(minZ, maxZ);
 
-                corridorBounds.SetMinMax(new(minX, 0, z), new(maxX, 0, z + corridorSize.z));
+                Debug.Log(maxX);
+                Debug.Log(b2.min.x);
+
+                corridorBounds.SetMinMax(new(minX, 0, z), new(maxX , 0, z + corridorSize.z));
             }
             else
             {
-                int minZ = Mathf.RoundToInt(b1.max.z);
-                int maxZ = Mathf.CeilToInt(b2.min.z);
+                int minZ = Mathf.FloorToInt(b1.max.z);
+                int maxZ = Mathf.FloorToInt(b2.min.z + Tilemap3D.TileUnit);
 
                 float minX = Mathf.Max(b1.min.x, b2.min.x);
                 float maxX = Mathf.Min(b1.max.x, b2.max.x) - corridorSize.x;
                 float x = Random.Range(minX, maxX);
+
+                Debug.Log(maxZ);
+                Debug.Log(b2.min.z);
 
                 corridorBounds.SetMinMax(new(x, 0, minZ), new(x + corridorSize.x, 0, maxZ));
             }
@@ -237,7 +243,7 @@ namespace Assets.DungeonGenerator
         private Bounds RandomRoom(Vector3 min, Vector3 max, Vector3 dir, bool isHorizontal)
         {
             Range<Vector3> roomSizeParam = _dungeon.Parameter<Range<Vector3>>(DungeonParameter.RoomSize);
-            int roomOffset = Random.Range(1, 5); // Distance between rooms
+            int roomOffset = Random.Range(2, 5); // Distance between rooms
             Vector3 roomSize = PointUtils.RandomSize(roomSizeParam.min, roomSizeParam.max);
             Vector3 roomCenter = PointUtils.RandomPointWithinRange(min, max);
 

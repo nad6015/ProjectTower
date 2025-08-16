@@ -40,7 +40,7 @@ namespace Assets.PlayerCharacter
         {
             base.Update();
 
-            _staminaRegenCooldown -= _staminaRegenRate;
+            _staminaRegenCooldown -= Time.deltaTime;
             if (_stats[FighterStats.STAMINA] < _maxStats[FighterStats.STAMINA] && _staminaRegenCooldown <= 0)
             {
                 IncreaseStat(FighterStats.STAMINA, 1);
@@ -73,14 +73,12 @@ namespace Assets.PlayerCharacter
             }
             else if (!_continueCombo)
             {
-
                 _continueCombo = true;
                 _comboCount++;
                 GetComponent<PlayerMovement>().speed = _stats[FighterStats.Speed];
             }
 
             IncreaseStat(FighterStats.STAMINA, -1);
-            Debug.Log(_stats[FighterStats.STAMINA]);
         }
     }
 }

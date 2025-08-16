@@ -54,11 +54,11 @@ namespace Assets.DungeonGenerator
             List<RaycastHit> hits = new();
 
             hits.AddRange(Physics.BoxCastAll(min,
-                isHorizontal ? new(bounds.size.x, 0, Tilemap3D.TileUnit) : new(bounds.size.z, 0, Tilemap3D.TileUnit),
+                isHorizontal ? new(bounds.size.x, 0, Tilemap3D.TileUnit) : new(Tilemap3D.TileUnit, 0, bounds.size.z),
                 Vector3.down));
 
             hits.AddRange(Physics.BoxCastAll(max,
-                isHorizontal ? new(bounds.size.x, 0, Tilemap3D.TileUnit) : new(bounds.size.z, 0, Tilemap3D.TileUnit),
+                isHorizontal ? new(bounds.size.x, 0, Tilemap3D.TileUnit) : new(Tilemap3D.TileUnit, 0, bounds.size.z),
                 Vector3.down));
 
             foreach (var hit in hits)

@@ -43,11 +43,11 @@ namespace Assets.Combat
         public void Awake()
         {
             _stats[FighterStats.Health] = health;
-            _stats[FighterStats.ATTACK] = attack;
+            _stats[FighterStats.Attack] = attack;
             _stats[FighterStats.Speed] = speed;
 
             _maxStats[FighterStats.Health] = health;
-            _maxStats[FighterStats.ATTACK] = attack;
+            _maxStats[FighterStats.Attack] = attack;
             _maxStats[FighterStats.Speed] = speed;
 
             _animator = GetComponentInChildren<Animator>();
@@ -121,7 +121,7 @@ namespace Assets.Combat
         /// <param name="attacker"></param>
         protected void TakeDamage(Fighter attacker)
         {
-            _stats[FighterStats.Health] -= attacker._stats[FighterStats.ATTACK];
+            _stats[FighterStats.Health] -= attacker._stats[FighterStats.Attack];
             _animator.SetTrigger("Injured");
             OnStatChange?.Invoke(FighterStats.Health);
 

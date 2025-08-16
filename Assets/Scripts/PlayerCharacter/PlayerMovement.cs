@@ -46,14 +46,11 @@ namespace Assets.PlayerCharacter
 
         void Update()
         {
-            if (!_fighter.IsAttacking())
-            {
-                _currentRotation = Quaternion.LookRotation(newPos == Vector3.zero ? transform.forward : newPos, Vector3.up);
+            _currentRotation = Quaternion.LookRotation(newPos == Vector3.zero ? transform.forward : newPos, Vector3.up);
 
-                transform.rotation = _currentRotation;
+            transform.rotation = _currentRotation;
 
-                _characterController.SimpleMove(speed * newPos);
-            }
+            _characterController.SimpleMove((!_fighter.IsAttacking() ? speed : 1) * newPos);
         }
     }
 }

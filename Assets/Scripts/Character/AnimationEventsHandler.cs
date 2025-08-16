@@ -29,6 +29,7 @@ namespace Assets.Scripts.Character
         public void OnFootstep()
         {
             audioSource.clip = footstepClip;
+            audioSource.volume = 0.5f;
             audioSource.Play();
         }
         /// <summary>
