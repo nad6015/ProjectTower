@@ -7,9 +7,9 @@
         "minX": 15,
         "minY": 0,
         "minZ": 15,
-        "maxX": 25,
+        "maxX": 20,
         "maxY": 0,
-        "maxZ": 25
+        "maxZ": 20
       },
       "locked": false
     },

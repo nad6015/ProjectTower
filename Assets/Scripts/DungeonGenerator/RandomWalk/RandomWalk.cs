@@ -211,9 +211,6 @@ namespace Assets.DungeonGenerator
                 float maxZ = Mathf.Min(b1.max.z, b2.max.z) - corridorSize.z;
                 float z = Random.Range(minZ, maxZ);
 
-                Debug.Log(maxX);
-                Debug.Log(b2.min.x);
-
                 corridorBounds.SetMinMax(new(minX, 0, z), new(maxX , 0, z + corridorSize.z));
             }
             else
@@ -224,9 +221,6 @@ namespace Assets.DungeonGenerator
                 float minX = Mathf.Max(b1.min.x, b2.min.x);
                 float maxX = Mathf.Min(b1.max.x, b2.max.x) - corridorSize.x;
                 float x = Random.Range(minX, maxX);
-
-                Debug.Log(maxZ);
-                Debug.Log(b2.min.z);
 
                 corridorBounds.SetMinMax(new(x, 0, minZ), new(x + corridorSize.x, 0, maxZ));
             }
