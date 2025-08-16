@@ -5,60 +5,62 @@ using UnityEngine.InputSystem;
 
 namespace Assets.PlayerCharacter
 {
-    [RequireComponent(typeof(CharacterController), typeof(PlayerAction), typeof(PlayerMovement))]
+    [RequireComponent(typeof(CharacterController), typeof(PlayerMovement))]
     public class PlayerController : MonoBehaviour
     {
         public event Action<InputAction.CallbackContext> OnInteract;
         public event Action<InputAction.CallbackContext> OnAttackPerformed;
-        [SerializeField]
-        private float _speed = 5;
-        
-        [SerializeField]
+        public event Action<InputAction.CallbackContext> MovePerformed;
+        public event Action<InputAction.CallbackContext> MoveCancelled;
 
-        private PlayerCamera _camera;
+        [SerializeField]
+        private GameObject _camera;
 
         private PlayableFighter _fighter;
 
-        private InputSystemActions actions;
-        private PlayerMovement playerMovement;
-        private PlayerCamera _playerCamera;
-        
+        private InputSystemActions _actions;
+        private PlayerMovement _playerMovement;
 
+        // Using both Awake and Start here to first initialise the controller's values (Awake) for the OnEnable and OnDisable
+        // and then to set the referenced scripts' values (Start).
         void Awake()
         {
-            playerMovement = GetComponent<PlayerMovement>();
-            playerMovement.speed = _speed;
-
-            actions = new InputSystemActions();
+            _playerMovement = GetComponent<PlayerMovement>();
             _fighter = GetComponent<PlayableFighter>();
 
-            _playerCamera = Instantiate(_camera);
+            _actions = new InputSystemActions();
+            Instantiate(_camera);
+        }
+
+        private void Start()
+        {
+            _playerMovement.speed = _fighter.GetMaxStat(Combat.FighterStats.Speed);
         }
 
         private void OnEnable()
         {
-            actions.Player.Move.Enable();
-            actions.Player.Move.performed += playerMovement.OnMovePerformed;
-            actions.Player.Move.canceled += playerMovement.OnMoveCancelled;
+            _actions.Player.Move.Enable();
+            _actions.Player.Move.performed += MovePerformed;
+            _actions.Player.Move.canceled += MoveCancelled;
 
-            actions.Player.Attack.Enable();
-            actions.Player.Attack.performed += AttackPerformed;
+            _actions.Player.Attack.Enable();
+            _actions.Player.Attack.performed += AttackPerformed;
 
-            actions.Player.Interact.Enable();
-            actions.Player.Interact.performed += InteractPerformed;
+            _actions.Player.Interact.Enable();
+            _actions.Player.Interact.performed += InteractPerformed;
         }
 
         private void OnDisable()
         {
-            actions.Player.Move.Disable();
-            actions.Player.Move.performed -= playerMovement.OnMovePerformed;
-            actions.Player.Move.canceled -= playerMovement.OnMoveCancelled;
+            _actions.Player.Move.Disable();
+            _actions.Player.Move.performed -= MovePerformed;
+            _actions.Player.Move.canceled -= MoveCancelled;
 
-            actions.Player.Attack.Disable();
-            actions.Player.Attack.performed -= AttackPerformed;
+            _actions.Player.Attack.Disable();
+            _actions.Player.Attack.performed -= AttackPerformed;
 
-            actions.Player.Interact.Disable();
-            actions.Player.Interact.performed -= InteractPerformed;
+            _actions.Player.Interact.Disable();
+            _actions.Player.Interact.performed -= InteractPerformed;
         }
 
         private void AttackPerformed(InputAction.CallbackContext context)

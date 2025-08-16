@@ -2,7 +2,6 @@ using Assets.DungeonGenerator.Components;
 using Assets.DungeonGenerator.Components.Tiles;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
 namespace Assets.DungeonGenerator
 {
@@ -66,7 +65,6 @@ namespace Assets.DungeonGenerator
             {
                 if (hit.collider.name.ToLower().Contains("wall") && hit.collider.transform.parent != transform)
                 {
-                    Debug.Log(hit.collider);
                     hit.collider.enabled = false;
                 }
             }

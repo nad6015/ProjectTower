@@ -4,19 +4,21 @@ using UnityEngine.UIElements;
 
 public class StatBar
 {
-    private Fighter _fighter;
-    private ProgressBar _bar;
+    private readonly Fighter _fighter;
+    private readonly ProgressBar _bar;
+    private readonly FighterStats _stat;
 
-    public StatBar(Fighter fighter, ProgressBar progressBar)
+    public StatBar(Fighter fighter, FighterStats stat, ProgressBar progressBar)
     {
         _fighter = fighter;
         _bar = progressBar;
 
-        _fighter.OnHealthChange += UpdateHealthBar;
+        _fighter.OnStatChange += UpdateStatBar;
 
-        _bar.highValue = _fighter.GetStat(FighterStats.HEALTH);
+        _bar.highValue = _fighter.GetMaxStat(stat);
         _bar.lowValue = 0;
-    }  
+        _stat = stat;
+    }
 
     internal void PositionRelativeToCamera(Camera main, float yOffset = 3)
     {
@@ -26,9 +28,12 @@ public class StatBar
         _bar.transform.position = new(pos.x - (_bar.contentRect.width / 2f), pos.y);
     }
 
-    private void UpdateHealthBar()
+    private void UpdateStatBar(FighterStats stat)
     {
-        _bar.value = _fighter.GetStat(FighterStats.HEALTH);
+        if (_stat == stat)
+        {
+            _bar.value = _fighter.GetStat(stat);
+        }
     }
 
     internal void Hide()

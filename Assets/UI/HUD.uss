@@ -1,4 +1,5 @@
-.status-bar .unity-progress-bar__progress {
+ .unity-progress-bar.status-bar
+ {
     width: 200px;
 }
 

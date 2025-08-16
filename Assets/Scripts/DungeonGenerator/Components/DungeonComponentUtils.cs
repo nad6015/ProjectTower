@@ -1,5 +1,4 @@
 using Assets.DungeonGenerator.Components.Tiles;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +6,7 @@ namespace Assets.DungeonGenerator.Components
 {
     public static class DungeonComponentUtils
     {
-        public static List<GameObject> DrawFloor(Tilemap3D tilemap, BoundsInt bounds, Transform transform)
+        public static IEnumerable<GameObject> DrawFloor(Tilemap3D tilemap, BoundsInt bounds, Transform transform)
         {
             int width = bounds.size.x;
             int height = bounds.size.z;

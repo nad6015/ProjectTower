@@ -27,7 +27,11 @@ namespace Assets.PlayerCharacter
 
         void Update()
         {
-            transform.SetPositionAndRotation(new Vector3(_player.position.x, DistanceFromPlayer, _player.position.z - DistanceFromPlayerZ), _initialRotation);
+            transform.SetPositionAndRotation(new Vector3(
+                _player.position.x, 
+                DistanceFromPlayer,
+                _player.position.z - DistanceFromPlayerZ), 
+                _initialRotation);
         }
     }
 }

@@ -13,7 +13,7 @@ public class EnemyHealthBar : MonoBehaviour
     void Start()
     {
         _fighter = GetComponentInParent<Fighter>();
-        _bar = new StatBar(_fighter, GetComponent<UIDocument>().rootVisualElement.Q<ProgressBar>());
+        _bar = new StatBar(_fighter, FighterStats.Health, GetComponent<UIDocument>().rootVisualElement.Q<ProgressBar>());
     }
 
     private void Update()

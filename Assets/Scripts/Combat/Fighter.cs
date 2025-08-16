@@ -7,7 +7,7 @@ namespace Assets.Combat
 {
     public abstract class Fighter : MonoBehaviour
     {
-        public event Action OnHealthChange;
+        public event Action<FighterStats> OnStatChange;
 
         [SerializeField]
         private int health = 5;
@@ -16,31 +16,40 @@ namespace Assets.Combat
         private int attack = 1;
 
         [SerializeField]
+        private int speed = 3;
+
+        [SerializeField]
         private LayerMask layerMask;
 
         [SerializeField]
         protected BoxCollider _hitbox;
 
         [SerializeField]
-        private float _attackCooldown = 0.5f;
+        private float _attackCooldownDuration = 0.5f;
 
-        private Dictionary<FighterStats, int> stats = new();
+        [SerializeField]
+        private float _attackCommitment = 0.5f;
 
         protected Animator _animator;
         protected bool _isAttacking = false;
-        private float _attackCooldownDuration = 0.5f;
+        protected Dictionary<FighterStats, int> _stats = new();
+        protected Dictionary<FighterStats, int> _maxStats = new();
 
-        private Weapon weapon;
-
+        private float _attackCooldown = 0.5f;
         private AnimationEventsHandler _animationEvents;
+        private int _prevSpeed = 0;
         private const string _attackParam = "Attack";
 
         public void Awake()
         {
-            stats[FighterStats.HEALTH] = health;
-            stats[FighterStats.ATTACK] = attack;
+            _stats[FighterStats.Health] = health;
+            _stats[FighterStats.ATTACK] = attack;
+            _stats[FighterStats.Speed] = speed;
 
-            weapon = GetComponentInChildren<Weapon>();
+            _maxStats[FighterStats.Health] = health;
+            _maxStats[FighterStats.ATTACK] = attack;
+            _maxStats[FighterStats.Speed] = speed;
+
             _animator = GetComponentInChildren<Animator>();
 
             _animationEvents = GetComponent<AnimationEventsHandler>();
@@ -50,30 +59,71 @@ namespace Assets.Combat
                 _animationEvents = GetComponentInChildren<AnimationEventsHandler>();
             }
 
-            _hitbox.includeLayers = layerMask;
             _hitbox.enabled = false;
-
             _animationEvents.OnAnimationEndHandler += OnAnimationEnd;
         }
 
-        public int GetStat(FighterStats stat) => stats[stat];
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <param name="stat"></param>
+        /// <returns></returns>
+        public int GetStat(FighterStats stat) => _stats[stat];
+
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <param name="stat"></param>
+        /// <returns></returns>
+        public int GetMaxStat(FighterStats stat) => _maxStats[stat];
 
         public void Attack()
         {
             if (_attackCooldown <= 0)
             {
                 _isAttacking = true;
-                _animator.SetTrigger("Attack");
+                _animator.SetTrigger(_attackParam);
                 _animator.SetBool(_attackParam, _isAttacking);
                 _hitbox.enabled = true;
             }
         }
 
+        public void Heal(int amountToHeal)
+        {
+            _stats[FighterStats.Health] += amountToHeal;
+            _stats[FighterStats.Health] = Math.Min(_stats[FighterStats.Health], _maxStats[FighterStats.Health]);
+            // TODO: Healing vfx
+
+            OnStatChange?.Invoke(FighterStats.Health);
+        }
+
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <returns></returns>
+        public bool IsDead()
+        {
+            return _stats[FighterStats.Health] <= 0;
+        }
+
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <returns></returns>
+        public bool IsAttacking()
+        {
+            return _isAttacking;
+        }
+
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <param name="attacker"></param>
         protected void TakeDamage(Fighter attacker)
         {
-            stats[FighterStats.HEALTH] -= attacker.stats[FighterStats.ATTACK];
+            _stats[FighterStats.Health] -= attacker._stats[FighterStats.ATTACK];
             _animator.SetTrigger("Injured");
-            OnHealthChange?.Invoke();
+            OnStatChange?.Invoke(FighterStats.Health);
 
             if (IsDead())
             {
@@ -81,20 +131,7 @@ namespace Assets.Combat
             }
         }
 
-        public void Heal(int amountToHeal)
-        {
-            stats[FighterStats.HEALTH] += amountToHeal;
-            OnHealthChange?.Invoke();
-
-            // TODO: Healling vfx
-        }
-
-        public bool IsDead()
-        {
-            return stats[FighterStats.HEALTH] <= 0;
-        }
-
-        private void Update()
+        protected virtual void Update()
         {
             if (_attackCooldown > 0f && !_isAttacking)
             {
@@ -112,7 +149,7 @@ namespace Assets.Combat
         {
             Fighter attacker = collider.GetComponentInParent<Fighter>();
 
-            if (attacker != null)
+            if (attacker != null && attacker != this)
             {
                 TakeDamage(attacker);
             }
@@ -123,6 +160,7 @@ namespace Assets.Combat
             _hitbox.enabled = false;
             _isAttacking = false;
             _attackCooldown = _attackCooldownDuration;
+            _stats[FighterStats.Speed] = _maxStats[FighterStats.Speed];
             AnimationEnded();
             _animator.SetBool(_attackParam, _isAttacking);
         }
@@ -132,11 +170,18 @@ namespace Assets.Combat
             _attackCooldown = 0;
         }
 
-        protected bool IsAttacking()
-        {
-            return _animator.GetBool(_attackParam);
-        }
-
         protected abstract void AnimationEnded();
+
+        protected void IncreaseStat(FighterStats stat, int value)
+        {
+            _stats[stat] += value;
+
+            if(_stats[stat] < 0)
+            {
+                _stats[stat] = 0;
+            }
+
+            OnStatChange?.Invoke(stat);
+        }
     }
 }

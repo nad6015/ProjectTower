@@ -7,43 +7,53 @@ namespace Assets.PlayerCharacter
     public class PlayerMovement : MonoBehaviour
     {
         internal float speed { get; set; }
-        private CharacterController characterController;
+        private CharacterController _characterController;
         private Vector3 newPos;
-        private Quaternion currentRotation;
-        private Animator animator;
+        private Quaternion _currentRotation;
+        private Animator _animator;
+        private PlayableFighter _fighter;
 
         void Awake()
         {
-            characterController = GetComponent<CharacterController>();
-            animator = GetComponentInChildren<Animator>();
-            animator.SetFloat("MotionSpeed", 1);
+            _characterController = GetComponent<CharacterController>();
+            _fighter = GetComponent<PlayableFighter>();
+
+            PlayerController playerController = GetComponent<PlayerController>();
+            playerController.MovePerformed += OnMovePerformed;
+            playerController.MoveCancelled += OnMoveCancelled;
+
+            _animator = GetComponentInChildren<Animator>();
+            _animator.SetFloat("MotionSpeed", 1);
 
             Cursor.lockState = CursorLockMode.Confined;
-            currentRotation = transform.rotation;
+            _currentRotation = transform.rotation;
         }
 
-        internal void OnMovePerformed(InputAction.CallbackContext context)
+        private void OnMovePerformed(InputAction.CallbackContext context)
         {
             var value = context.ReadValue<Vector2>();
             newPos.x = value.x;
             newPos.z = value.y;
-            animator.SetFloat("Speed", speed);
+            _animator.SetFloat("Speed", speed);
 
         }
 
-        internal void OnMoveCancelled(InputAction.CallbackContext context)
+        private void OnMoveCancelled(InputAction.CallbackContext context)
         {
             newPos = Vector3.zero;
-            animator.SetFloat("Speed", 0);
+            _animator.SetFloat("Speed", 0);
         }
 
         void Update()
         {
-            currentRotation = Quaternion.LookRotation(newPos == Vector3.zero ? transform.forward : newPos, Vector3.up);
+            if (!_fighter.IsAttacking())
+            {
+                _currentRotation = Quaternion.LookRotation(newPos == Vector3.zero ? transform.forward : newPos, Vector3.up);
 
-            transform.rotation = currentRotation;
+                transform.rotation = _currentRotation;
 
-            characterController.SimpleMove(speed * newPos);
+                _characterController.SimpleMove(speed * newPos);
+            }
         }
     }
 }

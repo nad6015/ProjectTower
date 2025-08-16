@@ -38,8 +38,6 @@ namespace Assets.DungeonGenerator.Components
             tilemap.DrawRoomCorner(bounds.max, transform);
         }
 
-
-
         public void Modify(Bounds cBounds, Tilemap3D tilemap)
         {
             if (!cBounds.Intersects(Bounds))
@@ -55,7 +53,6 @@ namespace Assets.DungeonGenerator.Components
                 float x = position.x + Tilemap3D.TileUnit;
                 float z = position.z + Tilemap3D.TileUnit;
 
-                Debug.Log(cBounds.Contains(position));
                 if (cBounds.Contains(position))
                 {
                     wall.SetActive(false);

@@ -13,8 +13,14 @@ public class PlayerHUD : MonoBehaviour
     {
         Fighter fighter = GetComponentInParent<PlayableFighter>();
         
-        _healthBar = new(fighter, GetComponent<UIDocument>().rootVisualElement.Q<VisualElement>("HealthBar").Q<ProgressBar>("ProgressBar"));
-        //_staminaBar = new(fighter, GetComponent<UIDocument>().rootVisualElement.Q<ProgressBar>("StaminaBar"));
+        _healthBar = new(
+            fighter, 
+            FighterStats.Health, 
+            GetComponent<UIDocument>().rootVisualElement.Q<VisualElement>("HealthBar").Q<ProgressBar>("ProgressBar"));
+        _staminaBar = new(
+            fighter, 
+            FighterStats.STAMINA, 
+            GetComponent<UIDocument>().rootVisualElement.Q<VisualElement>("StaminaBar").Q<ProgressBar>("ProgressBar"));
         //_manaBar = new(fighter, GetComponent<UIDocument>().rootVisualElement.Q<ProgressBar>("ManaBar"));
 
         //_manaBar.Hide();

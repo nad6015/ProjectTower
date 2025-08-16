@@ -13,6 +13,7 @@ TagManager:
   - CombatSystem
   - ResourceSystem
   - DungeonExit
+  - RenderCamera
   layers:
   - Default
   - TransparentFX

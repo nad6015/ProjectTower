@@ -60,12 +60,12 @@ public class CharacterMovementTest : InputTestFixture
         
         character = GameObject.Instantiate(player, enemyPosition, Quaternion.LookRotation(enemyPosition));
 
-        Assert.That(enemy.GetStat(FighterStats.HEALTH), Is.EqualTo(5));
+        Assert.That(enemy.GetStat(FighterStats.Health), Is.EqualTo(5));
         Press(mouse.leftButton);
         yield return new WaitForSeconds(1f);
         Release(mouse.leftButton);
 
 
-        Assert.That(enemy.GetStat(FighterStats.HEALTH), Is.EqualTo(4));
+        Assert.That(enemy.GetStat(FighterStats.Health), Is.EqualTo(4));
     }
 }
