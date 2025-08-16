@@ -17,9 +17,9 @@
       "parameter": "corridorSize",
       "value": {
         "type": "vector",
-        "x": 3,
+        "x": 4,
         "y": 0,
-        "z": 3
+        "z": 4
       },
       "locked": false
     },

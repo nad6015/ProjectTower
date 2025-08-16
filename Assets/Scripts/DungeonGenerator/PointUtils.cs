@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Assets.DungeonGenerator
 {
-    using Random = UnityEngine.Random;
     public class PointUtils
     {
         /// <summary>
@@ -13,8 +13,8 @@ namespace Assets.DungeonGenerator
         /// <returns>a random size</returns>
         public static Vector3 RandomSize(Vector3 minSize, Vector3 maxSize)
         {
-            float width = Random.Range(minSize.x, maxSize.x);
-            float height = Random.Range(minSize.z, maxSize.z);
+            int width = Random.Range(Mathf.RoundToInt(minSize.x), Mathf.RoundToInt(maxSize.x));
+            int height = Random.Range(Mathf.RoundToInt(minSize.z), Mathf.RoundToInt(maxSize.z));
 
             return new Vector3(width, 0, height);
         }
@@ -32,8 +32,8 @@ namespace Assets.DungeonGenerator
         /// <returns>A random point within the range</returns>
         public static Vector3 RandomPointWithinRange(Vector3 v1, Vector3 v2)
         {
-            float x = Random.Range(v1.x, v2.x);
-            float z = Random.Range(v1.z, v2.z);
+            int x = Random.Range(Mathf.RoundToInt(v1.x), Mathf.RoundToInt(v2.x));
+            int z = Random.Range(Mathf.RoundToInt(v1.z), Mathf.RoundToInt(v2.z));
             return new(x, 0, z);
         }
 

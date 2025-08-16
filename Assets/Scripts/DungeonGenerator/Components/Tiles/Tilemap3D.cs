@@ -11,6 +11,7 @@ namespace Assets.DungeonGenerator.Components.Tiles
         public List<GameObject> propTiles;
         public GameObject roomCorner;
         public GameObject corridorArch;
+        public const int TileUnit = 1;
 
         private Shufflebag<GameObject> _floors;
 
@@ -28,9 +29,44 @@ namespace Assets.DungeonGenerator.Components.Tiles
         /// <param name="z"></param>
         /// <param name="transform"></param>
         /// <returns></returns>
-        public GameObject DrawHorizontalWall(float x, float z, Transform transform)
+        public IEnumerable<GameObject> DrawHorizontalWalls(int width, int minX, int z, int maxZ, Transform transform)
         {
-            return Draw(x, z, wallTiles[0], Quaternion.identity, transform);
+            List<GameObject> walls = new();
+            for (int i = 0; i < width; i++)
+            {
+                float wallX = minX + i;
+
+                // Bottom wall
+                walls.Add(Draw(wallX, z, wallTiles[0], Quaternion.identity, transform));
+
+                // Top wall
+                walls.Add(Draw(wallX, maxZ, wallTiles[0], Quaternion.identity, transform));
+            }
+            return walls;
+        }
+
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="minZ"></param>
+        /// <param name="quaternion"></param>
+        /// <param name="transform"></param>
+        /// <returns></returns>
+        public IEnumerable<GameObject> DrawVerticalWalls(int height, int x, int maxX, int minZ, Transform transform)
+        {
+            List<GameObject> walls = new();
+            for (int i = 0; i < height; i++)
+            {
+                float z = minZ + i;
+
+                // Left wall
+                walls.Add(Draw(x, z, wallTiles[0], rotateY, transform));
+
+                // Right wall
+                walls.Add(Draw(maxX, z, wallTiles[0], rotateY, transform));
+            }
+            return walls;
         }
 
         /// <summary>
@@ -53,9 +89,22 @@ namespace Assets.DungeonGenerator.Components.Tiles
         /// <param name="y">the y coordinate</param>
         /// <param name="transform">the parent transform of this tile</param>
         /// <returns></returns>
-        public GameObject DrawFloor(float x, float z, Transform transform)
+        public List<GameObject> DrawFloor(Vector3 start, int width, int height, Transform transform)
         {
-            return Draw(x, z, _floors.TakeItem(), Quaternion.identity, transform);
+            List<GameObject> drawnFloorTiles = new();
+            int startX = Mathf.FloorToInt(start.x);
+            int startZ = Mathf.FloorToInt(start.z);
+
+            for (int i = 0; i < width; i++)
+            {
+                int x = startX + i;
+                for (int j = 0; j < height; j++)
+                {
+                    int z = startZ + j;
+                    drawnFloorTiles.Add(Draw(x, z, _floors.TakeItem(), Quaternion.identity, transform));
+                }
+            }
+            return drawnFloorTiles;
         }
 
         /// <summary>
@@ -78,24 +127,21 @@ namespace Assets.DungeonGenerator.Components.Tiles
         /// <summary>
         /// TODO
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="z"></param>
-        /// <param name="quaternion"></param>
-        /// <param name="transform"></param>
-        /// <returns></returns>
-        public GameObject DrawVerticalWall(float x, float z, Transform transform)
-        {
-            return Draw(x, z, wallTiles[0], rotateY, transform);
-        }
-
-        /// <summary>
-        /// TODO
-        /// </summary>
         /// <param name="bounds"></param>
         /// <param name="transform"></param>
         public GameObject DrawRoomCorner(float x, float z, Transform transform)
         {
             return Draw(x, z, roomCorner, Quaternion.identity, transform);
+        }
+
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <param name="max"></param>
+        /// <param name="transform"></param>
+        public GameObject DrawRoomCorner(Vector3Int max, Transform transform)
+        {
+            return DrawRoomCorner(max.x, max.z, transform);
         }
     }
 

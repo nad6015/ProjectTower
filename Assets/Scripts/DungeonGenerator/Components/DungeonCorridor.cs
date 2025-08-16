@@ -1,61 +1,41 @@
+using Assets.DungeonGenerator.Components;
+using Assets.DungeonGenerator.Components.Tiles;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace Assets.DungeonGenerator
 {
     public class DungeonCorridor : MonoBehaviour
     {
         public Bounds Bounds { get; private set; }
-
+        private bool isHorizontal = false;
         private readonly List<GameObject> walls = new();
+        private readonly List<GameObject> floors = new();
 
         /// <summary>
         /// Constructs a corridor.
         /// </summary>
-        /// <param name="components">the component used to construct the corridor</param>
-        internal void Construct(DungeonComponents components, Vector3 minCorridorSize)
+        /// <param name="tilemap">the component used to construct the corridor</param>
+        internal void Construct(Tilemap3D tilemap, Vector3 minCorridorSize)
         {
-            GameObject wallAsset = components.corridorWall;
-            GameObject floorAsset = components.floorTile;
+            BoundsInt bounds = DungeonComponentUtils.BoundsToBoundsInt(Bounds);
+            isHorizontal = minCorridorSize.z == Bounds.size.z;
 
-            float width = Bounds.size.x;
-            float height = Bounds.size.z;
+            transform.position = bounds.min;
 
-            float minX = Bounds.min.x;
-            float minZ = Bounds.min.z;
+            // Place the floor
+            floors.AddRange(DungeonComponentUtils.DrawFloor(tilemap, bounds, transform));
 
-            float maxX = Bounds.max.x;
-            float maxZ = Bounds.max.z;
+            // Place the walls depending on the corridor's axis
 
-            bool isHorizontal = minCorridorSize.z == height;
-
-            float angle = isHorizontal ? 0: 90f;
-            float count  = isHorizontal ? width : height;
-
-            transform.position = Bounds.min;
-
-            GameObject floor = Instantiate(floorAsset, new(minX, 0, minZ), Quaternion.identity, transform);
-            floor.name = "Floor";
-            floor.transform.localScale = PointUtils.Vec2ToVec3(Bounds.size, 0.5f);
-
-            // Place the walls
-            for (int i = 0; i < count; i++)
+            if (isHorizontal)
             {
-                float x = isHorizontal ? minX + i : minX;
-                float z = isHorizontal ? minZ : minZ + i;
-
-                GameObject wall = Instantiate(wallAsset, new Vector3(x, 0, z), Quaternion.identity, transform);
-                wall.name = "Wall Bottom";
-                wall.transform.GetChild(0).Rotate(Vector3.up, angle);
-                walls.Add(wall);
-
-                x = isHorizontal ? minX + i : maxX;
-                z = isHorizontal ? maxZ : minZ + i;
-
-                wall = Instantiate(wallAsset, new Vector3(x, 0, z), Quaternion.identity, transform);
-                wall.name = "Wall Top";
-                wall.transform.GetChild(0).Rotate(Vector3.up, angle);
-                walls.Add(wall);
+                walls.AddRange(DungeonComponentUtils.DrawTopAndBottomWalls(tilemap, bounds, transform));
+            }
+            else
+            {
+                walls.AddRange(DungeonComponentUtils.DrawLeftAndRightWalls(tilemap, bounds, transform));
             }
         }
 
@@ -70,12 +50,24 @@ namespace Assets.DungeonGenerator
 
         public void Modify(Bounds bounds)
         {
-            foreach (var wall in walls)
+            Vector3 min = isHorizontal ? new(Bounds.min.x, 0, Bounds.center.z) : new(Bounds.center.x, 0, Bounds.min.z);
+            Vector3 max = isHorizontal ? new(Bounds.max.x, 0, Bounds.center.z) : new(Bounds.center.x, 0, Bounds.max.z);
+            List<RaycastHit> hits = new();
+
+            hits.AddRange(Physics.BoxCastAll(min,
+                isHorizontal ? new(bounds.size.x, 0, Tilemap3D.TileUnit) : new(bounds.size.z, 0, Tilemap3D.TileUnit),
+                Vector3.down));
+
+            hits.AddRange(Physics.BoxCastAll(max,
+                isHorizontal ? new(bounds.size.x, 0, Tilemap3D.TileUnit) : new(bounds.size.z, 0, Tilemap3D.TileUnit),
+                Vector3.down));
+
+            foreach (var hit in hits)
             {
-                Vector3 wallPos = wall.transform.position;
-                if ((wallPos.x > bounds.min.x && wallPos.x < bounds.max.x) && (wallPos.z > bounds.min.z && wallPos.z < bounds.max.z))
+                if (hit.collider.name.ToLower().Contains("wall") && hit.collider.transform.parent != transform)
                 {
-                    wall.SetActive(false);
+                    Debug.Log(hit.collider);
+                    hit.collider.enabled = false;
                 }
             }
         }

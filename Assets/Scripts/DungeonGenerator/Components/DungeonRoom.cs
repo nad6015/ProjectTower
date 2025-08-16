@@ -19,55 +19,26 @@ namespace Assets.DungeonGenerator.Components
 
         public void Construct(Tilemap3D tilemap)
         {
-            transform.position = Bounds.min;
-
-            float width = Bounds.size.x;
-            float height = Bounds.size.z;
-
-            float minX = Bounds.min.x;
-            float minZ = Bounds.min.z;
-
-            float maxX = Bounds.max.x;
-            float maxZ = Bounds.max.z;
+            BoundsInt bounds = DungeonComponentUtils.BoundsToBoundsInt(Bounds); // Convert to int for accurate tile placement
+            transform.position = bounds.min;
 
             // Place the floor
-            for (int i = 0; i < width; i++)
-            {
-                for (int j = 0; j < height; j++)
-                {
-                    tilemap.DrawFloor(minX + i, minZ + j, transform);
-                }
-            }
+            DungeonComponentUtils.DrawFloor(tilemap, bounds, transform);
 
-            // Place the top and bottom walls
-            for (int i = 0; i < width; i++)
-            {
-                float wallX = minX + i;
-
-                // Bottom wall
-                walls.Add(tilemap.DrawHorizontalWall(wallX, minZ, transform));
-
-                // Top wall
-                walls.Add(tilemap.DrawHorizontalWall(wallX, maxZ, transform));
-            }
+            // Place top and bottom walls
+            walls.AddRange(DungeonComponentUtils.DrawTopAndBottomWalls(tilemap, bounds, transform));
 
             // Place left and right walls
-            for (int i = 0; i < height; i++)
-            {
-                float z = minZ + i;
+            walls.AddRange(DungeonComponentUtils.DrawLeftAndRightWalls(tilemap, bounds, transform));
 
-                // Left wall
-                walls.Add(tilemap.DrawVerticalWall(minX, z, transform));
-
-                // Right wall
-                walls.Add(tilemap.DrawVerticalWall(maxX, z, transform));
-            }
-
-            tilemap.DrawRoomCorner(minX, minZ, transform);
-            tilemap.DrawRoomCorner(minX, maxZ, transform);
-            tilemap.DrawRoomCorner(maxX, minZ, transform);
-            tilemap.DrawRoomCorner(maxX, maxZ, transform);
+            // Place room corner decorations
+            tilemap.DrawRoomCorner(bounds.min, transform);
+            tilemap.DrawRoomCorner(bounds.xMin, bounds.zMax, transform);
+            tilemap.DrawRoomCorner(bounds.xMax, bounds.zMin, transform);
+            tilemap.DrawRoomCorner(bounds.max, transform);
         }
+
+
 
         public void Modify(Bounds cBounds, Tilemap3D tilemap)
         {
@@ -81,9 +52,11 @@ namespace Assets.DungeonGenerator.Components
             foreach (GameObject wall in walls)
             {
                 Vector3 position = wall.transform.position;
+                float x = position.x + Tilemap3D.TileUnit;
+                float z = position.z + Tilemap3D.TileUnit;
 
-                if (position.x > cBounds.min.x && position.x < cBounds.max.x &&
-                    (Mathf.Approximately(position.z, cBounds.min.z) || Mathf.Approximately(position.z, cBounds.max.z)))
+                Debug.Log(cBounds.Contains(position));
+                if (cBounds.Contains(position))
                 {
                     wall.SetActive(false);
                     if (firstPos == Vector3.zero)
@@ -92,8 +65,8 @@ namespace Assets.DungeonGenerator.Components
                     }
                 }
 
-                if (position.z > cBounds.min.z && position.z < cBounds.max.z &&
-                    (Mathf.Approximately(position.x, cBounds.min.x) || Mathf.Approximately(position.x, cBounds.max.x)))
+                if (z > cBounds.min.z && z < cBounds.max.z &&
+                    (Mathf.Approximately(x, cBounds.min.x) || Mathf.Approximately(x, cBounds.max.x)))
                 {
                     wall.SetActive(false);
                     if (firstPos == Vector3.zero)
@@ -102,13 +75,6 @@ namespace Assets.DungeonGenerator.Components
                     }
                 }
             }
-            bool isHorizontal = Mathf.Approximately(firstPos.x, cBounds.min.x) || Mathf.Approximately(firstPos.x, cBounds.max.x);
-            tilemap.DrawCorridorArch(
-                isHorizontal ? cBounds.max.x : cBounds.min.x,
-                isHorizontal ? cBounds.min.z : cBounds.max.z,
-                isHorizontal, transform);
-
-            tilemap.DrawCorridorArch(cBounds.min.x, cBounds.min.z, isHorizontal, transform);
         }
 
         public static DungeonRoom Create(DungeonNode node)

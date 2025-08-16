@@ -3,6 +3,7 @@ using Assets.DungeonGenerator.Components;
 using System.Collections.Generic;
 using System.Linq;
 using Random = UnityEngine.Random;
+using Assets.DungeonGenerator.Components.Tiles;
 
 namespace Assets.DungeonGenerator
 {
@@ -34,7 +35,6 @@ namespace Assets.DungeonGenerator
         /// <summary>
         /// <inheritdoc/>
         /// </summary>
-        /// 
         public void GenerateDungeon(DungeonRepresentation dungeon)
         {
             _dungeon = dungeon;
@@ -42,7 +42,7 @@ namespace Assets.DungeonGenerator
             _corridors = new();
             _roomBounds = new();
 
-            CreateDungeonRepresentation();
+            CreateDungeonRooms();
             ConstructDungeon();
             PlaceContent();
         }
@@ -57,9 +57,9 @@ namespace Assets.DungeonGenerator
         ///    5. Choose a new random direction.
         ///    6. Repeat steps 3 to 5 using the last created room as the connection point to the new one. Stop when the desire number of rooms is reached.
         /// </summary>
-        private void CreateDungeonRepresentation()
+        private void CreateDungeonRooms()
         {
-            float negativeDirOffset = _dungeon.Parameter<Range<Vector3>>(DungeonParameter.RoomSize).max.magnitude;
+            int negativeDirOffset = Mathf.FloorToInt(_dungeon.Parameter<Range<Vector3>>(DungeonParameter.RoomSize).max.magnitude);
             Vector3 dir = RandomDirection();
 
             Bounds lastRoom = RandomRoom(Vector3.zero, Vector3.zero, dir, dir.x != 0);
@@ -73,7 +73,7 @@ namespace Assets.DungeonGenerator
             LinkNodes(layout.FirstNode, dir, negativeDirOffset, builtNodes);
         }
 
-        void LinkNodes(DungeonNode node, Vector3 dir, float negativeDirOffset, HashSet<DungeonNode> nodes)
+        void LinkNodes(DungeonNode node, Vector3 dir, int negativeDirOffset, HashSet<DungeonNode> nodes)
         {
             var lastRoom = node.Bounds;
             foreach (var n in node.LinkedNodes)
@@ -99,12 +99,12 @@ namespace Assets.DungeonGenerator
                     }
                     else if (dir == Vector3.left)
                     {
-                        nextRoom = RandomRoom(new(lastRoom.min.x - negativeDirOffset, 0, lastRoom.min.z), lastRoom.max, dir, true);
+                        nextRoom = RandomRoom(new(lastRoom.min.x - 0, 0, lastRoom.min.z), lastRoom.max, dir, true);
                         corridor = CreateCorridor(nextRoom, lastRoom, lastRoom.min.x - nextRoom.max.x, true);
                     }
                     else // dir == Vector3.down)
                     {
-                        nextRoom = RandomRoom(new(lastRoom.min.x, 0, lastRoom.min.z - negativeDirOffset), lastRoom.max, dir, false);
+                        nextRoom = RandomRoom(new(lastRoom.min.x, 0, lastRoom.min.z - 0), lastRoom.max, dir, false);
                         corridor = CreateCorridor(nextRoom, lastRoom, lastRoom.min.z - nextRoom.max.z, false);
                     }
                     dir = RandomDirection();
@@ -144,7 +144,7 @@ namespace Assets.DungeonGenerator
             {
                 var corridor = _corridors.ElementAt(i);
                 DungeonCorridor dungeonCorridor = DungeonCorridor.Create(corridor.Key, i);
-                dungeonCorridor.Construct(_components, _dungeon.Parameter<Vector3>(DungeonParameter.CorridorSize));
+                dungeonCorridor.Construct(_components.tilemap, _dungeon.Parameter<Vector3>(DungeonParameter.CorridorSize));
                 dungeonCorridor.transform.SetParent(_dungeonTransform);
                 _corridors[corridor.Key] = dungeonCorridor;
             }
@@ -199,21 +199,32 @@ namespace Assets.DungeonGenerator
         /// <returns>the bounds of the corridor</returns>
         private Bounds CreateCorridor(Bounds b1, Bounds b2, float dist, bool isHorizontal)
         {
-            Vector3 corridorCenter;
+            Bounds corridorBounds = new();
             Vector3 corridorSize = _dungeon.Parameter<Vector3>(DungeonParameter.CorridorSize);
+
             if (isHorizontal)
             {
-                float zOffset = corridorSize.z / 2f;
-                corridorCenter = PointUtils.RandomPointWithinRange(new(b1.max.x, 0, Mathf.Max(b1.min.z, b2.min.z) + zOffset), new(b1.max.x, 0, Mathf.Min(b1.max.z, b2.max.z) - zOffset));
-                corridorCenter.x += (dist / 2f);
+                int minX = Mathf.RoundToInt(b1.max.x);
+                int maxX = Mathf.CeilToInt(b2.min.x);
+
+                float minZ = Mathf.Max(b1.min.z, b2.min.z);
+                float maxZ = Mathf.Min(b1.max.z, b2.max.z) - corridorSize.z;
+                float z = Random.Range(minZ, maxZ);
+
+                corridorBounds.SetMinMax(new(minX, 0, z), new(maxX, 0, z + corridorSize.z));
             }
             else
             {
-                float xOffset = corridorSize.x / 2f;
-                corridorCenter = PointUtils.RandomPointWithinRange(new(Mathf.Max(b1.min.x, b2.min.x) + xOffset, 0, b1.max.z), new(Mathf.Min(b1.max.x, b2.max.x) - xOffset, 0, b1.max.z));
-                corridorCenter.z += (dist / 2f);
+                int minZ = Mathf.RoundToInt(b1.max.z);
+                int maxZ = Mathf.CeilToInt(b2.min.z);
+
+                float minX = Mathf.Max(b1.min.x, b2.min.x);
+                float maxX = Mathf.Min(b1.max.x, b2.max.x) - corridorSize.x;
+                float x = Random.Range(minX, maxX);
+
+                corridorBounds.SetMinMax(new(x, 0, minZ), new(x + corridorSize.x, 0, maxZ));
             }
-            return new Bounds(corridorCenter, new(isHorizontal ? dist : corridorSize.x, 0, isHorizontal ? corridorSize.z : dist));
+            return corridorBounds;
         }
 
         /// <summary>
@@ -226,17 +237,17 @@ namespace Assets.DungeonGenerator
         private Bounds RandomRoom(Vector3 min, Vector3 max, Vector3 dir, bool isHorizontal)
         {
             Range<Vector3> roomSizeParam = _dungeon.Parameter<Range<Vector3>>(DungeonParameter.RoomSize);
-            float roomOffset = Random.Range(1f, 5f); // Distance between rooms
+            int roomOffset = Random.Range(1, 5); // Distance between rooms
             Vector3 roomSize = PointUtils.RandomSize(roomSizeParam.min, roomSizeParam.max);
             Vector3 roomCenter = PointUtils.RandomPointWithinRange(min, max);
 
             if (isHorizontal)
             {
-                roomCenter.x += dir.x > 0 ? (roomOffset) + roomSize.x : -((roomOffset) + roomSize.x);
+                roomCenter.x += dir.x > 0 ? roomOffset + roomSize.x : -(roomOffset + roomSize.x);
             }
             else
             {
-                roomCenter.z += dir.z > 0 ? (roomOffset) + roomSize.z : -((roomOffset) + roomSize.z);
+                roomCenter.z += dir.z > 0 ? roomOffset + roomSize.z : -(roomOffset + roomSize.z);
             }
 
             return new Bounds(roomCenter, roomSize);
