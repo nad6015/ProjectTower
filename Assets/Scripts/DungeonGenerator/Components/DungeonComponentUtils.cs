@@ -6,7 +6,7 @@ namespace Assets.DungeonGenerator.Components
 {
     public static class DungeonComponentUtils
     {
-        public static IEnumerable<GameObject> DrawFloor(Tilemap3D tilemap, BoundsInt bounds, Transform transform)
+        public static IEnumerable<GameObject> DrawFloor(DungeonTilemap tilemap, BoundsInt bounds, Transform transform)
         {
             int width = bounds.size.x;
             int height = bounds.size.z;
@@ -14,7 +14,7 @@ namespace Assets.DungeonGenerator.Components
             return tilemap.DrawFloor(bounds.min, width, height, transform);
         }
 
-        public static IEnumerable<GameObject> DrawTopAndBottomWalls(Tilemap3D tilemap, BoundsInt bounds, Transform transform)
+        public static IEnumerable<GameObject> DrawTopAndBottomWalls(DungeonTilemap tilemap, BoundsInt bounds, Transform transform)
         {
             int width = bounds.size.x;
 
@@ -26,7 +26,7 @@ namespace Assets.DungeonGenerator.Components
             return tilemap.DrawHorizontalWalls(width, minX, minZ, maxZ, transform);
         }
 
-        public static IEnumerable<GameObject> DrawLeftAndRightWalls(Tilemap3D tilemap, BoundsInt bounds, Transform transform)
+        public static IEnumerable<GameObject> DrawLeftAndRightWalls(DungeonTilemap tilemap, BoundsInt bounds, Transform transform)
         {
             int height = bounds.size.z;
 

@@ -185,12 +185,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   _hitbox: {fileID: 8337178641630974411}
-  _attackCooldownDuration: 0.5
-  _attackCommitment: 0.2
+  _attackCooldownDuration: 0.75
+  _attackCommitment: 0.3
   maxCombo: 3
   _stamina: 5
-  _staminaRegenRate: 0.01
-  _staminaRegenCooldownDuration: 5
+  _staminaRegenRate: 0.05
+  _staminaRegenCooldownDuration: 2
 --- !u!81 &2553989433121075861
 AudioListener:
   m_ObjectHideFlags: 0

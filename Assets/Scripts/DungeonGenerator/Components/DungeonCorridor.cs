@@ -16,7 +16,7 @@ namespace Assets.DungeonGenerator
         /// Constructs a corridor.
         /// </summary>
         /// <param name="tilemap">the component used to construct the corridor</param>
-        internal void Construct(Tilemap3D tilemap, Vector3 minCorridorSize)
+        internal void Construct(DungeonTilemap tilemap, Vector3 minCorridorSize)
         {
             BoundsInt bounds = DungeonComponentUtils.BoundsToBoundsInt(Bounds);
             isHorizontal = minCorridorSize.z == Bounds.size.z;
@@ -45,29 +45,6 @@ namespace Assets.DungeonGenerator
             DungeonCorridor corridor = gameObj.AddComponent<DungeonCorridor>();
             corridor.Bounds = bounds;
             return corridor;
-        }
-
-        public void Modify(Bounds bounds)
-        {
-            Vector3 min = isHorizontal ? new(Bounds.min.x, 0, Bounds.center.z) : new(Bounds.center.x, 0, Bounds.min.z);
-            Vector3 max = isHorizontal ? new(Bounds.max.x, 0, Bounds.center.z) : new(Bounds.center.x, 0, Bounds.max.z);
-            List<RaycastHit> hits = new();
-
-            hits.AddRange(Physics.BoxCastAll(min,
-                isHorizontal ? new(bounds.size.x, 0, Tilemap3D.TileUnit) : new(Tilemap3D.TileUnit, 0, bounds.size.z),
-                Vector3.down));
-
-            hits.AddRange(Physics.BoxCastAll(max,
-                isHorizontal ? new(bounds.size.x, 0, Tilemap3D.TileUnit) : new(Tilemap3D.TileUnit, 0, bounds.size.z),
-                Vector3.down));
-
-            foreach (var hit in hits)
-            {
-                if (hit.collider.name.ToLower().Contains("wall") && hit.collider.transform.parent != transform)
-                {
-                    hit.collider.enabled = false;
-                }
-            }
         }
     }
 }

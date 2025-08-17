@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace Assets.DungeonGenerator.Components.Tiles
 {
-    [CreateAssetMenu(fileName = "DungeonTile", menuName = "Scriptable Objects/DungeonTile")]
-    public class DungeonProp : ScriptableObject
+    public class DungeonProp : MonoBehaviour
     {
-        public GameObject Tile;
+        [SerializeField]
         public AreaType Type;
+
+        [SerializeField]
+        public Vector2 TileSize = new(1, 1);
     }
 }

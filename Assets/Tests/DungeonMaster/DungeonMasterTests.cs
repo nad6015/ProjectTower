@@ -42,7 +42,7 @@ public class DungeonMasterTests
         TestSetUp();
 
         Assert.That(dungeonMaster.State == DungeonMasterState.RUNNING);
-        Assert.That(dungeonMaster.Floor == 1);
+        Assert.That(dungeonMaster.CurrentFloor == 1);
 
         GameObject startPos = GameObject.FindGameObjectWithTag("PlayerSpawn");
 
@@ -56,7 +56,7 @@ public class DungeonMasterTests
         dungeonMaster.OnDungeonCleared();
 
         player = GameObject.FindGameObjectWithTag("Player");
-        Assert.That(dungeonMaster.Floor == 1);
+        Assert.That(dungeonMaster.CurrentFloor == 1);
         Assert.That(dungeonMaster.State == DungeonMasterState.GENERATE_DUNGEON);
         Assert.Null(player);  // Player should not be active
 
@@ -66,7 +66,7 @@ public class DungeonMasterTests
         player = GameObject.FindGameObjectWithTag("Player");
 
         Assert.That(dungeonMaster.State == DungeonMasterState.RUNNING);
-        Assert.That(dungeonMaster.Floor == 2);
+        Assert.That(dungeonMaster.CurrentFloor == 2);
 
         Assert.NotNull(newStartPos);
         Assert.NotNull(player);

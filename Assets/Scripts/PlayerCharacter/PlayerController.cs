@@ -17,6 +17,7 @@ namespace Assets.PlayerCharacter
         private GameObject _camera;
 
         private PlayableFighter _fighter;
+        private Animator _animator;
 
         private InputSystemActions _actions;
         private PlayerMovement _playerMovement;
@@ -27,6 +28,7 @@ namespace Assets.PlayerCharacter
         {
             _playerMovement = GetComponent<PlayerMovement>();
             _fighter = GetComponent<PlayableFighter>();
+            _animator= GetComponentInChildren<Animator>();
 
             _actions = new InputSystemActions();
             Instantiate(_camera);
@@ -83,6 +85,12 @@ namespace Assets.PlayerCharacter
                     break;
                 }
             }
+        }
+
+        public void Reset()
+        {
+            _animator.Play("Idle Walk Run Blend", -1, 0);
+            _animator.SetFloat("MotionSpeed", 1);
         }
     }
 }

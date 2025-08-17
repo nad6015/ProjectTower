@@ -66,19 +66,22 @@ namespace Assets.PlayerCharacter
 
         private void OnAttackPerformed(InputAction.CallbackContext obj)
         {
-            if (!_isAttacking && _stats[FighterStats.STAMINA] > 0)
+            if (_stats[FighterStats.STAMINA] > 0)
             {
-                Attack();
-                GetComponent<PlayerMovement>().speed = _stats[FighterStats.Speed];
-            }
-            else if (!_continueCombo)
-            {
-                _continueCombo = true;
-                _comboCount++;
-                GetComponent<PlayerMovement>().speed = _stats[FighterStats.Speed];
-            }
+                if (!_isAttacking)
+                {
+                    Attack();
+                    GetComponent<PlayerMovement>().speed = _stats[FighterStats.Speed];
+                }
+                else if (!_continueCombo)
+                {
+                    _continueCombo = true;
+                    _comboCount++;
+                    GetComponent<PlayerMovement>().speed = _stats[FighterStats.Speed];
+                }
 
-            IncreaseStat(FighterStats.STAMINA, -1);
+                IncreaseStat(FighterStats.STAMINA, -1);
+            }
         }
     }
 }

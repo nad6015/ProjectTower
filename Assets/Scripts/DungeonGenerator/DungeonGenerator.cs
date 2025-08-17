@@ -29,8 +29,6 @@ namespace Assets.DungeonGenerator
         {
             representation.SetComponents(_components);
             _algorithms.ForEach(algorithm => algorithm.GenerateDungeon(representation));
-
-            GetComponent<NavMeshSurface>().BuildNavMesh();
             return representation.GetConstructedDungeon();
         }
 

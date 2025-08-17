@@ -8,7 +8,7 @@ using UnityEngine.TestTools;
 
 public class GameSceneManagerTests
 {
-    GameSceneManager gameManager;
+    SceneTransitionManager gameManager;
 
     [UnitySetUp]
     public IEnumerator SetUp()
@@ -20,7 +20,7 @@ public class GameSceneManagerTests
     [UnityTest]
     public IEnumerator GameManagerStartsANewGame()
     {
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameSceneManager>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SceneTransitionManager>();
         gameManager.StartNewGame();
         yield return null;
 
@@ -30,11 +30,11 @@ public class GameSceneManagerTests
     [UnityTest]
     public IEnumerator GameManagerPersistsBetweenScenes()
     {
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameSceneManager>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SceneTransitionManager>();
         gameManager.StartNewGame();
         yield return null;
 
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameSceneManager>();
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SceneTransitionManager>();
 
         Assert.That(gameManager != null);
     }

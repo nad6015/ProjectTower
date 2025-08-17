@@ -6,11 +6,10 @@ using Assets.GameManager;
 using Assets.Combat;
 using Newtonsoft.Json.Linq;
 using Assets.DungeonGenerator;
+using Random = UnityEngine.Random;
 
 namespace Assets.DungeonMaster
 {
-    using Random = UnityEngine.Random;
-
     public partial class DungeonMaster : MonoBehaviour
     {
         [SerializeField]
@@ -22,11 +21,20 @@ namespace Assets.DungeonMaster
         [SerializeField]
         private int _randomSeed;
 
-        public Dictionary<DungeonParameter, DungeonRule> GenerationRuleset { get; private set; }
-        public Dictionary<GameplayParameter, GameplayRule> GameplayRuleset { get; private set; }
+        [SerializeField]
+        private TextAsset _defaultParamFile;
+
+        [SerializeField]
+        private TextAsset _defaultRulesetFile;
+
+        [field: SerializeField]
+        public int MaxFloors { get; private set; }
+        public int CurrentFloor { get; private set; }
+
         public DungeonMasterState State { get; private set; }
 
-        public int Floor { get; private set; }
+        private Dictionary<DungeonParameter, DungeonRule> GenerationRuleset { get; set; }
+        private Dictionary<GameplayParameter, GameplayRule> GameplayRuleset { get; set; }
 
         private DungeonGenerator.DungeonGenerator _dungeonGenerator;
         private GameObject _player;
@@ -37,18 +45,20 @@ namespace Assets.DungeonMaster
         private Dictionary<GameParameter, int> _floorStatistics;
         //private ResourceSystem _resourceSystem;
         private CombatSystem _combatSystem;
+        private SceneTransitionManager _sceneTransitionManager;
 
         public void Start()
         {
             _floorStatistics = new();
             _dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator.DungeonGenerator>();
             _combatSystem = GameObject.FindGameObjectWithTag("CombatSystem").GetComponent<CombatSystem>();
+            _sceneTransitionManager = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneTransitionManager>();
 
-            JObject json = JObject.Parse(FindFile("DefaultDungeonRuleset", _rulesets).text);
+            JObject json = JObject.Parse(_defaultRulesetFile.text);
             GenerationRuleset = RulesetBuilder.BuildDungeonRuleset(json);
             GameplayRuleset = RulesetBuilder.BuildGameplayParams(json);
 
-            _dungeonParams = new DungeonRepresentation(FindFile("DefaultDungeonParameters", _parameterFiles));
+            _dungeonParams = new DungeonRepresentation(_defaultParamFile);
 
             _combatSystem.EnemyDefeated += OnEnemyDefeated;
             _combatSystem.PlayerDefeated += OnPlayerDefeated;
@@ -60,9 +70,16 @@ namespace Assets.DungeonMaster
         public void OnDungeonCleared()
         {
             _dungeonParams = _nextDungeonParams;
-            _nextDungeonParams = null;
+            //_nextDungeonParams = null;
             _player.SetActive(false);
-            State = DungeonMasterState.GENERATE_DUNGEON;
+            if (CurrentFloor >= MaxFloors)
+            {
+                State = DungeonMasterState.GAME_END;
+            }
+            else
+            {
+                State = DungeonMasterState.GENERATE_DUNGEON;
+            }
         }
 
         private void Update()
@@ -77,7 +94,6 @@ namespace Assets.DungeonMaster
                 case DungeonMasterState.RUNNING:
                 {
                     DoWork();
-
                     break;
                 }
                 case DungeonMasterState.GAME_END:
@@ -92,7 +108,12 @@ namespace Assets.DungeonMaster
         {
             if (_player.GetComponent<PlayableFighter>().IsDead())
             {
-                GameSceneManager.SceneTransition(GameSceneManager.GameScene.GAME_LOST);
+                _sceneTransitionManager.SceneTransition(GameScene.GameLost);
+            }
+            else
+            {
+                Debug.Log("Hi");
+                _sceneTransitionManager.SceneTransition(GameScene.NextScene);
             }
         }
 
@@ -119,9 +140,11 @@ namespace Assets.DungeonMaster
         {
             NewDungeon();
             GameObject.FindGameObjectWithTag("DungeonExit").GetComponent<DungeonExit>().DungeonCleared += OnDungeonCleared;
+            _sceneTransitionManager.SceneTransition(GameScene.None);
             _player.SetActive(true);
+            _player.GetComponent<PlayerController>().Reset();
             State = DungeonMasterState.RUNNING;
-            Floor++;
+            CurrentFloor++;
         }
 
         private void NewDungeon()
@@ -157,6 +180,4 @@ namespace Assets.DungeonMaster
             State = DungeonMasterState.GAME_END;
         }
     }
-
-
 }

@@ -1,22 +1,14 @@
-using Assets.GameManager;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 
 public class NewGame : MonoBehaviour
 {
     [SerializeField]
     private DungeonExit _exit;
 
-    void Awake()
+    void Start()
     {
-        _exit.DungeonCleared += OnDungeonCleared;
-    }
-
-    private void OnEnable()
-    {
-        //_enterDungeon = _root.Q<Button>("EnterDungeon");
-        //_enterDungeon.clicked += EnterDungeonClicked;
+        GameObject.FindGameObjectWithTag("DungeonExit").GetComponent<DungeonExit>().DungeonCleared += OnDungeonCleared;
     }
 
     private void OnDungeonCleared()

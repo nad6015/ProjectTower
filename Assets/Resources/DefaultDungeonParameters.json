@@ -4,12 +4,12 @@
       "parameter": "roomSize",
       "value": {
         "type": "vectorRange",
-        "minX": 15,
+        "minX": 10,
         "minY": 0,
-        "minZ": 15,
-        "maxX": 20,
+        "minZ": 10,
+        "maxX": 15,
         "maxY": 0,
-        "maxZ": 20
+        "maxZ": 15
       },
       "locked": false
     },
@@ -46,7 +46,7 @@
     },
     {
       "parameter": "roomCount",
-      "value": { "type": "number", "value": 10 },
+      "value": { "type": "number", "value": 4 },
       "locked": true
     }
   ],
