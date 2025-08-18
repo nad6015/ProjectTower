@@ -37,7 +37,7 @@ namespace Assets.DungeonMaster
         private Dictionary<GameplayParameter, GameplayRule> GameplayRuleset { get; set; }
 
         private DungeonGenerator.DungeonGenerator _dungeonGenerator;
-        private GameObject _player;
+        private PlayerController _player;
         private Dungeon _currentDungeon;
         private DungeonRepresentation _dungeonParams;
         private DungeonRepresentation _nextDungeonParams;
@@ -71,7 +71,7 @@ namespace Assets.DungeonMaster
         {
             _dungeonParams = _nextDungeonParams;
             //_nextDungeonParams = null;
-            _player.SetActive(false);
+            _player.Pause();
             if (CurrentFloor >= MaxFloors)
             {
                 State = DungeonMasterState.GAME_END;
@@ -112,7 +112,6 @@ namespace Assets.DungeonMaster
             }
             else
             {
-                Debug.Log("Hi");
                 _sceneTransitionManager.SceneTransition(GameScene.NextScene);
             }
         }
@@ -141,8 +140,7 @@ namespace Assets.DungeonMaster
             NewDungeon();
             GameObject.FindGameObjectWithTag("DungeonExit").GetComponent<DungeonExit>().DungeonCleared += OnDungeonCleared;
             _sceneTransitionManager.SceneTransition(GameScene.None);
-            _player.SetActive(true);
-            _player.GetComponent<PlayerController>().Reset();
+            _player.Play();
             State = DungeonMasterState.RUNNING;
             CurrentFloor++;
         }
@@ -161,7 +159,7 @@ namespace Assets.DungeonMaster
             }
             else
             {
-                _player = startingPoint.Spawn();
+                _player = startingPoint.Spawn().GetComponent<PlayerController>();
             }
         }
 

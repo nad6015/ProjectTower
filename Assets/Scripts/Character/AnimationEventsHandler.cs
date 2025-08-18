@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Assets.Scripts.Character
+namespace Assets.Character
 {
     [RequireComponent(typeof(AudioSource))]
     public class AnimationEventsHandler : MonoBehaviour

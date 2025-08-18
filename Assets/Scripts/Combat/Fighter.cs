@@ -1,4 +1,4 @@
-using Assets.Scripts.Character;
+using Assets.Character;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -151,9 +151,6 @@ namespace Assets.Combat
         private void OnTriggerEnter(Collider collider)
         {
             Fighter target = collider.GetComponentInParent<Fighter>();
-
-            Debug.Log("Collider: " + collider.gameObject);
-            Debug.Log("Attacker: " + this.gameObject);
 
             if (target != null && target.IsAttacking() && !target._hasAttacked.Contains(this))
             {

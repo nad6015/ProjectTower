@@ -2,6 +2,7 @@ using Assets.Scripts.Combat.Resources;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 namespace Assets.PlayerCharacter
 {
@@ -50,6 +51,10 @@ namespace Assets.PlayerCharacter
 
             _actions.Player.Interact.Enable();
             _actions.Player.Interact.performed += InteractPerformed;
+            
+            // Reset animator on enable
+            _animator.Play("Idle Walk Run Blend", -1, 0);
+            _animator.SetFloat("MotionSpeed", 1);
         }
 
         private void OnDisable()
@@ -87,10 +92,16 @@ namespace Assets.PlayerCharacter
             }
         }
 
-        public void Reset()
+        public void Play()
         {
-            _animator.Play("Idle Walk Run Blend", -1, 0);
-            _animator.SetFloat("MotionSpeed", 1);
+            enabled = true;
+            GetComponent<CharacterController>().enabled = enabled;
+        }
+
+        public void Pause()
+        {
+            enabled = false;
+            GetComponent<CharacterController>().enabled = false;
         }
     }
 }

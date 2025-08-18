@@ -20,6 +20,25 @@ public class StatBar
         _stat = stat;
     }
 
+    public void OnEnable()
+    {
+        _fighter.OnStatChange += UpdateStatBar;
+        
+        _bar.highValue = _fighter.GetMaxStat(_stat);
+        _bar.value = _fighter.GetStat(_stat);
+        _bar.lowValue = 0;
+        
+        Debug.Log(_stat);
+        Debug.Log(_bar.value);
+        _bar.SetEnabled(true);
+    }
+
+    public void OnDisable()
+    {
+        _fighter.OnStatChange -= UpdateStatBar;
+        _bar.SetEnabled(false);
+    }
+
     internal void PositionRelativeToCamera(Camera main, float yOffset = 3)
     {
         // WorldSpace To Panel Code referenced from - https://www.whatupgames.com/blog/create-a-health-bar-that-hovers-over-the-player-with-ui-toolkit
