@@ -30,10 +30,8 @@ public class PlayerHUD : MonoBehaviour
 
     private void OnEnable()
     {
-        Debug.Log("HI");
         _healthBar?.OnEnable();
         _staminaBar?.OnEnable();
-        //_document.rootVisualElement.r
     }
 
     private void OnDisable()

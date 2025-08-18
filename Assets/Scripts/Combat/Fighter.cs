@@ -35,7 +35,7 @@ namespace Assets.Combat
         protected Dictionary<FighterStats, int> _stats = new();
         protected Dictionary<FighterStats, int> _maxStats = new();
 
-        private float _attackCooldown = 0.5f;
+        private float _attackCooldown;
         private AnimationEventsHandler _animationEvents;
         private const string _attackParam = "Attack";
         private List<Fighter> _hasAttacked = new List<Fighter>();
@@ -64,6 +64,7 @@ namespace Assets.Combat
             // Binary inversion operator referenced from - https://discussions.unity.com/t/ignore-one-layermask-question/186174
             _hitbox.excludeLayers = ~layerMask;
             _animationEvents.OnAnimationEndHandler += OnAnimationEnd;
+            _attackCooldown = _attackCooldownDuration;
         }
 
         /// <summary>
@@ -88,7 +89,18 @@ namespace Assets.Combat
                 _animator.SetTrigger(_attackParam);
                 _animator.SetBool(_attackParam, _isAttacking);
                 _hitbox.enabled = true;
+                var colliders = Physics.OverlapBox(transform.position, Vector3.one, Quaternion.identity, layerMask);
+                foreach (var item in colliders)
+                {
+                    Fighter target = item.GetComponent<Fighter>();
+                    if (target != null)
+                    {
+                        target.TakeDamage(this);
+                    }
+                }
+                _attackCooldown = _attackCooldownDuration;
             }
+
         }
 
         public void Heal(int amountToHeal)
@@ -142,23 +154,6 @@ namespace Assets.Combat
             }
         }
 
-        /// <summary>
-        /// When a fighter attacks, their hitbox is enabled. If any other fighter is in the hitbox,
-        /// this Unity Message is triggered on them. So, each fighter has to call Attack on themselves in order to
-        /// apply damage.
-        /// </summary>
-        /// <param name="collider">The hitbox of the attacking fighter</param>
-        private void OnTriggerEnter(Collider collider)
-        {
-            Fighter target = collider.GetComponentInParent<Fighter>();
-
-            if (target != null && target.IsAttacking() && !target._hasAttacked.Contains(this))
-            {
-                TakeDamage(target);
-                target._hasAttacked.Add(this);
-            }
-        }
-
         private void OnAnimationEnd()
         {
             _hitbox.enabled = false;
@@ -168,11 +163,6 @@ namespace Assets.Combat
             AnimationEnded();
             _animator.SetBool(_attackParam, _isAttacking);
             _hasAttacked.Clear();
-        }
-
-        protected void ResetAttackCooldown()
-        {
-            _attackCooldown = 0;
         }
 
         protected abstract void AnimationEnded();

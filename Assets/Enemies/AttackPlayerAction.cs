@@ -14,12 +14,12 @@ public partial class AttackPlayerAction : Action
     protected override Status OnStart()
     {
         _enemyController = Self.Value.GetComponent<EnemyController>();
-        return Status.Running;
+        _enemyController.Attack();
+        return Status.Success;
     }
 
     protected override Status OnUpdate()
     {
-        _enemyController.Attack();
         return Status.Success;
     }
 

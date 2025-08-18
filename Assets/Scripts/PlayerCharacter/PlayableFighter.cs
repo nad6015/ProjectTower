@@ -52,7 +52,6 @@ namespace Assets.PlayerCharacter
         {
             if (_continueCombo && _comboCount < maxCombo)
             {
-                ResetAttackCooldown();
                 Attack();
             }
             else
