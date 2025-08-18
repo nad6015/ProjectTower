@@ -30,7 +30,6 @@ public class EnemyController : MonoBehaviour
 
     internal void Attack()
     {
-        Debug.Log("hi");
         _fighter.Attack();
     }
 }

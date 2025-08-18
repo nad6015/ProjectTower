@@ -10,16 +10,16 @@ public partial class AttackPlayerAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Self;
     [SerializeReference] public BlackboardVariable<GameObject> Player;
-    EnemyController enemyController;
+    private EnemyController _enemyController;
     protected override Status OnStart()
     {
-        enemyController = Self.Value.GetComponent<EnemyController>();
+        _enemyController = Self.Value.GetComponent<EnemyController>();
         return Status.Running;
     }
 
     protected override Status OnUpdate()
     {
-        enemyController.Attack();
+        _enemyController.Attack();
         return Status.Success;
     }
 

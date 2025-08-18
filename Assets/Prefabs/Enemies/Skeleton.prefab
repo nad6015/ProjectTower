@@ -213,7 +213,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   _hitbox: {fileID: 8261925513812931975}
-  _attackCooldownDuration: 0.5
+  _attackCooldownDuration: 2
   _attackCommitment: 0.5
 --- !u!136 &2600680609069488361
 CapsuleCollider:
@@ -225,7 +225,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -289,6 +289,10 @@ PrefabInstance:
     - target: {fileID: 8085167263928684524, guid: 57b229fea00509343b8997fb59671cb1, type: 3}
       propertyPath: m_Name
       value: HitBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085167263928684524, guid: 57b229fea00509343b8997fb59671cb1, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

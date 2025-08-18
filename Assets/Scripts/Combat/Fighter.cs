@@ -37,8 +37,8 @@ namespace Assets.Combat
 
         private float _attackCooldown = 0.5f;
         private AnimationEventsHandler _animationEvents;
-        private int _prevSpeed = 0;
         private const string _attackParam = "Attack";
+        private List<Fighter> _hasAttacked = new List<Fighter>();
 
         public void Awake()
         {
@@ -60,6 +60,9 @@ namespace Assets.Combat
             }
 
             _hitbox.enabled = false;
+            _hitbox.includeLayers = layerMask;
+            // Binary inversion operator referenced from - https://discussions.unity.com/t/ignore-one-layermask-question/186174
+            _hitbox.excludeLayers = ~layerMask;
             _animationEvents.OnAnimationEndHandler += OnAnimationEnd;
         }
 
@@ -147,11 +150,15 @@ namespace Assets.Combat
         /// <param name="collider">The hitbox of the attacking fighter</param>
         private void OnTriggerEnter(Collider collider)
         {
-            Fighter attacker = collider.GetComponentInParent<Fighter>();
+            Fighter target = collider.GetComponentInParent<Fighter>();
 
-            if (attacker != null && attacker != this)
+            Debug.Log("Collider: " + collider.gameObject);
+            Debug.Log("Attacker: " + this.gameObject);
+
+            if (target != null && target.IsAttacking() && !target._hasAttacked.Contains(this))
             {
-                TakeDamage(attacker);
+                TakeDamage(target);
+                target._hasAttacked.Add(this);
             }
         }
 
@@ -163,6 +170,7 @@ namespace Assets.Combat
             _stats[FighterStats.Speed] = _maxStats[FighterStats.Speed];
             AnimationEnded();
             _animator.SetBool(_attackParam, _isAttacking);
+            _hasAttacked.Clear();
         }
 
         protected void ResetAttackCooldown()
@@ -176,7 +184,7 @@ namespace Assets.Combat
         {
             _stats[stat] += value;
 
-            if(_stats[stat] < 0)
+            if (_stats[stat] < 0)
             {
                 _stats[stat] = 0;
             }

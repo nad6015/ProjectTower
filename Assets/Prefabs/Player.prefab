@@ -74,7 +74,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7333831184450978021}
   - component: {fileID: 8885495373170276511}
-  - component: {fileID: 9147705890816088154}
   - component: {fileID: 353777729234021114}
   - component: {fileID: 1122762451330811552}
   - component: {fileID: 8589072062742688946}
@@ -129,18 +128,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &9147705890816088154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1927581186806867705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce3f91680db7e11458f43dcb87e35795, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &353777729234021114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10e8f4f9326637f4798ef9a32c6aee2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
+  health: 100
   attack: 1
   speed: 5
   layerMask:
@@ -217,7 +204,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5112539630213677994, guid: 57b229fea00509343b8997fb59671cb1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 5112539630213677994, guid: 57b229fea00509343b8997fb59671cb1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -248,12 +235,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7632395973766377458, guid: 57b229fea00509343b8997fb59671cb1, type: 3}
+      propertyPath: m_Center.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7632395973766377458, guid: 57b229fea00509343b8997fb59671cb1, type: 3}
       propertyPath: m_IncludeLayers.m_Bits
       value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 8085167263928684524, guid: 57b229fea00509343b8997fb59671cb1, type: 3}
       propertyPath: m_Name
       value: HitBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 8085167263928684524, guid: 57b229fea00509343b8997fb59671cb1, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
