@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Tests/DungeonMaster.unity
     guid: b20bebe27f759ce4bbd61adf2d3dacc7
   - enabled: 1
-    path: Assets/Scenes/Prod/NewGame.unity
+    path: Assets/Scenes/Prod/Tutorial.unity
     guid: 133978d8ed7a5054bae3e2fcb0cc83e4
   - enabled: 1
     path: Assets/Scenes/Prod/StartScreen.unity
