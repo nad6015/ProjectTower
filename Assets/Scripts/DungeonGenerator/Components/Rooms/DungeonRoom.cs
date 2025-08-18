@@ -128,6 +128,10 @@ namespace Assets.DungeonGenerator.Components
             while (availableTileUnits > 0 && loopCount < 5)
             {
                 DungeonProp prop = tilemap.GetProp();
+                if (prop == null) // if null, then shufflebag is empty
+                { 
+                    break;
+                }
                 Vector3 pos = prop.transform.position;
                 switch (prop.Type)
                 {

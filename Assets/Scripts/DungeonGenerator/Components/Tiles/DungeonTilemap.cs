@@ -148,7 +148,7 @@ namespace Assets.DungeonGenerator.Components.Tiles
 
         internal DungeonProp GetProp()
         {
-            return _props.TakeItem().GetComponent<DungeonProp>();
+            return _props.TakeItem()?.GetComponent<DungeonProp>();
         }
     }
 
@@ -164,7 +164,11 @@ namespace Assets.DungeonGenerator.Components.Tiles
 
         public T TakeItem()
         {
-            if (_shuffleBag.Count == 0)
+            if (_shuffleBag.Count == 0 && _originalList.Count == 0)
+            {
+                return default;
+            }
+            else if (_shuffleBag.Count == 0)
             {
                 _shuffleBag = new List<T>(_originalList);
             }

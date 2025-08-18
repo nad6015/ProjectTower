@@ -26,7 +26,6 @@ MonoBehaviour:
   - {fileID: 8031560325989942358, guid: 4ac968795e975f24f9ef2169b7703399, type: 3}
   - {fileID: 8031560325989942358, guid: 4ac968795e975f24f9ef2169b7703399, type: 3}
   - {fileID: 8031560325989942358, guid: 4ac968795e975f24f9ef2169b7703399, type: 3}
-  propTiles:
-  - {fileID: 7645847684015655962, guid: 88e77d4b0e380cc4194bfd97418b1b08, type: 3}
+  propTiles: []
   roomCorner: {fileID: 9162778129440914531, guid: 3bc17762c4b3dc84ba960b2b38d7a768, type: 3}
   corridorArch: {fileID: 3372070806319749641, guid: 6a296b7b2f2d39149be33f3cd4ea8a8a, type: 3}
