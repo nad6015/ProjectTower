@@ -165,12 +165,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10e8f4f9326637f4798ef9a32c6aee2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 5
   attack: 1
   speed: 5
   layerMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 640
   _hitbox: {fileID: 8337178641630974411}
   _attackCooldownDuration: 0.75
   _attackCommitment: 0.3

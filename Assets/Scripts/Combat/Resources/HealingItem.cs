@@ -10,5 +10,6 @@ public class HealingItem : Item
     public override void Use(Fighter player)
     {
         player.Heal(_amountToHeal);
+        Destroy(gameObject);
     }
 }
