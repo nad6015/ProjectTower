@@ -1,5 +1,4 @@
 using System.Collections;
-using Assets.Combat;
 using Assets.DungeonGenerator;
 using Assets.DungeonMaster;
 using NUnit.Framework;
@@ -7,6 +6,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 using UnityEngine.TestTools.Utils;
+using static UnityEngine.GameObject;
+using static Assets.Utilities.GameObjectUtilities;
+using Assets.PlayerCharacter;
 
 public class DungeonMasterTests
 {
@@ -25,13 +27,14 @@ public class DungeonMasterTests
     public IEnumerator ShouldInitialiseSuccessfully()
     {
         TestSetUp();
-        
+
         Assert.That(dungeonMaster.State == DungeonMasterState.RUNNING);
+        Assert.That(dungeonMaster.CurrentFloor == 1);
 
         Assert.NotNull(dungeonGenerator);
-        Assert.That(dungeonGenerator.transform.childCount > 15);
+        Assert.That(dungeonGenerator.transform.childCount >= 15); // There should be at least ten rooms + 5 corridors
 
-        Assert.NotNull(GameObject.FindGameObjectWithTag("Player"));
+        Assert.NotNull(FindGameObjectWithTag("Player"));
 
         yield return null;
     }
@@ -44,7 +47,7 @@ public class DungeonMasterTests
         Assert.That(dungeonMaster.State == DungeonMasterState.RUNNING);
         Assert.That(dungeonMaster.CurrentFloor == 1);
 
-        GameObject startPos = GameObject.FindGameObjectWithTag("PlayerSpawn");
+        GameObject startPos = FindGameObjectWithTag("PlayerSpawn");
 
         Vector3 startPosition = startPos.transform.position;
 
@@ -55,15 +58,16 @@ public class DungeonMasterTests
 
         dungeonMaster.OnDungeonCleared();
 
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = FindGameObjectWithTag("Player");
         Assert.That(dungeonMaster.CurrentFloor == 1);
         Assert.That(dungeonMaster.State == DungeonMasterState.GENERATE_DUNGEON);
-        Assert.Null(player);  // Player should not be active
+        Assert.NotNull(player);
+        Assert.That(GetComponentByGameObjectTag<PlayerController>("Player").enabled == false); // PlayerController should not enabled while the dungeon is generating
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
 
-        GameObject newStartPos = GameObject.FindGameObjectWithTag("PlayerSpawn");
-        player = GameObject.FindGameObjectWithTag("Player");
+        GameObject newStartPos = FindGameObjectWithTag("PlayerSpawn");
+        player = FindGameObjectWithTag("Player");
 
         Assert.That(dungeonMaster.State == DungeonMasterState.RUNNING);
         Assert.That(dungeonMaster.CurrentFloor == 2);
@@ -81,7 +85,6 @@ public class DungeonMasterTests
         yield return new WaitForSeconds(1f);
 
         player.GetComponent<TestPlayer>().AttackSelf();
-        ;
 
         yield return new WaitForSeconds(1f);
         Assert.That(dungeonMaster.State == DungeonMasterState.GAME_END);
@@ -101,26 +104,10 @@ public class DungeonMasterTests
         Assert.Fail();
     }
 
-    [UnityTest]
-    public IEnumerator ShouldNotModifyLockedParameters()
-    {
-        yield return null;
-        Assert.Fail();
-    }
-
-    [UnityTest]
-    public IEnumerator ShouldModifyUnlockedParameters()
-    {
-        TestSetUp();
-
-        yield return null;
-        Assert.Fail();
-    }
-
     private void TestSetUp()
     {
-        dungeonMaster = GameObject.FindGameObjectWithTag("DungeonMaster").GetComponent<DungeonMaster>();
-        dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();
-        player = GameObject.FindGameObjectWithTag("Player");
+        dungeonMaster = GetComponentByGameObjectTag<DungeonMaster>("DungeonMaster");
+        dungeonGenerator = GetComponentByGameObjectTag<DungeonGenerator>("DungeonGenerator");
+        player = FindGameObjectWithTag("Player");
     }
 }

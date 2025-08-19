@@ -18,7 +18,7 @@ namespace Assets.DungeonMaster
                 if (!_rules.ContainsKey(dungeonParameter))
                 {
                     ValueRepresentation value = new(
-                        JsonUtils.ConvertToEnum<ValueType>(jRule["value"]),
+                        JsonUtils.ConvertToEnum<ValueType>(jRule["value"]["type"]),
                         JsonUtils.ToDictionary(jRule["value"]));
                     GameParameter gameParameter = JsonUtils.ConvertToEnum<GameParameter>(jRule, "gameParam");
 
@@ -39,7 +39,7 @@ namespace Assets.DungeonMaster
                if (!_rules.ContainsKey(gameplayParameter))
                {
                    ValueRepresentation value = new(
-                       JsonUtils.ConvertToEnum<ValueType>(jRule["value"]),
+                       JsonUtils.ConvertToEnum<ValueType>(jRule["valueType"]),
                         JsonUtils.ToDictionary(jRule["value"]));
                    GameParameter gameParameter = JsonUtils.ConvertToEnum<GameParameter>(jRule, "gameParam");
 

@@ -29,6 +29,8 @@
           "operand": "3"
         }
       ],
+      "valueType": "string",
+
       "value": {
         "type": "string",
         "value": "newWeapon"
@@ -42,6 +44,7 @@
           "operator": "not contains"
         }
       ],
+      "valueType": "number",
       "value": {
         "type": "number",
         "value": "10"
@@ -56,6 +59,7 @@
           "operand": "5"
         }
       ],
+      "valueType": "number",
       "value": {
         "type": "value",
         "value": "3"

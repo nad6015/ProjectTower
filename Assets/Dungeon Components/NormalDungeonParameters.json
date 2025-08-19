@@ -2,8 +2,8 @@
   "params": [
     {
       "parameter": "roomSize",
+      "valueType": "vectorRange",
       "value": {
-        "type": "vectorRange",
         "minX": 15,
         "minZ": 15,
         "maxX": 20,
@@ -13,8 +13,8 @@
     },
     {
       "parameter": "corridorSize",
+      "valueType": "vector",
       "value": {
-        "type": "vector",
         "x": 4,
         "z": 4
       },
@@ -22,50 +22,41 @@
     },
     {
       "parameter": "enemySpawnRate",
-      "value": { "type": "number", "value": 50 },
+      "valueType": "number",
+      "value": { "value": 50 },
       "locked": false
     },
     {
       "parameter": "itemsPerRoom",
+      "valueType": "range",
       "value": {
-        "type": "range",
         "min": 0,
         "max": 3
       }
     },
     {
       "parameter": "enemiesPerRoom",
+      "valueType": "range",
       "value": {
-        "type": "range",
         "min": 0,
         "max": 3
       }
     },
     {
       "parameter": "roomCount",
-      "value": { "type": "number", "value": 10 },
-      "locked": true
+      "valueType": "number",
+      "value": { "value": 10 }
     }
   ],
-  "templates": [
+  "baseDungeon": ["start", "explore", "combat", "item", "end"],
+  "dungeonPatterns": [
     {
-      "template": [
-        {
-          "type": "start"
-        },
-        {
-          "type": "explore"
-        },
-        {
-          "type": "combat"
-        },
-        {
-          "type": "item"
-        },
-        {
-          "type": "end"
-        }
-      ]
+      "matches": ["explore", "combat"],
+      "replacer": ["combat", "miniBoss", "explore", "restPoint"]
+    },
+    {
+      "matches": ["miniBoss"],
+      "replacer": ["item", "combat", "explore", "restPoint"]
     }
   ]
 }

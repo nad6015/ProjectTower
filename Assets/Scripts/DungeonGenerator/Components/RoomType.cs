@@ -11,6 +11,7 @@ namespace Assets.DungeonGenerator.Components
         End,
         Item,
         MiniBoss,
-        RestPoint
+        RestPoint,
+        Lock
     }
 }

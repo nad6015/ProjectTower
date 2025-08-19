@@ -20,7 +20,7 @@ namespace Assets.DungeonGenerator.Components
             {
                 case ValueType.Range:
                 {
-                    _value = new Range<int>(int.Parse(values[minParam]), int.Parse(values[maxParam]));
+                    _value = new Range<int>(ToInt(values[minParam]), ToInt(values[maxParam]));
                     break;
                 }
                 case ValueType.String:
@@ -30,19 +30,19 @@ namespace Assets.DungeonGenerator.Components
                 }
                 case ValueType.Number:
                 {
-                    _value = int.Parse(values[valueParam]);
+                    _value = ToInt(values[valueParam]);
                     break;
                 }
                 case ValueType.Vector:
                 {
-                    _value = new Vector3(ToInt(values["x"]), ToInt(values["y"]), ToInt(values["z"]));
+                    _value = new Vector3(ToInt(values["x"]), 0, ToInt(values["z"]));
                     break;
                 }
                 case ValueType.VectorRange:
                 {
                     _value = new Range<Vector3>(
-                        new(ToInt(values["minX"]), ToInt(values["minY"]), ToInt(values["minZ"])),
-                        new(ToInt(values["maxX"]), ToInt(values["maxY"]), ToInt(values["maxZ"]))
+                        new(ToInt(values["minX"]), 0, ToInt(values["minZ"])),
+                        new(ToInt(values["maxX"]), 0, ToInt(values["maxZ"]))
                         );
                     break;
                 }

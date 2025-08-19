@@ -1,62 +1,25 @@
 {
-  "exploration": [
+  "exploreFloor": [
     {
       "matches": [],
       "replacer": []
     },
     {
-      "matches": [
-        {
-          "type": "explore"
-        },
-        {
-          "type": "combat"
-        }
-      ],
-      "replacer": [
-        {
-          "type": "combat"
-        },
-        {
-          "type": "mini-boss"
-        },
-        {
-          "type": "explore"
-        },
-        {
-          "type": "rest-point"
-        }
-      ]
+      "matches": ["explore", "combat"],
+      "replacer": ["combat", "miniBoss", "explore", "restPoint"]
     },
     {
-      "matches": [
-        {
-          "type": "mini-boss"
-        }
-      ],
-      "replacer": [
-        {
-          "type": "item"
-        },
-        {
-          "type": "combat"
-        },
-        {
-          "type": "explore"
-        },
-        {
-          "type": "rest-point"
-        }
-      ]
+      "matches": ["miniBoss"],
+      "replacer": ["item", "combat", "explore", "restPoint"]
     }
   ],
-  "findItem": [
+  "UnlockDoor": [
     {
-      "matches": [],
-      "replacer": []
+      "matches": ["explore"],
+      "replacer": ["lock"]
     }
   ],
-  "boss": [
+  "FightBoss": [
     {
       "matches": [],
       "replacer": []

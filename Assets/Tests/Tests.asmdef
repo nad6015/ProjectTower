@@ -14,7 +14,8 @@
         "GameManager",
         "Unity.Behavior",
         "Unity.Behavior.Serialization",
-        "SerializableGUID"
+        "SerializableGUID",
+        "Utilities"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

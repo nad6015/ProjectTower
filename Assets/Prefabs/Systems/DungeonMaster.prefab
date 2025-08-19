@@ -51,3 +51,6 @@ MonoBehaviour:
   _randomSeed: 0
   _defaultParamFile: {fileID: 4900000, guid: c3e3dea475eb7654986c7e1b39eefb04, type: 3}
   _defaultRulesetFile: {fileID: 4900000, guid: f6d4d6e88bf081f4c9d7eb7460577577, type: 3}
+  _dungeonFlowsFile: {fileID: 4900000, guid: 6ff5a85fbb2d20642acfe7728e06203c, type: 3}
+  <MaxFloors>k__BackingField: 3
+  <FloorsPerSection>k__BackingField: 3

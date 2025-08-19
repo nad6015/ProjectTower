@@ -1,6 +1,7 @@
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
 
 namespace Assets.DungeonGenerator.Components
 {
@@ -9,12 +10,13 @@ namespace Assets.DungeonGenerator.Components
     /// </summary>
     public class DungeonRepresentation
     {
+        public DungeonLayout Layout { get; private set; }
+        public DungeonLayout BaseDungeon { get; }
+        public DungeonComponents Components { get; private set; }
+        public List<FlowPattern> Flows { get; private set; }
         public int Count { get { return _parameters.Count; } }
 
         private readonly Dictionary<DungeonParameter, ValueRepresentation> _parameters;
-        private readonly DungeonFlow _flow;
-        public DungeonComponents Components { get; private set; }
-        public DungeonLayout Layout { get; private set; }
         private Dungeon _dungeon;
 
         /// <summary>
@@ -23,20 +25,41 @@ namespace Assets.DungeonGenerator.Components
         /// <param name="parametersFile">A JSON file with the needed parameters within.</param>
         public DungeonRepresentation(TextAsset file)
         {
-            _dungeon = new Dungeon();
-            _parameters = new Dictionary<DungeonParameter, ValueRepresentation>();
             Layout = new();
+            BaseDungeon = new();
+            _dungeon = new Dungeon();
+            Flows = new List<FlowPattern>();
+            _parameters = new Dictionary<DungeonParameter, ValueRepresentation>();
 
             JObject json = JObject.Parse(file.text);
             JsonUtils.ForEachIn(json["params"], jParam =>
             {
-                DungeonParameter dungeonParameter = JsonUtils.ConvertToEnum<DungeonParameter>(jParam, "parameter");
+                DungeonParameter dungeonParameter = jParam["parameter"].ToObject<DungeonParameter>();
 
-                ValueType type = JsonUtils.ConvertToEnum<ValueType>(jParam["value"]);
+                ValueType type = jParam["valueType"].ToObject<ValueType>();
                 _parameters.Add(dungeonParameter, new ValueRepresentation(type, JsonUtils.ToDictionary(jParam["value"])));
             });
 
-            _flow = new(json["baseDungeon"], json["dungeonPatterns"]);
+            DungeonNode lastRoom = null;
+
+            JsonUtils.ForEachIn(json["baseDungeon"], jNode =>
+            {
+                DungeonNode room = new(jNode.ToObject<RoomType>());
+
+                BaseDungeon.Add(room);
+
+                if (lastRoom != null)
+                {
+                    BaseDungeon.Add(lastRoom, room);
+                }
+
+                lastRoom = room;
+            });
+
+            JsonUtils.ForEachIn(json["dungeonPatterns"], pattern =>
+            {
+                Flows.Add(new FlowPattern(pattern["matches"], pattern["replacer"]));
+            });
         }
 
         public T Parameter<T>(DungeonParameter dungeonParams)
@@ -47,11 +70,6 @@ namespace Assets.DungeonGenerator.Components
         public void ModifyParameter(DungeonParameter paramName, ValueRepresentation value)
         {
             _parameters[paramName].Modify(value);
-        }
-
-        internal DungeonFlow GetFlow()
-        {
-            return _flow;
         }
 
         public void SetRooms(DungeonLayout dungeonRooms)
@@ -72,6 +90,11 @@ namespace Assets.DungeonGenerator.Components
         public Dungeon GetConstructedDungeon()
         {
             return _dungeon;
+        }
+
+        public void LoadFlows(List<FlowPattern> flowPatterns)
+        {
+            Flows = flowPatterns;
         }
     }
 }

@@ -17,35 +17,33 @@ namespace Assets.DungeonGenerator
         /// <param name="dungeon">the dungeon representation</param>
         public void GenerateDungeon(DungeonRepresentation dungeon)
         {
-            DungeonFlow dungeonFlow = dungeon.GetFlow();
-            DungeonLayout _layout = dungeonFlow.FlowTemplate;
-            List<FlowPattern> flows = dungeonFlow.Flows;
+            DungeonLayout layout = dungeon.BaseDungeon;
 
             int roomCount = dungeon.Parameter<int>(DungeonParameter.RoomCount);
 
-            while (_layout.Count < roomCount)
+            while (layout.Count < roomCount)
             {
-                foreach (var flow in flows)
+                foreach (var flow in dungeon.Flows)
                 {
-                    var rooms = _layout.FindMatching(flow.Matches);
+                    var rooms = layout.FindMatching(flow.Matches);
                     if (rooms.Count == flow.Matches.Count)
                     {
-                        _layout.Replace(rooms, flow.Replacer);
+                        layout.Replace(rooms, flow.Replacer);
                     }
-                    else
-                    {
-                        flow.Matches.ForEach(r => Debug.Log(r));
-                    }
+
+                    foreach (var r in layout)
+                    { Debug.Log(r); }
                 }
-        
-                if (_layout.LastNode.Type != RoomType.End)
+
+                if (layout.LastNode.Type != RoomType.End)
                 {
-                    var end = _layout.FindMatching(new List<RoomType>() { RoomType.End });
-                    _layout.Remove(end[0]);
-                    _layout.Add(_layout.LastNode, new DungeonNode(RoomType.End));
+                    var end = layout.FindMatching(new List<RoomType>() { RoomType.End });
+
+                    layout.Remove(end[0]);
+                    layout.Add(layout.LastNode, new DungeonNode(RoomType.End));
                 }
             }
-            dungeon.SetRooms(_layout);
+            dungeon.SetRooms(layout);
         }
 
         /// <summary>

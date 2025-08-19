@@ -14,26 +14,7 @@ namespace Assets.DungeonGenerator
             FlowTemplate = new();
             Flows = new();
 
-            DungeonNode lastRoom = null;
-
-            foreach (JToken jNode in baseFlow.Children())
-            {
-                DungeonNode room = new(JsonUtils.ConvertToEnum<RoomType>(jNode));
-
-                FlowTemplate.Add(room);
-
-                if (lastRoom != null)
-                {
-                    FlowTemplate.Add(lastRoom, room);
-                }
-
-                lastRoom = room;
-            }
-
-            foreach (JToken pattern in dungeonPatterns.Children())
-            {
-                Flows.Add(new FlowPattern(pattern["matches"], pattern["replacer"]));
-            }
+            
         }
     }
 }

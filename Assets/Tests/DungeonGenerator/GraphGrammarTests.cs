@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class GraphGrammarTests
 {
-    readonly DungeonComponents components = Resources.Load<DungeonComponents>("DevComponents");
     readonly TextAsset paramFile = Resources.Load<TextAsset>("TestParameters");
     DungeonRepresentation dungeon;
     GraphGrammar algorithm;

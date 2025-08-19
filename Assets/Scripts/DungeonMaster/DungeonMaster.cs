@@ -7,6 +7,7 @@ using Assets.Combat;
 using Newtonsoft.Json.Linq;
 using Assets.DungeonGenerator;
 using Random = UnityEngine.Random;
+using static Assets.Utilities.GameObjectUtilities;
 
 namespace Assets.DungeonMaster
 {
@@ -27,8 +28,14 @@ namespace Assets.DungeonMaster
         [SerializeField]
         private TextAsset _defaultRulesetFile;
 
+        [SerializeField]
+        private TextAsset _dungeonFlowsFile;
+
         [field: SerializeField]
         public int MaxFloors { get; private set; }
+
+        [field: SerializeField]
+        public int FloorsPerSection { get; private set; }
         public int CurrentFloor { get; private set; }
 
         public DungeonMasterState State { get; private set; }
@@ -46,24 +53,22 @@ namespace Assets.DungeonMaster
         //private ResourceSystem _resourceSystem;
         private CombatSystem _combatSystem;
         private SceneTransitionManager _sceneTransitionManager;
+        private DungeonMasterConfiguration _config;
+
 
         public void Start()
         {
             _floorStatistics = new();
-            _dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator.DungeonGenerator>();
-            _combatSystem = GameObject.FindGameObjectWithTag("CombatSystem").GetComponent<CombatSystem>();
-            _sceneTransitionManager = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneTransitionManager>();
+            _dungeonGenerator = GetComponentByGameObjectTag<DungeonGenerator.DungeonGenerator>("DungeonGenerator");
+            _combatSystem = GetComponentByGameObjectTag<CombatSystem>("CombatSystem");
+            _sceneTransitionManager = GetComponentByGameObjectTag<SceneTransitionManager>("SceneManager");
 
-            JObject json = JObject.Parse(_defaultRulesetFile.text);
-            GenerationRuleset = RulesetBuilder.BuildDungeonRuleset(json);
-            GameplayRuleset = RulesetBuilder.BuildGameplayParams(json);
-
-            _dungeonParams = new DungeonRepresentation(_defaultParamFile);
+            ReadConfig();
 
             _combatSystem.EnemyDefeated += OnEnemyDefeated;
             _combatSystem.PlayerDefeated += OnPlayerDefeated;
 
-            if(_randomSeed > -1)
+            if (_randomSeed > -1)
             {
                 Random.InitState(_randomSeed);
             }
@@ -72,7 +77,7 @@ namespace Assets.DungeonMaster
 
         public void OnDungeonCleared()
         {
-            _dungeonParams = _nextDungeonParams;
+            //_dungeonParams = _nextDungeonParams;
             //_nextDungeonParams = null;
             _player.Pause();
             if (CurrentFloor >= MaxFloors)
@@ -140,21 +145,45 @@ namespace Assets.DungeonMaster
 
         private void GenerateDungeon()
         {
+
+            switch (CurrentFloor % FloorsPerSection)
+            {
+                case 0: // Current floor is a multiple of three
+                {
+                    break; // TODO
+                }
+                case 1: // Current floor is a multiple of two
+                {
+                    _dungeonParams.LoadFlows(_config.DungeonFlows[DungeonMission.UnlockDoor]);
+                    break;
+                }
+                case 2:
+                {
+                    _dungeonParams.LoadFlows(_config.DungeonFlows[DungeonMission.ExploreFloor]);
+                    break;
+                }
+                default:
+                {
+                    Debug.Log("CurrentFloor mod FloorsPerSection = " + CurrentFloor % FloorsPerSection);
+                    break;
+                }
+            }
+
             NewDungeon();
-            GameObject.FindGameObjectWithTag("DungeonExit").GetComponent<DungeonExit>().DungeonCleared += OnDungeonCleared;
+            GetComponentByGameObjectTag<DungeonExit>("DungeonExit").DungeonCleared += OnDungeonCleared;
             _sceneTransitionManager.SceneTransition(GameScene.None);
             _player.Play();
             State = DungeonMasterState.RUNNING;
-            CurrentFloor++;
+            CurrentFloor++; // Next floor has been reached, so increment counter
         }
 
         private void NewDungeon()
         {
             _dungeonGenerator.ClearDungeon();
             _currentDungeon = _dungeonGenerator.GenerateDungeon(_dungeonParams);
-            SpawnPoint startingPoint = GameObject.FindGameObjectWithTag("PlayerSpawn").GetComponent<SpawnPoint>();
+            SpawnPoint startingPoint = GetComponentByGameObjectTag<SpawnPoint>("PlayerSpawn");
 
-            _nextDungeonParams = _dungeonParams;
+            //_nextDungeonParams = _dungeonParams;
 
             if (_player != null)
             {
@@ -165,6 +194,33 @@ namespace Assets.DungeonMaster
                 _player = startingPoint.Spawn().GetComponent<PlayerController>();
             }
         }
+
+        private void ReadConfig()
+        {
+            _config = new();
+            _config.DungeonFlows = new();
+
+            JObject jFlows = JObject.Parse(_dungeonFlowsFile.text);
+            Debug.Log("Hiiiaiai");
+            JsonUtils.ForEachIn(jFlows, dungeonFlow =>
+            {
+                List<FlowPattern> flowPatterns = new();
+
+                JsonUtils.ForEachIn(jFlows[dungeonFlow.Path], pattern =>
+                {
+                    flowPatterns.Add(new FlowPattern(pattern["matches"], pattern["replacer"]));
+                });
+
+                _config.DungeonFlows.Add(JsonUtils.ConvertToEnum<DungeonMission>(dungeonFlow.Path), flowPatterns);
+            });
+            JObject json = JObject.Parse(_defaultRulesetFile.text);
+            GenerationRuleset = RulesetBuilder.BuildDungeonRuleset(json);
+            GameplayRuleset = RulesetBuilder.BuildGameplayParams(json);
+
+            _dungeonParams = new DungeonRepresentation(_defaultParamFile);
+            Debug.Log(_dungeonParams);
+        }
+
 
         private TextAsset FindFile(string v, List<TextAsset> files)
         {
@@ -179,6 +235,37 @@ namespace Assets.DungeonMaster
         private void OnPlayerDefeated(Fighter fighter)
         {
             State = DungeonMasterState.GAME_END;
+        }
+
+        public struct DungeonMasterConfiguration
+        {
+            public Dictionary<Difficulty, DungeonLayout> DungeonTemplates;
+            public Dictionary<DungeonMission, List<DungeonRule>> Rulesets;
+            public Dictionary<Difficulty, List<GameplayRule>> GameRulesets;
+            public Dictionary<DungeonTheme, DungeonComponents> DungeonComponents;
+            public Dictionary<DungeonMission, List<FlowPattern>> DungeonFlows;
+        }
+
+        public enum Difficulty
+        {
+            Easy,
+            Normal,
+            Hard
+        }
+
+        public enum DungeonMission
+        {
+            ExploreFloor,
+            UnlockDoor,
+            FightBoss
+        }
+
+        public enum DungeonTheme
+        {
+            Castle,
+            Dungeon,
+            Alchemist,
+            Tutorial
         }
     }
 }

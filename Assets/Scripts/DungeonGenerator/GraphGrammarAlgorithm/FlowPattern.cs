@@ -16,12 +16,12 @@ namespace Assets.DungeonGenerator
 
             foreach (var replacer in jReplacer)
             {
-                Replacer.Add(JsonUtils.ConvertToEnum<RoomType>(replacer));
+                Replacer.Add(replacer.ToObject<RoomType>());
             }
 
             foreach (var match in jMatches)
             {
-                Matches.Add(JsonUtils.ConvertToEnum<RoomType>(match));
+                Matches.Add(match.ToObject<RoomType>());
             }
         }
     }

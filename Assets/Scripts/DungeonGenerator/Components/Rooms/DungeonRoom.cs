@@ -87,6 +87,11 @@ namespace Assets.DungeonGenerator.Components
                     dungeonRoom = gameObj.AddComponent<CombatRoom>();
                     break;
                 }
+                case RoomType.Lock:
+                {
+                    dungeonRoom = gameObj.AddComponent<LockedRoom>();
+                    break;
+                }
                 default:
                 {
                     dungeonRoom = gameObj.AddComponent<DungeonRoom>();

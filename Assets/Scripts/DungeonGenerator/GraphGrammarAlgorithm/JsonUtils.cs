@@ -20,6 +20,18 @@ namespace Assets.DungeonGenerator
             }
         }
 
+        public static T ConvertToEnum<T>(JToken jToken)
+        {
+            try
+            {
+                return (T)Enum.Parse(typeof(T), jToken.ToString(), true);
+            }
+            catch
+            {
+                return default;
+            }
+        }
+
         public static void ForEachIn(JToken jsonField, Action<JToken> action)
         {
             // Newtonsoft.Json code referenced from - https://www.newtonsoft.com/json/help/html/SerializingJSONFragments.htm
