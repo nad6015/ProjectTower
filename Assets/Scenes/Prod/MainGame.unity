@@ -293,9 +293,17 @@ PrefabInstance:
       value: GameSystems
       objectReference: {fileID: 0}
     - target: {fileID: 7751301447746594715, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
+      propertyPath: _randomSeed
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7751301447746594715, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
       propertyPath: _defaultParamFile
       value: 
       objectReference: {fileID: 4900000, guid: 7890b97a0489c3d4a97716c906cb0117, type: 3}
+    - target: {fileID: 7751301447746594715, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
+      propertyPath: <MaxFloors>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

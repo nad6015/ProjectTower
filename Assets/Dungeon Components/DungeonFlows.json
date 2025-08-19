@@ -1,0 +1,65 @@
+{
+  "exploration": [
+    {
+      "matches": [],
+      "replacer": []
+    },
+    {
+      "matches": [
+        {
+          "type": "explore"
+        },
+        {
+          "type": "combat"
+        }
+      ],
+      "replacer": [
+        {
+          "type": "combat"
+        },
+        {
+          "type": "mini-boss"
+        },
+        {
+          "type": "explore"
+        },
+        {
+          "type": "rest-point"
+        }
+      ]
+    },
+    {
+      "matches": [
+        {
+          "type": "mini-boss"
+        }
+      ],
+      "replacer": [
+        {
+          "type": "item"
+        },
+        {
+          "type": "combat"
+        },
+        {
+          "type": "explore"
+        },
+        {
+          "type": "rest-point"
+        }
+      ]
+    }
+  ],
+  "findItem": [
+    {
+      "matches": [],
+      "replacer": []
+    }
+  ],
+  "boss": [
+    {
+      "matches": [],
+      "replacer": []
+    }
+  ]
+}

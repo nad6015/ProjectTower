@@ -13,7 +13,7 @@ namespace Assets.GameManager
 
         private GameScene _sceneToTransitionTo;
 
-        private const string _newGame = "NewGame";
+        private const string _newGame = "Tutorial";
         private const string _startScreen = "StartScreen";
 
         private void Awake()

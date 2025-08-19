@@ -1,0 +1,71 @@
+{
+  "params": [
+    {
+      "parameter": "roomSize",
+      "value": {
+        "type": "vectorRange",
+        "minX": 15,
+        "minZ": 15,
+        "maxX": 20,
+        "maxZ": 20
+      },
+      "locked": false
+    },
+    {
+      "parameter": "corridorSize",
+      "value": {
+        "type": "vector",
+        "x": 4,
+        "z": 4
+      },
+      "locked": false
+    },
+    {
+      "parameter": "enemySpawnRate",
+      "value": { "type": "number", "value": 50 },
+      "locked": false
+    },
+    {
+      "parameter": "itemsPerRoom",
+      "value": {
+        "type": "range",
+        "min": 0,
+        "max": 3
+      }
+    },
+    {
+      "parameter": "enemiesPerRoom",
+      "value": {
+        "type": "range",
+        "min": 0,
+        "max": 3
+      }
+    },
+    {
+      "parameter": "roomCount",
+      "value": { "type": "number", "value": 10 },
+      "locked": true
+    }
+  ],
+  "templates": [
+    {
+      "template": [
+        {
+          "type": "start"
+        },
+        {
+          "type": "explore"
+        },
+        {
+          "type": "combat"
+        },
+        {
+          "type": "item"
+        },
+        {
+          "type": "end"
+        }
+      ]
+    }
+  ]
+}
