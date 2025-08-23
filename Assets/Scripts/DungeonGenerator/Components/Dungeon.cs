@@ -1,3 +1,4 @@
+using Assets.Combat;
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace Assets.DungeonGenerator.Components
     public class Dungeon
     {
         public List<DungeonRoom> DungeonRooms { get; internal set; }
+        public List<NpcFighter> Enemies { get; internal set; }
 
         /// <summary>
         /// Constructs a new dungeon.

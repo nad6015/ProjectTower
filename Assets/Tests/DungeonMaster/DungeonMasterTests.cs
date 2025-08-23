@@ -62,7 +62,7 @@ public class DungeonMasterTests
         Assert.That(dungeonMaster.CurrentFloor == 1);
         Assert.That(dungeonMaster.State == DungeonMasterState.GENERATE_DUNGEON);
         Assert.NotNull(player);
-        Assert.That(GetComponentByGameObjectTag<PlayerController>("Player").enabled == false); // PlayerController should not enabled while the dungeon is generating
+        Assert.That(FindComponentByTag<PlayerController>("Player").enabled == false); // PlayerController should not enabled while the dungeon is generating
 
         yield return new WaitForSeconds(1f);
 
@@ -106,8 +106,8 @@ public class DungeonMasterTests
 
     private void TestSetUp()
     {
-        dungeonMaster = GetComponentByGameObjectTag<DungeonMaster>("DungeonMaster");
-        dungeonGenerator = GetComponentByGameObjectTag<DungeonGenerator>("DungeonGenerator");
+        dungeonMaster = FindComponentByTag<DungeonMaster>("DungeonMaster");
+        dungeonGenerator = FindComponentByTag<DungeonGenerator>("DungeonGenerator");
         player = FindGameObjectWithTag("Player");
     }
 }

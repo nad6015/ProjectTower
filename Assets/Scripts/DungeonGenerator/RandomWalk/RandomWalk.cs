@@ -131,17 +131,6 @@ namespace Assets.DungeonGenerator
         private void ConstructDungeon()
         {
             // Dictionary upsert code referenced from - https://stackoverflow.com/questions/1243717/how-to-update-the-value-stored-in-dictionary-in-c
-            foreach (var node in _dungeon.Layout)
-            {
-                var roomBounds = node.Bounds;
-                DungeonRoom room = DungeonRoom.Create(node);
-                room.Construct(_components.tilemap);
-                room.Populate(_dungeon);
-                room.transform.SetParent(_dungeonTransform);
-                _roomBounds[roomBounds] = room;
-                _dungeon.AddDungeonRoom(room);
-            }
-
             for (int i = 0; i < _corridors.Count; i++)
             {
                 var corridor = _corridors.ElementAt(i);
@@ -151,8 +140,19 @@ namespace Assets.DungeonGenerator
                 _corridors[corridor.Key] = dungeonCorridor;
             }
 
+            foreach (var node in _dungeon.Layout)
+            {
+                var roomBounds = node.Bounds;
+                DungeonRoom room = DungeonRoom.Create(node);
+                room.Construct(_components.tilemap);
+                room.transform.SetParent(_dungeonTransform);
+                _roomBounds[roomBounds] = room;
+                _dungeon.AddDungeonRoom(room);
+            }
+
             foreach (var room in _roomBounds.Values)
             {
+                room.Populate(_dungeon);
                 foreach (var corridor in _corridors.Values)
                 {
                     room.Modify(corridor.Bounds);
@@ -167,6 +167,7 @@ namespace Assets.DungeonGenerator
         {
             foreach (var room in _roomBounds.Values)
             {
+                room.InstaniateContents(_dungeon);
                 foreach (var content in room.Contents)
                 {
                     GameObject.Instantiate(content.Item1, content.Item2, Quaternion.identity, room.transform);

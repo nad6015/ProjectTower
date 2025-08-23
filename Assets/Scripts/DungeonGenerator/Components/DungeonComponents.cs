@@ -1,4 +1,5 @@
 ﻿using Assets.DungeonGenerator.Components.Tiles;
+using Assets.Interactables;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,5 +13,6 @@ namespace Assets.DungeonGenerator
         public List<GameObject> enemies;
         public SpawnPoint startingPoint;
         public DungeonExit exit;
+        public PickupItem doorKey;
     }
 }

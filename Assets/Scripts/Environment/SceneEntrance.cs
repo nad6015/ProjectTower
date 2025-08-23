@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-namespace Assets.Scripts.Environment
+namespace Assets.Interactables.Environment
 {
     /// <summary>
     /// Transitions the player to a new scene.

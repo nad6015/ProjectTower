@@ -2,83 +2,64 @@
   "params": [
     {
       "parameter": "roomSize",
+      "gameParam": "clearTime",
+      "valueType": "vectorRange",
       "value": {
-        "type": "vectorRange",
         "minX": 15,
-        "minY": 0,
         "minZ": 15,
         "maxX": 35,
-        "maxY": 0,
         "maxZ": 35
       },
       "locked": false
     },
     {
       "parameter": "corridorSize",
+      "gameParam": "clearTime",
+      "valueType": "vector",
       "value": {
-        "type": "vector",
         "x": 3,
-        "y": 0,
         "z": 3
       },
       "locked": false
     },
     {
       "parameter": "enemySpawnRate",
-      "value": { "type": "number", "value": 50 },
+      "gameParam": "clearTime",
+      "valueType": "number",
+      "value": { "value": 50 },
       "locked": false
     },
     {
       "parameter": "itemsPerRoom",
+      "gameParam": "clearTime",
+      "valueType": "range",
       "value": {
-        "type": "range",
         "min": 0,
         "max": 3
       }
     },
     {
       "parameter": "enemiesPerRoom",
+      "gameParam": "clearTime",
+      "valueType": "range",
       "value": {
-        "type": "range",
         "min": 0,
         "max": 3
       }
     },
     {
       "parameter": "roomCount",
-      "value": { "type": "number", "value": 10 },
+      "gameParam": "clearTime",
+      "valueType": "number",
+      "value": { "value": 10 },
       "locked": true
     }
   ],
-  "baseDungeon": [
-    {
-      "type": "start"
-    },
-    {
-      "type": "explore"
-    },
-    {
-      "type": "end"
-    }
-  ],
+  "baseDungeon": ["start", "explore", "end"],
   "dungeonPatterns": [
     {
-      "matches": [
-        {
-          "type": "explore"
-        }
-      ],
-      "replacer": [
-        {
-          "type": "explore"
-        },
-        {
-          "type": "combat"
-        },
-        {
-          "type": "item"
-        }
-      ]
+      "matches": ["explore"],
+      "replacer": ["explore", "combat", "item"]
     }
   ]
 }

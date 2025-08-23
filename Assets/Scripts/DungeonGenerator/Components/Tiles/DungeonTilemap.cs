@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace Assets.DungeonGenerator.Components.Tiles
 {
@@ -10,7 +11,7 @@ namespace Assets.DungeonGenerator.Components.Tiles
         public List<GameObject> floorTiles;
         public List<GameObject> propTiles;
         public GameObject roomCorner;
-        public GameObject corridorArch;
+        public GameObject corridorDoor;
         public const int TileUnit = 1;
 
         private Shufflebag<GameObject> _floors;
@@ -55,7 +56,7 @@ namespace Assets.DungeonGenerator.Components.Tiles
         /// <param name="quaternion"></param>
         /// <param name="transform"></param>
         /// <returns></returns>
-        public IEnumerable<GameObject> DrawVerticalWalls(int height, int x, int maxX, int minZ, Transform transform)
+        public List<GameObject> DrawVerticalWalls(int height, int x, int maxX, int minZ, Transform transform)
         {
             List<GameObject> walls = new();
             for (int i = 0; i < height; i++)
@@ -76,12 +77,30 @@ namespace Assets.DungeonGenerator.Components.Tiles
         /// </summary>
         /// <param name="x"></param>
         /// <param name="z"></param>
-        /// <param name="quaternion"></param>
+        /// <param name="isHorizontal"></param>
         /// <param name="transform"></param>
         /// <returns></returns>
-        public GameObject DrawCorridorArch(float x, float z, bool isHorizontal, Transform transform)
+        public List<GameObject> DrawCorridorDoors(BoundsInt bounds, bool isHorizontal, Transform transform)
         {
-            return Draw(x, z, corridorArch, isHorizontal ? rotateY : Quaternion.identity, transform);
+            List<GameObject> doors = new()
+            {
+                Draw(bounds.xMin, bounds.zMin, corridorDoor, isHorizontal ? rotateY : Quaternion.identity, transform)
+            };
+
+            if (isHorizontal)
+            {
+                doors.Add(Draw(bounds.xMax, bounds.zMin, corridorDoor, rotateY, transform));
+                // Flip first door
+                doors[0].transform.localScale += Vector3.left * 2;
+            }
+            else
+            {
+                doors.Add(Draw(bounds.xMin, bounds.zMax, corridorDoor, Quaternion.identity, transform));
+                // Flip second door
+                doors[1].transform.localScale += Vector3.back * 2;
+            }
+
+            return doors;
         }
 
         /// <summary>

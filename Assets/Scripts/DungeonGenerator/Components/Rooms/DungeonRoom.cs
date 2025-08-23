@@ -65,6 +65,8 @@ namespace Assets.DungeonGenerator.Components
             }
         }
 
+        public virtual void InstaniateContents(DungeonRepresentation dungeon) { }
+
         public static DungeonRoom Create(DungeonNode node)
         {
             // Create gameobject code referenced from  - https://discussions.unity.com/t/how-do-you-create-an-empty-gameobject-in-code-and-add-it-to-the-scene/86380/4

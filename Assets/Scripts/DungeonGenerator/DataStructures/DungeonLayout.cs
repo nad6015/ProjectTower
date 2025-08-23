@@ -35,11 +35,8 @@ namespace Assets.DungeonGenerator
             if (node != null && !_graph.Contains(node))
             {
                 _graph.Add(node);
-                if (FirstNode == null)
-                {
-                    FirstNode = node;
-                }
 
+                FirstNode ??= node;
                 LastNode = node;
             }
         }

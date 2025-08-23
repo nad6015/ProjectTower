@@ -2,6 +2,7 @@
   "dungeonRules": [
     {
       "parameter": "roomCount",
+      "gameParam": "clearTime",
       "conditions": [
         {
           "operator": "<",
@@ -12,27 +13,29 @@
           "operand": 2
         }
       ],
+      "valueType": "range",
       "value": {
-        "type": "range",
         "min": 10,
         "max": 10
       }
     },
     {
       "parameter": "theme",
+      "gameParam": "clearTime",
       "conditions": [
         {
           "operator": "==",
           "operand": 3
         }
       ],
+      "valueType": "number",
       "value": {
-        "type": "number",
         "value": 10
       }
     },
     {
       "parameter": "roomSize",
+      "gameParam": "clearTime",
       "conditions": [
         {
           "operator": "<",
@@ -43,14 +46,15 @@
           "operand": 2
         }
       ],
+      "valueType": "range",
       "value": {
-        "type": "range",
         "min": 10,
         "max": 10
       }
     },
     {
       "parameter": "roomCount",
+      "gameParam": "clearTime",
       "conditions": [
         {
           "operator": "<",
@@ -61,8 +65,8 @@
           "operand": "2"
         }
       ],
+      "valueType": "range",
       "value": {
-        "type": "range",
         "min": "10",
         "max": "10"
       }

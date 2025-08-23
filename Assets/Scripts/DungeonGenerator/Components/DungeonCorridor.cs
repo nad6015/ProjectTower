@@ -1,13 +1,18 @@
 using Assets.DungeonGenerator.Components;
 using Assets.DungeonGenerator.Components.Tiles;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+
+using static Assets.Utilities.GameObjectUtilities;
 
 namespace Assets.DungeonGenerator
 {
     public class DungeonCorridor : MonoBehaviour
     {
         public Bounds Bounds { get; private set; }
+        public Tuple<DungeonDoor, DungeonDoor> Doors { get; internal set; }
+
         private bool isHorizontal = false;
         private readonly List<GameObject> walls = new();
         private readonly List<GameObject> floors = new();
@@ -19,7 +24,7 @@ namespace Assets.DungeonGenerator
         internal void Construct(DungeonTilemap tilemap, Vector3 minCorridorSize)
         {
             BoundsInt bounds = DungeonComponentUtils.BoundsToBoundsInt(Bounds);
-            isHorizontal = minCorridorSize.z == Bounds.size.z;
+            isHorizontal = Mathf.Approximately(minCorridorSize.z, Bounds.size.z);
 
             transform.position = bounds.min;
 
@@ -36,13 +41,17 @@ namespace Assets.DungeonGenerator
             {
                 walls.AddRange(DungeonComponentUtils.DrawLeftAndRightWalls(tilemap, bounds, transform));
             }
+
+
+            List<GameObject> doors = tilemap.DrawCorridorDoors(bounds, isHorizontal, transform);
+            
+            Doors = new(doors[0].GetComponent<DungeonDoor>(),
+                        doors[1].GetComponent<DungeonDoor>());
         }
 
         public static DungeonCorridor Create(Bounds bounds, int id)
         {
-            // Create gameobject code referenced from  - https://discussions.unity.com/t/how-do-you-create-an-empty-gameobject-in-code-and-add-it-to-the-scene/86380/4
-            GameObject gameObj = new("Corridor " + id);
-            DungeonCorridor corridor = gameObj.AddComponent<DungeonCorridor>();
+            DungeonCorridor corridor = NewGameObjectWithComponent<DungeonCorridor>("Corridor " + id);
             corridor.Bounds = bounds;
             return corridor;
         }

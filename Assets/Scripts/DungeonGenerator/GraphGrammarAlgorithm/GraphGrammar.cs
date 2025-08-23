@@ -30,9 +30,6 @@ namespace Assets.DungeonGenerator
                     {
                         layout.Replace(rooms, flow.Replacer);
                     }
-
-                    foreach (var r in layout)
-                    { Debug.Log(r); }
                 }
 
                 if (layout.LastNode.Type != RoomType.End)

@@ -30,4 +30,4 @@ MonoBehaviour:
   propTiles:
   - {fileID: 2411030350727224445, guid: c41d74fcc0801f244921f1ed7d2ad72c, type: 3}
   roomCorner: {fileID: 9162778129440914531, guid: 3bc17762c4b3dc84ba960b2b38d7a768, type: 3}
-  corridorArch: {fileID: 3372070806319749641, guid: 6a296b7b2f2d39149be33f3cd4ea8a8a, type: 3}
+  corridorDoor: {fileID: 1804593036432212441, guid: 230da11bae7918b47a868e235df65983, type: 3}

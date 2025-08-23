@@ -59,9 +59,9 @@ namespace Assets.DungeonMaster
         public void Start()
         {
             _floorStatistics = new();
-            _dungeonGenerator = GetComponentByGameObjectTag<DungeonGenerator.DungeonGenerator>("DungeonGenerator");
-            _combatSystem = GetComponentByGameObjectTag<CombatSystem>("CombatSystem");
-            _sceneTransitionManager = GetComponentByGameObjectTag<SceneTransitionManager>("SceneManager");
+            _dungeonGenerator = FindComponentByTag<DungeonGenerator.DungeonGenerator>("DungeonGenerator");
+            _combatSystem = FindComponentByTag<CombatSystem>("CombatSystem");
+            _sceneTransitionManager = FindComponentByTag<SceneTransitionManager>("SceneManager");
 
             ReadConfig();
 
@@ -170,7 +170,7 @@ namespace Assets.DungeonMaster
             }
 
             NewDungeon();
-            GetComponentByGameObjectTag<DungeonExit>("DungeonExit").DungeonCleared += OnDungeonCleared;
+            FindComponentByTag<DungeonExit>("DungeonExit").DungeonCleared += OnDungeonCleared;
             _sceneTransitionManager.SceneTransition(GameScene.None);
             _player.Play();
             State = DungeonMasterState.RUNNING;
@@ -181,7 +181,7 @@ namespace Assets.DungeonMaster
         {
             _dungeonGenerator.ClearDungeon();
             _currentDungeon = _dungeonGenerator.GenerateDungeon(_dungeonParams);
-            SpawnPoint startingPoint = GetComponentByGameObjectTag<SpawnPoint>("PlayerSpawn");
+            SpawnPoint startingPoint = FindComponentByTag<SpawnPoint>("PlayerSpawn");
 
             //_nextDungeonParams = _dungeonParams;
 
@@ -197,11 +197,12 @@ namespace Assets.DungeonMaster
 
         private void ReadConfig()
         {
-            _config = new();
-            _config.DungeonFlows = new();
+            _config = new()
+            {
+                DungeonFlows = new()
+            };
 
             JObject jFlows = JObject.Parse(_dungeonFlowsFile.text);
-            Debug.Log("Hiiiaiai");
             JsonUtils.ForEachIn(jFlows, dungeonFlow =>
             {
                 List<FlowPattern> flowPatterns = new();
@@ -218,7 +219,6 @@ namespace Assets.DungeonMaster
             GameplayRuleset = RulesetBuilder.BuildGameplayParams(json);
 
             _dungeonParams = new DungeonRepresentation(_defaultParamFile);
-            Debug.Log(_dungeonParams);
         }
 
 
@@ -235,37 +235,6 @@ namespace Assets.DungeonMaster
         private void OnPlayerDefeated(Fighter fighter)
         {
             State = DungeonMasterState.GAME_END;
-        }
-
-        public struct DungeonMasterConfiguration
-        {
-            public Dictionary<Difficulty, DungeonLayout> DungeonTemplates;
-            public Dictionary<DungeonMission, List<DungeonRule>> Rulesets;
-            public Dictionary<Difficulty, List<GameplayRule>> GameRulesets;
-            public Dictionary<DungeonTheme, DungeonComponents> DungeonComponents;
-            public Dictionary<DungeonMission, List<FlowPattern>> DungeonFlows;
-        }
-
-        public enum Difficulty
-        {
-            Easy,
-            Normal,
-            Hard
-        }
-
-        public enum DungeonMission
-        {
-            ExploreFloor,
-            UnlockDoor,
-            FightBoss
-        }
-
-        public enum DungeonTheme
-        {
-            Castle,
-            Dungeon,
-            Alchemist,
-            Tutorial
         }
     }
 }
