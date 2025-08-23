@@ -14,5 +14,8 @@ namespace Assets.DungeonGenerator
         public SpawnPoint startingPoint;
         public DungeonExit exit;
         public PickupItem doorKey;
+
+        public AudioClip FootstepAudio;
+        public AudioClip DungeonMusic;
     }
 }

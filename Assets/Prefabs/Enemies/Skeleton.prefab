@@ -117,6 +117,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4864f590e6b94064abe7cbb17ca8fd52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attackAudio: {fileID: 8300000, guid: af8183a063315f4428b15dc5f386c27b, type: 3}
+  _footstepAudio: {fileID: 8300000, guid: 85016e0f2b01da248b9663dd49a161b0, type: 3}
+  _vocalizationCooldownMax: 0.5
+  _vocalizationAudio: {fileID: 8300000, guid: 4efbc380fa09d42a58aa2525a076ea31, type: 3}
 --- !u!114 &5658981686592037637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,7 +575,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0793ba9750e12646b1885722cdeff40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  footstepClip: {fileID: 8300000, guid: 6e25a79a56cab4b44bc80c484325273f, type: 3}
 --- !u!4 &639502432920095342 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8515481512855283392, guid: d22f19c596816ce45a79d46ce04df7e8, type: 3}

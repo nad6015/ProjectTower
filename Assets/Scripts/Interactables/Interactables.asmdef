@@ -2,8 +2,8 @@
     "name": "ResourceSystem",
     "rootNamespace": "",
     "references": [
-        "GUID:d55e6bac66764cd48a4277bded8a3d54",
-        "GUID:75469ad4d38634e559750d17036d5f7c"
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:5c484d457c8d04d44928026d42ae0939"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

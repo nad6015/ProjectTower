@@ -1,4 +1,3 @@
-using Assets.Character;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,7 +35,6 @@ namespace Assets.Combat
         protected Dictionary<FighterStats, int> _maxStats = new();
 
         private float _attackCooldown;
-        private AnimationEventsHandler _animationEvents;
         private const string _attackParam = "Attack";
         private List<Fighter> _hasAttacked = new List<Fighter>();
 
@@ -52,18 +50,10 @@ namespace Assets.Combat
 
             _animator = GetComponentInChildren<Animator>();
 
-            _animationEvents = GetComponent<AnimationEventsHandler>();
-
-            if (_animationEvents == null)
-            {
-                _animationEvents = GetComponentInChildren<AnimationEventsHandler>();
-            }
-
             _hitbox.enabled = false;
             _hitbox.includeLayers = layerMask;
             // Binary inversion operator referenced from - https://discussions.unity.com/t/ignore-one-layermask-question/186174
             _hitbox.excludeLayers = ~layerMask;
-            _animationEvents.OnAnimationEndHandler += OnAnimationEnd;
             _attackCooldown = _attackCooldownDuration;
         }
 
@@ -154,7 +144,10 @@ namespace Assets.Combat
             }
         }
 
-        private void OnAnimationEnd()
+        /// <summary>
+        /// TODO: Explain why this method is public
+        /// </summary>
+        public void OnAnimationEnd()
         {
             _hitbox.enabled = false;
             _isAttacking = false;

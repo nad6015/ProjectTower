@@ -147,7 +147,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 0.5235849, g: 0.58784014, b: 0.6981132, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -248,6 +248,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 227143510637177730, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
+      propertyPath: <BackgroundMusic>k__BackingField
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1294662827774491674, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
+      propertyPath: m_Volume
+      value: 0.255
+      objectReference: {fileID: 0}
     - target: {fileID: 1968421982472447155, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

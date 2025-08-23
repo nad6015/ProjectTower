@@ -1,9 +1,7 @@
 {
     "name": "CombatSystem",
     "rootNamespace": "",
-    "references": [
-        "GUID:5c484d457c8d04d44928026d42ae0939"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23f500bec246602448fd2ce8af056caf, type: 3}
+  m_Name: CastleComponents
+  m_EditorClassIdentifier: 
+  tilemap: {fileID: 11400000, guid: e840b69a7ed95b049abe377e9a91da92, type: 2}
+  enemies:
+  - {fileID: 7807404158470223261, guid: 8a3936195cd77f449baadaa5b9e38874, type: 3}
+  startingPoint: {fileID: 3787019230069511806, guid: 7c404835786532a4fbf9a3cc35cbd73b, type: 3}
+  exit: {fileID: 8684044341818389683, guid: 20f557f5c48279b4d9ec43df8dfe49e2, type: 3}
+  doorKey: {fileID: 7755368289592254985, guid: 4dd9073c733399a4084427390387fc87, type: 3}
+  FootstepAudio: {fileID: 8300000, guid: 72f526a6a9890f643a88e85a61c86c8a, type: 3}
+  DungeonMusic: {fileID: 8300000, guid: 065f04c5299eda24ca0de7c3fb617419, type: 3}

@@ -1,2 +1,4 @@
 Lowpoly Medieval Weapon Pack - VertexModeler [https://assetstore.unity.com/packages/3d/props/weapons/lowpoly-medieval-weapon-pack-291374]
 Skeleton - SazenGames [TODO]
+
+10 Impact/Shield Blocks - StarNinja, OpenGameArt (https://opengameart.org/users/starninjas)

@@ -8,6 +8,7 @@ using Newtonsoft.Json.Linq;
 using Assets.DungeonGenerator;
 using Random = UnityEngine.Random;
 using static Assets.Utilities.GameObjectUtilities;
+using Assets.Audio;
 
 namespace Assets.DungeonMaster
 {
@@ -53,6 +54,7 @@ namespace Assets.DungeonMaster
         //private ResourceSystem _resourceSystem;
         private CombatSystem _combatSystem;
         private SceneTransitionManager _sceneTransitionManager;
+        private AudioManager _audioManager;
         private DungeonMasterConfiguration _config;
 
 
@@ -62,7 +64,7 @@ namespace Assets.DungeonMaster
             _dungeonGenerator = FindComponentByTag<DungeonGenerator.DungeonGenerator>("DungeonGenerator");
             _combatSystem = FindComponentByTag<CombatSystem>("CombatSystem");
             _sceneTransitionManager = FindComponentByTag<SceneTransitionManager>("SceneManager");
-
+            _audioManager = FindComponentByTag<AudioManager>("AudioManager");
             ReadConfig();
 
             _combatSystem.EnemyDefeated += OnEnemyDefeated;
@@ -172,6 +174,8 @@ namespace Assets.DungeonMaster
             NewDungeon();
             FindComponentByTag<DungeonExit>("DungeonExit").DungeonCleared += OnDungeonCleared;
             _sceneTransitionManager.SceneTransition(GameScene.None);
+            _audioManager.Modify(_dungeonParams.Components);
+            _audioManager.PlayBackgroundMusic();
             _player.Play();
             State = DungeonMasterState.RUNNING;
             CurrentFloor++; // Next floor has been reached, so increment counter
@@ -227,9 +231,12 @@ namespace Assets.DungeonMaster
             return files.Find(t => t.name.Contains(v));
         }
 
-        private void OnEnemyDefeated(NpcFighter fighter)
+        private void OnEnemyDefeated(Fighter fighter)
         {
-            _floorStatistics[GameParameter.EnemiesDefeated]++;
+            if (fighter.GetComponent<NpcFighter>() != null)
+            {
+                _floorStatistics[GameParameter.EnemiesDefeated]++;
+            }
         }
 
         private void OnPlayerDefeated(Fighter fighter)

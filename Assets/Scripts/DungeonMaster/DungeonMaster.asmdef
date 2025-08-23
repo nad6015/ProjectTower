@@ -2,13 +2,12 @@
     "name": "DungeonMaster",
     "rootNamespace": "",
     "references": [
-        "GUID:d55e6bac66764cd48a4277bded8a3d54",
         "GUID:420b08d418bac8e4babc8c1f6acc8e7f",
-        "GUID:d8b63aba1907145bea998dd612889d6b",
         "GUID:701b43c0ed1d95546976a14ae7ee858a",
         "GUID:8f58cc982924d0e49b0468776fe53757",
         "GUID:0d8531475bede2f4f8cbc2381c564e76",
-        "GUID:e2a5ff707e3f39e46bd72c960469775c"
+        "GUID:e2a5ff707e3f39e46bd72c960469775c",
+        "GUID:5c484d457c8d04d44928026d42ae0939"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

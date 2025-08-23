@@ -184,6 +184,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84b9626025633a045a7912a45530dac2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attackAudio: {fileID: 8300000, guid: af8183a063315f4428b15dc5f386c27b, type: 3}
+  _footstepAudio: {fileID: 8300000, guid: 72f526a6a9890f643a88e85a61c86c8a, type: 3}
   _camera: {fileID: 28193099444425750, guid: e8168ae4c75c5824ab25fad2be4a1789, type: 3}
 --- !u!114 &8589072062742688946
 MonoBehaviour:
@@ -225,7 +227,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1927581186806867705}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f29a56bc056f6bb428ceb5b9cfd50e5d, type: 3}
   m_Name: 
@@ -511,7 +513,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0793ba9750e12646b1885722cdeff40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  footstepClip: {fileID: 8300000, guid: 6e25a79a56cab4b44bc80c484325273f, type: 3}
 --- !u!4 &4115653010728122670 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 35c44a97c30e4e946a0f4d3310613b95, type: 3}

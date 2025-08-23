@@ -7,7 +7,6 @@
         "UnityEditor.TestRunner",
         "Unity.InputSystem",
         "Unity.InputSystem.TestFramework",
-        "PlayerCharacter",
         "CombatSystem",
         "DungeonGenerator",
         "DungeonMaster",
@@ -15,7 +14,8 @@
         "Unity.Behavior",
         "Unity.Behavior.Serialization",
         "SerializableGUID",
-        "Utilities"
+        "Utilities",
+        "GameCharacters"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

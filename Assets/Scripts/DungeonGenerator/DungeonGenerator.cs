@@ -1,6 +1,5 @@
 using UnityEngine;
 using Assets.DungeonGenerator.Components;
-using Unity.AI.Navigation;
 using System.Collections.Generic;
 
 namespace Assets.DungeonGenerator
