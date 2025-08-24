@@ -1,5 +1,5 @@
 using System.Collections;
-using Assets.DungeonGenerator;
+using Assets.DungeonGenerator.Components;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.AI;

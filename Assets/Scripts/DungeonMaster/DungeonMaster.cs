@@ -84,7 +84,7 @@ namespace Assets.DungeonMaster
         {
             _player.Pause();
             _dungeonGenerator.ClearDungeon();
-            State = CurrentFloor >= MaxFloors ? DungeonMasterState.GameEnd : DungeonMasterState.GenerateDungeon;
+            State = CurrentFloor > MaxFloors ? DungeonMasterState.GameEnd : DungeonMasterState.GenerateDungeon;
         }
 
         private void Update()

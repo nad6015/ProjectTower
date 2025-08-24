@@ -15,7 +15,8 @@
         "Unity.Behavior.Serialization",
         "SerializableGUID",
         "Utilities",
-        "GameCharacters"
+        "GameCharacters",
+        "ResourceSystem"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

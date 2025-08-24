@@ -1,4 +1,5 @@
-﻿using Assets.DungeonGenerator.Components.Tiles;
+﻿using Assets.DungeonGenerator.Components;
+using Assets.DungeonGenerator.Components.Tiles;
 using Assets.Interactables;
 using System.Collections.Generic;
 using UnityEngine;

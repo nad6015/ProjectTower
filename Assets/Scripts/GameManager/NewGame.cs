@@ -1,3 +1,4 @@
+using Assets.DungeonGenerator.Components;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

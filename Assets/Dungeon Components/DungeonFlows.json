@@ -26,6 +26,10 @@
       {
         "matches": ["explore", "combat"],
         "replacer": ["lock", "combat", "item"]
+      },
+      {
+        "matches": ["item", "end"],
+        "replacer": ["combat", "restPoint", "end"]
       }
     ]
   },

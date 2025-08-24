@@ -45,7 +45,7 @@
     {
       "parameter": "roomCount",
       "valueType": "number",
-      "value": { "value": 5 }
+      "value": { "value": 7 }
     }
   ]
 }

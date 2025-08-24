@@ -1,5 +1,4 @@
-﻿using Assets.PlayerCharacter;
-using Assets.PlayerCharacter.Resources;
+﻿using Assets.PlayerCharacter.Resources;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,12 +12,13 @@ namespace Assets.Interactables
         private float _rotationSpeed = 1f;
         private void Update()
         {
-            transform.Rotate(Vector3.up, _rotationSpeed);
+            Pickup.transform.Rotate(Vector3.up, _rotationSpeed);
         }
 
         protected override void HandleInteract(InputAction.CallbackContext context)
         {
             Pickup.Use(controller);
+            gameObject.SetActive(false);
         }
     }
 }
