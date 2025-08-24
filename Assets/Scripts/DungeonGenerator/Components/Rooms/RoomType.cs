@@ -10,7 +10,7 @@ namespace Assets.DungeonGenerator.Components
         Ambush,
         End,
         Item,
-        MiniBoss,
+        Boss,
         RestPoint,
         Lock
     }

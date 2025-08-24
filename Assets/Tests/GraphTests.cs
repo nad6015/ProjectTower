@@ -145,12 +145,12 @@ public class GraphTests
 
         List<RoomType> pattern = new()
         {
-            RoomType.Combat, RoomType.Explore, RoomType.Item, RoomType.MiniBoss
+            RoomType.Combat, RoomType.Explore, RoomType.Item, RoomType.Boss
         };
 
         List<RoomType> replacer = new()
         {
-            RoomType.Combat, RoomType.Ambush,RoomType.Treasure,RoomType.MiniBoss
+            RoomType.Combat, RoomType.Ambush,RoomType.Treasure,RoomType.Boss
         };
 
         List<DungeonNode> foundNodes = graph.FindMatching(pattern);
@@ -163,7 +163,7 @@ public class GraphTests
         Assert.That(graph.FindById(5).IsSameType(RoomType.Combat));
         Assert.That(graph.FindById(6).IsSameType(RoomType.Ambush));
         Assert.That(graph.FindById(7).IsSameType(RoomType.Treasure));
-        Assert.That(graph.FindById(8).IsSameType(RoomType.MiniBoss));
+        Assert.That(graph.FindById(8).IsSameType(RoomType.Boss));
 
         Assert.That(graph.IsConnected());
     }
@@ -208,7 +208,7 @@ public class GraphTests
         List<RoomType> replacer = new()
         {
             RoomType.Combat, RoomType.Ambush, RoomType.Treasure,
-            RoomType.MiniBoss, RoomType.RestPoint, RoomType.Combat
+            RoomType.Boss, RoomType.RestPoint, RoomType.Combat
         };
 
         List<DungeonNode> foundNodes = graph.FindMatching(pattern);
@@ -222,7 +222,7 @@ public class GraphTests
         Assert.That(graph.FindById(1).IsSameType(RoomType.Combat));
         Assert.That(graph.FindById(2).IsSameType(RoomType.Ambush));
         Assert.That(graph.FindById(3).IsSameType(RoomType.Treasure));
-        Assert.That(graph.FindById(4).IsSameType(RoomType.MiniBoss));
+        Assert.That(graph.FindById(4).IsSameType(RoomType.Boss));
         Assert.That(graph.FindById(count).IsSameType(RoomType.RestPoint));
         Assert.That(graph.FindById(count + 1).IsSameType(RoomType.Combat));
 
@@ -279,7 +279,7 @@ public class GraphTests
         var node6 = new DungeonNode(RoomType.Combat);
         var node7 = new DungeonNode(RoomType.Explore);
         var node8 = new DungeonNode(RoomType.Item);
-        var node9 = new DungeonNode(RoomType.MiniBoss);
+        var node9 = new DungeonNode(RoomType.Boss);
         var end = new DungeonNode(RoomType.End);
 
         tenNodeGraph.Add(start, node2);

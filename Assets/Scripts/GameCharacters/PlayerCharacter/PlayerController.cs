@@ -84,13 +84,15 @@ namespace Assets.PlayerCharacter
         {
             enabled = true;
             GetComponent<CharacterController>().enabled = enabled;
-            //_footstepAudio =  
         }
 
         public void Pause()
         {
             enabled = false;
             GetComponent<CharacterController>().enabled = false;
+
+            // Event clearing code referenced from - https://stackoverflow.com/questions/153573/how-can-i-clear-event-subscriptions-in-c
+            OnInteract = null;
         }
     }
 }

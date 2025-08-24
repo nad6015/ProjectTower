@@ -30,34 +30,20 @@ namespace Assets.DungeonGenerator.Components
             Components = components;
 
             JObject json = JObject.Parse(file.text);
-            JsonUtils.ForEachIn(json["params"], jParam =>
-            {
-                DungeonParameter dungeonParameter = jParam["parameter"].ToObject<DungeonParameter>();
+         
+        }
 
-                ValueType type = jParam["valueType"].ToObject<ValueType>();
-                _parameters.Add(dungeonParameter, new ValueRepresentation(type, JsonUtils.ToDictionary(jParam["value"])));
-            });
-
-            DungeonNode lastRoom = null;
-
-            JsonUtils.ForEachIn(json["baseDungeon"], (System.Action<JToken>)(jNode =>
-            {
-                DungeonNode room = new(jNode.ToObject<RoomType>());
-
-                Layout.Add(room);
-
-                if (lastRoom != null)
-                {
-                    Layout.Add(lastRoom, room);
-                }
-
-                lastRoom = room;
-            }));
-
-            JsonUtils.ForEachIn(json["dungeonPatterns"], pattern =>
-            {
-                Flows.Add(new FlowPattern(pattern["matches"], pattern["replacer"]));
-            });
+        public DungeonRepresentation(
+                DungeonLayout dungeonLayout,
+                List<FlowPattern> flowPatterns,
+                DungeonComponents components,
+                Dictionary<DungeonParameter,ValueRepresentation> parameters)
+        {
+            Layout = dungeonLayout;
+            Flows = flowPatterns;
+            Components = components;
+            _parameters = parameters;
+            _dungeon = new Dungeon();
         }
 
         public T Parameter<T>(DungeonParameter dungeonParams)

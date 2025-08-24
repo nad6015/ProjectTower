@@ -56,6 +56,7 @@ namespace Assets.DungeonMaster
         private DungeonMasterConfiguration _config;
         private int currentSection = 0;
         private DungeonComponents _currentComponents;
+        private Dictionary<DungeonParameter, ValueRepresentation> _dungeonParameters;
 
         public void Start()
         {
@@ -67,7 +68,7 @@ namespace Assets.DungeonMaster
 
             NextDungeonSection();
 
-            ReadConfig();
+            ReadConfigurationFromFiles();
 
             _combatSystem.EnemyDefeated += OnEnemyDefeated;
             _combatSystem.PlayerDefeated += OnPlayerDefeated;
@@ -82,6 +83,7 @@ namespace Assets.DungeonMaster
         public void OnDungeonCleared()
         {
             _player.Pause();
+            _dungeonGenerator.ClearDungeon();
             State = CurrentFloor >= MaxFloors ? DungeonMasterState.GameEnd : DungeonMasterState.GenerateDungeon;
         }
 
@@ -118,8 +120,9 @@ namespace Assets.DungeonMaster
             }
 
             DungeonMission nextMission = (DungeonMission)CurrentFloor;
-            Debug.Log(nextMission);
-            _dungeonParams.LoadFlows(_config.DungeonFlows[nextMission]);
+
+            _dungeonParams = new DungeonRepresentation(_config.BaseDungeons[nextMission],
+                _config.DungeonFlows[nextMission], _currentComponents, _dungeonParameters);
 
             NewDungeon();
 
@@ -178,7 +181,6 @@ namespace Assets.DungeonMaster
         /// </summary>
         private void NewDungeon()
         {
-            _dungeonGenerator.ClearDungeon();
             _dungeonGenerator.GenerateDungeon(_dungeonParams);
             SpawnPoint startingPoint = FindComponentByTag<SpawnPoint>("PlayerSpawn");
 
@@ -195,7 +197,7 @@ namespace Assets.DungeonMaster
         /// <summary>
         /// Reads config from the currently configuration json file.
         /// </summary>
-        private void ReadConfig()
+        private void ReadConfigurationFromFiles()
         {
             _config = ReadConfigFromJson(_dungeonFlowsFile);
 
@@ -203,7 +205,7 @@ namespace Assets.DungeonMaster
             GenerationRuleset = BuildDungeonRuleset(json);
             GameplayRuleset = BuildGameplayParams(json);
 
-            _dungeonParams = new DungeonRepresentation(_defaultParamFile, _currentComponents);
+            _dungeonParameters = BuildDungeonParameters(_defaultParamFile);
         }
 
         private void NextDungeonSection()

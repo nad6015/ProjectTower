@@ -20,8 +20,7 @@ namespace Assets.DungeonGenerator
             DungeonLayout layout = dungeon.Layout;
 
             int roomCount = dungeon.Parameter<int>(DungeonParameter.RoomCount);
-            Debug.Log(roomCount);
-
+            
             while (layout.Count < roomCount)
             {
                 foreach (var flow in dungeon.Flows)

@@ -3,6 +3,8 @@ using Newtonsoft.Json.Linq;
 using Assets.DungeonGenerator.Components;
 using Assets.DungeonGenerator;
 using UnityEngine;
+using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
+using System.Security.Cryptography;
 
 namespace Assets.DungeonMaster
 {
@@ -58,22 +60,59 @@ namespace Assets.DungeonMaster
         {
             DungeonMasterConfiguration config = new()
             {
-                DungeonFlows = new()
+                DungeonFlows = new(),
+                BaseDungeons = new()
             };
 
             JObject jFlows = JObject.Parse(flowsFile.text);
             JsonUtils.ForEachIn(jFlows, dungeonFlow =>
             {
-                List<FlowPattern> flowPatterns = new();
+            var dungeonFlowChildren = dungeonFlow.Children();
+            List<FlowPattern> flowPatterns = new();
+            DungeonLayout layout = new();
 
-                JsonUtils.ForEachIn(jFlows[dungeonFlow.Path], pattern =>
+            DungeonMission mission = JsonUtils.ConvertToEnum<DungeonMission>(dungeonFlow.Path);
+
+            foreach (var pattern in dungeonFlowChildren["flows"].Children())
+            {
+                flowPatterns.Add(new FlowPattern(pattern["matches"], pattern["replacer"]));
+            }
+
+            DungeonNode lastRoom = null;
+
+            foreach (var jNode in dungeonFlowChildren["baseDungeon"].Children())
+            {
+                DungeonNode room = new(jNode.ToObject<RoomType>());
+
+                layout.Add(room);
+
+                if (lastRoom != null)
                 {
-                    flowPatterns.Add(new FlowPattern(pattern["matches"], pattern["replacer"]));
-                });
+                    layout.Add(lastRoom, room);
+                }
 
-                config.DungeonFlows.Add(JsonUtils.ConvertToEnum<DungeonMission>(dungeonFlow.Path), flowPatterns);
-            });
+                lastRoom = room;
+            }
+
+            config.DungeonFlows.Add(mission, flowPatterns);
+            config.BaseDungeons.Add(mission, layout);
+        });
+         
             return config;
+        }
+
+        public static Dictionary<DungeonParameter, ValueRepresentation> BuildDungeonParameters(TextAsset jsonFile)
+        {
+            Dictionary<DungeonParameter, ValueRepresentation> parameters = new();
+            JObject json = JObject.Parse(jsonFile.text);
+            JsonUtils.ForEachIn(json["params"], jParam =>
+            {
+                DungeonParameter dungeonParameter = jParam["parameter"].ToObject<DungeonParameter>();
+
+                ValueType type = jParam["valueType"].ToObject<ValueType>();
+                parameters.Add(dungeonParameter, new ValueRepresentation(type, JsonUtils.ToDictionary(jParam["value"])));
+            });
+            return parameters;
         }
 
         private static List<ICondition> BuildConditions(JToken j)

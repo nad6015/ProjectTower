@@ -10,6 +10,14 @@ namespace Assets.Interactables
     public abstract class Interactable : MonoBehaviour
     {
         protected PlayerController controller;
+
+        private void OnDisable()
+        {
+            if (controller != null)
+            {
+                controller.OnInteract -= HandleInteract;
+            }
+        }
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
