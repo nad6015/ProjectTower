@@ -1,12 +1,12 @@
 ﻿namespace Assets.DungeonMaster
 {
-    public partial class DungeonMaster
+    /// <summary>
+    /// TODO
+    /// </summary>
+    public enum DungeonMission
     {
-        public enum DungeonMission
-        {
-            ExploreFloor,
-            UnlockDoor,
-            FightBoss
-        }
+        ExploreFloor = 0,
+        FindKey = 1,
+        FightBoss = 2,
     }
 }

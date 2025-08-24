@@ -2,7 +2,6 @@ using Assets.GameCharacters;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static Assets.Utilities.GameObjectUtilities;
 
 namespace Assets.PlayerCharacter
 {

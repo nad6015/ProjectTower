@@ -12,6 +12,11 @@ namespace Assets.Combat
         {
         }
 
+        public bool IsPlayerDead()
+        {
+            throw new NotImplementedException();
+        }
+
         private void Update()
         {
         

@@ -28,7 +28,7 @@ public class DungeonMasterTests
     {
         TestSetUp();
 
-        Assert.That(dungeonMaster.State == DungeonMasterState.RUNNING);
+        Assert.That(dungeonMaster.State == DungeonMasterState.Running);
         Assert.That(dungeonMaster.CurrentFloor == 1);
 
         Assert.NotNull(dungeonGenerator);
@@ -44,7 +44,7 @@ public class DungeonMasterTests
     {
         TestSetUp();
 
-        Assert.That(dungeonMaster.State == DungeonMasterState.RUNNING);
+        Assert.That(dungeonMaster.State == DungeonMasterState.Running);
         Assert.That(dungeonMaster.CurrentFloor == 1);
 
         GameObject startPos = FindGameObjectWithTag("PlayerSpawn");
@@ -60,7 +60,7 @@ public class DungeonMasterTests
 
         player = FindGameObjectWithTag("Player");
         Assert.That(dungeonMaster.CurrentFloor == 1);
-        Assert.That(dungeonMaster.State == DungeonMasterState.GENERATE_DUNGEON);
+        Assert.That(dungeonMaster.State == DungeonMasterState.GenerateDungeon);
         Assert.NotNull(player);
         Assert.That(FindComponentByTag<PlayerController>("Player").enabled == false); // PlayerController should not enabled while the dungeon is generating
 
@@ -69,7 +69,7 @@ public class DungeonMasterTests
         GameObject newStartPos = FindGameObjectWithTag("PlayerSpawn");
         player = FindGameObjectWithTag("Player");
 
-        Assert.That(dungeonMaster.State == DungeonMasterState.RUNNING);
+        Assert.That(dungeonMaster.State == DungeonMasterState.Running);
         Assert.That(dungeonMaster.CurrentFloor == 2);
 
         Assert.NotNull(newStartPos);
@@ -87,7 +87,7 @@ public class DungeonMasterTests
         player.GetComponent<TestPlayer>().AttackSelf();
 
         yield return new WaitForSeconds(1f);
-        Assert.That(dungeonMaster.State == DungeonMasterState.GAME_END);
+        Assert.That(dungeonMaster.State == DungeonMasterState.GameEnd);
     }
 
     [UnityTest]

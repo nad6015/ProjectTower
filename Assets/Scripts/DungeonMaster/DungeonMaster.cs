@@ -8,6 +8,7 @@ using Newtonsoft.Json.Linq;
 using Assets.DungeonGenerator;
 using Random = UnityEngine.Random;
 using static Assets.Utilities.GameObjectUtilities;
+using static Assets.DungeonMaster.DungeonMasterDeserializationUtil;
 using Assets.Audio;
 
 namespace Assets.DungeonMaster
@@ -46,7 +47,6 @@ namespace Assets.DungeonMaster
 
         private DungeonGenerator.DungeonGenerator _dungeonGenerator;
         private PlayerController _player;
-        private Dungeon _currentDungeon;
         private DungeonRepresentation _dungeonParams;
         private DungeonRepresentation _nextDungeonParams;
         private Dictionary<GameplayParameter, ValueRepresentation> _gameParams;
@@ -56,7 +56,6 @@ namespace Assets.DungeonMaster
         private SceneTransitionManager _sceneTransitionManager;
         private AudioManager _audioManager;
         private DungeonMasterConfiguration _config;
-
 
         public void Start()
         {
@@ -74,39 +73,30 @@ namespace Assets.DungeonMaster
             {
                 Random.InitState(_randomSeed);
             }
-            State = DungeonMasterState.GENERATE_DUNGEON;
+            State = DungeonMasterState.GenerateDungeon;
         }
 
         public void OnDungeonCleared()
         {
-            //_dungeonParams = _nextDungeonParams;
-            //_nextDungeonParams = null;
             _player.Pause();
-            if (CurrentFloor >= MaxFloors)
-            {
-                State = DungeonMasterState.GAME_END;
-            }
-            else
-            {
-                State = DungeonMasterState.GENERATE_DUNGEON;
-            }
+            State = CurrentFloor >= MaxFloors ? DungeonMasterState.GameEnd : DungeonMasterState.GenerateDungeon;
         }
 
         private void Update()
         {
             switch (State)
             {
-                case DungeonMasterState.GENERATE_DUNGEON:
+                case DungeonMasterState.GenerateDungeon:
                 {
                     GenerateDungeon();
                     break;
                 }
-                case DungeonMasterState.RUNNING:
+                case DungeonMasterState.Running:
                 {
                     DoWork();
                     break;
                 }
-                case DungeonMasterState.GAME_END:
+                case DungeonMasterState.GameEnd:
                 {
                     EndGame();
                     break;
@@ -114,18 +104,32 @@ namespace Assets.DungeonMaster
             }
         }
 
-        private void EndGame()
+        /// <summary>
+        /// Generates the next dungeon using the adapted dungeon parameters.
+        /// </summary>
+        private void GenerateDungeon()
         {
-            if (_player.GetComponent<PlayableFighter>().IsDead())
-            {
-                _sceneTransitionManager.SceneTransition(GameScene.GameLost);
-            }
-            else
-            {
-                _sceneTransitionManager.SceneTransition(GameScene.NextScene);
-            }
+            DungeonMission nextMission = (DungeonMission)CurrentFloor;
+            _dungeonParams.LoadFlows(_config.DungeonFlows[nextMission]);
+
+            NewDungeon();
+
+            FindComponentByTag<DungeonExit>("DungeonExit").DungeonCleared += OnDungeonCleared;
+
+            _sceneTransitionManager.SceneTransition(GameScene.None);
+            _audioManager.Modify(_dungeonParams.Components);
+            _audioManager.PlayBackgroundMusic();
+
+            _player.Play();
+            CurrentFloor++; // Next floor has been reached, so increment counter
+
+            State = DungeonMasterState.Running;
         }
 
+        /// <summary>
+        /// Main loop of the Dungeon Master. Checks all the rules for both dungeon generation and gameplay
+        /// and updates their values if the rules' conditions are met.
+        /// </summary>
         private void DoWork()
         {
             foreach (DungeonRule rule in GenerationRuleset.Values)
@@ -145,49 +149,29 @@ namespace Assets.DungeonMaster
             }
         }
 
-        private void GenerateDungeon()
+        /// <summary>
+        /// Transitions the game to the next scene based on whether the player won or lost.
+        /// </summary>
+        private void EndGame()
         {
-
-            switch (CurrentFloor % FloorsPerSection)
+            if (_player.GetComponent<PlayableFighter>().IsDead())
             {
-                case 0: // Current floor is a multiple of three
-                {
-                    break; // TODO
-                }
-                case 1: // Current floor is a multiple of two
-                {
-                    _dungeonParams.LoadFlows(_config.DungeonFlows[DungeonMission.UnlockDoor]);
-                    break;
-                }
-                case 2:
-                {
-                    _dungeonParams.LoadFlows(_config.DungeonFlows[DungeonMission.ExploreFloor]);
-                    break;
-                }
-                default:
-                {
-                    Debug.Log("CurrentFloor mod FloorsPerSection = " + CurrentFloor % FloorsPerSection);
-                    break;
-                }
+                _sceneTransitionManager.SceneTransition(GameScene.GameLost);
             }
-
-            NewDungeon();
-            FindComponentByTag<DungeonExit>("DungeonExit").DungeonCleared += OnDungeonCleared;
-            _sceneTransitionManager.SceneTransition(GameScene.None);
-            _audioManager.Modify(_dungeonParams.Components);
-            _audioManager.PlayBackgroundMusic();
-            _player.Play();
-            State = DungeonMasterState.RUNNING;
-            CurrentFloor++; // Next floor has been reached, so increment counter
+            else
+            {
+                _sceneTransitionManager.SceneTransition(GameScene.NextScene);
+            }
         }
 
+        /// <summary>
+        /// Calls the dungeon generator and sets the player in the new starting room.
+        /// </summary>
         private void NewDungeon()
         {
             _dungeonGenerator.ClearDungeon();
-            _currentDungeon = _dungeonGenerator.GenerateDungeon(_dungeonParams);
+            _dungeonGenerator.GenerateDungeon(_dungeonParams);
             SpawnPoint startingPoint = FindComponentByTag<SpawnPoint>("PlayerSpawn");
-
-            //_nextDungeonParams = _dungeonParams;
 
             if (_player != null)
             {
@@ -199,49 +183,28 @@ namespace Assets.DungeonMaster
             }
         }
 
+        /// <summary>
+        /// Reads config from the currently configuration json file.
+        /// </summary>
         private void ReadConfig()
         {
-            _config = new()
-            {
-                DungeonFlows = new()
-            };
+            _config = ReadConfigFromJson(_dungeonFlowsFile);
 
-            JObject jFlows = JObject.Parse(_dungeonFlowsFile.text);
-            JsonUtils.ForEachIn(jFlows, dungeonFlow =>
-            {
-                List<FlowPattern> flowPatterns = new();
-
-                JsonUtils.ForEachIn(jFlows[dungeonFlow.Path], pattern =>
-                {
-                    flowPatterns.Add(new FlowPattern(pattern["matches"], pattern["replacer"]));
-                });
-
-                _config.DungeonFlows.Add(JsonUtils.ConvertToEnum<DungeonMission>(dungeonFlow.Path), flowPatterns);
-            });
             JObject json = JObject.Parse(_defaultRulesetFile.text);
-            GenerationRuleset = RulesetBuilder.BuildDungeonRuleset(json);
-            GameplayRuleset = RulesetBuilder.BuildGameplayParams(json);
+            GenerationRuleset = BuildDungeonRuleset(json);
+            GameplayRuleset = BuildGameplayParams(json);
 
             _dungeonParams = new DungeonRepresentation(_defaultParamFile);
         }
 
-
-        private TextAsset FindFile(string v, List<TextAsset> files)
-        {
-            return files.Find(t => t.name.Contains(v));
-        }
-
         private void OnEnemyDefeated(Fighter fighter)
         {
-            if (fighter.GetComponent<NpcFighter>() != null)
-            {
-                _floorStatistics[GameParameter.EnemiesDefeated]++;
-            }
+            _floorStatistics[GameParameter.EnemiesDefeated]++;
         }
 
         private void OnPlayerDefeated(Fighter fighter)
         {
-            State = DungeonMasterState.GAME_END;
+            State = DungeonMasterState.GameEnd;
         }
     }
 }

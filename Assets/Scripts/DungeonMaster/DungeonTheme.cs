@@ -1,13 +1,13 @@
 ﻿namespace Assets.DungeonMaster
 {
-    public partial class DungeonMaster
+    /// <summary>
+    /// TODO
+    /// </summary>
+    public enum DungeonTheme
     {
-        public enum DungeonTheme
-        {
-            Castle,
-            Dungeon,
-            Alchemist,
-            Tutorial
-        }
+        Castle,
+        Dungeon,
+        Alchemist,
+        Tutorial
     }
 }

@@ -15,7 +15,7 @@ public class DungeonRulesetTest
     public void SetUp()
     {
         JObject json = JObject.Parse(Resources.Load<TextAsset>("TestRuleset").text);
-        ruleset = RulesetBuilder.BuildDungeonRuleset(json);
+        ruleset = DungeonMasterDeserializationUtil.BuildDungeonRuleset(json);
     }
 
     [Test]

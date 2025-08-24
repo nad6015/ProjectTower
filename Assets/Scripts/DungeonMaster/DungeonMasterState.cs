@@ -1,9 +1,12 @@
 ﻿namespace Assets.DungeonMaster
 {
+    /// <summary>
+    /// TODO
+    /// </summary>
     public enum DungeonMasterState
     {
-        GENERATE_DUNGEON,
-        RUNNING,
-        GAME_END
+        GenerateDungeon,
+        Running,
+        GameEnd
     }
 }
