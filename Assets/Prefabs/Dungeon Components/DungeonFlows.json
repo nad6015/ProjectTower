@@ -1,0 +1,49 @@
+{
+  "exploreFloor": {
+    "baseDungeon": ["start", "explore", "combat", "item", "end"],
+    "flows": [
+      {
+        "matches": ["explore", "combat"],
+        "replacer": ["combat", "explore", "combat", "restPoint"]
+      },
+      {
+        "matches": ["restPoint", "item"],
+        "replacer": ["item", "combat"]
+      },
+      {
+        "matches": ["explore", "combat"],
+        "replacer": ["combat", "item", "combat", "explore"]
+      },
+      {
+        "matches": ["combat", "item"],
+        "replacer": ["explore", "restPoint"]
+      }
+    ]
+  },
+  "FindKey": {
+    "baseDungeon": ["start", "explore", "combat", "item", "end"],
+    "flows": [
+      {
+        "matches": ["explore", "combat"],
+        "replacer": ["lock", "combat"]
+      },
+      {
+        "matches": ["item"],
+        "replacer": ["combat", "restPoint", "explore"]
+      },
+      {
+        "matches": ["combat"],
+        "replacer": ["item", "explore", "ambush"]
+      }
+    ]
+  },
+  "FightBoss": {
+    "baseDungeon": ["start", "explore", "combat", "item", "end"],
+    "flows": [
+      {
+        "matches": ["combat"],
+        "replacer": ["explore", "restPoint", "boss"]
+      }
+    ]
+  }
+}

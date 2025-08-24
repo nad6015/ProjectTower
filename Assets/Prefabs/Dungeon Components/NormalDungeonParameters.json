@@ -2,61 +2,50 @@
   "params": [
     {
       "parameter": "roomSize",
+      "valueType": "vectorRange",
       "value": {
-        "type": "vectorRange",
-        "minX": 10,
-        "minY": 0,
+        "minX": 15,
         "minZ": 10,
-        "maxX": 10,
-        "maxY": 0,
-        "maxZ": 10
+        "maxX": 20,
+        "maxZ": 15
       },
       "locked": false
     },
     {
       "parameter": "corridorSize",
+      "valueType": "vector",
       "value": {
-        "type": "vector",
         "x": 4,
-        "y": 0,
         "z": 4
       },
       "locked": false
     },
     {
       "parameter": "enemySpawnRate",
-      "value": { "type": "number", "value": 100 },
+      "valueType": "number",
+      "value": { "value": 75 },
       "locked": false
     },
     {
       "parameter": "itemsPerRoom",
+      "valueType": "range",
       "value": {
-        "type": "range",
         "min": 0,
         "max": 3
       }
     },
     {
       "parameter": "enemiesPerRoom",
+      "valueType": "range",
       "value": {
-        "type": "range",
-        "min": 1,
-        "max": 1
+        "min": 0,
+        "max": 5
       }
     },
     {
       "parameter": "roomCount",
-      "value": { "type": "number", "value": 2 },
-      "locked": true
+      "valueType": "number",
+      "value": { "value": 7 }
     }
-  ],
-  "baseDungeon": [
-    {
-      "type": "start"
-    },
-    {
-      "type": "end"
-    }
-  ],
-  "dungeonPatterns": []
+  ]
 }

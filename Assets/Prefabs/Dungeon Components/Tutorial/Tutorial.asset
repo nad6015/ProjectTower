@@ -13,19 +13,19 @@ MonoBehaviour:
   m_Name: Tutorial
   m_EditorClassIdentifier: 
   wallTiles:
-  - {fileID: 3030302167426459883, guid: cd459e7457c3a0d4a84e4fba790fcb74, type: 3}
-  - {fileID: 3030302167426459883, guid: cd459e7457c3a0d4a84e4fba790fcb74, type: 3}
-  - {fileID: 3030302167426459883, guid: cd459e7457c3a0d4a84e4fba790fcb74, type: 3}
-  - {fileID: 3030302167426459883, guid: cd459e7457c3a0d4a84e4fba790fcb74, type: 3}
-  - {fileID: 3030302167426459883, guid: cd459e7457c3a0d4a84e4fba790fcb74, type: 3}
-  - {fileID: 3030302167426459883, guid: cd459e7457c3a0d4a84e4fba790fcb74, type: 3}
+  - {fileID: 3030302167426459883, guid: dc35ab1a892680e4a97ba022df8c746b, type: 3}
+  - {fileID: 3030302167426459883, guid: dc35ab1a892680e4a97ba022df8c746b, type: 3}
+  - {fileID: 3030302167426459883, guid: dc35ab1a892680e4a97ba022df8c746b, type: 3}
+  - {fileID: 3030302167426459883, guid: ac5b47e52473d4a4686bc23bbfc85b03, type: 3}
+  - {fileID: 3030302167426459883, guid: dc35ab1a892680e4a97ba022df8c746b, type: 3}
+  - {fileID: 3030302167426459883, guid: dc35ab1a892680e4a97ba022df8c746b, type: 3}
   floorTiles:
   - {fileID: 8031560325989942358, guid: 4810e26a2d7ab1f4b96ce111ddfcc910, type: 3}
   - {fileID: 8031560325989942358, guid: 4ac968795e975f24f9ef2169b7703399, type: 3}
   - {fileID: 8031560325989942358, guid: 4ac968795e975f24f9ef2169b7703399, type: 3}
-  - {fileID: 8031560325989942358, guid: 4ac968795e975f24f9ef2169b7703399, type: 3}
+  - {fileID: 8031560325989942358, guid: 4810e26a2d7ab1f4b96ce111ddfcc910, type: 3}
   - {fileID: 8031560325989942358, guid: 4ac968795e975f24f9ef2169b7703399, type: 3}
   - {fileID: 8031560325989942358, guid: 4ac968795e975f24f9ef2169b7703399, type: 3}
   propTiles: []
   roomCorner: {fileID: 9162778129440914531, guid: 3bc17762c4b3dc84ba960b2b38d7a768, type: 3}
-  corridorArch: {fileID: 3372070806319749641, guid: 6a296b7b2f2d39149be33f3cd4ea8a8a, type: 3}
+  corridorDoor: {fileID: 1804593036432212441, guid: 230da11bae7918b47a868e235df65983, type: 3}

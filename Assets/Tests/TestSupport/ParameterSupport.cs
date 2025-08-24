@@ -3,5 +3,8 @@ using UnityEngine;
 public class ParameterSupport : MonoBehaviour
 {
     [field: SerializeField]
-    public TextAsset ParamFile {get; private set;}
+    public TextAsset ParamFile { get; private set; }
+
+    [field: SerializeField]
+    public TextAsset ConfigFile { get; private set;}
 }

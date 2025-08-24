@@ -1,5 +1,6 @@
 using Assets.DungeonGenerator;
 using Assets.DungeonGenerator.Components;
+using Assets.DungeonMaster;
 using NUnit.Framework;
 using System.Collections;
 using UnityEngine;
@@ -92,8 +93,14 @@ public class GraphGrammarTests
 
     private IEnumerator TestSetUp(int roomCount = 2)
     {
-        TextAsset paramFile = GameObject.FindGameObjectWithTag("TestSupport").GetComponent<ParameterSupport>().ParamFile;
-        dungeon = new(paramFile, null);
+        ParameterSupport support = GameObject.FindGameObjectWithTag("TestSupport").GetComponent<ParameterSupport>();
+        TextAsset paramFile = support.ParamFile;
+        TextAsset configFile = support.ConfigFile;
+
+        var parameters = DungeonMasterDeserializationUtil.BuildDungeonParameters(paramFile);
+        var config = DungeonMasterDeserializationUtil.ReadConfigFromJson(configFile);
+        
+        dungeon = new(config.BaseDungeons[DungeonMission.ExploreFloor], config.DungeonFlows[DungeonMission.ExploreFloor], null, parameters);
         dungeon.ModifyParameter(DungeonParameter.RoomCount,
             new ValueRepresentation(ValueType.Number, new() { { "value", roomCount.ToString() } }));
 
@@ -103,6 +110,6 @@ public class GraphGrammarTests
 
     static int[] roomCounts = new int[]
     {
-        1, 2, 3, 5, 10, 17, 32
+        1, 2, 3, 5, 7, 10, 17, 32
     };
 }

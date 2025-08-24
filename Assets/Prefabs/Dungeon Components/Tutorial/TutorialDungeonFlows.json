@@ -1,0 +1,14 @@
+{
+  "exploreFloor": {
+    "baseDungeon": ["start", "combat", "end"],
+    "flows": []
+  },
+  "FindKey": {
+    "baseDungeon": [],
+    "flows": []
+  },
+  "FightBoss": {
+    "baseDungeon": [],
+    "flows": []
+  }
+}

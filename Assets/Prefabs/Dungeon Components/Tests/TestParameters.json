@@ -2,32 +2,34 @@
   "params": [
     {
       "parameter": "roomSize",
+      "gameParam": "clearTime",
       "valueType": "vectorRange",
       "value": {
         "minX": 15,
         "minZ": 15,
-        "maxX": 20,
-        "maxZ": 20
-      },
-      "locked": false
+        "maxX": 35,
+        "maxZ": 35
+      }
     },
     {
       "parameter": "corridorSize",
+      "gameParam": "clearTime",
       "valueType": "vector",
       "value": {
-        "x": 4,
-        "z": 4
-      },
-      "locked": false
+        "x": 3,
+        "z": 3
+      }
     },
     {
       "parameter": "enemySpawnRate",
+      "gameParam": "clearTime",
       "valueType": "number",
       "value": { "value": 50 },
       "locked": false
     },
     {
       "parameter": "itemsPerRoom",
+      "gameParam": "clearTime",
       "valueType": "range",
       "value": {
         "min": 0,
@@ -36,6 +38,7 @@
     },
     {
       "parameter": "enemiesPerRoom",
+      "gameParam": "clearTime",
       "valueType": "range",
       "value": {
         "min": 0,
@@ -44,8 +47,9 @@
     },
     {
       "parameter": "roomCount",
+      "gameParam": "clearTime",
       "valueType": "number",
-      "value": { "value": 7 }
+      "value": { "value": 10 }
     }
   ]
 }

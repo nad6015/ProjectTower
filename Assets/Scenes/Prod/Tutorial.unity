@@ -182,7 +182,11 @@ PrefabInstance:
     - target: {fileID: 7751301447746594715, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
       propertyPath: _defaultParamFile
       value: 
-      objectReference: {fileID: 4900000, guid: 4f292d59f4b5ff74492d7ff2c45709db, type: 3}
+      objectReference: {fileID: 4900000, guid: b987898a22092fc4ca340e140efff420, type: 3}
+    - target: {fileID: 7751301447746594715, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
+      propertyPath: _dungeonFlowsFile
+      value: 
+      objectReference: {fileID: 4900000, guid: afeb91ee10b6f724b979ddd89e7a8c35, type: 3}
     - target: {fileID: 7751301447746594715, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
       propertyPath: _defaultRulesetFile
       value: 
@@ -198,6 +202,14 @@ PrefabInstance:
     - target: {fileID: 7751301447746594715, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
       propertyPath: _parameterFiles.Array.size
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7751301447746594715, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
+      propertyPath: '_componentsList.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: b2c37205087410b4a8080703ea44b20e, type: 2}
+    - target: {fileID: 7751301447746594715, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
+      propertyPath: <FloorsPerSection>k__BackingField
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7822902449526581457, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag

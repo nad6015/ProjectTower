@@ -323,6 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <ParamFile>k__BackingField: {fileID: 4900000, guid: b01790cb2dbe8844b8360c7a9caf599c, type: 3}
+  <ConfigFile>k__BackingField: {fileID: 4900000, guid: 9d16550c7e575b24486eff7c07d32e95, type: 3}
 --- !u!4 &1407011832
 Transform:
   m_ObjectHideFlags: 0

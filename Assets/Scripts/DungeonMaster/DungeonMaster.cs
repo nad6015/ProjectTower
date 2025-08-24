@@ -114,7 +114,7 @@ namespace Assets.DungeonMaster
         /// </summary>
         private void GenerateDungeon()
         {
-            if (CurrentFloor >= FloorsPerSection)
+            if (CurrentFloor > FloorsPerSection)
             {
                 NextDungeonSection();
             }
