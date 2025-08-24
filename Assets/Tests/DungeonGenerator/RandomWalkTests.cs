@@ -115,10 +115,9 @@ public class RandomWalkTests
 
         dungeonGenerator.ClearDungeon();
 
-        DungeonRepresentation dungeon = new(paramFile);
+        DungeonRepresentation dungeon = new(paramFile, components);
         dungeon.ModifyParameter(DungeonParameter.RoomCount, new ValueRepresentation(ValueType.Number,
             new() { { "value", roomCount.ToString() } }));
-        dungeon.SetComponents(components);
 
         dungeon.SetRooms(CreateLayout(roomCount, branchCount));
         RandomWalk algorithm = new(dungeonGenerator.transform);

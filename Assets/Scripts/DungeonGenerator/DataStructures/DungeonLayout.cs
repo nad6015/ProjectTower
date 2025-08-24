@@ -244,7 +244,6 @@ namespace Assets.DungeonGenerator
             else if (replacer.Count < nodes.Count)
             {
                 List<DungeonNode> allNodes = new();
-
                 for (int i = 0; i < nodes.Count; i++)
                 {
                     var node = nodes[i];
@@ -264,16 +263,6 @@ namespace Assets.DungeonGenerator
         public DungeonNode FindById(int v)
         {
             return _graph.Find(n=>n.Id == v);
-        }
-
-        internal void Add(DungeonLayout flowTemplate)
-        {
-            foreach(var node in flowTemplate)
-            {
-                Add(node);
-                Debug.Log(node);
-            }
-            LastNode = flowTemplate.LastNode;
         }
     }
 }

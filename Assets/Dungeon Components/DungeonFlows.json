@@ -13,7 +13,7 @@
       "replacer": ["item", "combat", "explore", "restPoint"]
     }
   ],
-  "UnlockDoor": [
+  "FindKey": [
     {
       "matches": ["explore"],
       "replacer": ["lock"]

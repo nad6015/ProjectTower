@@ -9,8 +9,7 @@
         "minZ": 15,
         "maxX": 35,
         "maxZ": 35
-      },
-      "locked": false
+      }
     },
     {
       "parameter": "corridorSize",
@@ -19,8 +18,7 @@
       "value": {
         "x": 3,
         "z": 3
-      },
-      "locked": false
+      }
     },
     {
       "parameter": "enemySpawnRate",
@@ -51,8 +49,7 @@
       "parameter": "roomCount",
       "gameParam": "clearTime",
       "valueType": "number",
-      "value": { "value": 10 },
-      "locked": true
+      "value": { "value": 10 }
     }
   ],
   "baseDungeon": ["start", "explore", "end"],
@@ -60,6 +57,22 @@
     {
       "matches": ["explore"],
       "replacer": ["explore", "combat", "item"]
+    },
+    {
+      "matches": ["explore", "combat"],
+      "replacer": ["combat", "miniBoss", "explore", "restPoint"]
+    },
+    {
+      "matches": ["miniBoss"],
+      "replacer": ["item", "combat", "explore", "restPoint"]
+    },
+    {
+      "matches": ["restPoint"],
+      "replacer": ["item", "explore", "explore"]
+    },
+    {
+      "matches": ["explore", "explore"],
+      "replacer": ["combat"]
     }
   ]
 }

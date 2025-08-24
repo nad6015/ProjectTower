@@ -13,13 +13,10 @@ using Assets.Audio;
 
 namespace Assets.DungeonMaster
 {
-    public partial class DungeonMaster : MonoBehaviour
+    public class DungeonMaster : MonoBehaviour
     {
         [SerializeField]
-        private List<TextAsset> _parameterFiles;
-
-        [SerializeField]
-        private List<TextAsset> _rulesets;
+        private List<DungeonComponents> _componentsList;
 
         [SerializeField]
         private int _randomSeed;
@@ -38,6 +35,7 @@ namespace Assets.DungeonMaster
 
         [field: SerializeField]
         public int FloorsPerSection { get; private set; }
+
         public int CurrentFloor { get; private set; }
 
         public DungeonMasterState State { get; private set; }
@@ -56,6 +54,8 @@ namespace Assets.DungeonMaster
         private SceneTransitionManager _sceneTransitionManager;
         private AudioManager _audioManager;
         private DungeonMasterConfiguration _config;
+        private int currentSection = 0;
+        private DungeonComponents _currentComponents;
 
         public void Start()
         {
@@ -64,6 +64,9 @@ namespace Assets.DungeonMaster
             _combatSystem = FindComponentByTag<CombatSystem>("CombatSystem");
             _sceneTransitionManager = FindComponentByTag<SceneTransitionManager>("SceneManager");
             _audioManager = FindComponentByTag<AudioManager>("AudioManager");
+
+            NextDungeonSection();
+
             ReadConfig();
 
             _combatSystem.EnemyDefeated += OnEnemyDefeated;
@@ -109,7 +112,13 @@ namespace Assets.DungeonMaster
         /// </summary>
         private void GenerateDungeon()
         {
+            if (CurrentFloor >= FloorsPerSection)
+            {
+                NextDungeonSection();
+            }
+
             DungeonMission nextMission = (DungeonMission)CurrentFloor;
+            Debug.Log(nextMission);
             _dungeonParams.LoadFlows(_config.DungeonFlows[nextMission]);
 
             NewDungeon();
@@ -194,9 +203,15 @@ namespace Assets.DungeonMaster
             GenerationRuleset = BuildDungeonRuleset(json);
             GameplayRuleset = BuildGameplayParams(json);
 
-            _dungeonParams = new DungeonRepresentation(_defaultParamFile);
+            _dungeonParams = new DungeonRepresentation(_defaultParamFile, _currentComponents);
         }
 
+        private void NextDungeonSection()
+        {
+            _currentComponents = _componentsList[currentSection++];
+            CurrentFloor = 1;
+
+        }
         private void OnEnemyDefeated(Fighter fighter)
         {
             _floorStatistics[GameParameter.EnemiesDefeated]++;

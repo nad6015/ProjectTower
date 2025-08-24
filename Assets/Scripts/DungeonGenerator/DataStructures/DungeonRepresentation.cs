@@ -10,7 +10,6 @@ namespace Assets.DungeonGenerator.Components
     public class DungeonRepresentation
     {
         public DungeonLayout Layout { get; private set; }
-        public DungeonLayout BaseDungeon { get; }
         public DungeonComponents Components { get; private set; }
         public List<FlowPattern> Flows { get; private set; }
         public int Count { get { return _parameters.Count; } }
@@ -22,13 +21,13 @@ namespace Assets.DungeonGenerator.Components
         /// Constructs dungeon parameters from a JSON file.
         /// </summary>
         /// <param name="parametersFile">A JSON file with the needed parameters within.</param>
-        public DungeonRepresentation(TextAsset file)
+        public DungeonRepresentation(TextAsset file, DungeonComponents components)
         {
             Layout = new();
-            BaseDungeon = new();
             _dungeon = new Dungeon();
             Flows = new List<FlowPattern>();
             _parameters = new Dictionary<DungeonParameter, ValueRepresentation>();
+            Components = components;
 
             JObject json = JObject.Parse(file.text);
             JsonUtils.ForEachIn(json["params"], jParam =>
@@ -41,19 +40,19 @@ namespace Assets.DungeonGenerator.Components
 
             DungeonNode lastRoom = null;
 
-            JsonUtils.ForEachIn(json["baseDungeon"], jNode =>
+            JsonUtils.ForEachIn(json["baseDungeon"], (System.Action<JToken>)(jNode =>
             {
                 DungeonNode room = new(jNode.ToObject<RoomType>());
 
-                BaseDungeon.Add(room);
+                Layout.Add(room);
 
                 if (lastRoom != null)
                 {
-                    BaseDungeon.Add(lastRoom, room);
+                    Layout.Add(lastRoom, room);
                 }
 
                 lastRoom = room;
-            });
+            }));
 
             JsonUtils.ForEachIn(json["dungeonPatterns"], pattern =>
             {
@@ -76,11 +75,6 @@ namespace Assets.DungeonGenerator.Components
             Layout = dungeonRooms;
         }
 
-        public void SetComponents(DungeonComponents components)
-        {
-            Components = components;
-        }
-
         internal void AddDungeonRoom(DungeonRoom room)
         {
             _dungeon.DungeonRooms.Add(room);
@@ -93,7 +87,7 @@ namespace Assets.DungeonGenerator.Components
 
         public void LoadFlows(List<FlowPattern> flowPatterns)
         {
-            Flows = flowPatterns;
+            Flows.AddRange(flowPatterns);
         }
     }
 }

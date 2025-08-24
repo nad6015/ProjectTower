@@ -17,9 +17,10 @@ namespace Assets.DungeonGenerator
         /// <param name="dungeon">the dungeon representation</param>
         public void GenerateDungeon(DungeonRepresentation dungeon)
         {
-            DungeonLayout layout = dungeon.BaseDungeon;
+            DungeonLayout layout = dungeon.Layout;
 
             int roomCount = dungeon.Parameter<int>(DungeonParameter.RoomCount);
+            Debug.Log(roomCount);
 
             while (layout.Count < roomCount)
             {
@@ -29,6 +30,11 @@ namespace Assets.DungeonGenerator
                     if (rooms.Count == flow.Matches.Count)
                     {
                         layout.Replace(rooms, flow.Replacer);
+                    }
+
+                    if(layout.Count >= roomCount)
+                    {
+                        break;
                     }
                 }
 
@@ -40,15 +46,6 @@ namespace Assets.DungeonGenerator
                     layout.Add(layout.LastNode, new DungeonNode(RoomType.End));
                 }
             }
-            dungeon.SetRooms(layout);
-        }
-
-        /// <summary>
-        /// <inheritdoc/>
-        /// </summary>
-        public void ClearDungeon()
-        {
-            //_layout.RemoveAll();
         }
     }
 }

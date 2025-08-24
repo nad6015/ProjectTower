@@ -1,20 +1,47 @@
 using Assets.DungeonGenerator;
 using Assets.DungeonGenerator.Components;
 using NUnit.Framework;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.TestTools;
 
 public class GraphGrammarTests
 {
-    readonly TextAsset paramFile = Resources.Load<TextAsset>("TestParameters");
     DungeonRepresentation dungeon;
     GraphGrammar algorithm;
+    const int startingRoomCount = 3;
 
     [SetUp]
     public void SetUp()
     {
-        SceneManager.LoadScene("Scenes/Tests/RandomWalkAlgorithm");
+        SceneManager.LoadScene("Scenes/Tests/RandomWalk");
         DungeonNode.Reset();
+    }
+
+    [UnityTest]
+    public IEnumerator ShouldLoadBaseDungeonWhenRoomCountMatches()
+    {
+        yield return TestSetUp(3);
+        DungeonLayout rooms = dungeon.Layout;
+        Assert.That(rooms.Count == startingRoomCount);
+
+        algorithm.GenerateDungeon(dungeon);
+
+        rooms = dungeon.Layout;
+
+        Assert.That(rooms.Count == startingRoomCount);
+
+        DungeonNode firstNode = rooms.FirstNode;
+        DungeonNode secondNode = rooms[firstNode][0];
+        DungeonNode thirdNode = rooms[secondNode][1];
+
+        Assert.That(firstNode.Type == RoomType.Start);
+        Assert.That(secondNode.Type == RoomType.Explore);
+        Assert.That(thirdNode.Type == RoomType.End);
+
+        Assert.That(rooms.FirstNode.Type == RoomType.Start);
+        Assert.That(rooms.LastNode.Type == RoomType.End);
     }
 
     [Test]
@@ -23,7 +50,7 @@ public class GraphGrammarTests
         TestSetUp(5);
 
         DungeonLayout rooms = dungeon.Layout;
-        Assert.That(rooms.Count == 0);
+        Assert.That(rooms.Count == startingRoomCount);
 
         algorithm.GenerateDungeon(dungeon);
 
@@ -34,7 +61,6 @@ public class GraphGrammarTests
         DungeonNode firstNode = rooms.FirstNode;
         DungeonNode secondNode = rooms[firstNode][0];
         DungeonNode thirdNode = rooms[secondNode][1];
-        Debug.Log(rooms[thirdNode][0]);
         DungeonNode fourthNode = rooms[thirdNode][1];
         DungeonNode fifthNode = rooms[fourthNode][1];
 
@@ -48,12 +74,35 @@ public class GraphGrammarTests
         Assert.That(rooms.LastNode.Type == RoomType.End);
     }
 
-    private void TestSetUp(int roomCount = 2)
+    [UnityTest]
+    public IEnumerator ShouldGenerateConnectedDungeons([ValueSource("roomCounts")] int roomCount)
     {
-        dungeon = new(paramFile);
+        yield return TestSetUp(roomCount);
+
+        DungeonLayout rooms = dungeon.Layout;
+        Assert.That(rooms.Count == startingRoomCount);
+
+        algorithm.GenerateDungeon(dungeon);
+
+        rooms = dungeon.Layout;
+
+        Assert.That(rooms.Count >= roomCount);
+        Assert.That(rooms.IsConnected());
+    }
+
+    private IEnumerator TestSetUp(int roomCount = 2)
+    {
+        TextAsset paramFile = GameObject.FindGameObjectWithTag("TestSupport").GetComponent<ParameterSupport>().ParamFile;
+        dungeon = new(paramFile, null);
         dungeon.ModifyParameter(DungeonParameter.RoomCount,
             new ValueRepresentation(ValueType.Number, new() { { "value", roomCount.ToString() } }));
 
         algorithm = new();
+        yield return new WaitForSeconds(1);
     }
+
+    static int[] roomCounts = new int[]
+    {
+        1, 2, 3, 5, 10, 17, 32
+    };
 }

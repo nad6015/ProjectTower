@@ -269,18 +269,6 @@ namespace Assets.DungeonGenerator
         }
 
         /// <summary>
-        /// <inheritdoc/>
-        /// </summary>
-        public void ClearDungeon()
-        {
-            _roomBounds?.Clear();
-            _corridors?.Clear();
-
-            _components = null;
-            _dungeon = null;
-        }
-
-        /// <summary>
         /// Checks if a room can be placed in the given bounds.
         /// </summary>
         /// <returns>true if no other room is in the location.</returns>

@@ -15,6 +15,7 @@ TagManager:
   - RenderCamera
   - SceneManager
   - AudioManager
+  - TestSupport
   layers:
   - Default
   - TransparentFX

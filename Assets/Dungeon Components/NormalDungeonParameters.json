@@ -45,7 +45,7 @@
     {
       "parameter": "roomCount",
       "valueType": "number",
-      "value": { "value": 10 }
+      "value": { "value": 7 }
     }
   ],
   "baseDungeon": ["start", "explore", "combat", "item", "end"],

@@ -1,9 +1,6 @@
 using Assets.DungeonGenerator.Components;
 using Assets.DungeonGenerator;
-using Newtonsoft.Json.Linq;
 using NUnit.Framework;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class DungeonParametersTest
@@ -13,7 +10,7 @@ public class DungeonParametersTest
     [SetUp]
     public void SetUp()
     {
-        parameters = new(Resources.Load<TextAsset>("TestParameters"));
+        parameters = new(Resources.Load<TextAsset>("TestParameters"), null);
     }
 
     [Test]

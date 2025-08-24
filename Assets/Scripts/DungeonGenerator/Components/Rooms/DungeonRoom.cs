@@ -70,7 +70,7 @@ namespace Assets.DungeonGenerator.Components
         public static DungeonRoom Create(DungeonNode node)
         {
             // Create gameobject code referenced from  - https://discussions.unity.com/t/how-do-you-create-an-empty-gameobject-in-code-and-add-it-to-the-scene/86380/4
-            GameObject gameObj = new("Room " + node.Id);
+            GameObject gameObj = new("Room " + node.Id + " - " + node.Type);
             DungeonRoom dungeonRoom;
             switch (node.Type)
             {

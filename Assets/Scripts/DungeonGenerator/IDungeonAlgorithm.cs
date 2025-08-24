@@ -13,10 +13,5 @@ namespace Assets.DungeonGenerator
         /// </summary>
         /// <param name="dungeon">the representation to use as a blueprint</param>
         void GenerateDungeon(DungeonRepresentation dungeon);
-
-        /// <summary>
-        /// Clears an algorithm of any state used to generate a dungeon.
-        /// </summary>
-        void ClearDungeon();
     }
 }
