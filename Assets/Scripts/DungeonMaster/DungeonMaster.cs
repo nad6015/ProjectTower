@@ -73,10 +73,12 @@ namespace Assets.DungeonMaster
             _combatSystem.EnemyDefeated += OnEnemyDefeated;
             _combatSystem.PlayerDefeated += OnPlayerDefeated;
 
-            if (_randomSeed > -1)
+            if (_randomSeed == -1)
             {
-                Random.InitState(_randomSeed);
+                _randomSeed = Random.Range(0, int.MaxValue);
             }
+            Random.InitState(_randomSeed);
+            Debug.Log("Random seed is " + _randomSeed);
             State = DungeonMasterState.GenerateDungeon;
         }
 
