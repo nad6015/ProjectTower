@@ -312,6 +312,22 @@ PrefabInstance:
       propertyPath: <MaxFloors>k__BackingField
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7751301447746594715, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
+      propertyPath: _componentsList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7751301447746594715, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
+      propertyPath: '_componentsList.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 7380d815a4667c34e95156db4f3caf88, type: 2}
+    - target: {fileID: 7751301447746594715, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
+      propertyPath: '_componentsList.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 789f60b180d42e54981796a0cc96c5af, type: 2}
+    - target: {fileID: 7751301447746594715, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
+      propertyPath: <FloorsPerSection>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

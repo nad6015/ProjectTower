@@ -1,8 +1,10 @@
 using Assets.DungeonGenerator.Components.Tiles;
+using Assets.Utilities;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using static Assets.Utilities.GameObjectUtilities;
 
 namespace Assets.DungeonGenerator.Components
 {
@@ -13,12 +15,13 @@ namespace Assets.DungeonGenerator.Components
         public DungeonNode DungeonNode { get; private set; }
         public RoomType Type { get { return DungeonNode.Type; } }
 
-        protected float _maxTileUnitsUnavailable = 0.5f;
         private List<GameObject> _walls;
+        private Bounds _safeArea; // Where in the room is safe to place items
 
         private void Awake()
         {
             Contents = new();
+            _walls = new();
         }
 
         public void Construct(DungeonTilemap tilemap)
@@ -69,41 +72,41 @@ namespace Assets.DungeonGenerator.Components
 
         public static DungeonRoom Create(DungeonNode node)
         {
-            // Create gameobject code referenced from  - https://discussions.unity.com/t/how-do-you-create-an-empty-gameobject-in-code-and-add-it-to-the-scene/86380/4
-            GameObject gameObj = new("Room " + node.Id + " - " + node.Type);
+            string name = "Room " + node.Id + " - " + node.Type;
             DungeonRoom dungeonRoom;
             switch (node.Type)
             {
                 case RoomType.Start:
                 {
-                    dungeonRoom = gameObj.AddComponent<DungeonStartRoom>();
+                    dungeonRoom = NewGameObjectWithComponent<DungeonStartRoom>(name);
                     break;
                 }
                 case RoomType.End:
                 {
-                    dungeonRoom = gameObj.AddComponent<DungeonEndRoom>();
+                    dungeonRoom = NewGameObjectWithComponent<DungeonEndRoom>(name);
                     break;
                 }
                 case RoomType.Combat:
                 {
-                    dungeonRoom = gameObj.AddComponent<CombatRoom>();
+                    dungeonRoom = NewGameObjectWithComponent<CombatRoom>(name);
                     break;
                 }
                 case RoomType.Lock:
                 {
-                    dungeonRoom = gameObj.AddComponent<LockedRoom>();
+                    dungeonRoom = NewGameObjectWithComponent<LockedRoom>(name);
                     break;
                 }
                 default:
                 {
-                    dungeonRoom = gameObj.AddComponent<DungeonRoom>();
+                    dungeonRoom = NewGameObjectWithComponent<DungeonRoom>(name);
                     break;
                 }
             }
 
+            // Setup safe area for later item placement
+            dungeonRoom._safeArea = new Bounds(node.Bounds.center, node.Bounds.size);
+            dungeonRoom._safeArea.Expand(-DungeonTilemap.TileUnit * 2);
             dungeonRoom.DungeonNode = node;
-            dungeonRoom._walls = new List<GameObject>();
-
             return dungeonRoom;
         }
 
@@ -129,32 +132,19 @@ namespace Assets.DungeonGenerator.Components
 
         protected virtual void PlaceProps(DungeonRepresentation dungeon)
         {
-            int loopCount = 0; // TODO: Remove later
-            int availableTileUnits = Mathf.RoundToInt((Bounds.size.z * Bounds.size.x) * _maxTileUnitsUnavailable);
+            int itemCount = dungeon.RandomItemCount();
+            
             DungeonTilemap tilemap = dungeon.Components.tilemap;
-            while (availableTileUnits > 0 && loopCount < 5)
+            for (int i = 0; i < itemCount; i++)
             {
                 DungeonProp prop = tilemap.GetProp();
                 if (prop == null) // if null, then shufflebag is empty
-                { 
+                {
                     break;
                 }
                 Vector3 pos = prop.transform.position;
-                switch (prop.Type)
-                {
-                    case AreaType.WALL:
-                    {
-                        Contents.Add(new(prop.gameObject, pos + new Vector3(Bounds.center.x, 0, Bounds.max.z - DungeonTilemap.TileUnit)));
-                        break;
-                    }
-                    case AreaType.FLOOR:
-                    {
-                        Contents.Add(new(prop.gameObject, pos + PointUtils.RandomPointWithinBounds(Bounds)));
-                        break;
-                    }
-                }
-                availableTileUnits -= Mathf.RoundToInt(prop.TileSize.x * prop.TileSize.y);
-                loopCount++;
+
+                Contents.Add(new(prop.gameObject, pos + PointUtils.RandomPointWithinBounds(_safeArea)));
             }
         }
     }

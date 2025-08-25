@@ -36,18 +36,14 @@ namespace Assets.GameCharacters
 
         public void Footstep()
         {
-            if (!_audioSource.isPlaying)
-            {
-                _audioSource.clip = _footstepAudio;
-                _audioSource.volume = 0.5f;
-                _audioSource.Play();
-            }
+            PlaySound(_footstepAudio);
         }
 
-        protected void PlaySound(AudioClip clip)
+        protected void PlaySound(AudioClip clip, float volume = 0.5f)
         {
             if (!_audioSource.isPlaying)
             {
+                _audioSource.volume = volume;
                 _audioSource.clip = clip;
                 _audioSource.Play();
             }

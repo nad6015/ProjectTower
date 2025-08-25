@@ -6,7 +6,7 @@ namespace Assets.DungeonGenerator.Components
     {
         internal override void Populate(DungeonRepresentation dungeon)
         {
-            base.Populate(dungeon);
+            PlaceProps(dungeon);
             SpawnPoint startingPoint = dungeon.Components.startingPoint;
             Contents.Add(new(startingPoint.gameObject, startingPoint.transform.position + Bounds.center));
         }

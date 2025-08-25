@@ -1,4 +1,5 @@
 using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -74,6 +75,13 @@ namespace Assets.DungeonGenerator.Components
         public void LoadFlows(List<FlowPattern> flowPatterns)
         {
             Flows.AddRange(flowPatterns);
+        }
+
+        internal int RandomItemCount()
+        {
+            Range<int> itemCountRange = _parameters[DungeonParameter.ItemsPerRoom].Value<Range<int>>();
+
+            return UnityEngine.Random.Range(itemCountRange.min, itemCountRange.max);
         }
     }
 }
