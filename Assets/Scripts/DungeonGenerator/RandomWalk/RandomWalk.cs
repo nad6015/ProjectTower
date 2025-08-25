@@ -224,7 +224,7 @@ namespace Assets.DungeonGenerator
         {
             Range<Vector3> roomSizeParam = _dungeon.Parameter<Range<Vector3>>(DungeonParameter.RoomSize);
             Vector3 corridorSize = _dungeon.Parameter<Vector3>(DungeonParameter.CorridorSize);
-            int roomOffset = Random.Range(Mathf.RoundToInt(corridorSize.x) + DungeonTilemap.TileUnit, 5); // Distance between rooms
+            int roomOffset = (int)corridorSize.x; //Random.Range(Mathf.RoundToInt(corridorSize.x) + DungeonTilemap.TileUnit, 5); // Distance between rooms
 
             Vector3 roomSize = PointUtils.RandomSize(roomSizeParam.min, roomSizeParam.max);
             Vector3 roomCenter = PointUtils.RandomPointWithinRange(min, max);

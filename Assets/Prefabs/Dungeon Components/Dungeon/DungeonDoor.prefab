@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 6509050523190265211}
   - component: {fileID: 996869724501804607}
   - component: {fileID: 7222345242957927706}
-  m_Layer: 9
+  m_Layer: 5
   m_Name: Prompt
   m_TagString: Untagged
   m_Icon: {fileID: 0}

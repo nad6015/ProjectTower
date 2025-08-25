@@ -28,8 +28,12 @@ namespace Assets.DungeonGenerator
 
             transform.position = bounds.min;
 
+            // Create an empty game object to contain the floor tiles
+            GameObject floor = new("Floor");
+            floor.transform.SetParent(transform);
+
             // Place the floor
-            floors.AddRange(DungeonComponentUtils.DrawFloor(tilemap, bounds, transform));
+            floors.AddRange(DungeonComponentUtils.DrawFloor(tilemap, bounds, floor.transform));
 
             // Place the walls depending on the corridor's axis
 
@@ -41,7 +45,6 @@ namespace Assets.DungeonGenerator
             {
                 walls.AddRange(DungeonComponentUtils.DrawLeftAndRightWalls(tilemap, bounds, transform));
             }
-
 
             List<GameObject> doors = tilemap.DrawCorridorDoors(bounds, isHorizontal, transform);
             

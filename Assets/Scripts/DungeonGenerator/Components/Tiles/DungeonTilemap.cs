@@ -73,31 +73,26 @@ namespace Assets.DungeonGenerator.Components.Tiles
         }
 
         /// <summary>
-        /// TODO
+        /// Draw the corridor's doors. Hardcoded values are used (the +4 and -1) in this method as the corridor door model is
+        /// knwon and unlikely to change.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="z"></param>
+        /// <param name="bounds">the bounds of the corridor</param>
         /// <param name="isHorizontal"></param>
         /// <param name="transform"></param>
         /// <returns></returns>
         public List<GameObject> DrawCorridorDoors(BoundsInt bounds, bool isHorizontal, Transform transform)
         {
-            List<GameObject> doors = new()
-            {
-                Draw(bounds.xMin, bounds.zMin, corridorDoor, isHorizontal ? rotateY : Quaternion.identity, transform)
-            };
+            List<GameObject> doors = new();
 
             if (isHorizontal)
             {
-                doors.Add(Draw(bounds.xMax, bounds.zMin, corridorDoor, rotateY, transform));
-                // Flip first door
-                doors[0].transform.localScale += Vector3.left * 2;
+                doors.Add(Draw(bounds.xMin, bounds.zMin + 4, corridorDoor, Quaternion.Inverse(rotateY), transform));
+                doors.Add(Draw(bounds.xMax - 1, bounds.zMin, corridorDoor, rotateY, transform));
             }
             else
             {
-                doors.Add(Draw(bounds.xMin, bounds.zMax, corridorDoor, Quaternion.identity, transform));
-                // Flip second door
-                doors[1].transform.localScale += Vector3.back * 2;
+                doors.Add(Draw(bounds.xMin, bounds.zMin, corridorDoor, Quaternion.identity, transform));
+                doors.Add(Draw(bounds.xMin + 4, bounds.zMax - 1, corridorDoor, Quaternion.AngleAxis(180f, Vector3.up), transform));
             }
 
             return doors;
