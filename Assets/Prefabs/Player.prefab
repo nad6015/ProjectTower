@@ -207,11 +207,11 @@ MonoBehaviour:
     m_Bits: 640
   _hitbox: {fileID: 8337178641630974411}
   _attackCooldownDuration: 0
-  _attackCommitment: 0.2
+  _attackCommitment: 1
   maxCombo: 3
   _stamina: 5
   _staminaRegenRate: 0.085
-  _staminaRegenCooldownDuration: 1
+  _staminaRegenCooldownDuration: 3
 --- !u!81 &2553989433121075861
 AudioListener:
   m_ObjectHideFlags: 0
