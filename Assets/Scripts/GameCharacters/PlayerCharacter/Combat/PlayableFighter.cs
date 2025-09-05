@@ -49,10 +49,12 @@ namespace Assets.PlayerCharacter
             if (_continueCombo && _comboCount < maxCombo)
             {
                 Attack();
+                IncreaseStat(FighterStats.STAMINA, -1);
             }
             else
             {
                 _comboCount = 0;
+                _animator.SetBool("Attack", false);
             }
 
             _animator.SetInteger(_animCombo, _comboCount);
@@ -67,15 +69,14 @@ namespace Assets.PlayerCharacter
                 {
                     Attack();
                     GetComponent<PlayerMovement>().speed = _stats[FighterStats.Speed];
+                    IncreaseStat(FighterStats.STAMINA, -1);
                 }
                 else if (!_continueCombo)
                 {
                     _continueCombo = true;
-                    _comboCount++;
+                    _comboCount = Mathf.Min(_comboCount + 1, maxCombo);
                     GetComponent<PlayerMovement>().speed = _stats[FighterStats.Speed];
                 }
-
-                IncreaseStat(FighterStats.STAMINA, -1);
             }
         }
     }

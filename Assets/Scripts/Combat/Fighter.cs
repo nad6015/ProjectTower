@@ -117,7 +117,7 @@ namespace Assets.Combat
         /// <returns></returns>
         public bool IsAttacking()
         {
-            return _isAttacking;
+            return _animator.GetBool(_attackParam);
         }
 
         /// <summary>
@@ -145,7 +145,9 @@ namespace Assets.Combat
         }
 
         /// <summary>
-        /// TODO: Explain why this method is public
+        /// Called when an OnAnimationEnd event is invoked from an animation.
+        /// Due to the way Unity animation events work, an external class (GameCharacterController)
+        /// must register this callback for the Fighter class.
         /// </summary>
         public void OnAnimationEnd()
         {
@@ -154,7 +156,6 @@ namespace Assets.Combat
             _attackCooldown = _attackCooldownDuration;
             _stats[FighterStats.Speed] = _maxStats[FighterStats.Speed];
             AnimationEnded();
-            _animator.SetBool(_attackParam, _isAttacking);
             _hasAttacked.Clear();
         }
 
