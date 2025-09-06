@@ -1,3 +1,4 @@
+using Assets.Combat;
 using Assets.GameCharacters;
 using System;
 using UnityEngine;
@@ -16,11 +17,17 @@ namespace Assets.PlayerCharacter
         [SerializeField]
         private GameObject _camera;
 
+        [SerializeField]
+        private PlayerHUD _hud;
+
+        public PlayerCamera Camera { get; private set; }
+
         private PlayableFighter _fighter;
         private Animator _animator;
 
         private InputSystemActions _actions;
         private PlayerMovement _playerMovement;
+
 
         // Using both Awake and Start here to first initialise the controller's values (Awake) for the OnEnable and OnDisable
         // and then to set the referenced scripts' values (Start).
@@ -28,10 +35,10 @@ namespace Assets.PlayerCharacter
         {
             _playerMovement = GetComponent<PlayerMovement>();
             _fighter = GetComponent<PlayableFighter>();
-            _animator= GetComponentInChildren<Animator>();
+            _animator = GetComponentInChildren<Animator>();
 
             _actions = new InputSystemActions();
-            Instantiate(_camera);
+            Camera = Instantiate(_camera).GetComponent<PlayerCamera>();
         }
 
         protected override void Start()
@@ -49,9 +56,8 @@ namespace Assets.PlayerCharacter
             _actions.Player.Attack.Enable();
             _actions.Player.Attack.performed += AttackPerformed;
 
-            _actions.Player.Interact.Enable();
-            _actions.Player.Interact.performed += InteractPerformed;
-            
+           
+
             // Reset animator on enable
             _animator.Play("Idle Walk Run Blend", -1, 0);
             _animator.SetFloat("MotionSpeed", 1);
@@ -78,14 +84,25 @@ namespace Assets.PlayerCharacter
         private void InteractPerformed(InputAction.CallbackContext context)
         {
             OnInteract?.Invoke(context);
+
+            // Now the event has sent and its callbacks executed, disable the interact control
+            _actions.Player.Interact.Disable();
+            _actions.Player.Interact.performed -= InteractPerformed;
+            _hud.HidePrompt();
         }
 
-        public void Play()
+        /// <summary>
+        /// Unpauses the player controller so the player can control the character.
+        /// </summary>
+        public void Resume()
         {
             enabled = true;
             GetComponent<CharacterController>().enabled = enabled;
         }
 
+        /// <summary>
+        /// Pause the player controller so the player cannot move the character.
+        /// </summary>
         public void Pause()
         {
             enabled = false;
@@ -93,6 +110,29 @@ namespace Assets.PlayerCharacter
 
             // Event clearing code referenced from - https://stackoverflow.com/questions/153573/how-can-i-clear-event-subscriptions-in-c
             OnInteract = null;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.GetComponent<NpcFighter>() == null) // If the other collider is not an enemy. TODO: Use layermask for this.
+            {
+                _hud.ShowPrompt();
+
+                // Enable interact events
+                _actions.Player.Interact.Enable();
+                _actions.Player.Interact.performed += InteractPerformed;
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.GetComponent<NpcFighter>() == null) // If the other collider is not an enemy. TODO: Use layermask for this.
+            {
+                _hud.HidePrompt();
+                // Disable interact events
+                _actions.Player.Interact.Disable();
+                _actions.Player.Interact.performed -= InteractPerformed;
+            }
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Assets.Interactables;
 using Assets.PlayerCharacter;
-using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,7 +16,6 @@ namespace Assets.DungeonGenerator.Components
         private void Awake()
         {
             _animator = GetComponentInChildren<Animator>();
-            prompt.GetComponent<TextMeshPro>().text = "";
         }
 
         public DoorKey LockDoor(DoorKey doorKey)
@@ -25,7 +23,6 @@ namespace Assets.DungeonGenerator.Components
             _doorKey = doorKey;
             _locked = true;
             _animator.SetBool("Locked", true);
-            prompt.GetComponent<TextMeshPro>().text = "Unlock(E)";
 
             return _doorKey;
         }
@@ -37,7 +34,6 @@ namespace Assets.DungeonGenerator.Components
             {
                 _locked = false;
                 _animator.SetBool("Locked", _locked);
-                prompt.GetComponent<TextMeshPro>().text = "";
             }
         }
     }

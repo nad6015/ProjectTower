@@ -12,15 +12,17 @@ namespace Assets.DungeonGenerator.Components.Tiles
         public List<GameObject> propTiles;
         public GameObject roomCorner;
         public GameObject corridorDoor;
+        public Color mainCameraColor;
+
         public const int TileUnit = 1;
 
         private Shufflebag<GameObject> _floors;
-        private Shufflebag<GameObject> _props;
+        private Shufflebag<GameObject> _setPieces;
 
         public void OnEnable()
         {
             _floors = new(floorTiles);
-            _props = new(propTiles);
+            _setPieces = new(propTiles);
         }
 
         private Quaternion rotateY = Quaternion.AngleAxis(-90f, Vector3.up);
@@ -162,7 +164,7 @@ namespace Assets.DungeonGenerator.Components.Tiles
 
         internal DungeonProp GetProp()
         {
-            return _props.TakeItem()?.GetComponent<DungeonProp>();
+            return _setPieces.TakeItem()?.GetComponent<DungeonProp>();
         }
     }
 

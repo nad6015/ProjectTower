@@ -16,13 +16,14 @@ namespace Assets.PlayerCharacter
 
         private Transform _player;
         private Quaternion _initialRotation;
-        
-        void Start()
+        private Camera _camera;
+        void Awake()
         {
             _player = GameObject.FindWithTag("Player").transform;
 
             transform.Rotate(Vector3.right, cameraTilt);
             _initialRotation = transform.rotation;
+            _camera = GetComponent<Camera>();
         }
 
         void Update()
@@ -32,6 +33,11 @@ namespace Assets.PlayerCharacter
                 DistanceFromPlayer,
                 _player.position.z - DistanceFromPlayerZ), 
                 _initialRotation);
+        }
+
+        public void UpdateBackgroundColor(Color newColor)
+        {
+            _camera.backgroundColor = newColor;
         }
     }
 }

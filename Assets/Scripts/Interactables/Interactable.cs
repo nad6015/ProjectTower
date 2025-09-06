@@ -9,14 +9,7 @@ namespace Assets.Interactables
     /// </summary>
     public abstract class Interactable : MonoBehaviour
     {
-        [SerializeField]
-        protected GameObject prompt;
         protected PlayerController controller;
-
-        private void Start()
-        {
-            prompt.SetActive(false);
-        }
 
         private void OnDisable()
         {
@@ -31,7 +24,6 @@ namespace Assets.Interactables
             {
                 controller = other.GetComponent<PlayerController>();
                 controller.OnInteract += HandleInteract;
-                prompt.SetActive(true);
             }
         }
 
@@ -40,7 +32,6 @@ namespace Assets.Interactables
             if (other.CompareTag("Player"))
             {
                 controller.OnInteract -= HandleInteract;
-                prompt.SetActive(false);
             }
         }
 

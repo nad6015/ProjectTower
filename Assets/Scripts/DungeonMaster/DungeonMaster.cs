@@ -134,7 +134,8 @@ namespace Assets.DungeonMaster
             _audioManager.Modify(_dungeonParams.Components);
             _audioManager.PlayBackgroundMusic();
 
-            _player.Play();
+            _player.Resume();
+            _player.Camera.UpdateBackgroundColor(_currentComponents.tilemap.mainCameraColor);
             CurrentFloor++; // Next floor has been reached, so increment counter
 
             State = DungeonMasterState.Running;
