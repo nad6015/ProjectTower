@@ -330,7 +330,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 789f60b180d42e54981796a0cc96c5af, type: 2}
     - target: {fileID: 7751301447746594715, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
       propertyPath: <FloorsPerSection>k__BackingField
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
