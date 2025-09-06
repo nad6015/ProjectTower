@@ -10,43 +10,78 @@ namespace Assets.PlayerCharacter
         private List<GameObject> _visibleInventory;
 
         [SerializeField]
-        private int _maxItemStack;
+        private int _maxInventorySize = 3;
 
-        private Dictionary<UsableItem, int> _inventory;
+        private List<UsableItem> _inventory;
 
         void Awake()
         {
-            _inventory = new Dictionary<UsableItem, int>();
+            _inventory = new();
         }
 
         public void Add(UsableItem gameObject)
         {
-            if (_inventory.ContainsKey(gameObject))
+            if (!_inventory.Contains(gameObject) && _inventory.Count < _maxInventorySize)
             {
-                _inventory[gameObject]++;
-                _inventory[gameObject] = Mathf.Min(_inventory[gameObject], _maxItemStack);
-            }
-            else
-            {
-                _inventory.Add(gameObject, 1);
+                _inventory.Add(gameObject);
                 DisplayItem(gameObject);
             }
         }
 
-        private void DisplayItem(UsableItem gameObject)
+        /// <summary>
+        /// Displays the usable item in the first available inventory slot
+        /// </summary>
+        /// <param name="item"></param>
+        private void DisplayItem(UsableItem item)
         {
             foreach (var itemSlot in _visibleInventory)
-            { 
-                if(itemSlot.transform.childCount == 0)
+            {
+                if (itemSlot.transform.childCount == 0)
                 {
-                    gameObject.transform.SetParent(itemSlot.transform, false);
+                    item.transform.SetParent(itemSlot.transform, false);
                 }
             }
         }
 
+        /// <summary>
+        /// Removes the given item from the inventory display.
+        /// </summary>
+        /// <param name="item"></param>
+        private void RemoveItemFromDisplay(UsableItem item)
+        {
+            foreach (var itemSlot in _visibleInventory)
+            {
+                if (itemSlot.transform.GetChild(0).gameObject == item.gameObject)
+                {
+                    item.transform.SetParent(null);
+                    item.gameObject.SetActive(false);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Checks if the given item exists within the inventory.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         public bool Contains(UsableItem item)
         {
-            return _inventory.ContainsKey(item);
+            return _inventory.Contains(item);
+        }
+
+        /// <summary>
+        /// Removes the specified item from the inventory if it exists.
+        /// Removing an item with multiple instances within the inventory, only decreases the number of instances.
+        /// If the item is the last in the inventory, it is removed from display as well as from the inventory map.
+        /// </summary>
+        /// <param name="item"></param>
+        public void Remove(UsableItem item)
+        {
+            if (_inventory.Contains(item))
+            {
+                _inventory.Remove(item);
+                RemoveItemFromDisplay(item);
+            }
         }
     }
 }

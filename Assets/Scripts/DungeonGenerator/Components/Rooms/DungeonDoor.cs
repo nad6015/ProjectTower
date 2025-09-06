@@ -34,6 +34,7 @@ namespace Assets.DungeonGenerator.Components
             {
                 _locked = false;
                 _animator.SetBool("Locked", _locked);
+                playerInventory.Remove(_doorKey);
             }
         }
     }
