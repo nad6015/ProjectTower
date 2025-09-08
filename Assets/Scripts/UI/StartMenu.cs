@@ -6,10 +6,15 @@ namespace Assets.UI
 {
     public class StartMenu : MonoBehaviour
     {
+        [SerializeField]
+        private UIDocument _credits;
+
+        [SerializeField]
+        private UIDocument _options;
+
         private VisualElement _root;
         private SceneTransitionManager _gameManager;
 
-        private Button _newGame;
         void Awake()
         {
             _root = GetComponent<UIDocument>().rootVisualElement;
@@ -18,8 +23,27 @@ namespace Assets.UI
 
         private void OnEnable()
         {
-            _newGame = _root.Q<Button>("NewGame");
-            _newGame.clicked += NewGameClicked;
+            _root.Q<Button>("NewGame").clicked += NewGameClicked;
+            _root.Q<Button>("Credits").clicked += ShowCredits;
+            _root.Q<Button>("Options").clicked += ShowOptions;
+        }
+        private void OnDisable()
+        {
+            _root.Q<Button>("NewGame").clicked -= NewGameClicked;
+            _root.Q<Button>("Credits").clicked -= ShowCredits;
+            _root.Q<Button>("Options").clicked -= ShowOptions;
+        }
+
+        private void ShowOptions()
+        {
+            _root.visible = false;
+            _options.rootVisualElement.visible = true;
+        }
+
+        private void ShowCredits()
+        {
+            _root.visible = false;
+            _credits.rootVisualElement.visible = true;
         }
 
         private void NewGameClicked()

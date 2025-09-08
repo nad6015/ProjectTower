@@ -1,10 +1,13 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/NewGame.uss?fileID=7433441132597879392&amp;guid=92b35fbb46ca55f4b897a2d5e8f7374c&amp;type=3#NewGame" />
     <ui:VisualElement name="VisualElement" style="flex-grow: 1; background-color: rgba(115, 37, 39, 0); justify-content: space-around; width: auto; max-width: initial; align-self: auto; align-items: stretch; align-content: auto;">
-        <ui:VisualElement style="flex-grow: 1; flex-direction: column; flex-wrap: wrap; align-content: center; align-self: auto; justify-content: space-evenly; height: 50%; max-height: 50%; align-items: stretch; max-width: 25%; left: 37.5%;">
-            <ui:Button text="New Game" name="NewGame" data-source-type="GameManager, Assembly-CSharp" />
-            <ui:Button text="Load" />
-            <ui:Button text="Options" />
-            <ui:Button text="Exit" />
+        <ui:VisualElement name="VisualElement" style="flex-grow: 1; flex-direction: column; flex-wrap: wrap; align-content: center; align-self: auto; justify-content: space-between; height: 100%; align-items: center; max-width: 20%; width: 20%; background-color: rgb(149, 149, 149); background-position-x: center 0; padding-top: 6px; padding-right: 0; padding-bottom: 6px; padding-left: 0;">
+            <ui:Label text="The Tower" style="-unity-font-definition: url(&quot;project://database/Assets/UI/Metamorphous/Metamorphous-Regular.ttf?fileID=12800000&amp;guid=357a43675fa265f49991b9f235967205&amp;type=3#Metamorphous-Regular&quot;); font-size: 20px; width: 123px; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+            <ui:VisualElement name="Buttons" style="flex-grow: 1; height: 50%; max-height: 50%; justify-content: flex-start; width: 100%;">
+                <ui:Button text="New Game" name="NewGame" data-source-type="GameManager, Assembly-CSharp" class="button" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; width: 100%;" />
+                <ui:Button text="Credits" name="Credits" class="button" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+                <ui:Button text="Options" name="Options" class="button" style="margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

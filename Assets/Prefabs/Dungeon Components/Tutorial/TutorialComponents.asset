@@ -15,8 +15,8 @@ MonoBehaviour:
   tilemap: {fileID: 11400000, guid: 3342a51109a605e45b5bfa4b137d9f91, type: 2}
   enemies:
   - {fileID: 7807404158470223261, guid: 4b0862e902349224abf8b18c3010fd57, type: 3}
-  startingPoint: {fileID: 3787019230069511806, guid: 7c404835786532a4fbf9a3cc35cbd73b, type: 3}
+  startingPoint: {fileID: 7254044432296773021, guid: 1ea21838ee976ae479f70fea99a527cb, type: 3}
   exit: {fileID: 8684044341818389683, guid: 20f557f5c48279b4d9ec43df8dfe49e2, type: 3}
   doorKey: {fileID: 7755368289592254985, guid: 4dd9073c733399a4084427390387fc87, type: 3}
-  FootstepAudio: {fileID: 0}
+  FootstepAudio: {fileID: 8300000, guid: 85016e0f2b01da248b9663dd49a161b0, type: 3}
   DungeonMusic: {fileID: 8300000, guid: f5ee955192fe8f248bced6d3747de1a1, type: 3}

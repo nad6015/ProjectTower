@@ -29,3 +29,4 @@ MonoBehaviour:
   propTiles: []
   roomCorner: {fileID: 9162778129440914531, guid: 3bc17762c4b3dc84ba960b2b38d7a768, type: 3}
   corridorDoor: {fileID: 1804593036432212441, guid: 230da11bae7918b47a868e235df65983, type: 3}
+  mainCameraColor: {r: 0.36078432, g: 0.35686275, b: 0.33333334, a: 0}
