@@ -2,7 +2,6 @@
 using Assets.Interactables;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GameObject;
 using Random = UnityEngine.Random;
 
 namespace Assets.DungeonGenerator.Components

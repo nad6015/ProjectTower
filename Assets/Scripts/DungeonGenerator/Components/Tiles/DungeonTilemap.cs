@@ -17,23 +17,27 @@ namespace Assets.DungeonGenerator.Components.Tiles
         public const int TileUnit = 1;
 
         private Shufflebag<GameObject> _floors;
+        private Shufflebag<GameObject> _walls;
         private Shufflebag<GameObject> _setPieces;
 
         public void OnEnable()
         {
             _floors = new(floorTiles);
+            _walls = new(wallTiles);
             _setPieces = new(propTiles);
         }
 
         private Quaternion rotateY = Quaternion.AngleAxis(-90f, Vector3.up);
 
         /// <summary>
-        /// TODO
+        /// Draws the left and right walls of a room.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="z"></param>
-        /// <param name="transform"></param>
-        /// <returns></returns>
+        /// <param name="width">the width of the room</param>
+        /// <param name="minX">the x component of the room's starting point</param>
+        /// <param name="z">the z component of the room's starting</param>
+        /// <param name="maxZ">the z component of the room's furthermost point</param>
+        /// <param name="transform">the room's transform</param>
+        /// <returns>A collection of the created walls</returns>
         public IEnumerable<GameObject> DrawHorizontalWalls(int width, int minX, int z, int maxZ, Transform transform)
         {
             List<GameObject> walls = new();
@@ -42,22 +46,23 @@ namespace Assets.DungeonGenerator.Components.Tiles
                 float wallX = minX + i;
 
                 // Bottom wall
-                walls.Add(Draw(wallX, z, wallTiles[0], Quaternion.identity, transform));
+                walls.Add(Draw(wallX, z, _walls.TakeItem(), Quaternion.AngleAxis(180, Vector3.up), transform));
 
                 // Top wall
-                walls.Add(Draw(wallX, maxZ, wallTiles[0], Quaternion.identity, transform));
+                walls.Add(Draw(wallX, maxZ, _walls.TakeItem(), Quaternion.identity, transform));
             }
             return walls;
         }
 
         /// <summary>
-        /// TODO
+        /// Draws the top and bottom walls of a room.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="minZ"></param>
-        /// <param name="quaternion"></param>
-        /// <param name="transform"></param>
-        /// <returns></returns>
+        /// <param name="height">the height of the room</param>
+        /// <param name="x">the z component of the room's starting</param>
+        /// <param name="maxX">the x component of the room's furthermost point</param>
+        /// <param name="minZ">the z component of the room's starting point</param>
+        /// <param name="transform">the room's transform</param>
+        /// <returns>A collection of the created walls</returns>
         public List<GameObject> DrawVerticalWalls(int height, int x, int maxX, int minZ, Transform transform)
         {
             List<GameObject> walls = new();
@@ -66,10 +71,10 @@ namespace Assets.DungeonGenerator.Components.Tiles
                 float z = minZ + i;
 
                 // Left wall
-                walls.Add(Draw(x, z, wallTiles[0], rotateY, transform));
+                walls.Add(Draw(x, z, _walls.TakeItem(), rotateY, transform));
 
                 // Right wall
-                walls.Add(Draw(maxX, z, wallTiles[0], rotateY, transform));
+                walls.Add(Draw(maxX, z, _walls.TakeItem(), Quaternion.Inverse(rotateY), transform));
             }
             return walls;
         }
@@ -162,39 +167,9 @@ namespace Assets.DungeonGenerator.Components.Tiles
             return DrawRoomCorner(max.x, max.z, transform);
         }
 
-        internal DungeonProp GetProp()
+        internal DungeonTile GetProp()
         {
-            return _setPieces.TakeItem()?.GetComponent<DungeonProp>();
-        }
-    }
-
-    public class Shufflebag<T>
-    {
-        private List<T> _originalList;
-        private List<T> _shuffleBag;
-        public Shufflebag(List<T> originalList)
-        {
-            _originalList = new List<T>(originalList);
-            _shuffleBag = new List<T>(originalList);
-        }
-
-        public T TakeItem()
-        {
-            if (_shuffleBag.Count == 0 && _originalList.Count == 0)
-            {
-                return default;
-            }
-            else if (_shuffleBag.Count == 0)
-            {
-                _shuffleBag = new List<T>(_originalList);
-            }
-
-            int randomIndex = Mathf.RoundToInt(UnityEngine.Random.value * (_shuffleBag.Count - 1));
-
-            T item = _shuffleBag[randomIndex];
-            _shuffleBag.RemoveAt(randomIndex);
-
-            return item;
+            return _setPieces.TakeItem()?.GetComponent<DungeonTile>();
         }
     }
 }

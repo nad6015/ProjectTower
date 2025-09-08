@@ -1,10 +1,10 @@
 using Assets.DungeonGenerator.Components.Tiles;
-using Assets.Utilities;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using static Assets.Utilities.GameObjectUtilities;
+using Assets.DungeonGenerator.Components.Rooms;
 
 namespace Assets.DungeonGenerator.Components
 {
@@ -15,13 +15,18 @@ namespace Assets.DungeonGenerator.Components
         public DungeonNode DungeonNode { get; private set; }
         public RoomType Type { get { return DungeonNode.Type; } }
 
-        private List<GameObject> _walls;
+        protected List<GameObject> _walls;
+        protected GameObject _floor;
         private Bounds _safeArea; // Where in the room is safe to place items
 
         private void Awake()
         {
             Contents = new();
             _walls = new();
+
+            // Create an empty game object to contain the floor tiles
+            _floor = new("Floor");
+            _floor.transform.SetParent(transform);
         }
 
         public void Construct(DungeonTilemap tilemap)
@@ -29,12 +34,8 @@ namespace Assets.DungeonGenerator.Components
             BoundsInt bounds = DungeonComponentUtils.BoundsToBoundsInt(Bounds); // Convert to int for accurate tile placement
             transform.position = bounds.min;
 
-            // Create an empty game object to contain the floor tiles
-            GameObject floor = new("Floor");
-            floor.transform.SetParent(transform);
-
             // Place the floors
-            DungeonComponentUtils.DrawFloor(tilemap, bounds, floor.transform);
+            DungeonComponentUtils.DrawFloor(tilemap, bounds, _floor.transform);
 
             // Create an empty game object to contain the wall tiles
             GameObject walls = new("Walls");
@@ -96,6 +97,21 @@ namespace Assets.DungeonGenerator.Components
                     dungeonRoom = NewGameObjectWithComponent<LockedRoom>(name);
                     break;
                 }
+                case RoomType.RestPoint:
+                {
+                    dungeonRoom = NewGameObjectWithComponent<RestPointRoom>(name);
+                    break;
+                }
+                case RoomType.Explore:
+                {
+                    dungeonRoom = NewGameObjectWithComponent<ExploreRoom>(name);
+                    break;
+                }
+                case RoomType.Boss:
+                {
+                    dungeonRoom = NewGameObjectWithComponent<BossRoom>(name);
+                    break;
+                }
                 default:
                 {
                     dungeonRoom = NewGameObjectWithComponent<DungeonRoom>(name);
@@ -137,7 +153,7 @@ namespace Assets.DungeonGenerator.Components
             DungeonTilemap tilemap = dungeon.Components.tilemap;
             for (int i = 0; i < itemCount; i++)
             {
-                DungeonProp prop = tilemap.GetProp();
+                DungeonTile prop = tilemap.GetProp();
                 if (prop == null) // if null, then shufflebag is empty
                 {
                     break;

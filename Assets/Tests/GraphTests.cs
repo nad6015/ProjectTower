@@ -125,7 +125,7 @@ public class GraphTests
 
         List<RoomType> pattern = new()
         {
-            RoomType.Combat, RoomType.Explore, RoomType.Item
+            RoomType.Combat, RoomType.Explore, RoomType.Treasure
         };
 
         List<DungeonNode> foundNodes = graph.FindMatching(pattern);
@@ -133,7 +133,7 @@ public class GraphTests
         Assert.That(foundNodes.Count == 3);
         Assert.That(foundNodes[0].IsSameType(RoomType.Combat));
         Assert.That(foundNodes[1].IsSameType(RoomType.Explore));
-        Assert.That(foundNodes[2].IsSameType(RoomType.Item));
+        Assert.That(foundNodes[2].IsSameType(RoomType.Treasure));
     }
 
 
@@ -145,12 +145,12 @@ public class GraphTests
 
         List<RoomType> pattern = new()
         {
-            RoomType.Combat, RoomType.Explore, RoomType.Item, RoomType.Boss
+            RoomType.Combat, RoomType.Explore, RoomType.Treasure, RoomType.Boss
         };
 
         List<RoomType> replacer = new()
         {
-            RoomType.Combat, RoomType.Ambush,RoomType.Treasure,RoomType.Boss
+            RoomType.Combat, RoomType.Generic,RoomType.Treasure,RoomType.Boss
         };
 
         List<DungeonNode> foundNodes = graph.FindMatching(pattern);
@@ -161,7 +161,7 @@ public class GraphTests
 
         Assert.That(graph.Count == count);
         Assert.That(graph.FindById(5).IsSameType(RoomType.Combat));
-        Assert.That(graph.FindById(6).IsSameType(RoomType.Ambush));
+        Assert.That(graph.FindById(6).IsSameType(RoomType.Generic));
         Assert.That(graph.FindById(7).IsSameType(RoomType.Treasure));
         Assert.That(graph.FindById(8).IsSameType(RoomType.Boss));
 
@@ -176,7 +176,7 @@ public class GraphTests
 
         List<RoomType> pattern = new()
         {
-            RoomType.Combat, RoomType.Explore, RoomType.Item
+            RoomType.Combat, RoomType.Explore, RoomType.Treasure
         };
 
         List<RoomType> replacer = new() { RoomType.Treasure };
@@ -202,12 +202,12 @@ public class GraphTests
 
         List<RoomType> pattern = new()
         {
-            RoomType.Item, RoomType.Explore, RoomType.Combat, RoomType.RestPoint
+            RoomType.Treasure, RoomType.Explore, RoomType.Combat, RoomType.RestPoint
         };
 
         List<RoomType> replacer = new()
         {
-            RoomType.Combat, RoomType.Ambush, RoomType.Treasure,
+            RoomType.Combat, RoomType.Generic, RoomType.Treasure,
             RoomType.Boss, RoomType.RestPoint, RoomType.Combat
         };
 
@@ -220,7 +220,7 @@ public class GraphTests
         Assert.That(graph.Count == count + 2);
 
         Assert.That(graph.FindById(1).IsSameType(RoomType.Combat));
-        Assert.That(graph.FindById(2).IsSameType(RoomType.Ambush));
+        Assert.That(graph.FindById(2).IsSameType(RoomType.Generic));
         Assert.That(graph.FindById(3).IsSameType(RoomType.Treasure));
         Assert.That(graph.FindById(4).IsSameType(RoomType.Boss));
         Assert.That(graph.FindById(count).IsSameType(RoomType.RestPoint));
@@ -260,7 +260,7 @@ public class GraphTests
     {
         DungeonLayout threeNodeGraph = new();
         var start = new DungeonNode(RoomType.Start);
-        var node2 = new DungeonNode(RoomType.Item);
+        var node2 = new DungeonNode(RoomType.Treasure);
         var end = new DungeonNode(RoomType.End);
 
         threeNodeGraph.Add(start, node2);
@@ -272,13 +272,13 @@ public class GraphTests
     {
         DungeonLayout tenNodeGraph = new();
         var start = new DungeonNode(RoomType.Start);
-        var node2 = new DungeonNode(RoomType.Item);
+        var node2 = new DungeonNode(RoomType.Treasure);
         var node3 = new DungeonNode(RoomType.Explore);
         var node4 = new DungeonNode(RoomType.Combat);
         var node5 = new DungeonNode(RoomType.RestPoint);
         var node6 = new DungeonNode(RoomType.Combat);
         var node7 = new DungeonNode(RoomType.Explore);
-        var node8 = new DungeonNode(RoomType.Item);
+        var node8 = new DungeonNode(RoomType.Treasure);
         var node9 = new DungeonNode(RoomType.Boss);
         var end = new DungeonNode(RoomType.End);
 

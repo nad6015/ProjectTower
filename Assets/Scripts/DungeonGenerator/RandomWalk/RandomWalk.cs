@@ -19,18 +19,18 @@ namespace Assets.DungeonGenerator
         private DungeonRepresentation _dungeon;
         private DungeonComponents _components;
         private readonly Transform _dungeonTransform;
-        private readonly List<Vector3> _shuffleBag;
+        private readonly Shufflebag<Vector3> _directions;
 
         public RandomWalk(Transform transform)
         {
             _dungeonTransform = transform;
-            _shuffleBag = new List<Vector3>()
+            _directions = new(new()
             {
                 Vector3.back,
                 Vector3.forward,
                 Vector3.left,
                 Vector3.right
-            };
+            });
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Assets.DungeonGenerator
         private void CreateDungeonRooms()
         {
             int negativeDirOffset = Mathf.FloorToInt(_dungeon.Parameter<Range<Vector3>>(DungeonParameter.RoomSize).max.magnitude);
-            Vector3 dir = RandomDirection();
+            Vector3 dir = _directions.TakeItem();
 
             Bounds lastRoom = RandomRoom(Vector3.zero, Vector3.zero, dir, dir.x != 0);
             _roomBounds.Add(lastRoom, null);
@@ -109,7 +109,7 @@ namespace Assets.DungeonGenerator
                         nextRoom = RandomRoom(new(lastRoom.min.x, 0, lastRoom.min.z - 0), lastRoom.max, dir, false);
                         corridor = CreateCorridor(nextRoom, lastRoom, false);
                     }
-                    dir = RandomDirection();
+                    dir = _directions.TakeItem();
                     // If a room or a corridor already exists in that area, then loop again.
                     if (CanPlaceRoom(nextRoom, corridor))
                     {
@@ -168,6 +168,10 @@ namespace Assets.DungeonGenerator
             foreach (var room in _roomBounds.Values)
             {
                 room.InstaniateContents(_dungeon);
+                if(room.DungeonNode.Type == RoomType.Start)
+                {
+                    continue;
+                }
                 foreach (var content in room.Contents)
                 {
                     GameObject.Instantiate(content.Item1, content.Item2, Quaternion.identity, room.transform);
@@ -239,33 +243,6 @@ namespace Assets.DungeonGenerator
             }
 
             return new Bounds(roomCenter, roomSize);
-        }
-
-        /// <summary>
-        /// Chooses a random direction from the following list:
-        ///     - Right (1,0,0)
-        ///     - Left (-1,0,0)
-        ///     - Up (0,0,1)
-        ///     - Down (0,0,-1)
-        /// Uses the dungeon parameters to decide the bias between directions.
-        /// </summary>
-        /// <returns>a randomly chosen direction</returns>
-        private Vector3 RandomDirection()
-        {
-            if (_shuffleBag.Count == 0)
-            {
-                _shuffleBag.Add(Vector3.back);
-                _shuffleBag.Add(Vector3.forward);
-                _shuffleBag.Add(Vector3.left);
-                _shuffleBag.Add(Vector3.right);
-            }
-
-            int randomIndex = Mathf.RoundToInt(Random.value * (_shuffleBag.Count - 1));
-
-            Vector3 dir = _shuffleBag[randomIndex];
-            _shuffleBag.RemoveAt(randomIndex);
-
-            return dir;
         }
 
         /// <summary>

@@ -68,7 +68,7 @@ public class GraphGrammarTests
         Assert.That(firstNode.Type == RoomType.Start);
         Assert.That(secondNode.Type == RoomType.Explore);
         Assert.That(thirdNode.Type == RoomType.Combat);
-        Assert.That(fourthNode.Type == RoomType.Item);
+        Assert.That(fourthNode.Type == RoomType.Treasure);
         Assert.That(fifthNode.Type == RoomType.End);
 
         Assert.That(rooms.FirstNode.Type == RoomType.Start);

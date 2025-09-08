@@ -1,3 +1,4 @@
+using Assets.DungeonGenerator.Components.Tiles;
 using UnityEngine;
 
 namespace Assets.DungeonGenerator.Components
@@ -6,9 +7,19 @@ namespace Assets.DungeonGenerator.Components
     {
         internal override void Populate(DungeonRepresentation dungeon)
         {
-            PlaceProps(dungeon);
             SpawnPoint startingPoint = dungeon.Components.startingPoint;
-            Contents.Add(new(startingPoint.gameObject, startingPoint.transform.position + Bounds.center));
+            GameObject.Instantiate(startingPoint, Bounds.center, Quaternion.identity);
+            DungeonTile tile = startingPoint.GetComponent<DungeonTile>();
+            Bounds bounds = tile.GetBounds();
+
+            var hits = Physics.BoxCastAll(Bounds.center, bounds.extents / 2, Vector3.down);
+            foreach (var hit in hits)
+            {
+                if (!tile.Contains(hit.collider.gameObject))
+                {
+                    hit.collider.gameObject.SetActive(false);
+                }
+            }
         }
     }
 }

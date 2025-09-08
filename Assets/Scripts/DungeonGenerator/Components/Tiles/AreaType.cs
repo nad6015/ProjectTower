@@ -3,8 +3,9 @@
     public enum AreaType
     {
         None = 0,
-        WALL = 1,
-        CENTER = 2,
-        FLOOR = 3
+        Wall = 1,
+        Center = 2,
+        Floor = 3,
+        Corner = 4,
     }
 }

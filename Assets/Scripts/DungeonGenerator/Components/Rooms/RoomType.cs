@@ -5,13 +5,11 @@ namespace Assets.DungeonGenerator.Components
         Generic,
         Start,
         Explore,
-        Treasure,
         Combat,
-        Ambush,
-        End,
-        Item,
+        Treasure,
         Boss,
         RestPoint,
-        Lock
+        Lock,
+        End,
     }
 }
