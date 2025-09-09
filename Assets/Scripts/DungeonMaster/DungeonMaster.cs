@@ -50,7 +50,7 @@ namespace Assets.DungeonMaster
         private Dictionary<GameplayParameter, ValueRepresentation> _gameParams;
         private Dictionary<GameParameter, int> _floorStatistics;
         //private ResourceSystem _resourceSystem;
-        private CombatSystem _combatSystem;
+        private CombatManager _combatSystem;
         private SceneTransitionManager _sceneTransitionManager;
         private AudioManager _audioManager;
         private DungeonMasterConfiguration _config;
@@ -62,7 +62,7 @@ namespace Assets.DungeonMaster
         {
             _floorStatistics = new();
             _dungeonGenerator = FindComponentByTag<DungeonGenerator.DungeonGenerator>("DungeonGenerator");
-            _combatSystem = FindComponentByTag<CombatSystem>("CombatSystem");
+            _combatSystem = FindComponentByTag<CombatManager>("CombatSystem");
             _sceneTransitionManager = FindComponentByTag<SceneTransitionManager>("SceneManager");
             _audioManager = FindComponentByTag<AudioManager>("AudioManager");
 
@@ -133,6 +133,8 @@ namespace Assets.DungeonMaster
             _sceneTransitionManager.SceneTransition(GameScene.None);
             _audioManager.Modify(_dungeonParams.Components);
             _audioManager.PlayBackgroundMusic();
+
+            _combatSystem.OnNewDungeon();
 
             _player.Resume();
             _player.Camera.UpdateBackgroundColor(_currentComponents.tilemap.mainCameraColor);
@@ -217,12 +219,12 @@ namespace Assets.DungeonMaster
             CurrentFloor = 1;
 
         }
-        private void OnEnemyDefeated(Fighter fighter)
+        private void OnEnemyDefeated(NpcFighter fighter)
         {
             _floorStatistics[GameParameter.EnemiesDefeated]++;
         }
 
-        private void OnPlayerDefeated(Fighter fighter)
+        private void OnPlayerDefeated(PlayableFighter fighter)
         {
             State = DungeonMasterState.GameEnd;
         }

@@ -1,0 +1,6 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/NewGame.uss?fileID=7433441132597879392&amp;guid=92b35fbb46ca55f4b897a2d5e8f7374c&amp;type=3#NewGame" />
+    <engine:VisualElement style="flex-grow: 1; align-items: flex-start; flex-direction: row; align-self: auto; justify-content: space-evenly; padding-top: 24px; padding-right: 24px; padding-bottom: 24px; padding-left: 24px;">
+        <engine:Label text="Congratulations, You&apos;ve Beaten The Tower!" name="Label" style="font-size: 28px; -unity-font-definition: url(&quot;project://database/Assets/UI/Metamorphous/Metamorphous-Regular.ttf?fileID=12800000&amp;guid=357a43675fa265f49991b9f235967205&amp;type=3#Metamorphous-Regular&quot;);" />
+    </engine:VisualElement>
+</engine:UXML>

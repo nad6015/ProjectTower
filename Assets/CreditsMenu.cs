@@ -8,12 +8,10 @@ public class CreditsMenu : MonoBehaviour
     private UIDocument _prevMenu;
 
     private VisualElement _root;
-    private SceneTransitionManager _gameManager;
 
     void Awake()
     {
         _root = GetComponent<UIDocument>().rootVisualElement;
-        _gameManager = GameObject.FindGameObjectWithTag("SceneManager").GetComponent<SceneTransitionManager>();
         _root.visible = false;
     }
 

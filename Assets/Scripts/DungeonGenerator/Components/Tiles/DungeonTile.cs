@@ -15,19 +15,6 @@ namespace Assets.DungeonGenerator.Components.Tiles
         public Bounds Bounds { get; private set; }
         private List<GameObject> contents;
 
-        private void Awake()
-        {
-            contents = new List<GameObject>();
-            contents.AddRange(GetChildren(transform));
-        }
-
-        private void Start()
-        {
-            Debug.Log(contents.Count);
-            contents = new List<GameObject>();
-            contents.AddRange(GetChildren(transform));
-        }
-
         public Bounds GetBounds()
         {
             Bounds bounds = new Bounds();

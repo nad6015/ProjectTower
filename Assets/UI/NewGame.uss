@@ -38,3 +38,7 @@
     transition-timing-function: ease;
     transition-delay: 0s;
 }
+
+.button-bg {
+    background-color: rgb(188, 188, 188);
+}

@@ -7,6 +7,7 @@ namespace Assets.Combat
     public abstract class Fighter : MonoBehaviour
     {
         public event Action<FighterStats> OnStatChange;
+        public event Action<Fighter> OnDefeat;
 
         [SerializeField]
         private int health = 5;
@@ -36,7 +37,8 @@ namespace Assets.Combat
 
         private float _attackCooldown;
         private const string _attackParam = "Attack";
-        private List<Fighter> _hasAttacked = new List<Fighter>();
+        private List<Fighter> _hasAttacked = new();
+
 
         public void Awake()
         {
@@ -58,19 +60,24 @@ namespace Assets.Combat
         }
 
         /// <summary>
-        /// TODO
+        /// Gets the current value of a fighter stat. This can differ from the max stat
+        /// if the stat is reduced or increased. For example, a fighter that takes damage will have their current health reduced
+        /// but the max health they can have will stay the same.
         /// </summary>
         /// <param name="stat"></param>
-        /// <returns></returns>
+        /// <returns>the value of the stat</returns>
         public int GetStat(FighterStats stat) => _stats[stat];
 
         /// <summary>
-        /// TODO
+        /// Gets the max value of a fighter stat.
         /// </summary>
         /// <param name="stat"></param>
-        /// <returns></returns>
+        /// <returns>the max value of the stat</returns>
         public int GetMaxStat(FighterStats stat) => _maxStats[stat];
 
+        /// <summary>
+        /// Called when a fighter attacks, but only runs the attack logic if the attack cooldown is equal to or less than zero.
+        /// </summary>
         public void Attack()
         {
             if (_attackCooldown <= 0)
@@ -82,8 +89,7 @@ namespace Assets.Combat
                 var colliders = Physics.OverlapBox(transform.position, Vector3.one, Quaternion.identity, layerMask);
                 foreach (var item in colliders)
                 {
-                    Fighter target = item.GetComponent<Fighter>();
-                    if (target != null)
+                    if (item.TryGetComponent<Fighter>(out var target))
                     {
                         target.TakeDamage(this);
                     }
@@ -132,7 +138,8 @@ namespace Assets.Combat
 
             if (IsDead())
             {
-                gameObject.SetActive(false); // TODO: Death indicator
+                OnDefeat?.Invoke(this);
+                _animator.SetTrigger("Defeated");
             }
         }
 
