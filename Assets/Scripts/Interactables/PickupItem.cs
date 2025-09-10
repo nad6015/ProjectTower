@@ -10,6 +10,10 @@ namespace Assets.Interactables
         public UsableItem Pickup { get; set; }
 
         private float _rotationSpeed = 1f;
+        private void Awake()
+        {
+            prompt = "Pickup";
+        }
         private void Update()
         {
             Pickup.transform.Rotate(Vector3.up, _rotationSpeed);

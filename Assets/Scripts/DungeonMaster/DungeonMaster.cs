@@ -221,7 +221,14 @@ namespace Assets.DungeonMaster
         }
         private void OnEnemyDefeated(NpcFighter fighter)
         {
-            _floorStatistics[GameParameter.EnemiesDefeated]++;
+            if (_floorStatistics.ContainsKey(GameParameter.EnemiesDefeated))
+            {
+                _floorStatistics[GameParameter.EnemiesDefeated]++;
+            }
+            else
+            {
+                _floorStatistics[GameParameter.EnemiesDefeated] = 1;
+            }
         }
 
         private void OnPlayerDefeated(PlayableFighter fighter)

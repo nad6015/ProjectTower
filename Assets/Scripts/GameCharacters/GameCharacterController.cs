@@ -23,8 +23,6 @@ namespace Assets.GameCharacters
             _animationEventsHandler.OnFootstepHandler += Footstep;
             _animationEventsHandler.OnHitHandler += Hit;
             _animationEventsHandler.OnAnimationEndHandler += GetComponent<Fighter>().OnAnimationEnd;
-
-            //_audioManager = FindComponentByTag<AudioManager>()
         }
 
         public void Hit()

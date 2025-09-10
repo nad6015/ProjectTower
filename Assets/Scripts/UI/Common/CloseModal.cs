@@ -1,8 +1,7 @@
-using Assets.GameManager;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class CreditsMenu : MonoBehaviour
+public class CloseModal : MonoBehaviour
 {
     [SerializeField]
     private UIDocument _prevMenu;
@@ -28,6 +27,9 @@ public class CreditsMenu : MonoBehaviour
     private void ShowPreviousMenu()
     {
         _root.visible = false;
-        _prevMenu.rootVisualElement.visible = true;
+        if (_prevMenu != null)
+        {
+            _prevMenu.rootVisualElement.visible = true;
+        }
     }
 }

@@ -1,6 +1,7 @@
 using Assets.Combat;
 using Assets.PlayerCharacter;
 using Assets.UI;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -37,9 +38,10 @@ public class PlayerHUD : MonoBehaviour
     /// <summary>
     /// Shows the interaction prompt.
     /// </summary>
-    public void ShowPrompt()
+    public void ShowPrompt(string prompt)
     {
         _prompt.SetActive(true);
+        _prompt.GetComponentInChildren<TextMeshProUGUI>().text = prompt;
     }
 
     /// <summary>

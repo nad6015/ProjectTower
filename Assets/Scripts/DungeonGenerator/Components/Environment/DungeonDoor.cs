@@ -16,6 +16,7 @@ namespace Assets.DungeonGenerator.Components
         private void Awake()
         {
             _animator = GetComponentInChildren<Animator>();
+            prompt = "Unlock";
         }
 
         public DoorKey LockDoor(DoorKey doorKey)

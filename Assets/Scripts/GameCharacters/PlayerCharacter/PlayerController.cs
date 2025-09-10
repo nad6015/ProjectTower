@@ -56,7 +56,8 @@ namespace Assets.PlayerCharacter
             _actions.Player.Attack.Enable();
             _actions.Player.Attack.performed += AttackPerformed;
 
-           
+            _actions.Player.Interact.Enable();
+            _actions.Player.Interact.performed += InteractPerformed;
 
             // Reset animator on enable
             _animator.Play("Idle Walk Run Blend", -1, 0);
@@ -84,11 +85,6 @@ namespace Assets.PlayerCharacter
         private void InteractPerformed(InputAction.CallbackContext context)
         {
             OnInteract?.Invoke(context);
-
-            // Now the event has sent and its callbacks executed, disable the interact control
-            _actions.Player.Interact.Disable();
-            _actions.Player.Interact.performed -= InteractPerformed;
-            _hud.HidePrompt();
         }
 
         /// <summary>
@@ -112,27 +108,14 @@ namespace Assets.PlayerCharacter
             OnInteract = null;
         }
 
-        private void OnTriggerEnter(Collider other)
+        public void ShowHUD(string prompt)
         {
-            if (other.GetComponent<NpcFighter>() == null) // If the other collider is not an enemy. TODO: Use layermask for this.
-            {
-                _hud.ShowPrompt();
-
-                // Enable interact events
-                _actions.Player.Interact.Enable();
-                _actions.Player.Interact.performed += InteractPerformed;
-            }
+            _hud.ShowPrompt(prompt);
         }
 
-        private void OnTriggerExit(Collider other)
+        public void HideHUD()
         {
-            if (other.GetComponent<NpcFighter>() == null) // If the other collider is not an enemy. TODO: Use layermask for this.
-            {
-                _hud.HidePrompt();
-                // Disable interact events
-                _actions.Player.Interact.Disable();
-                _actions.Player.Interact.performed -= InteractPerformed;
-            }
+            _hud.HidePrompt();
         }
     }
 }

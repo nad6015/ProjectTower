@@ -10,6 +10,7 @@ namespace Assets.Interactables
     public abstract class Interactable : MonoBehaviour
     {
         protected PlayerController controller;
+        protected string prompt = "Interact";
 
         private void OnDisable()
         {
@@ -24,6 +25,7 @@ namespace Assets.Interactables
             {
                 controller = other.GetComponent<PlayerController>();
                 controller.OnInteract += HandleInteract;
+                controller.ShowHUD(prompt);
             }
         }
 
@@ -32,6 +34,7 @@ namespace Assets.Interactables
             if (other.CompareTag("Player"))
             {
                 controller.OnInteract -= HandleInteract;
+                controller.HideHUD();
             }
         }
 
