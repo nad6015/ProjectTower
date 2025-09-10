@@ -142,7 +142,7 @@ namespace Assets.DungeonGenerator.Components
             {
                 int count = Random.Range(enemiesPerRoom.min, enemiesPerRoom.max);
                 GameObject enemy = dungeon.Components.enemies[0];
-                Contents.Add(new(enemy, enemy.transform.position + PointUtils.RandomPointWithinBounds(Bounds)));
+                Contents.Add(new(enemy, enemy.transform.position + PointUtils.RandomPointWithinBounds(_safeArea)));
             }
         }
 

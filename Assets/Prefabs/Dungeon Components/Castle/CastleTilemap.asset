@@ -30,4 +30,5 @@ MonoBehaviour:
   propTiles:
   - {fileID: 2411030350727224445, guid: c41d74fcc0801f244921f1ed7d2ad72c, type: 3}
   roomCorner: {fileID: 9162778129440914531, guid: 3bc17762c4b3dc84ba960b2b38d7a768, type: 3}
-  corridorDoor: {fileID: 1804593036432212441, guid: 230da11bae7918b47a868e235df65983, type: 3}
+  corridorDoor: {fileID: 1804593036432212441, guid: 346160a9c95f15e419015a73f48c5468, type: 3}
+  mainCameraColor: {r: 0, g: 0, b: 0, a: 0}

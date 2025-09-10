@@ -45,8 +45,8 @@ namespace Assets.DungeonGenerator
 
             CreateDungeonRooms();
             ConstructDungeon();
-            GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<NavMeshSurface>().BuildNavMesh();
             PlaceContent();
+            GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<NavMeshSurface>().BuildNavMesh();
         }
 
         /// <summary>

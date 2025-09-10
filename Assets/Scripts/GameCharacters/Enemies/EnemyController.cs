@@ -8,7 +8,7 @@ public class EnemyController : GameCharacterController
 {
     [SerializeField]
     private float _vocalizationCooldownMax = 15f;
-    
+
     [SerializeField]
     private AudioClip _vocalizationAudio;
 
@@ -31,14 +31,17 @@ public class EnemyController : GameCharacterController
         _graphAgent.BlackboardReference.SetVariableValue("Health", _fighter.GetMaxStat(FighterStats.Health));
         _graphAgent.BlackboardReference.SetVariableValue("Animator", _animator);
 
+        _fighter.OnStatChange += HandleStatChange;
+
         _vocalizationCooldown = Random.Range(0, _vocalizationCooldownMax);
     }
 
+
     private void Update()
     {
-        _animator.SetFloat("Speed", _fighter.IsAttacking() ? 1 : _agent.velocity.magnitude);
+        _animator.SetFloat("Speed", _fighter.IsAttacking() ? _fighter.GetStat(FighterStats.Speed) : _agent.velocity.magnitude);
         _vocalizationCooldown -= Time.deltaTime;
-        if(_vocalizationCooldown <= 0)
+        if (_vocalizationCooldown <= 0)
         {
             PlaySound(_vocalizationAudio);
             _vocalizationCooldown = Random.Range(0, _vocalizationCooldownMax);
@@ -46,10 +49,18 @@ public class EnemyController : GameCharacterController
     }
 
     /// <summary>
-    /// TODO
+    /// A delegating method called when the behaviour tree decides to attak the player.
     /// </summary>
     public void Attack()
     {
         _fighter.Attack();
+    }
+
+    private void HandleStatChange(FighterStats stat)
+    {
+        if (stat == FighterStats.Health)
+        {
+            _graphAgent.BlackboardReference.SetVariableValue("Health", _fighter.GetStat(FighterStats.Health));
+        }
     }
 }
