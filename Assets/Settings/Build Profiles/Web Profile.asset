@@ -28,6 +28,8 @@ MonoBehaviour:
     m_path: Assets/Scenes/Prod/GameWon.unity
   - m_enabled: 1
     m_path: Assets/Scenes/Prod/Tutorial.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/Prod/GameLost.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
     m_Settings:
