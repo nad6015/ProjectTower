@@ -1,9 +1,11 @@
 using System.Collections;
 using Assets.DungeonGenerator;
+using Assets.DungeonMaster;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
+using static Assets.Utilities.GameObjectUtilities;
 
 public class DungeonGeneratorTest
 {
@@ -17,24 +19,24 @@ public class DungeonGeneratorTest
     public IEnumerator ShouldContainAllDungeonComponents()
     {
         // Asserts that all root game objects are present
-        // Root game objects syhould be:
+        // Root game objects should be:
         //  Player
         //  Main camera
         //  At least one Directional Light
-        //  Dungeon generator
-        //  Dungeon Master
-        //  Game Scene Manager (this is not counted in the rootCount because it is marked as don't destroy)
-        Assert.That(SceneManager.GetActiveScene().rootCount == 5);
+        //  The game systems prefab
+        Assert.That(SceneManager.GetActiveScene().rootCount == 4);
         yield return null;
     }
 
     [UnityTest]
     public IEnumerator ShouldClearAllDungeonComponents()
     {
-        DungeonGenerator dungeonGenerator = GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<DungeonGenerator>();
+        DungeonGenerator dungeonGenerator = FindComponentByTag<DungeonGenerator>("DungeonGenerator");
+        DungeonMaster dungeonMaster = FindComponentByTag<DungeonMaster>("DungeonMaster");
+        dungeonMaster.enabled = false;
         
         // Asserts that all root game objects are present
-        Assert.That(SceneManager.GetActiveScene().rootCount == 5);
+        Assert.That(SceneManager.GetActiveScene().rootCount == 4);
         Assert.That(dungeonGenerator.transform.childCount > 10);
         
         dungeonGenerator.ClearDungeon();
@@ -42,7 +44,7 @@ public class DungeonGeneratorTest
         yield return new WaitForSeconds(1f);
 
         // Asserts that all root game objects haven't been deleted alongside the dungeon components
-        Assert.That(SceneManager.GetActiveScene().rootCount == 5);
+        Assert.That(SceneManager.GetActiveScene().rootCount == 4);
         Assert.That(dungeonGenerator.transform.childCount == 0);
     }
 }

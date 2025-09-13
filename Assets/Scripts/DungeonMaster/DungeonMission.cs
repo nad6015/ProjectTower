@@ -5,8 +5,8 @@
     /// </summary>
     public enum DungeonMission
     {
-        ExploreFloor = 1,
-        FindKey = 2,
-        FightBoss = 3,
+        ExploreFloor,
+        FindKey,
+        FightBoss
     }
 }

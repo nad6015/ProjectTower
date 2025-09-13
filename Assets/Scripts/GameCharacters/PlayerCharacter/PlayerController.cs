@@ -1,4 +1,3 @@
-using Assets.Combat;
 using Assets.GameCharacters;
 using System;
 using UnityEngine;
@@ -6,13 +5,13 @@ using UnityEngine.InputSystem;
 
 namespace Assets.PlayerCharacter
 {
-    [RequireComponent(typeof(CharacterController), typeof(PlayerMovement))]
+    [RequireComponent(typeof(CharacterController))]
     public class PlayerController : GameCharacterController
     {
         public event Action<InputAction.CallbackContext> OnInteract;
         public event Action<InputAction.CallbackContext> OnAttackPerformed;
-        public event Action<InputAction.CallbackContext> MovePerformed;
-        public event Action<InputAction.CallbackContext> MoveCancelled;
+        public event Action<InputAction.CallbackContext> OnMovePerformed;
+        public event Action<InputAction.CallbackContext> OnMoveCancelled;
         public event Action<InputAction.CallbackContext> OnBlockPerformed;
         public event Action<InputAction.CallbackContext> OnBlockCancelled;
 
@@ -80,6 +79,25 @@ namespace Assets.PlayerCharacter
             _actions.Player.Block.Disable();
             _actions.Player.Block.performed -= BlockPerformed;
         }
+
+        /// <summary>
+        /// Event handler for move input.
+        /// </summary>
+        /// <param name="context">The input context</param>
+        private void MovePerformed(InputAction.CallbackContext context)
+        {
+            OnMovePerformed?.Invoke(context);
+        }
+
+        /// <summary>
+        /// Event handler for when move input is cancelled.
+        /// </summary>
+        /// <param name="context">The input context</param>
+        private void MoveCancelled(InputAction.CallbackContext context)
+        {
+            OnMoveCancelled?.Invoke(context);
+        }
+
 
         /// <summary>
         /// Event handler for attack input.

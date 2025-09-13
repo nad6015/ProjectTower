@@ -2,20 +2,27 @@ using Assets.DungeonGenerator.Components;
 using Assets.DungeonGenerator;
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using static Assets.Utilities.GameObjectUtilities;
+using UnityEngine.TestTools;
+using System.Collections;
 
 public class DungeonParametersTest
 {
     DungeonRepresentation parameters;
 
-    [SetUp]
-    public void SetUp()
+    [UnitySetUp]
+    public IEnumerator SetUp()
     {
-        parameters = new(Resources.Load<TextAsset>("TestParameters"), null);
+        SceneManager.LoadScene("Scenes/Tests/DungeonParameters");
+        yield return null;
     }
 
-    [Test]
-    public void ShouldGetAnyParameter()
+    [UnityTest]
+    public IEnumerator ShouldGetAnyParameter()
     {
+        yield return new WaitForSeconds(1);
+        parameters = new(FindComponentByTag<ParameterSupport>("TestSupport").ParamFile, null);
         Range<int> enemiesPerRoom = parameters.Parameter<Range<int>>(DungeonParameter.EnemiesPerRoom);
         Range<Vector3> roomSize = parameters.Parameter<Range<Vector3>>(DungeonParameter.RoomSize);
 

@@ -11,12 +11,12 @@ public class GraphGrammarTests
 {
     DungeonRepresentation dungeon;
     GraphGrammar algorithm;
-    const int startingRoomCount = 3;
+    const int startingRoomCount = 5;
 
     [SetUp]
     public void SetUp()
     {
-        SceneManager.LoadScene("Scenes/Tests/RandomWalk");
+        SceneManager.LoadScene("Scenes/Tests/GraphGrammar");
         DungeonNode.Reset();
     }
 
@@ -36,19 +36,24 @@ public class GraphGrammarTests
         DungeonNode firstNode = rooms.FirstNode;
         DungeonNode secondNode = rooms[firstNode][0];
         DungeonNode thirdNode = rooms[secondNode][1];
+        DungeonNode fourthNode = rooms[thirdNode][1];
+        DungeonNode fifthNode = rooms[fourthNode][1];
 
         Assert.That(firstNode.Type == RoomType.Start);
         Assert.That(secondNode.Type == RoomType.Explore);
-        Assert.That(thirdNode.Type == RoomType.End);
+        Assert.That(thirdNode.Type == RoomType.Combat);
+        Assert.That(fourthNode.Type == RoomType.Treasure);
+        Assert.That(fifthNode.Type == RoomType.End);
 
         Assert.That(rooms.FirstNode.Type == RoomType.Start);
         Assert.That(rooms.LastNode.Type == RoomType.End);
     }
 
-    [Test]
-    public void ShouldGenerateDungeonFromFlows()
+
+    [UnityTest]
+    public IEnumerator ShouldGenerateDungeonFromFlows()
     {
-        TestSetUp(5);
+        yield return TestSetUp(5);
 
         DungeonLayout rooms = dungeon.Layout;
         Assert.That(rooms.Count == startingRoomCount);
@@ -98,7 +103,7 @@ public class GraphGrammarTests
         TextAsset configFile = support.ConfigFile;
 
         var parameters = DungeonMasterDeserializationUtil.BuildDungeonParameters(paramFile);
-        var config = DungeonMasterDeserializationUtil.ReadConfigFromJson(configFile);
+        var config = DungeonMasterDeserializationUtil.ReadGeneratorConfigFromJson(configFile);
         
         dungeon = new(config.BaseDungeons[DungeonMission.ExploreFloor], config.DungeonFlows[DungeonMission.ExploreFloor], null, parameters);
         dungeon.ModifyParameter(DungeonParameter.RoomCount,

@@ -17,15 +17,15 @@ namespace Assets.PlayerCharacter
         private Animator _animator;
         private bool _isDefending = false;
 
-        void Awake()
+        void Start()
         {
             _characterController = GetComponent<CharacterController>();
             _fighter = GetComponent<PlayableFighter>();
             Speed = _fighter.GetMaxStat(Combat.FighterStats.Speed);
 
             PlayerController playerController = GetComponent<PlayerController>();
-            playerController.MovePerformed += OnMovePerformed;
-            playerController.MoveCancelled += OnMoveCancelled;
+            playerController.OnMovePerformed += OnMovePerformed;
+            playerController.OnMoveCancelled += OnMoveCancelled;
             playerController.OnBlockPerformed += OnBlockPerformed;
             playerController.OnBlockCancelled += OnBlockCancelled;
 

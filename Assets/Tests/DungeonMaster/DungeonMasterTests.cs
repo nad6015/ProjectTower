@@ -27,7 +27,7 @@ public class DungeonMasterTests
     public IEnumerator ShouldInitialiseSuccessfully()
     {
         TestSetUp();
-
+        yield return new WaitForSeconds(1f);
         Assert.That(dungeonMaster.State == DungeonMasterState.Running);
         Assert.That(dungeonMaster.CurrentFloor == 1);
 
@@ -43,6 +43,8 @@ public class DungeonMasterTests
     public IEnumerator ShouldGenerateNewDungeonOnClear()
     {
         TestSetUp();
+
+        yield return new WaitForSeconds(1f);
 
         Assert.That(dungeonMaster.State == DungeonMasterState.Running);
         Assert.That(dungeonMaster.CurrentFloor == 1);

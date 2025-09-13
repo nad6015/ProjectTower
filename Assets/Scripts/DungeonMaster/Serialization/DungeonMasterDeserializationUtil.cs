@@ -56,7 +56,7 @@ namespace Assets.DungeonMaster
             return _rules;
         }
 
-        public static DungeonMasterConfiguration ReadConfigFromJson(TextAsset flowsFile)
+        public static DungeonMasterConfiguration ReadGeneratorConfigFromJson(TextAsset flowsFile)
         {
             DungeonMasterConfiguration config = new()
             {
@@ -126,6 +126,11 @@ namespace Assets.DungeonMaster
                     case ">":
                     {
                         condition = new GreaterThanCondition(JsonUtils.ToInt(jCondition["operand"]));
+                        break;
+                    }
+                    case "<":
+                    {
+                        condition = new LessThanCondition(JsonUtils.ToInt(jCondition["operand"]));
                         break;
                     }
                 }

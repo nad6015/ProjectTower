@@ -35,6 +35,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Prod/GameLost.unity
     guid: c48364272b545aa4b869a3253045d666
+  - enabled: 1
+    path: Assets/Scenes/Tests/DungeonComponents.unity
+    guid: d09d501e5ea113b498f54b5f62f3754f
+  - enabled: 1
+    path: Assets/Scenes/Tests/DungeonPlayability.unity
+    guid: 2e4f1520f5b4523499611e57bc4a4ad6
+  - enabled: 1
+    path: Assets/Scenes/Tests/DungeonParameters.unity
+    guid: cc576c2ff825e79489573478aa745032
+  - enabled: 1
+    path: Assets/Scenes/Tests/GraphGrammar.unity
+    guid: daf460a547473084ea029b8cdcc5f835
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 99f9c9493070a9d4c979a8fec7c5a8d3, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

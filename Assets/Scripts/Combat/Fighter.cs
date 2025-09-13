@@ -37,7 +37,7 @@ namespace Assets.Combat
         private const string _attackParam = "Attack";
         private readonly List<Fighter> _hasAttacked = new();
 
-        public void Awake()
+        public virtual void Awake()
         {
             SetStat(FighterStats.Health, health);
             SetStat(FighterStats.Attack, attack);

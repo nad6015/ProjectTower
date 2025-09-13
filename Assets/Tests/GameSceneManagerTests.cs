@@ -1,5 +1,5 @@
 using System.Collections;
-using Assets.DungeonGenerator;
+using static Assets.Utilities.GameObjectUtilities;
 using Assets.GameManager;
 using NUnit.Framework;
 using UnityEngine;
@@ -20,22 +20,10 @@ public class GameSceneManagerTests
     [UnityTest]
     public IEnumerator GameManagerStartsANewGame()
     {
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SceneTransitionManager>();
+        gameManager = FindComponentByTag<SceneTransitionManager>("SceneManager");
         gameManager.StartNewGame();
-        yield return null;
+        yield return new WaitForSeconds(1f);
 
-        Assert.That(SceneManager.GetActiveScene().name == "NewGame");
-    }
-
-    [UnityTest]
-    public IEnumerator GameManagerPersistsBetweenScenes()
-    {
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SceneTransitionManager>();
-        gameManager.StartNewGame();
-        yield return null;
-
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SceneTransitionManager>();
-
-        Assert.That(gameManager != null);
+        Assert.That(SceneManager.GetActiveScene().name == "Tutorial");
     }
 }

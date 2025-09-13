@@ -130,7 +130,7 @@ public class RandomWalkTests
     {
         List<DungeonRoom> rooms = new(GameObject.FindObjectsByType<DungeonRoom>(FindObjectsSortMode.InstanceID));
         // Sort code referenced from - https://stackoverflow.com/questions/3498891/system-comparisont-understanding
-        rooms.Sort((r1, r2) => r1.name.CompareTo(r2.name));
+        rooms.Sort((r1, r2) => r1.DungeonNode.Id.CompareTo(r2.DungeonNode.Id));
         return rooms;
     }
 

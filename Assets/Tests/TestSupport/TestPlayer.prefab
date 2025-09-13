@@ -110,12 +110,13 @@ GameObject:
   - component: {fileID: 7333831184450978021}
   - component: {fileID: 8589072062742688946}
   - component: {fileID: 8885495373170276511}
-  - component: {fileID: 353777729234021114}
-  - component: {fileID: 1122762451330811552}
   - component: {fileID: 2553989433121075861}
   - component: {fileID: 7191444459485844105}
+  - component: {fileID: 7619914738478276075}
+  - component: {fileID: 6887441011102283108}
+  - component: {fileID: 3679782664911102223}
   m_Layer: 8
-  m_Name: Player
+  m_Name: TestPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -188,35 +189,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &353777729234021114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1927581186806867705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d717e4e71d8b074680d4547e7409e94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speedReduction: 0.35
---- !u!114 &1122762451330811552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1927581186806867705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84b9626025633a045a7912a45530dac2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _attackAudio: {fileID: 8300000, guid: af8183a063315f4428b15dc5f386c27b, type: 3}
-  _footstepAudio: {fileID: 8300000, guid: 72f526a6a9890f643a88e85a61c86c8a, type: 3}
-  _camera: {fileID: 28193099444425750, guid: e8168ae4c75c5824ab25fad2be4a1789, type: 3}
-  _hud: {fileID: 8136366814593251839}
 --- !u!81 &2553989433121075861
 AudioListener:
   m_ObjectHideFlags: 0
@@ -240,6 +212,72 @@ MonoBehaviour:
   _visibleInventory:
   - {fileID: 646656833660071202}
   _maxInventorySize: 3
+--- !u!195 &7619914738478276075
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927581186806867705}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 7
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &6887441011102283108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927581186806867705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e25eaf9b0fa9a2b4091bc261bd406169, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackAudio: {fileID: 0}
+  _footstepAudio: {fileID: 0}
+  _camera: {fileID: 28193099444425750, guid: e8168ae4c75c5824ab25fad2be4a1789, type: 3}
+  _hud: {fileID: 8136366814593251839}
+--- !u!114 &3679782664911102223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927581186806867705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Graph: {fileID: -4497366720598237260, guid: 2e5c7a5a70b6ebb469620b1303e5fb68, type: 2}
+  m_BlackboardVariableOverridesList:
+  - rid: 4462406731957273130
+  m_IsInitialised: 0
+  m_IsStarted: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 4462406731957273130
+      type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 1
+          m_Value1: 0
+        Name: Self
+        m_Value: {fileID: 1927581186806867705}
 --- !u!1 &2623857081611254654
 GameObject:
   m_ObjectHideFlags: 0

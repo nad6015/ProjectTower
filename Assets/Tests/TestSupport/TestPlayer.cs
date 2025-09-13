@@ -1,18 +1,14 @@
-using Assets.Combat;
+using Assets.PlayerCharacter;
 using Unity.Behavior;
 using UnityEngine;
 
-public class TestPlayer : MonoBehaviour
+public class TestPlayer : PlayerController
 {
-    private void Start()
+    protected override void Start()
     {
-        GameObject exit = GameObject.Find("DungeonExit");
-        GetComponent<BehaviorGraphAgent>().SetVariableValue("exit", exit);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        
+        base.Start();
+        //GameObject exit = GameObject.Find("DungeonExit");
+        //GetComponent<BehaviorGraphAgent>().SetVariableValue("exit", exit);
     }
 
     internal void AttackSelf()

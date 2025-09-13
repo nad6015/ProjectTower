@@ -1,5 +1,5 @@
 {
-  "FindKey": {
+  "exploreFloor": {
     "baseDungeon": ["start", "explore", "combat", "treasure", "end"],
     "flows": [
       {
@@ -20,7 +20,7 @@
       }
     ]
   },
-  "exploreFloor": {
+  "FindKey": {
     "baseDungeon": ["start", "explore", "combat", "generic", "end"],
     "flows": [
       {

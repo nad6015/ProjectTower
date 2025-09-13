@@ -65,7 +65,8 @@ namespace Assets.DungeonMaster
             _combatSystem = FindComponentByTag<CombatManager>("CombatSystem");
             _sceneTransitionManager = FindComponentByTag<SceneTransitionManager>("SceneManager");
             _audioManager = FindComponentByTag<AudioManager>("AudioManager");
-
+            CurrentFloor = 0;
+            Debug.Log(CurrentFloor);
             NextDungeonSection();
 
             ReadConfigurationFromFiles();
@@ -89,7 +90,7 @@ namespace Assets.DungeonMaster
             State = CurrentFloor > MaxFloors ? DungeonMasterState.GameEnd : DungeonMasterState.GenerateDungeon;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             switch (State)
             {
@@ -204,7 +205,7 @@ namespace Assets.DungeonMaster
         /// </summary>
         private void ReadConfigurationFromFiles()
         {
-            _config = ReadConfigFromJson(_dungeonFlowsFile);
+            _config = ReadGeneratorConfigFromJson(_dungeonFlowsFile);
 
             JObject json = JObject.Parse(_defaultRulesetFile.text);
             GenerationRuleset = BuildDungeonRuleset(json);
@@ -216,7 +217,7 @@ namespace Assets.DungeonMaster
         private void NextDungeonSection()
         {
             _currentComponents = _componentsList[currentSection++];
-            CurrentFloor = 1;
+            CurrentFloor = 0;
 
         }
         private void OnEnemyDefeated(NpcFighter fighter)

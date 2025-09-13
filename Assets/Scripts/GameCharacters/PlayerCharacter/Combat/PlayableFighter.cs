@@ -24,8 +24,9 @@ namespace Assets.PlayerCharacter
         private int _comboCount = 0;
         private float _staminaRegenCooldown;
 
-        public void Start()
+        public override void Awake()
         {
+            base.Awake();
             SetStat(FighterStats.Stamina, _stamina);
 
             PlayerController controller = GetComponent<PlayerController>();

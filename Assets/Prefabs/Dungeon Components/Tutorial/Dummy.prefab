@@ -74,11 +74,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7427183573183377191}
+  - component: {fileID: 5786447517652734510}
   - component: {fileID: 208907241719135446}
   - component: {fileID: 5658981686592037637}
   - component: {fileID: 3465270817417797098}
   - component: {fileID: 5862065200417515096}
-  - component: {fileID: 5786447517652734510}
   - component: {fileID: 3099547995495244315}
   m_Layer: 7
   m_Name: Dummy
@@ -105,6 +105,26 @@ Transform:
   - {fileID: 4647413279620749522}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5786447517652734510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7807404158470223261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a83538da6b55fe54fb48df0dba24bfbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  attack: 0
+  speed: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  _hitbox: {fileID: 8261925513812931975}
+  _attackCooldownDuration: 0.5
 --- !u!114 &208907241719135446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,27 +218,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &5786447517652734510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7807404158470223261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a83538da6b55fe54fb48df0dba24bfbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 100
-  attack: 0
-  speed: 0
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 256
-  _hitbox: {fileID: 8261925513812931975}
-  _attackCooldownDuration: 0.5
-  _attackCommitment: 0.5
 --- !u!65 &3099547995495244315
 BoxCollider:
   m_ObjectHideFlags: 0

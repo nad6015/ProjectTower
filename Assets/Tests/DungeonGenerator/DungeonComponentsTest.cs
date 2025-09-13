@@ -3,35 +3,48 @@ using Assets.DungeonGenerator.Components;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
-
-public class DungeonComponentsTest
+using static Assets.Utilities.GameObjectUtilities;
+using static TestUtilities;
+public class DungeonComponentsTest : InputTestFixture
 {
+    Keyboard keyboard;
+    Mouse mouse;
+
     [SetUp]
-    public void Setup()
+    public override void Setup()
     {
         SceneManager.LoadScene("Scenes/Tests/DungeonComponents");
+        base.Setup();
+        keyboard = InputSystem.AddDevice<Keyboard>();
+        mouse = InputSystem.AddDevice<Mouse>();
+
+        Press(mouse.rightButton);
+        Release(mouse.rightButton);
     }
 
     [UnityTest]
-    public IEnumerator ShouldDungeonExitShouldSpawnNewPlayer()
+    public IEnumerator ShouldLeaveDungeonViaDungeonExit()
     {
         yield return new WaitForSeconds(1f);
-        NavMeshAgent testAgent = GameObject.FindGameObjectWithTag("Player").transform.parent.GetComponent<NavMeshAgent>();
-        Transform endPoint = GameObject.FindFirstObjectByType<DungeonExit>().transform;
+        bool leftDungeon = false;
+        NavMeshAgent testAgent = FindComponentByTag<NavMeshAgent>("Player");
+        DungeonExit exit = GameObject.FindFirstObjectByType<DungeonExit>();
+        Transform exitTransform = exit.transform;
 
+        exit.DungeonCleared += () => leftDungeon = true;
+        testAgent.SetDestination(exitTransform.position);
         do
         {
             yield return new WaitForSeconds(1);
         }
+        while (!HasReachedDestination(testAgent.transform, exitTransform));
+        Assert.That(HasReachedDestination(testAgent.transform, exitTransform));
+        Press(keyboard.eKey);
+        yield return new WaitForSeconds(1);
 
-        while (!HasReachedDestination(testAgent.transform, endPoint));
-        Assert.That(HasReachedDestination(testAgent.transform, endPoint));
-    }
-
-    private bool HasReachedDestination(Transform agent, Transform endpoint)
-    {
-        return Vector3.Distance(endpoint.position, agent.position) < 1;
+        Assert.That(leftDungeon, Is.True);
     }
 }

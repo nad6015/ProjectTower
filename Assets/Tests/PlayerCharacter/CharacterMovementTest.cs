@@ -5,11 +5,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
+using static Assets.Utilities.GameObjectUtilities;
 
 public class CharacterMovementTest : InputTestFixture
 {
-    readonly GameObject player = Resources.Load<GameObject>("Player");
-    GameObject character;
+    Transform player;
     Keyboard keyboard;
     Mouse mouse;
 
@@ -25,40 +25,48 @@ public class CharacterMovementTest : InputTestFixture
     }
 
     [UnityTest]
-    public IEnumerator ShouldMovePlayerCharacterWhenKeyIsPressed()
+    public IEnumerator ShouldMovePlayerCharacterWhenKeysArePressed()
     {
-        character = GameObject.Instantiate(player, new Vector3(0, 1), Quaternion.identity);
+        player = FindComponentByTag<Transform>("Player");
+        Vector3 waKeysPos = new(-2.5f, 0, 2.5f);
+        Vector3 sdKeysPos = new(2.5f, 0, -2.5f);
 
-        float distance = Vector3.Distance(character.transform.position, new Vector3(-2, 0, 1.5f));
+        float distance = Vector3.Distance(player.position, waKeysPos);
         Assert.That(distance, Is.GreaterThan(1));
 
         Press(keyboard.wKey);
         Press(keyboard.aKey);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.75f);
         Release(keyboard.wKey);
         Release(keyboard.aKey);
         yield return new WaitForSeconds(1f);
+       
+        distance = Vector3.Distance(player.position, waKeysPos);
 
-        Assert.That(distance, Is.LessThanOrEqualTo(1));
+        Assert.That(distance, Is.LessThanOrEqualTo(1));;
+   
+
+        distance = Vector3.Distance(player.position, sdKeysPos);
+        Assert.That(distance, Is.GreaterThan(1));
 
         Press(keyboard.sKey);
         Press(keyboard.dKey);
         yield return new WaitForSeconds(1.5f);
         Release(keyboard.sKey);
         Release(keyboard.dKey);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
 
-        distance = Vector3.Distance(character.transform.position, new Vector3(2, 0, -1.5f));
+        distance = Vector3.Distance(player.position, sdKeysPos);
         Assert.That(distance, Is.LessThanOrEqualTo(1));
     }
 
     [UnityTest]
     public IEnumerator ShouldBeAbleToAttackEnemy()
     {
-        Fighter enemy = GameObject.Find("Enemy").GetComponent<Fighter>();
-        Vector3 enemyPosition = new(enemy.transform.position.x, 1, enemy.transform.position.z - 1);
-        
-        character = GameObject.Instantiate(player, enemyPosition, Quaternion.LookRotation(enemyPosition));
+        Fighter enemy = GameObject.Find("Dummy").GetComponent<Fighter>();
+        player = FindComponentByTag<Transform>("Player");
+        Vector3 enemyPosition = new(player.transform.position.x, 1, player.transform.position.z + 1);
+        enemy.transform.SetPositionAndRotation(enemyPosition, Quaternion.identity);
 
         Assert.That(enemy.GetStat(FighterStats.Health), Is.EqualTo(5));
         Press(mouse.leftButton);

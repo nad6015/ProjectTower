@@ -6,5 +6,8 @@ public class ParameterSupport : MonoBehaviour
     public TextAsset ParamFile { get; private set; }
 
     [field: SerializeField]
-    public TextAsset ConfigFile { get; private set;}
+    public TextAsset ConfigFile { get; private set; }
+
+    [field: SerializeField]
+    public TextAsset RulesetFile { get; private set; }
 }
