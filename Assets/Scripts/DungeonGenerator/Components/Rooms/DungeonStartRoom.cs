@@ -8,7 +8,7 @@ namespace Assets.DungeonGenerator.Components
         internal override void Populate(DungeonRepresentation dungeon)
         {
             SpawnPoint startingPoint = dungeon.Components.startingPoint;
-            GameObject.Instantiate(startingPoint, Bounds.center, Quaternion.identity);
+            GameObject.Instantiate(startingPoint, Bounds.center, Quaternion.identity, transform);
             DungeonTile tile = startingPoint.GetComponent<DungeonTile>();
             Bounds bounds = tile.GetBounds();
 

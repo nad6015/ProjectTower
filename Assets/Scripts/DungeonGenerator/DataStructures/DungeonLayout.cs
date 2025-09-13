@@ -112,8 +112,6 @@ namespace Assets.DungeonGenerator
             DungeonNode firstNode = _graph.First();
             visitedNodes.Add(firstNode);
             VisitNode(firstNode, visitedNodes);
-            Debug.Log(visitedNodes.Count);
-            Debug.Log(Count);
             return visitedNodes.Count == Count;
         }
 

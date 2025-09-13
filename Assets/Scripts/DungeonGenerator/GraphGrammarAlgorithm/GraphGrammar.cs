@@ -45,7 +45,6 @@ namespace Assets.DungeonGenerator
                     layout.Add(layout.LastNode, new DungeonNode(RoomType.End));
                 }
             }
-            Debug.Log(layout.IsConnected());
         }
     }
 }
