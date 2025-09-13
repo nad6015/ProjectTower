@@ -27,7 +27,7 @@ public class EnemyController : GameCharacterController
         _animator = GetComponentInChildren<Animator>();
         _animator.SetFloat("MotionSpeed", 1);
 
-        _graphAgent.BlackboardReference.SetVariableValue("Speed", _fighter.GetMaxStat(FighterStats.Speed));
+        _graphAgent.BlackboardReference.SetVariableValue("Speed", (int)_fighter.GetMaxStat(FighterStats.Speed));
         _graphAgent.BlackboardReference.SetVariableValue("Health", _fighter.GetMaxStat(FighterStats.Health));
         _graphAgent.BlackboardReference.SetVariableValue("Animator", _animator);
 
@@ -40,6 +40,7 @@ public class EnemyController : GameCharacterController
     private void Update()
     {
         _animator.SetFloat("Speed", _fighter.IsAttacking() ? _fighter.GetStat(FighterStats.Speed) : _agent.velocity.magnitude);
+        _agent.speed = _fighter.GetStat(FighterStats.Speed);
         _vocalizationCooldown -= Time.deltaTime;
         if (_vocalizationCooldown <= 0)
         {

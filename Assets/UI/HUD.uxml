@@ -13,12 +13,8 @@
                     <AttributeOverrides element-name="ProgressBar" value="10" />
                 </engine:Instance>
             </engine:VisualElement>
-            <engine:VisualElement picking-mode="Ignore" name="ManaBarContainer" style="flex-grow: 0; flex-direction: row; background-position-y: center 0; background-position-x: center 0; -unity-background-scale-mode: scale-and-crop; -unity-text-align: middle-center; align-items: center; justify-content: flex-start; align-self: auto; align-content: auto; height: auto;">
-                <engine:VisualElement name="ManaIcon" class="mana" style="flex-grow: 0; height: 33px; width: 37px; align-content: auto; align-items: auto; justify-content: center; align-self: center; flex-shrink: 0; margin-top: 5px; margin-right: 5px; margin-bottom: 5px; margin-left: 5px; background-image: url(&quot;project://database/Assets/UI/heart.png?fileID=2800000&amp;guid=c6ffcb40bb1eea8459b600deb9e01f76&amp;type=3#heart&quot;);" />
-                <engine:Instance template="StatBar" name="ManaBar" class="bar mana" />
-            </engine:VisualElement>
         </engine:VisualElement>
-        <engine:VisualElement name="ItemSelector" style="flex-grow: 0; height: 225px; width: 225px; align-items: auto; align-content: auto;">
+        <engine:VisualElement name="ItemSelector" style="flex-grow: 0; height: 225px; width: 225px; align-items: auto; align-content: auto; display: none;">
             <engine:VisualElement name="ItemBox01" class="item-box active-item" style="background-image: none; align-self: auto; bottom: auto; left: 25%; top: 5%;">
                 <engine:VisualElement class="item-icon" style="background-image: url(&quot;project://database/Assets/UI/Bastardschwert%20Type%2002.png?fileID=2800000&amp;guid=b0f9c61f2f3cf3740903ac0dfd40a75b&amp;type=3#Bastardschwert Type 02&quot;);" />
             </engine:VisualElement>

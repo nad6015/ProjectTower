@@ -30,7 +30,7 @@ public class PlayerHUD : MonoBehaviour
 
         _staminaBar = new(
             _fighter,
-            FighterStats.STAMINA,
+            FighterStats.Stamina,
             _document.rootVisualElement.Q<VisualElement>("StaminaBar").Q<ProgressBar>("ProgressBar"));
         _prompt.SetActive(false);
     }

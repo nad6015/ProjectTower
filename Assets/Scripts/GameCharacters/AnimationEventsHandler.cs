@@ -9,12 +9,20 @@ namespace Assets.GameCharacters
         public event Action OnAnimationEndHandler;
         public event Action OnHitHandler;
         public event Action OnFootstepHandler;
+        public event Action OnDodgeDoneHandler;
+        public event Action OnAttackStartHandler;
 
+        /// <summary>
+        /// Event handler for any animation with the OnFootstep event.
+        /// </summary>
         public void Hit()
         {
             OnHitHandler?.Invoke();
         }
 
+        /// <summary>
+        /// Event handler for any animation with the OnFootstep event.
+        /// </summary>
         public void OnFootstep()
         {
             OnFootstepHandler?.Invoke();
@@ -26,6 +34,22 @@ namespace Assets.GameCharacters
         public void OnAnimationEnd()
         {
             OnAnimationEndHandler?.Invoke();
+        }
+
+        /// <summary>
+        /// Handler for any animation with the DodgeDone event.
+        /// </summary>
+        public void DodgeDone()
+        {
+            OnDodgeDoneHandler?.Invoke();
+        }
+
+        /// <summary>
+        /// Handler for any animation with the DodgeDone event.
+        /// </summary>
+        public void AttackStart()
+        {
+            OnAttackStartHandler?.Invoke();
         }
     }
 }

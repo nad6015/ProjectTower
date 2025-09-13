@@ -1,4 +1,5 @@
 using Assets.Combat;
+using Assets.GameCharacters;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,11 +26,12 @@ namespace Assets.PlayerCharacter
 
         public void Start()
         {
-            _stats[FighterStats.STAMINA] = _stamina;
-            _maxStats[FighterStats.STAMINA] = _stamina;
+            SetStat(FighterStats.Stamina, _stamina);
 
             PlayerController controller = GetComponent<PlayerController>();
             controller.OnAttackPerformed += OnAttackPerformed;
+            controller.OnBlockPerformed += OnBlockPerformed;
+            controller.OnBlockCancelled += BlockCancelled;
         }
 
         protected override void Update()
@@ -37,19 +39,43 @@ namespace Assets.PlayerCharacter
             base.Update();
 
             _staminaRegenCooldown -= Time.deltaTime;
-            if (_stats[FighterStats.STAMINA] < _maxStats[FighterStats.STAMINA] && _staminaRegenCooldown <= 0)
+            if (_stats[FighterStats.Stamina] < _maxStats[FighterStats.Stamina] && _staminaRegenCooldown <= 0)
             {
-                IncreaseStat(FighterStats.STAMINA, 1);
+                ModifyStat(FighterStats.Stamina, _staminaRegenRate);
                 _staminaRegenCooldown = _staminaRegenCooldownDuration;
             }
         }
 
+        /// <summary>
+        /// Event handler for block input.
+        /// </summary>
+        /// <param name="context">the context from the input</param>
+        private void OnBlockPerformed(InputAction.CallbackContext context)
+        {
+            _animator.SetBool("Block", true);
+            _isDefending = true;
+        }
+
+        /// <summary>
+        /// Event handler for when block input is cancelled.
+        /// </summary>
+        /// <param name="context">the context from the input</param>
+        private void BlockCancelled(InputAction.CallbackContext context)
+        {
+            _animator.SetBool("Block", false);
+            _isDefending = false;
+        }
+
+
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
         protected override void AnimationEnded()
         {
             if (_continueCombo && _comboCount < maxCombo)
             {
                 Attack();
-                IncreaseStat(FighterStats.STAMINA, -1);
+                ModifyStat(FighterStats.Stamina, -1);
             }
             else
             {
@@ -63,19 +89,17 @@ namespace Assets.PlayerCharacter
 
         private void OnAttackPerformed(InputAction.CallbackContext obj)
         {
-            if (_stats[FighterStats.STAMINA] > 0)
+            if (_stats[FighterStats.Stamina] > 0)
             {
                 if (!_isAttacking)
                 {
                     Attack();
-                    //GetComponent<PlayerMovement>().speed = _stats[FighterStats.Speed];
-                    IncreaseStat(FighterStats.STAMINA, -1);
+                    ModifyStat(FighterStats.Stamina, -1);
                 }
                 else if (!_continueCombo)
                 {
                     _continueCombo = true;
                     _comboCount = Mathf.Min(_comboCount + 1, maxCombo);
-                    //GetComponent<PlayerMovement>().speed = _stats[FighterStats.Speed];
                 }
             }
         }

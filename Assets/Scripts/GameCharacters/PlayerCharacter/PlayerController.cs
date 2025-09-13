@@ -13,6 +13,8 @@ namespace Assets.PlayerCharacter
         public event Action<InputAction.CallbackContext> OnAttackPerformed;
         public event Action<InputAction.CallbackContext> MovePerformed;
         public event Action<InputAction.CallbackContext> MoveCancelled;
+        public event Action<InputAction.CallbackContext> OnBlockPerformed;
+        public event Action<InputAction.CallbackContext> OnBlockCancelled;
 
         [SerializeField]
         private GameObject _camera;
@@ -22,19 +24,15 @@ namespace Assets.PlayerCharacter
 
         public PlayerCamera Camera { get; private set; }
 
-        private PlayableFighter _fighter;
         private Animator _animator;
 
         private InputSystemActions _actions;
-        private PlayerMovement _playerMovement;
 
 
         // Using both Awake and Start here to first initialise the controller's values (Awake) for the OnEnable and OnDisable
         // and then to set the referenced scripts' values (Start).
         void Awake()
         {
-            _playerMovement = GetComponent<PlayerMovement>();
-            _fighter = GetComponent<PlayableFighter>();
             _animator = GetComponentInChildren<Animator>();
 
             _actions = new InputSystemActions();
@@ -44,7 +42,6 @@ namespace Assets.PlayerCharacter
         protected override void Start()
         {
             base.Start();
-            _playerMovement.speed = _fighter.GetMaxStat(Combat.FighterStats.Speed);
         }
 
         private void OnEnable()
@@ -58,6 +55,10 @@ namespace Assets.PlayerCharacter
 
             _actions.Player.Interact.Enable();
             _actions.Player.Interact.performed += InteractPerformed;
+
+            _actions.Player.Block.Enable();
+            _actions.Player.Block.performed += BlockPerformed;
+            _actions.Player.Block.canceled += BlockCancelled;
 
             // Reset animator on enable
             _animator.Play("Idle Walk Run Blend", -1, 0);
@@ -75,16 +76,45 @@ namespace Assets.PlayerCharacter
 
             _actions.Player.Interact.Disable();
             _actions.Player.Interact.performed -= InteractPerformed;
+
+            _actions.Player.Block.Disable();
+            _actions.Player.Block.performed -= BlockPerformed;
         }
 
+        /// <summary>
+        /// Event handler for attack input.
+        /// </summary>
+        /// <param name="context">The input context</param>
         private void AttackPerformed(InputAction.CallbackContext context)
         {
             OnAttackPerformed?.Invoke(context);
         }
 
+        /// <summary>
+        /// Event handler for interact input.
+        /// </summary>
+        /// <param name="context">The input context</param>
         private void InteractPerformed(InputAction.CallbackContext context)
         {
             OnInteract?.Invoke(context);
+        }
+
+        /// <summary>
+        /// Event handler for block input.
+        /// </summary>
+        /// <param name="context">the context from the input</param>
+        private void BlockPerformed(InputAction.CallbackContext context)
+        {
+            OnBlockPerformed?.Invoke(context);
+        }
+
+        /// <summary>
+        /// Event handler for block input.
+        /// </summary>
+        /// <param name="context">the context from the input</param>
+        private void BlockCancelled(InputAction.CallbackContext context)
+        {
+            OnBlockCancelled?.Invoke(context);
         }
 
         /// <summary>

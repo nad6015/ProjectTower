@@ -109,9 +109,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7333831184450978021}
   - component: {fileID: 8885495373170276511}
+  - component: {fileID: 8589072062742688946}
   - component: {fileID: 353777729234021114}
   - component: {fileID: 1122762451330811552}
-  - component: {fileID: 8589072062742688946}
   - component: {fileID: 2553989433121075861}
   - component: {fileID: 7191444459485844105}
   m_Layer: 8
@@ -164,34 +164,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &353777729234021114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1927581186806867705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d717e4e71d8b074680d4547e7409e94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1122762451330811552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1927581186806867705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84b9626025633a045a7912a45530dac2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _attackAudio: {fileID: 8300000, guid: af8183a063315f4428b15dc5f386c27b, type: 3}
-  _footstepAudio: {fileID: 8300000, guid: 72f526a6a9890f643a88e85a61c86c8a, type: 3}
-  _camera: {fileID: 28193099444425750, guid: e8168ae4c75c5824ab25fad2be4a1789, type: 3}
-  _hud: {fileID: 8136366814593251839}
 --- !u!114 &8589072062742688946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,11 +184,39 @@ MonoBehaviour:
     m_Bits: 640
   _hitbox: {fileID: 8337178641630974411}
   _attackCooldownDuration: 0
-  _attackCommitment: 1
   maxCombo: 3
   _stamina: 5
-  _staminaRegenRate: 0.085
-  _staminaRegenCooldownDuration: 3
+  _staminaRegenRate: 0.75
+  _staminaRegenCooldownDuration: 2
+--- !u!114 &353777729234021114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927581186806867705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d717e4e71d8b074680d4547e7409e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedReduction: 0.35
+--- !u!114 &1122762451330811552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927581186806867705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84b9626025633a045a7912a45530dac2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackAudio: {fileID: 8300000, guid: af8183a063315f4428b15dc5f386c27b, type: 3}
+  _footstepAudio: {fileID: 8300000, guid: 72f526a6a9890f643a88e85a61c86c8a, type: 3}
+  _camera: {fileID: 28193099444425750, guid: e8168ae4c75c5824ab25fad2be4a1789, type: 3}
+  _hud: {fileID: 8136366814593251839}
 --- !u!81 &2553989433121075861
 AudioListener:
   m_ObjectHideFlags: 0
@@ -239,7 +239,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _visibleInventory:
   - {fileID: 646656833660071202}
-  _maxItemStack: 5
+  _maxInventorySize: 3
 --- !u!1 &2623857081611254654
 GameObject:
   m_ObjectHideFlags: 0

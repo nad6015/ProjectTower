@@ -27,28 +27,21 @@ namespace Assets.Combat
         [SerializeField]
         private float _attackCooldownDuration = 0.5f;
 
-        [SerializeField]
-        private float _attackCommitment = 0.5f;
-
         protected Animator _animator;
         protected bool _isAttacking = false;
-        protected Dictionary<FighterStats, int> _stats = new();
-        protected Dictionary<FighterStats, int> _maxStats = new();
+        protected Dictionary<FighterStats, float> _stats = new();
+        protected Dictionary<FighterStats, float> _maxStats = new();
+        protected bool _isDefending = false;
 
         private float _attackCooldown;
         private const string _attackParam = "Attack";
-        private List<Fighter> _hasAttacked = new();
-
+        private readonly List<Fighter> _hasAttacked = new();
 
         public void Awake()
         {
-            _stats[FighterStats.Health] = health;
-            _stats[FighterStats.Attack] = attack;
-            _stats[FighterStats.Speed] = speed;
-
-            _maxStats[FighterStats.Health] = health;
-            _maxStats[FighterStats.Attack] = attack;
-            _maxStats[FighterStats.Speed] = speed;
+            SetStat(FighterStats.Health, health);
+            SetStat(FighterStats.Attack, attack);
+            SetStat(FighterStats.Speed, speed);
 
             _animator = GetComponentInChildren<Animator>();
 
@@ -66,14 +59,14 @@ namespace Assets.Combat
         /// </summary>
         /// <param name="stat"></param>
         /// <returns>the value of the stat</returns>
-        public int GetStat(FighterStats stat) => _stats[stat];
+        public float GetStat(FighterStats stat) => _stats[stat];
 
         /// <summary>
         /// Gets the max value of a fighter stat.
         /// </summary>
         /// <param name="stat"></param>
         /// <returns>the max value of the stat</returns>
-        public int GetMaxStat(FighterStats stat) => _maxStats[stat];
+        public float GetMaxStat(FighterStats stat) => _maxStats[stat];
 
         /// <summary>
         /// Called when a fighter attacks, but only runs the attack logic if the attack cooldown is equal to or less than zero.
@@ -86,7 +79,7 @@ namespace Assets.Combat
                 _animator.SetTrigger(_attackParam);
                 _animator.SetBool(_attackParam, _isAttacking);
                 _hitbox.enabled = true;
-                var colliders = Physics.OverlapBox(transform.position, Vector3.one, Quaternion.identity, layerMask);
+                var colliders = Physics.OverlapBox(transform.position + transform.forward, Vector3.one, Quaternion.identity, layerMask);
                 foreach (var item in colliders)
                 {
                     if (item.TryGetComponent<Fighter>(out var target))
@@ -109,30 +102,32 @@ namespace Assets.Combat
         }
 
         /// <summary>
-        /// TODO
+        /// Checks if the fighter is dead or not.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true if fighter's health is less than or equal to 0</returns>
         public bool IsDead()
         {
             return _stats[FighterStats.Health] <= 0;
         }
 
         /// <summary>
-        /// TODO
+        /// Checks if the fighter is attacking based on its current animation state.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>whether the Attack animation state is true or not.</returns>
         public bool IsAttacking()
         {
             return _animator.GetBool(_attackParam);
         }
 
         /// <summary>
-        /// TODO
+        /// Applies damage to the fighter.
         /// </summary>
-        /// <param name="attacker"></param>
+        /// <param name="attacker">the fighter attacking this fighter</param>
         protected void TakeDamage(Fighter attacker)
         {
-            _stats[FighterStats.Health] -= attacker._stats[FighterStats.Attack];
+            float dmgDealt = attacker.GetStat(FighterStats.Attack) * (_isDefending ? 0.5f : 1f);
+            
+            _stats[FighterStats.Health] -= dmgDealt;
             _animator.SetTrigger("Injured");
             OnStatChange?.Invoke(FighterStats.Health);
 
@@ -165,9 +160,17 @@ namespace Assets.Combat
             _hasAttacked.Clear();
         }
 
+        /// <summary>
+        /// A callback for inheriting classes to do some work during the OnAnimationEnd handler.
+        /// </summary>
         protected abstract void AnimationEnded();
 
-        protected void IncreaseStat(FighterStats stat, int value)
+        /// <summary>
+        /// Modifies the fighter's specified stat by a given amount. Does not affect the max stat.
+        /// </summary>
+        /// <param name="stat">the stat to modify</param>
+        /// <param name="value">the amount to modify the stat by</param>
+        protected void ModifyStat(FighterStats stat, float value)
         {
             _stats[stat] += value;
 
@@ -176,6 +179,18 @@ namespace Assets.Combat
                 _stats[stat] = 0;
             }
 
+            OnStatChange?.Invoke(stat);
+        }
+
+        /// <summary>
+        /// Sets the given stat's max and current value to a new value.
+        /// </summary>
+        /// <param name="stat">the stat to set</param>
+        /// <param name="value">the amount to set the stat by</param>
+        protected void SetStat(FighterStats stat, int value)
+        {
+            _stats[stat] = value;
+            _maxStats[stat] = value;
             OnStatChange?.Invoke(stat);
         }
     }
