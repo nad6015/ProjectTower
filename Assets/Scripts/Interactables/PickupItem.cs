@@ -9,7 +9,7 @@ namespace Assets.Interactables
         [field: SerializeField]
         public UsableItem Pickup { get; set; }
 
-        private float _rotationSpeed = 1f;
+        private readonly float _rotationSpeed = 1f;
         private void Awake()
         {
             prompt = "Pickup";
@@ -22,6 +22,7 @@ namespace Assets.Interactables
         protected override void HandleInteract(InputAction.CallbackContext context)
         {
             Pickup.Use(controller);
+            DisableInteraction();
             gameObject.SetActive(false);
         }
     }

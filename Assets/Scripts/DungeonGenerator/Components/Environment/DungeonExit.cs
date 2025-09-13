@@ -12,6 +12,11 @@ namespace Assets.DungeonGenerator.Components
     {
         public event Action DungeonCleared;
 
+        private void Start()
+        {
+            prompt = "Go to next floor";
+        }
+
         protected override void HandleInteract(InputAction.CallbackContext context)
         {
             DungeonCleared?.Invoke();

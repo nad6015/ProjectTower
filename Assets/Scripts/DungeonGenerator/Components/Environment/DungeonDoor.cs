@@ -35,6 +35,8 @@ namespace Assets.DungeonGenerator.Components
             {
                 _locked = false;
                 _animator.SetBool("Locked", _locked);
+                DisableInteraction();
+                prompt = "";
                 playerInventory.Remove(_doorKey);
             }
         }

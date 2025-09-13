@@ -1,5 +1,4 @@
-﻿using Assets.Combat;
-using Assets.Interactables;
+﻿using Assets.Interactables;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -8,14 +7,12 @@ namespace Assets.DungeonGenerator.Components
 {
     public class LockedRoom : DungeonRoom
     {
-        private float _combatOrFindRate = 0.0f;
         private DungeonDoor door;
 
         internal override void Populate(DungeonRepresentation dungeon)
         {
             DungeonNode lockedRoom = null;
-            var dungeonRooms = dungeon.GetConstructedDungeon().DungeonRooms;
-            Debug.Log(DungeonNode.LinkedNodes.Count);
+
             if (DungeonNode.LinkedNodes.Count > 2)
             {
                 foreach (var node in DungeonNode.LinkedNodes)
@@ -46,8 +43,8 @@ namespace Assets.DungeonGenerator.Components
                     break;
                 }
             }
-            Debug.Log(corridor);
-            DungeonDoor door = corridor.Doors.Item1; // First door is always the door that connects to the room.
+
+            DungeonDoor door = corridor.Doors.Item1;
 
             this.door = door;
 
@@ -59,20 +56,13 @@ namespace Assets.DungeonGenerator.Components
             var dungeonRooms = dungeon.GetConstructedDungeon().DungeonRooms;
 
             PickupItem keyPickup = Instantiate(dungeon.Components.doorKey);
-            if (Random.value > _combatOrFindRate) // If random value is greater than .5 then spawn key in a random room
-            {
-                int index = Random.Range(0, dungeonRooms.IndexOf(this));
-                DungeonRoom room = dungeonRooms[index];
-                keyPickup.transform.SetParent(room.transform);
-                Bounds safeBounds = new(room.Bounds.center, room.Bounds.size / 2f);
-                keyPickup.transform.position = PointUtils.RandomPointWithinBounds(safeBounds);
-            }
-            else
-            {
-                List<NpcFighter> enemies = dungeon.GetConstructedDungeon().Enemies;
-                int index = Random.Range(0, enemies.Count - 1);
-                keyPickup.transform.SetParent(enemies[index].transform);
-            }
+
+            int index = Random.Range(0, dungeonRooms.IndexOf(this));
+            DungeonRoom room = dungeonRooms[index];
+            keyPickup.transform.SetParent(room.transform);
+            Bounds safeBounds = new(room.Bounds.center, room.Bounds.size / 2f);
+            keyPickup.transform.position = PointUtils.RandomPointWithinBounds(safeBounds);
+
             door.LockDoor(keyPickup.Pickup.GetComponent<DoorKey>());
         }
 

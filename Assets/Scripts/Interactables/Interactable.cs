@@ -33,9 +33,14 @@ namespace Assets.Interactables
         {
             if (other.CompareTag("Player"))
             {
-                controller.OnInteract -= HandleInteract;
-                controller.HideHUD();
+                DisableInteraction();
             }
+        }
+
+        protected void DisableInteraction()
+        {
+            controller.OnInteract -= HandleInteract;
+            controller.HideHUD();
         }
 
         protected abstract void HandleInteract(InputAction.CallbackContext context);
