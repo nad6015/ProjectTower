@@ -11,9 +11,10 @@ namespace Assets.DungeonGenerator
     public class DungeonCorridor : MonoBehaviour
     {
         public Bounds Bounds { get; private set; }
-        public Tuple<DungeonDoor, DungeonDoor> Doors { get; internal set; }
+        public Tuple<DungeonNode, DungeonNode> ConnectedRooms { get; private set; }
+        public DungeonAxis Axis { get; private set; }
+        public Tuple<DungeonDoor, DungeonDoor> Doors { get; private set; }
 
-        private bool isHorizontal = false;
         private readonly List<GameObject> walls = new();
         private readonly List<GameObject> floors = new();
 
@@ -21,10 +22,10 @@ namespace Assets.DungeonGenerator
         /// Constructs a corridor.
         /// </summary>
         /// <param name="tilemap">the component used to construct the corridor</param>
-        internal void Construct(DungeonTilemap tilemap, Vector3 minCorridorSize)
+        internal void Construct(DungeonTilemap tilemap)
         {
             BoundsInt bounds = DungeonComponentUtils.BoundsToBoundsInt(Bounds);
-            isHorizontal = Mathf.Approximately(minCorridorSize.z, Bounds.size.z);
+            bool isHorizontal = Axis == DungeonAxis.Horizontal;
 
             transform.position = bounds.min;
 
@@ -46,16 +47,16 @@ namespace Assets.DungeonGenerator
                 walls.AddRange(DungeonComponentUtils.DrawLeftAndRightWalls(tilemap, bounds, transform));
             }
 
-            List<GameObject> doors = tilemap.DrawCorridorDoors(bounds, isHorizontal, transform);
-            
-            Doors = new(doors[0].GetComponent<DungeonDoor>(),
-                        doors[1].GetComponent<DungeonDoor>());
+            var tempDoors = tilemap.DrawCorridorDoors(bounds, isHorizontal, transform);
+            Doors = new(tempDoors.Item1.GetComponent<DungeonDoor>(), tempDoors.Item2.GetComponent<DungeonDoor>());
         }
 
-        public static DungeonCorridor Create(Bounds bounds, int id)
+        public static DungeonCorridor Create(DungeonNodeLink link, int id)
         {
             DungeonCorridor corridor = NewGameObjectWithComponent<DungeonCorridor>("Corridor " + id);
-            corridor.Bounds = bounds;
+            corridor.Bounds = link.Bounds;
+            corridor.ConnectedRooms = link.ConnectedRooms;
+            corridor.Axis = link.Axis;
             return corridor;
         }
     }

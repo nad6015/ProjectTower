@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7847025080477372333}
-  - component: {fileID: 1104936142331130373}
+  - component: {fileID: 7685706558341425609}
   m_Layer: 0
   m_Name: Key
   m_TagString: Untagged
@@ -33,7 +33,7 @@ Transform:
   - {fileID: 5675288524040216946}
   m_Father: {fileID: 3341059481506393456}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1104936142331130373
+--- !u!114 &7685706558341425609
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,7 +42,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 246045634685021776}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f22793f15c7b2644a9e254eff67a290, type: 3}
+  m_Script: {fileID: 11500000, guid: b2f3973ef1e25c1499bac9dbbd0000d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3913015270439700818
@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 991e793ac04065148a3df38e1f5c91e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Pickup>k__BackingField: {fileID: 1104936142331130373}
+  <Pickup>k__BackingField: {fileID: 7685706558341425609}
 --- !u!65 &8807443462663122346
 BoxCollider:
   m_ObjectHideFlags: 0

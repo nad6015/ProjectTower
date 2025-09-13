@@ -23,8 +23,7 @@
     {
       "parameter": "enemySpawnRate",
       "valueType": "number",
-      "value": { "value": 75 },
-      "locked": false
+      "value": { "value": 75 }
     },
     {
       "parameter": "itemsPerRoom",

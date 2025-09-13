@@ -15,7 +15,6 @@ public partial class AttackPlayerAction : Action
     {
         _enemyController = Self.Value.GetComponent<EnemyController>();
         _enemyController.Attack();
-        Debug.Log("Player Attacked!");
         return Status.Success;
     }
 

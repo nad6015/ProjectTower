@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -80,26 +81,25 @@ namespace Assets.DungeonGenerator.Components.Tiles
         }
 
         /// <summary>
-        /// Draw the corridor's doors. Hardcoded values are used (the +4 and -1) in this method as the corridor door model is
-        /// knwon and unlikely to change.
+        /// Draw a corridor's doors. 
         /// </summary>
         /// <param name="bounds">the bounds of the corridor</param>
-        /// <param name="isHorizontal"></param>
-        /// <param name="transform"></param>
-        /// <returns></returns>
-        public List<GameObject> DrawCorridorDoors(BoundsInt bounds, bool isHorizontal, Transform transform)
+        /// <param name="isHorizontal">is the corridor placed horizontally</param>
+        /// <param name="transform">the transform of the corridor game object</param>
+        /// <returns>A tuple of the doors</returns>
+        public Tuple<GameObject, GameObject> DrawCorridorDoors(BoundsInt bounds, bool isHorizontal, Transform transform)
         {
-            List<GameObject> doors = new();
+            Tuple<GameObject, GameObject> doors;
 
             if (isHorizontal)
             {
-                doors.Add(Draw(bounds.xMin, bounds.zMin + 4, corridorDoor, Quaternion.Inverse(rotateY), transform));
-                doors.Add(Draw(bounds.xMax - 1, bounds.zMin, corridorDoor, rotateY, transform));
+                doors = new(Draw(bounds.xMin, bounds.zMin + 4, corridorDoor, Quaternion.Inverse(rotateY), transform),
+                            Draw(bounds.xMax - 1, bounds.zMin, corridorDoor, rotateY, transform));
             }
             else
             {
-                doors.Add(Draw(bounds.xMin, bounds.zMin, corridorDoor, Quaternion.identity, transform));
-                doors.Add(Draw(bounds.xMin + 4, bounds.zMax - 1, corridorDoor, Quaternion.AngleAxis(180f, Vector3.up), transform));
+                doors = new(Draw(bounds.xMin, bounds.zMin, corridorDoor, Quaternion.identity, transform),
+                            Draw(bounds.xMin + 4, bounds.zMax - 1, corridorDoor, Quaternion.AngleAxis(180f, Vector3.up), transform));
             }
 
             return doors;

@@ -14,7 +14,7 @@ namespace Assets.DungeonGenerator
     public class RandomWalk : IDungeonAlgorithm
     {
         private Dictionary<Bounds, DungeonRoom> _roomBounds;
-        private Dictionary<Bounds, DungeonCorridor> _corridors;
+        private Dictionary<DungeonNodeLink, DungeonCorridor> _corridors;
 
         private DungeonRepresentation _dungeon;
         private DungeonComponents _components;
@@ -109,12 +109,19 @@ namespace Assets.DungeonGenerator
                         nextRoom = RandomRoom(new(lastRoom.min.x, 0, lastRoom.min.z - 0), lastRoom.max, dir, false);
                         corridor = CreateCorridor(nextRoom, lastRoom, false);
                     }
+
+                    // Construct a dungeon node link here as the direction changes before the components get placed
+                    DungeonNodeLink corridorLink = new(corridor,
+                          new(node, n),
+                          Mathf.Approximately(dir.x, 0) ? DungeonAxis.Vertical : DungeonAxis.Horizontal);
+
                     dir = _directions.TakeItem();
                     // If a room or a corridor already exists in that area, then loop again.
                     if (CanPlaceRoom(nextRoom, corridor))
                     {
-                        _corridors.Add(corridor, null);
+                        _corridors.Add(corridorLink, null);
                         _roomBounds.Add(nextRoom, null);
+
                         n.Bounds = nextRoom;
                         nodes.Add(n);
 
@@ -135,7 +142,7 @@ namespace Assets.DungeonGenerator
             {
                 var corridor = _corridors.ElementAt(i);
                 DungeonCorridor dungeonCorridor = DungeonCorridor.Create(corridor.Key, i);
-                dungeonCorridor.Construct(_components.tilemap, _dungeon.Parameter<Vector3>(DungeonParameter.CorridorSize));
+                dungeonCorridor.Construct(_components.tilemap);
                 dungeonCorridor.transform.SetParent(_dungeonTransform);
                 _corridors[corridor.Key] = dungeonCorridor;
             }
@@ -168,7 +175,7 @@ namespace Assets.DungeonGenerator
             foreach (var room in _roomBounds.Values)
             {
                 room.InstaniateContents(_dungeon);
-                if(room.DungeonNode.Type == RoomType.Start)
+                if (room.DungeonNode.Type == RoomType.Start)
                 {
                     continue;
                 }
@@ -260,7 +267,8 @@ namespace Assets.DungeonGenerator
             }
             foreach (var corridor in _corridors.Keys)
             {
-                if (corridor.Intersects(newCorridor) || corridor.Intersects(newRoom))
+                Bounds cBounds = corridor.Bounds;
+                if (cBounds.Intersects(newCorridor) || cBounds.Intersects(newRoom))
                 {
                     return false;
                 }

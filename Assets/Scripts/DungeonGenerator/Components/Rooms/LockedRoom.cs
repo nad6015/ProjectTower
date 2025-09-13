@@ -13,24 +13,29 @@ namespace Assets.DungeonGenerator.Components
 
         internal override void Populate(DungeonRepresentation dungeon)
         {
-            DungeonNode corridorToLock = null;
+            DungeonNode lockedRoom = null;
             var dungeonRooms = dungeon.GetConstructedDungeon().DungeonRooms;
-
-            foreach (var node in dungeon.Layout)
+            Debug.Log(DungeonNode.LinkedNodes.Count);
+            if (DungeonNode.LinkedNodes.Count > 2)
             {
-                HashSet<DungeonNode> visitedNodes = new()
+                foreach (var node in DungeonNode.LinkedNodes)
+                {
+                    HashSet<DungeonNode> visitedNodes = new()
                 {
                     node, DungeonNode
                 };
-                DungeonNode fnode = FindPathTo(RoomType.End, node.LinkedNodes, visitedNodes);
-                if (fnode != null)
-                {
-                    corridorToLock = node;
-                    break;
+                    DungeonNode fnode = FindPathTo(RoomType.End, node.LinkedNodes, visitedNodes);
+                    if (fnode != null)
+                    {
+                        lockedRoom = node;
+                        break;
+                    }
                 }
             }
-
-            DungeonRoom lockedRoom = dungeonRooms.Find(room => room.DungeonNode == corridorToLock);
+            else
+            {
+                lockedRoom = DungeonNode.LinkedNodes[0];
+            }
 
             DungeonCorridor corridor = null;
             foreach (var c in FindObjectsByType<DungeonCorridor>(FindObjectsSortMode.None))
@@ -41,6 +46,7 @@ namespace Assets.DungeonGenerator.Components
                     break;
                 }
             }
+            Debug.Log(corridor);
             DungeonDoor door = corridor.Doors.Item1; // First door is always the door that connects to the room.
 
             this.door = door;
