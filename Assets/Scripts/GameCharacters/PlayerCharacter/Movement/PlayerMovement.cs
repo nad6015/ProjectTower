@@ -51,7 +51,7 @@ namespace Assets.PlayerCharacter
 
             transform.rotation = _currentRotation;
 
-            _characterController.SimpleMove((!_fighter.IsAttacking() ? speed : 1) * newPos);
+            _characterController.SimpleMove(speed * newPos);
         }
     }
 }

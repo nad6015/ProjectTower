@@ -15,7 +15,7 @@
                     <engine:Label text="Attack" name="Label" style="font-size: 20px; -unity-font-definition: url(&quot;project://database/Assets/UI/Metamorphous/Metamorphous-Regular.ttf?fileID=12800000&amp;guid=357a43675fa265f49991b9f235967205&amp;type=3#Metamorphous-Regular&quot;); align-self: auto; align-items: auto; align-content: auto;" />
                     <engine:VisualElement class="control-prompt-img" />
                 </engine:VisualElement>
-                <engine:VisualElement name="Dodge" class="control-prompt" style="opacity: 1; display: none;">
+                <engine:VisualElement name="Dodge" class="control-prompt" style="opacity: 1; display: flex;">
                     <engine:Label text="Dodge" name="Label" style="font-size: 20px; -unity-font-definition: url(&quot;project://database/Assets/UI/Metamorphous/Metamorphous-Regular.ttf?fileID=12800000&amp;guid=357a43675fa265f49991b9f235967205&amp;type=3#Metamorphous-Regular&quot;); align-self: auto; align-items: auto; align-content: auto;" />
                     <engine:VisualElement class="control-prompt-img" style="flex-grow: 1; height: 100%; background-image: url(&quot;project://database/Assets/UI/GameInputControllerIconsFree/mouse/mouse-solid/mouse-right.png?fileID=2800000&amp;guid=3c477db1ce513e54c828b3ceeb5caf46&amp;type=3#mouse-right&quot;);" />
                 </engine:VisualElement>
@@ -23,7 +23,7 @@
                     <engine:Label text="Interact" name="Label" style="font-size: 20px; -unity-font-definition: url(&quot;project://database/Assets/UI/Metamorphous/Metamorphous-Regular.ttf?fileID=12800000&amp;guid=357a43675fa265f49991b9f235967205&amp;type=3#Metamorphous-Regular&quot;); align-self: auto; align-items: auto; align-content: auto;" />
                     <engine:VisualElement class="control-prompt-img" style="background-image: url(&quot;project://database/Assets/UI/GameInputControllerIconsFree/keyboard/keyboard-solid/e.png?fileID=2800000&amp;guid=69da02ec34c73624b91727759ad616df&amp;type=3#e&quot;);" />
                 </engine:VisualElement>
-                <engine:VisualElement name="RotateCamera" class="control-prompt" style="display: flex;">
+                <engine:VisualElement name="RotateCamera" class="control-prompt" style="display: none;">
                     <engine:Label text="Rotate Camera" name="Label" style="font-size: 20px; -unity-font-definition: url(&quot;project://database/Assets/UI/Metamorphous/Metamorphous-Regular.ttf?fileID=12800000&amp;guid=357a43675fa265f49991b9f235967205&amp;type=3#Metamorphous-Regular&quot;); align-self: auto; align-items: auto; align-content: auto;" />
                     <engine:VisualElement class="control-prompt-img" style="flex-grow: 1; height: 100%; background-image: url(&quot;project://database/Assets/UI/GameInputControllerIconsFree/mouse/mouse-solid/mouse-middle.png?fileID=2800000&amp;guid=75d38e34a5887f3439d5351f8493e77b&amp;type=3#mouse-middle&quot;);" />
                 </engine:VisualElement>

@@ -68,14 +68,14 @@ namespace Assets.PlayerCharacter
                 if (!_isAttacking)
                 {
                     Attack();
-                    GetComponent<PlayerMovement>().speed = _stats[FighterStats.Speed];
+                    //GetComponent<PlayerMovement>().speed = _stats[FighterStats.Speed];
                     IncreaseStat(FighterStats.STAMINA, -1);
                 }
                 else if (!_continueCombo)
                 {
                     _continueCombo = true;
                     _comboCount = Mathf.Min(_comboCount + 1, maxCombo);
-                    GetComponent<PlayerMovement>().speed = _stats[FighterStats.Speed];
+                    //GetComponent<PlayerMovement>().speed = _stats[FighterStats.Speed];
                 }
             }
         }

@@ -161,7 +161,6 @@ namespace Assets.Combat
             _hitbox.enabled = false;
             _isAttacking = false;
             _attackCooldown = _attackCooldownDuration;
-            _stats[FighterStats.Speed] = _maxStats[FighterStats.Speed];
             AnimationEnded();
             _hasAttacked.Clear();
         }
