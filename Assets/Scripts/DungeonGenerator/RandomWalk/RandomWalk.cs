@@ -46,8 +46,9 @@ namespace Assets.DungeonGenerator
 
             CreateDungeonRooms();
             ConstructDungeon();
+            GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<NavMeshSurface>().BuildNavMesh(); // First build is to ensure enemies are placed on a navmesh
             PlaceContent();
-            GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<NavMeshSurface>().BuildNavMesh();
+            GameObject.FindGameObjectWithTag("DungeonGenerator").GetComponent<NavMeshSurface>().BuildNavMesh(); // second build are to account for navmesh obstacles
         }
 
         /// <summary>
@@ -85,6 +86,7 @@ namespace Assets.DungeonGenerator
                 {
                     continue;
                 }
+                _directions.RefreshBag();
                 for (var i = 0; i < 4; i++)
                 {
                     Bounds nextRoom;
@@ -124,6 +126,7 @@ namespace Assets.DungeonGenerator
                         _roomBounds.Add(nextRoom, null);
 
                         n.Bounds = nextRoom;
+
                         nodes.Add(n);
 
                         LinkNodes(n, dir, negativeDirOffset, nodes);
@@ -236,10 +239,11 @@ namespace Assets.DungeonGenerator
         {
             Range<Vector3> roomSizeParam = _dungeon.Parameter<Range<Vector3>>(DungeonParameter.RoomSize);
             Vector3 corridorSize = _dungeon.Parameter<Vector3>(DungeonParameter.CorridorSize);
-            int roomOffset = (int)corridorSize.x; //Random.Range(Mathf.RoundToInt(corridorSize.x) + DungeonTilemap.TileUnit, 5); // Distance between rooms
 
             Vector3 roomSize = PointUtils.RandomSize(roomSizeParam.min, roomSizeParam.max);
             Vector3 roomCenter = PointUtils.RandomPointWithinRange(min, max);
+
+            int roomOffset = Random.Range(Mathf.RoundToInt(roomSize.magnitude), Mathf.RoundToInt(roomSizeParam.max.magnitude)); // Distance between rooms
 
             if (isHorizontal)
             {

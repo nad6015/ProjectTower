@@ -39,25 +39,20 @@ namespace Assets.DungeonMaster
             }
 
             int value = statistics[GameParameter];
-            Debug.Log(Id);
+            
             foreach (var condition in _conditions)
             {
                 if (!condition.IsMet(value))
                 {
-                    Debug.Log(Id+ " Condition is not met");
-                    Debug.Log(value);
-
                     _conditionsMet = false;
                     break;
                 }
                 else
                 {
-                    Debug.Log(Id + "Condition is met");
-                    Debug.Log(value);
                     _conditionsMet = true;
                 }
             };
-            Debug.Log(Id+ " rule has " + (_conditionsMet ? "all conditions met" : "no or partial conditions met"));
+            
             return _conditionsMet;
         }
 

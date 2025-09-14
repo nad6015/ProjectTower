@@ -1,8 +1,9 @@
 {
   "gameplayRules": [
     {
+      "id": "increaseHealingDropRate",
       "parameter": "restorationItem",
-      "gameParam": "totalHealthLost",
+      "gameParam": "characterHealth",
       "conditions": [
         {
           "operator": "<",
@@ -15,8 +16,9 @@
       }
     },
     {
+      "id": "increaseItemDrop",
       "parameter": "restorationItem",
-      "gameParam": "totalHealthLost",
+      "gameParam": "characterHealth",
       "conditions": [
         {
           "operator": "<",
@@ -31,6 +33,7 @@
   ],
   "dungeonRules": [
     {
+      "id": "increaseDungeonLength",
       "parameter": "roomCount",
       "gameParam": "clearTime",
       "conditions": [

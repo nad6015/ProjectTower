@@ -29,9 +29,6 @@ namespace Assets.UI
             _bar.highValue = _fighter.GetMaxStat(_stat);
             _bar.value = _fighter.GetStat(_stat);
             _bar.lowValue = 0;
-
-            Debug.Log(_stat);
-            Debug.Log(_bar.value);
             _bar.SetEnabled(true);
         }
 

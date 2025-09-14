@@ -1,6 +1,5 @@
 ﻿using Assets.DungeonGenerator.DataStructures;
 using Assets.Interactables;
-using Assets.PlayerCharacter;
 using Assets.PlayerCharacter.Resources;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,9 +9,6 @@ namespace Assets.DungeonGenerator.Components
 {
     public class TreasureChest : Interactable
     {
-        [SerializeField]
-        private PickupItem _chestItem;
-
         private IDungeonResourceManager _manager;
         private Animator _animator;
 
@@ -20,6 +16,7 @@ namespace Assets.DungeonGenerator.Components
         {
             _manager = FindComponentByTag<IDungeonResourceManager>("ResourceSystem");
             _animator = GetComponentInChildren<Animator>();
+            prompt = "Open";
         }
 
         protected override void HandleInteract(InputAction.CallbackContext context)
@@ -29,17 +26,10 @@ namespace Assets.DungeonGenerator.Components
 
         public void Open()
         {
-            _chestItem.gameObject.SetActive(true);
+            UsableItem item = _manager.TakeTreasureChestItem();
+            item.Use(controller);
             _animator.SetBool("Open", true);
             DisableInteraction();
-        }
-    }
-
-    public class StatIncreaser : UsableItem
-    {
-        public override void Use(PlayerController player)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

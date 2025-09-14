@@ -33,7 +33,7 @@ namespace Assets.DungeonGenerator.DataStructures
             }
             else if (_shuffleBag.Count == 0)
             {
-                _shuffleBag = new List<T>(_originalList);
+               RefreshBag();
             }
 
             int randomIndex = Mathf.RoundToInt(Random.value * (_shuffleBag.Count - 1));
@@ -42,6 +42,14 @@ namespace Assets.DungeonGenerator.DataStructures
             _shuffleBag.RemoveAt(randomIndex);
 
             return item;
+        }
+
+        /// <summary>
+        /// Refills the shufflebag without taking any items from it.
+        /// </summary>
+        public void RefreshBag()
+        {
+            _shuffleBag = new List<T>(_originalList);
         }
     }
 }

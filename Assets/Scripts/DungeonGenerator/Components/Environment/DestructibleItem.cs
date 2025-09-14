@@ -31,7 +31,6 @@ namespace Assets.DungeonGenerator.Components
             {
                 _audioSource.Play();
                 Interactable item = _manager.TakeContainerItem();
-                Debug.Log(item);
                 if (item != null)
                 {
                     SpawnPoint spawnPoint = GetComponent<SpawnPoint>();

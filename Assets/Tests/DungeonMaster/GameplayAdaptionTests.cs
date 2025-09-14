@@ -11,6 +11,7 @@ using Tests.Support;
 using Assets.Combat;
 using Assets.DungeonGenerator.Components;
 using Assets.Interactables;
+using Assets.PlayerCharacter;
 
 public class GameplayAdaptionTests
 {

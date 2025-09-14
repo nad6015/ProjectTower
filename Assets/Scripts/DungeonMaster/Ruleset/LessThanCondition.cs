@@ -16,10 +16,6 @@ namespace Assets.DungeonMaster
 
         public bool IsMet(int value)
         {
-            Debug.Log("value < _operand = " + (value < _operand));
-            Debug.Log("value = " + value);
-            Debug.Log("_operand = " + _operand);
-
             return value < _operand;
         }
     }

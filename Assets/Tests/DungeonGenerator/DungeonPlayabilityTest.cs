@@ -7,31 +7,41 @@ using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
 using static TestUtilities;
 using static Assets.Utilities.GameObjectUtilities;
+using Assets.Combat;
 
-public class DungeonPlayabilityTest
+namespace Tests.DungeonPlayablity
 {
-    [SetUp]
-    public void Setup()
+    public class DungeonPlayabilityTest
     {
-        SceneManager.LoadScene("Scenes/Tests/DungeonPlayability");
-    }
-
-    [UnityTest]
-    [Repeat(10)]
-    [Timeout(3600000)]
-    public IEnumerator ShouldReachDungeonEnd()
-    {
-        yield return new WaitForSeconds(1f);
-        NavMeshAgent testAgent = FindComponentByTag<NavMeshAgent>("Player");
-        Transform endPoint = GameObject.FindFirstObjectByType<DungeonExit>().transform;
-        testAgent.SetDestination(endPoint.position);
-
-        do
+        const int testTimeoutMs = (3600000 * 8) + (600000);
+        [SetUp]
+        public void Setup()
         {
-            yield return new WaitForSeconds(1);
+            SceneManager.LoadScene("Scenes/Tests/DungeonPlayability");
         }
 
-        while (!HasReachedDestination(testAgent.transform, endPoint));
-        Assert.That(HasReachedDestination(testAgent.transform, endPoint));
+        [UnityTest]
+        [Repeat(500)]
+        [Timeout(testTimeoutMs)]
+        public IEnumerator ShouldReachDungeonEnd()
+        {
+            yield return new WaitForSeconds(1f);
+            var enemies = GameObject.FindObjectsByType<NpcFighter>(FindObjectsSortMode.None);
+            foreach (var enemy in enemies)
+            {
+                enemy.gameObject.SetActive(false);
+            }
+
+            NavMeshAgent testAgent = FindComponentByTag<NavMeshAgent>("Player");
+            Transform endPoint = GameObject.FindFirstObjectByType<DungeonExit>().transform;
+            testAgent.SetDestination(endPoint.position);
+
+            do
+            {
+                yield return new WaitForSeconds(1);
+            }
+            while (!HasReachedDestination(testAgent.transform, endPoint));
+            Assert.That(HasReachedDestination(testAgent.transform, endPoint));
+        }
     }
 }

@@ -31,9 +31,6 @@ public class DungeonParametersTest
         Assert.That(enemiesPerRoom.min == 0);
         Assert.That(enemiesPerRoom.max == 3);
 
-        Debug.Log(roomSize.min);
-        Debug.Log(roomSize.max);
-
         Assert.That(roomSize.min == new Vector3(15, 0, 15));
         Assert.That(roomSize.max == new Vector3(35, 0, 35));
     }

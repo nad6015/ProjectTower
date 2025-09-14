@@ -1,5 +1,6 @@
 using Assets.Combat;
 using Assets.GameCharacters;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -103,6 +104,12 @@ namespace Assets.PlayerCharacter
                     _comboCount = Mathf.Min(_comboCount + 1, maxCombo);
                 }
             }
+        }
+
+        public void IncreaseStat(FighterStats stats, int _statIncrease)
+        {
+            SetStat(stats, GetMaxStat(stats) + _statIncrease);
+            // TODO: Animation to show what stat increased
         }
     }
 }
