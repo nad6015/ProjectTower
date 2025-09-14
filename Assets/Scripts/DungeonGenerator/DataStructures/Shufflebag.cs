@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.DungeonGenerator.Components.Tiles
+namespace Assets.DungeonGenerator.DataStructures
 {
     /// <summary>
-    /// A C# representation of a shufflebag (reference: https://medium.com/@lemapp09/beginning-game-development-shuffle-bag-d059a3f38bfc)
-    /// for creating controlled randomness.
+    /// A C# representation of a shufflebag, a method of controlling randomness to ensure fairness in games.
+    /// A set of outcomes are put into the bag and then radnomly pulled out. For example, if a dice roll should 
+    /// have a 1/6 chance of landing on any face, then the bag would have 1,2,3,4,5,6 which would be pulled out randomly.
+    /// Once the bag is empty, the selected outcomes would be put back into the bag.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class Shufflebag<T>

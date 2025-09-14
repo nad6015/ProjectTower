@@ -2,17 +2,16 @@ using Assets.PlayerCharacter;
 using Unity.Behavior;
 using UnityEngine;
 
-public class TestPlayer : PlayerController
+namespace Tests.Support
 {
-    protected override void Start()
+    public class TestPlayer : PlayerController
     {
-        base.Start();
-        //GameObject exit = GameObject.Find("DungeonExit");
-        //GetComponent<BehaviorGraphAgent>().SetVariableValue("exit", exit);
-    }
-
-    internal void AttackSelf()
-    {
-        
+        TestPlayableFighter _fighter;
+        protected override void Start()
+        {
+            base.Start();
+            _fighter = GetComponent<TestPlayableFighter>();
+            
+        }
     }
 }

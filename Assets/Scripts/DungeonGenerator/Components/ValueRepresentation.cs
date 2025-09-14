@@ -88,7 +88,7 @@ namespace Assets.DungeonGenerator.Components
                 }
                 case ValueType.Number:
                 {
-                    _value = value.Value<int>();
+                    _value = (int)_value + value.Value<int>();
                     break;
                 }
             }

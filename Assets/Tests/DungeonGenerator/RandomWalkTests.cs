@@ -16,7 +16,7 @@ public class RandomWalkTests
     [SetUp]
     public void SetUp()
     {
-        SceneManager.LoadScene("Scenes/Tests/RandomWalkAlgorithm");
+        SceneManager.LoadScene("Scenes/Tests/RandomWalk");
         DungeonNode.Reset();
     }
 

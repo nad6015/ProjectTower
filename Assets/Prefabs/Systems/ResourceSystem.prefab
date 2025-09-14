@@ -44,4 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e532807eac0e714bbc498521503438c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemDropRate: 0.5
+  _containerItemsList:
+  - {fileID: 7852392728132166079, guid: 3a68e34b9cf70244d910afff8f8d8799, type: 3}

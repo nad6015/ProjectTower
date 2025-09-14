@@ -187,7 +187,7 @@ namespace Assets.Combat
         /// </summary>
         /// <param name="stat">the stat to set</param>
         /// <param name="value">the amount to set the stat by</param>
-        protected void SetStat(FighterStats stat, int value)
+        protected void SetStat(FighterStats stat, float value)
         {
             _stats[stat] = value;
             _maxStats[stat] = value;

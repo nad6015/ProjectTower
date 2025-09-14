@@ -8,6 +8,7 @@ namespace Assets.DungeonGenerator.Components
         {
             PlaceProps(dungeon);
             SpawnEnemies(dungeon);
+            // TODO: chance of combat room being locked
         }
     }
 }

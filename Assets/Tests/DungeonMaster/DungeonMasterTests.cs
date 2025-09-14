@@ -9,6 +9,9 @@ using UnityEngine.TestTools.Utils;
 using static UnityEngine.GameObject;
 using static Assets.Utilities.GameObjectUtilities;
 using Assets.PlayerCharacter;
+using Tests.Support;
+using Assets.PlayerCharacter.Resources;
+using Assets.Interactables;
 
 public class DungeonMasterTests
 {
@@ -32,7 +35,7 @@ public class DungeonMasterTests
         Assert.That(dungeonMaster.CurrentFloor == 1);
 
         Assert.NotNull(dungeonGenerator);
-        Assert.That(dungeonGenerator.transform.childCount >= 15); // There should be at least ten rooms + 5 corridors
+        Assert.That(dungeonGenerator.transform.childCount >= 10); // There should be at least 5 rooms + 5 corridors
 
         Assert.NotNull(FindGameObjectWithTag("Player"));
 
@@ -85,25 +88,63 @@ public class DungeonMasterTests
         TestSetUp();
 
         yield return new WaitForSeconds(1f);
+        Assert.That(dungeonMaster.State == DungeonMasterState.Running);
 
-        player.GetComponent<TestPlayer>().AttackSelf();
+        player.GetComponent<TestPlayableFighter>().DefeatSelf();
 
         yield return new WaitForSeconds(1f);
         Assert.That(dungeonMaster.State == DungeonMasterState.GameEnd);
     }
 
     [UnityTest]
-    public IEnumerator ShouldUseGameStateToModifyEventChance()
+    public IEnumerator ShouldUseGameStateToModifyGameplayParameter()
     {
-        yield return null;
-        Assert.Fail();
+        TestSetUp();
+
+        yield return new WaitForSeconds(1f);
+
+        Assert.That(dungeonMaster.State == DungeonMasterState.Running);
+
+        DestructibleItem item = GameObject.FindFirstObjectByType<DestructibleItem>();
+        item.transform.SetPositionAndRotation(new(player.transform.position.x, 1, player.transform.position.z + 1), Quaternion.identity);
+        player.GetComponent<TestPlayableFighter>().Attack();
+
+        yield return new WaitForSeconds(1f);
+
+        Assert.That(GameObject.FindFirstObjectByType<PickupItem>() == null);
+        GameObject.Destroy(item);
+        player.GetComponent<TestPlayableFighter>().DamageSelf(3); // Restoration drop rate should increase by 100
+        yield return new WaitForSeconds(1f);
+
+        DestructibleItem item2 = GameObject.FindFirstObjectByType<DestructibleItem>();
+        item2.transform.SetPositionAndRotation(new(player.transform.position.x, 1, player.transform.position.z + 1), Quaternion.identity);
+        player.GetComponent<TestPlayableFighter>().Attack();
+        yield return new WaitForSeconds(1f);
+
+
+        Assert.That(GameObject.FindFirstObjectByType<PickupItem>() != null);
     }
 
     [UnityTest]
-    public IEnumerator ShouldPassParametersToDungeonGenerator()
+    public IEnumerator ShouldUseGameStateToModifyDungeonParameter()
     {
-        yield return null;
-        Assert.Fail();
+        TestSetUp();
+
+        yield return new WaitForSeconds(1f);
+
+        Assert.That(dungeonMaster.State == DungeonMasterState.Running);
+
+        player.GetComponent<TestPlayableFighter>().DefeatRandomEnemy();
+
+        yield return new WaitForSeconds(1f);
+
+        dungeonMaster.OnDungeonCleared();
+        
+        yield return new WaitForSeconds(1f);
+        
+        Assert.That(dungeonMaster.State == DungeonMasterState.Running);
+        Assert.That(dungeonMaster.CurrentFloor == 2);
+        Assert.That(GameObject.FindObjectsByType<TestNpcFighter>(FindObjectsSortMode.None).Length >= 5);
     }
 
     private void TestSetUp()

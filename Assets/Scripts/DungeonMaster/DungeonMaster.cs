@@ -45,28 +45,32 @@ namespace Assets.DungeonMaster
 
         private DungeonGenerator.DungeonGenerator _dungeonGenerator;
         private PlayerController _player;
-        private DungeonRepresentation _dungeonParams;
-        private DungeonRepresentation _nextDungeonParams;
-        private Dictionary<GameplayParameter, ValueRepresentation> _gameParams;
+
+        private DungeonRepresentation _dungeonRep;
+        private DungeonComponents _currentComponents;
+        private DungeonMasterConfiguration _config;
+        private Dictionary<DungeonParameter, ValueRepresentation> _dungeonParameters;
+        private Dictionary<GameplayParameter, ValueRepresentation> _gameplayParams;
         private Dictionary<GameParameter, int> _floorStatistics;
-        //private ResourceSystem _resourceSystem;
+
+        private ResourceSystem _resourceSystem;
         private CombatManager _combatSystem;
         private SceneTransitionManager _sceneTransitionManager;
         private AudioManager _audioManager;
-        private DungeonMasterConfiguration _config;
+
         private int currentSection = 0;
-        private DungeonComponents _currentComponents;
-        private Dictionary<DungeonParameter, ValueRepresentation> _dungeonParameters;
 
         public void Start()
         {
             _floorStatistics = new();
+            _gameplayParams = new();
+
             _dungeonGenerator = FindComponentByTag<DungeonGenerator.DungeonGenerator>("DungeonGenerator");
             _combatSystem = FindComponentByTag<CombatManager>("CombatSystem");
             _sceneTransitionManager = FindComponentByTag<SceneTransitionManager>("SceneManager");
             _audioManager = FindComponentByTag<AudioManager>("AudioManager");
-            CurrentFloor = 0;
-            Debug.Log(CurrentFloor);
+            _resourceSystem = FindComponentByTag<ResourceSystem>("ResourceSystem");
+
             NextDungeonSection();
 
             ReadConfigurationFromFiles();
@@ -124,7 +128,7 @@ namespace Assets.DungeonMaster
 
             DungeonMission nextMission = (DungeonMission)CurrentFloor;
 
-            _dungeonParams = new DungeonRepresentation(_config.BaseDungeons[nextMission],
+            _dungeonRep = new DungeonRepresentation(_config.BaseDungeons[nextMission],
                 _config.DungeonFlows[nextMission], _currentComponents, _dungeonParameters);
 
             NewDungeon();
@@ -132,7 +136,7 @@ namespace Assets.DungeonMaster
             FindComponentByTag<DungeonExit>("DungeonExit").DungeonCleared += OnDungeonCleared;
 
             _sceneTransitionManager.SceneTransition(GameScene.None);
-            _audioManager.Modify(_dungeonParams.Components);
+            _audioManager.Modify(_dungeonRep.Components);
             _audioManager.PlayBackgroundMusic();
 
             _combatSystem.OnNewDungeon();
@@ -154,7 +158,8 @@ namespace Assets.DungeonMaster
             {
                 if (rule.ConditionsMet(_floorStatistics))
                 {
-                    _nextDungeonParams.ModifyParameter(rule.Parameter, rule.Value());
+                    _dungeonRep.ModifyParameter(rule.Parameter, rule.Value());
+                    _floorStatistics[rule.GameParameter] = 0; // Reset var after modification
                 }
             }
 
@@ -162,7 +167,16 @@ namespace Assets.DungeonMaster
             {
                 if (rule.ConditionsMet(_floorStatistics))
                 {
-                    _gameParams[rule.Parameter].Modify(rule.Value());
+                    if (!_gameplayParams.ContainsKey(rule.Parameter))
+                    {
+                        _gameplayParams[rule.Parameter] = rule.Value();
+                    }
+                    else
+                    {
+                        _gameplayParams[rule.Parameter].Modify(rule.Value());
+                    }
+                    _resourceSystem.UpdateItemRates(_gameplayParams);
+                    _floorStatistics[rule.GameParameter] = 0; // Reset var after modification
                 }
             }
         }
@@ -187,7 +201,7 @@ namespace Assets.DungeonMaster
         /// </summary>
         private void NewDungeon()
         {
-            _dungeonGenerator.GenerateDungeon(_dungeonParams);
+            _dungeonGenerator.GenerateDungeon(_dungeonRep);
             SpawnPoint startingPoint = FindComponentByTag<SpawnPoint>("PlayerSpawn");
 
             if (_player != null)
@@ -197,6 +211,7 @@ namespace Assets.DungeonMaster
             else
             {
                 _player = startingPoint.Spawn().GetComponent<PlayerController>();
+                _player.GetComponent<PlayableFighter>().OnStatChange += OnPlayerHealthChanged;
             }
         }
 
@@ -235,6 +250,21 @@ namespace Assets.DungeonMaster
         private void OnPlayerDefeated(PlayableFighter fighter)
         {
             State = DungeonMasterState.GameEnd;
+        }
+
+        private void OnPlayerHealthChanged(FighterStats stat)
+        {
+            if (stat == FighterStats.Health)
+            {
+                var fighter = _player.GetComponent<PlayableFighter>();
+                int playerHp = Mathf.RoundToInt(fighter.GetStat(stat));
+                int playerMaxHp = Mathf.RoundToInt(fighter.GetMaxStat(stat));
+                if (!_floorStatistics.ContainsKey(GameParameter.TotalHealthLost))
+                {
+                    _floorStatistics[GameParameter.TotalHealthLost] = 0;
+                }
+                _floorStatistics[GameParameter.TotalHealthLost] += (playerMaxHp - playerHp);
+            }
         }
     }
 }

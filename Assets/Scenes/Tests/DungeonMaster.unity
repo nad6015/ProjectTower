@@ -485,6 +485,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameSystems
       objectReference: {fileID: 0}
+    - target: {fileID: 7751301447746594715, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
+      propertyPath: _defaultRulesetFile
+      value: 
+      objectReference: {fileID: 4900000, guid: feec4b49b06160646986a10f5e9f42b8, type: 3}
+    - target: {fileID: 7751301447746594715, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
+      propertyPath: '_componentsList.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 60d4a2d7729581b43aa719c06f097a6b, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -61,10 +61,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2411030350727224445}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8dfd51956c14ee04bbd1aa88292d09a5, type: 3}
+  m_Script: {fileID: 11500000, guid: fad605a64bb9092489cc350e69ebb4b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _destroyedItem: {fileID: 2411030350727224445, guid: e8ece3cd5c42cfd45a5e71e61c699e6e, type: 3}
+  _itemBreakClip: {fileID: 0}
 --- !u!114 &5819248284586061273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,6 +151,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 206226219380534606}
     m_Modifications:
+    - target: {fileID: 2601675966969212786, guid: 3ddfb275a6af7b54aa0decd735ed4b47, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3769563866615321629, guid: 3ddfb275a6af7b54aa0decd735ed4b47, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5

@@ -3,7 +3,7 @@ Skeleton - SazenGames [TODO]
 
 10 Impact/Shield Blocks - StarNinja, OpenGameArt [https://opengameart.org/users/starninjas]
 
-42 "Monster 2 RPG" Music Tracks - TroutSneeze [https://opengameart.org/content/42-monster-rpg-2-music-tracks]
+42 "Monster 2 RPG" Music Tracks - TroutSneeze [https://opengameart.org/content/42-monster-rpg-2-music-tracks] (CC0)
 
 Swish - Bamboo Stick Weapon Swhoshes - qubodup [https://opengameart.org/content/swish-bamboo-stick-weapon-swhoshes]
 
@@ -16,3 +16,7 @@ Lowpoly Magician RIO - VertexModeler [https://assetstore.unity.com/packages/3d/c
 Training_Dummy  - 
 
 CemeteryPack - 
+
+Breaking Bottle  - spookymodem [https://opengameart.org/content/breaking-bottle] (CC-BY 3.0)
+
+5 break, crunch impacts - Independent.nu [https://opengameart.org/content/5-break-crunch-impacts] (CC0)

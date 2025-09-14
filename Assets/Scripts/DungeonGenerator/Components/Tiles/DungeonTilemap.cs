@@ -1,3 +1,4 @@
+using Assets.DungeonGenerator.DataStructures;
 using System;
 using System.Collections.Generic;
 using UnityEngine;

@@ -149,7 +149,7 @@ namespace Assets.DungeonGenerator.Components
         protected virtual void PlaceProps(DungeonRepresentation dungeon)
         {
             int itemCount = dungeon.RandomItemCount();
-            
+
             DungeonTilemap tilemap = dungeon.Components.tilemap;
             for (int i = 0; i < itemCount; i++)
             {
@@ -162,6 +162,67 @@ namespace Assets.DungeonGenerator.Components
 
                 Contents.Add(new(prop.gameObject, pos + PointUtils.RandomPointWithinBounds(_safeArea)));
             }
+        }
+
+        protected DungeonDoor LockClosestDoor()
+        {
+            DungeonNode lockedRoom = null;
+
+            if (DungeonNode.LinkedNodes.Count > 2)
+            {
+                foreach (var node in DungeonNode.LinkedNodes)
+                {
+                    HashSet<DungeonNode> visitedNodes = new()
+                    {
+                        node, DungeonNode
+                    };
+                    DungeonNode fnode = FindPathTo(RoomType.End, node.LinkedNodes, visitedNodes);
+                    if (fnode != null)
+                    {
+                        lockedRoom = node;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                lockedRoom = DungeonNode.LinkedNodes[0];
+            }
+
+            DungeonCorridor corridor = null;
+            foreach (var c in FindObjectsByType<DungeonCorridor>(FindObjectsSortMode.None))
+            {
+                if (c.Bounds.Intersects(Bounds) && c.Bounds.Intersects(lockedRoom.Bounds))
+                {
+                    corridor = c;
+                    break;
+                }
+            }
+
+            DungeonDoor door = corridor.Doors.Item1;
+
+            return door;
+        }
+
+        private DungeonNode FindPathTo(RoomType type, List<DungeonNode> connectedNodes, HashSet<DungeonNode> visitedNodes)
+        {
+            foreach (DungeonNode node in connectedNodes)
+            {
+                if (visitedNodes.Contains(node))
+                {
+                    continue;
+                }
+                visitedNodes.Add(node);
+                if (node.Type == type)
+                {
+                    return node;
+                }
+                else
+                {
+                    return FindPathTo(type, node.LinkedNodes, visitedNodes);
+                }
+            }
+            return null;
         }
     }
 }

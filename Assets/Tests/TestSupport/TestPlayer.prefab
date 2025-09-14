@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _document: {fileID: 4600176206075918073}
-  _fighter: {fileID: 8589072062742688946}
+  _fighter: {fileID: 6252234096800327505}
   _prompt: {fileID: 7098450318440030670}
 --- !u!1 &646656833660071202
 GameObject:
@@ -108,13 +108,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7333831184450978021}
-  - component: {fileID: 8589072062742688946}
   - component: {fileID: 8885495373170276511}
   - component: {fileID: 2553989433121075861}
   - component: {fileID: 7191444459485844105}
   - component: {fileID: 7619914738478276075}
   - component: {fileID: 6887441011102283108}
   - component: {fileID: 3679782664911102223}
+  - component: {fileID: 6252234096800327505}
   m_Layer: 8
   m_Name: TestPlayer
   m_TagString: Player
@@ -140,30 +140,6 @@ Transform:
   - {fileID: 8899353942779763286}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8589072062742688946
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1927581186806867705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10e8f4f9326637f4798ef9a32c6aee2c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 5
-  attack: 1
-  speed: 5
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 640
-  _hitbox: {fileID: 8337178641630974411}
-  _attackCooldownDuration: 0
-  maxCombo: 3
-  _stamina: 5
-  _staminaRegenRate: 0.75
-  _staminaRegenCooldownDuration: 2
 --- !u!143 &8885495373170276511
 CharacterController:
   m_ObjectHideFlags: 0
@@ -278,6 +254,30 @@ MonoBehaviour:
           m_Value1: 0
         Name: Self
         m_Value: {fileID: 1927581186806867705}
+--- !u!114 &6252234096800327505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1927581186806867705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7648e4895b15a4047a3c1ff7471d10f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 5
+  attack: 100
+  speed: 3
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 640
+  _hitbox: {fileID: 8337178641630974411}
+  _attackCooldownDuration: 0.5
+  maxCombo: 3
+  _stamina: 5
+  _staminaRegenRate: 0.1
+  _staminaRegenCooldownDuration: 1
 --- !u!1 &2623857081611254654
 GameObject:
   m_ObjectHideFlags: 0

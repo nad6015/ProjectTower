@@ -8,6 +8,6 @@
         None,
         ClearTime,
         EnemiesDefeated,
-        CharacterHealth,
+        TotalHealthLost,
     }
 }

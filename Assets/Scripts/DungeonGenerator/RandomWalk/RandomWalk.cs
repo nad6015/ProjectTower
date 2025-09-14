@@ -5,6 +5,7 @@ using System.Linq;
 using Random = UnityEngine.Random;
 using Assets.DungeonGenerator.Components.Tiles;
 using Unity.AI.Navigation;
+using Assets.DungeonGenerator.DataStructures;
 
 namespace Assets.DungeonGenerator
 {

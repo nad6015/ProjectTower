@@ -34,13 +34,12 @@ public class DungeonRulesetTest
 
         Assert.That(ruleset.Count == 3);
         Assert.That(ruleset.ContainsKey(DungeonParameter.RoomCount), Is.True);
-        Assert.That(ruleset.ContainsKey(DungeonParameter.CorridorSize), Is.True);
+        Assert.That(ruleset.ContainsKey(DungeonParameter.EnemiesPerRoom), Is.True);
         Assert.That(ruleset.ContainsKey(DungeonParameter.ItemsPerRoom), Is.True);
 
         Assert.That(ruleset[DungeonParameter.RoomCount].GameParameter == GameParameter.ClearTime);
         Assert.That(ruleset[DungeonParameter.CorridorSize].GameParameter == GameParameter.EnemiesDefeated);
-        Assert.That(ruleset[DungeonParameter.ItemsPerRoom].GameParameter == GameParameter.CharacterHealth);
-
+        Assert.That(ruleset[DungeonParameter.ItemsPerRoom].GameParameter == GameParameter.TotalHealthLost);
 
         DungeonRule rule = ruleset[DungeonParameter.RoomCount];
         var gameData = new Dictionary<GameParameter, int>()

@@ -2,16 +2,16 @@
   "gameplayRules": [
     {
       "parameter": "restorationItem",
-      "gameParam": "characterHealth",
+      "gameParam": "totalHealthLost",
       "conditions": [
         {
-          "operator": "<",
+          "operator": ">",
           "operand": "3"
         }
       ],
       "valueType": "number",
       "value": {
-        "value": "10"
+        "value": "100"
       }
     }
   ],
@@ -31,22 +31,22 @@
       }
     },
     {
-      "parameter": "corridorSize",
+      "parameter": "enemiesPerRoom",
       "gameParam": "EnemiesDefeated",
       "conditions": [
         {
           "operator": ">",
-          "operand": "5"
+          "operand": "0"
         }
       ],
       "valueType": "number",
       "value": {
-        "value": "3"
+        "value": "10"
       }
     },
     {
       "parameter": "ItemsPerRoom",
-      "gameParam": "characterHealth",
+      "gameParam": "totalHealthLost",
       "conditions": [
         {
           "operator": "<",

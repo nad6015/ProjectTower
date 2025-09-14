@@ -16,7 +16,7 @@
         "SerializableGUID",
         "Utilities",
         "GameCharacters",
-        "ResourceSystem"
+        "Interactables"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
