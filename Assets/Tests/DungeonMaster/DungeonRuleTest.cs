@@ -23,7 +23,7 @@ public class DungeonRuleTest
             new LessThanCondition(10)
         };
 
-        rule = new(DungeonParameter.RoomCount,
+        rule = new("id",DungeonParameter.RoomCount,
             GameParameter.EnemiesDefeated, conditons,
             new(ValueType.Range, value));
     }

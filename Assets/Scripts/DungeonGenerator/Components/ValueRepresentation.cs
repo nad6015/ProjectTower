@@ -50,7 +50,7 @@ namespace Assets.DungeonGenerator.Components
         }
 
         /// <summary>
-        /// TODO
+        /// Gets the value as T.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
@@ -78,7 +78,6 @@ namespace Assets.DungeonGenerator.Components
             {
                 return;
             }
-
             switch (value.Type)
             {
                 case ValueType.String:
@@ -87,7 +86,7 @@ namespace Assets.DungeonGenerator.Components
                     break;
                 }
                 case ValueType.Number:
-                {
+                {   
                     _value = (int)_value + value.Value<int>();
                     break;
                 }

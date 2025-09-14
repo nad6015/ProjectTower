@@ -40,8 +40,8 @@ namespace Assets.DungeonMaster
 
         public DungeonMasterState State { get; private set; }
 
-        private Dictionary<DungeonParameter, DungeonRule> GenerationRuleset { get; set; }
-        private Dictionary<GameplayParameter, GameplayRule> GameplayRuleset { get; set; }
+        private Dictionary<string, DungeonRule> GenerationRuleset { get; set; }
+        private Dictionary<string, GameplayRule> GameplayRuleset { get; set; }
 
         private DungeonGenerator.DungeonGenerator _dungeonGenerator;
         private PlayerController _player;
@@ -52,6 +52,7 @@ namespace Assets.DungeonMaster
         private Dictionary<DungeonParameter, ValueRepresentation> _dungeonParameters;
         private Dictionary<GameplayParameter, ValueRepresentation> _gameplayParams;
         private Dictionary<GameParameter, int> _floorStatistics;
+        private List<GameParameter> _gameParametersToReset;
 
         private ResourceSystem _resourceSystem;
         private CombatManager _combatSystem;
@@ -64,6 +65,7 @@ namespace Assets.DungeonMaster
         {
             _floorStatistics = new();
             _gameplayParams = new();
+            _gameParametersToReset = new();
 
             _dungeonGenerator = FindComponentByTag<DungeonGenerator.DungeonGenerator>("DungeonGenerator");
             _combatSystem = FindComponentByTag<CombatManager>("CombatSystem");
@@ -154,12 +156,13 @@ namespace Assets.DungeonMaster
         /// </summary>
         private void DoWork()
         {
+            
             foreach (DungeonRule rule in GenerationRuleset.Values)
             {
                 if (rule.ConditionsMet(_floorStatistics))
                 {
                     _dungeonRep.ModifyParameter(rule.Parameter, rule.Value());
-                    _floorStatistics[rule.GameParameter] = 0; // Reset var after modification
+                    _gameParametersToReset.Add(rule.GameParameter); // Queue param for reset after modification
                 }
             }
 
@@ -176,7 +179,15 @@ namespace Assets.DungeonMaster
                         _gameplayParams[rule.Parameter].Modify(rule.Value());
                     }
                     _resourceSystem.UpdateItemRates(_gameplayParams);
-                    _floorStatistics[rule.GameParameter] = 0; // Reset var after modification
+                    _gameParametersToReset.Add(rule.GameParameter); // Queue param for reset after modification
+                }
+            }
+
+            foreach (var param in _gameParametersToReset)
+            {
+                if (_floorStatistics.ContainsKey(param))
+                {
+                    _floorStatistics[param] = 0;
                 }
             }
         }
@@ -259,11 +270,8 @@ namespace Assets.DungeonMaster
                 var fighter = _player.GetComponent<PlayableFighter>();
                 int playerHp = Mathf.RoundToInt(fighter.GetStat(stat));
                 int playerMaxHp = Mathf.RoundToInt(fighter.GetMaxStat(stat));
-                if (!_floorStatistics.ContainsKey(GameParameter.TotalHealthLost))
-                {
-                    _floorStatistics[GameParameter.TotalHealthLost] = 0;
-                }
-                _floorStatistics[GameParameter.TotalHealthLost] += (playerMaxHp - playerHp);
+
+                _floorStatistics[GameParameter.CharacterHealth] = Mathf.RoundToInt(((float)playerHp / playerMaxHp) * 100f);
             }
         }
     }

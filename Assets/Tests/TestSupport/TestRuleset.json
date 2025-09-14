@@ -1,22 +1,43 @@
 {
   "gameplayRules": [
     {
+      "id": "increaseItemCount",
       "parameter": "restorationItem",
-      "gameParam": "totalHealthLost",
+      "gameParam": "characterHealth",
       "conditions": [
         {
+          "operator": "<",
+          "operand": "30"
+        },
+        {
           "operator": ">",
-          "operand": "3"
+          "operand": "0"
         }
       ],
       "valueType": "number",
       "value": {
         "value": "100"
       }
+    },
+    {
+      "id": "decreaseItemCount",
+      "parameter": "restorationItem",
+      "gameParam": "characterHealth",
+      "conditions": [
+        {
+          "operator": ">",
+          "operand": "30"
+        }
+      ],
+      "valueType": "number",
+      "value": {
+        "value": "-100"
+      }
     }
   ],
   "dungeonRules": [
     {
+      "id": "roomCount",
       "parameter": "roomCount",
       "gameParam": "clearTime",
       "conditions": [
@@ -31,6 +52,7 @@
       }
     },
     {
+      "id": "enemiesPerRoom",
       "parameter": "enemiesPerRoom",
       "gameParam": "EnemiesDefeated",
       "conditions": [
@@ -45,12 +67,13 @@
       }
     },
     {
+      "id": "itemsPerRoom",
       "parameter": "ItemsPerRoom",
-      "gameParam": "totalHealthLost",
+      "gameParam": "characterHealth",
       "conditions": [
         {
           "operator": "<",
-          "operand": "5"
+          "operand": "51"
         }
       ],
       "valueType": "number",
@@ -59,6 +82,7 @@
       }
     },
     {
+      "id": "itemsPerRoom",
       "parameter": "ItemsPerRoom",
       "gameParam": "clearTime",
       "conditions": [

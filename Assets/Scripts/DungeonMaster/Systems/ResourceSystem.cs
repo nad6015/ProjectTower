@@ -23,6 +23,7 @@ namespace Assets.Combat
 
         public Interactable TakeContainerItem()
         {
+            Debug.Log(_itemDropRate);
             if (_itemDropRate > Random.value)
             {
                 return _containerItems.TakeItem();

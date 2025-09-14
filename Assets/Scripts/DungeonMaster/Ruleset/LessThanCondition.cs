@@ -1,4 +1,6 @@
-﻿namespace Assets.DungeonMaster
+﻿using UnityEngine;
+
+namespace Assets.DungeonMaster
 {
     /// <summary>
     /// Represents a condition within a DungeonMasterRule.
@@ -14,6 +16,10 @@
 
         public bool IsMet(int value)
         {
+            Debug.Log("value < _operand = " + (value < _operand));
+            Debug.Log("value = " + value);
+            Debug.Log("_operand = " + _operand);
+
             return value < _operand;
         }
     }

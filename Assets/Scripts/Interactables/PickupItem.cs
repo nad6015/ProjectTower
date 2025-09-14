@@ -7,7 +7,7 @@ namespace Assets.Interactables
     public class PickupItem : Interactable
     {
         [field: SerializeField]
-        public UsableItem Pickup { get; set; }
+        public UsableItem Pickup { get; private set; }
 
         private readonly float _rotationSpeed = 1f;
         private void Awake()

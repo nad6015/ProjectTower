@@ -13,7 +13,7 @@ using static Assets.Utilities.GameObjectUtilities;
 
 public class DungeonRulesetTest
 {
-    Dictionary<DungeonParameter, DungeonRule> ruleset;
+    Dictionary<string, DungeonRule> ruleset;
 
     [UnitySetUp]
     public IEnumerator SetUp()
@@ -33,15 +33,15 @@ public class DungeonRulesetTest
 
 
         Assert.That(ruleset.Count == 3);
-        Assert.That(ruleset.ContainsKey(DungeonParameter.RoomCount), Is.True);
-        Assert.That(ruleset.ContainsKey(DungeonParameter.EnemiesPerRoom), Is.True);
-        Assert.That(ruleset.ContainsKey(DungeonParameter.ItemsPerRoom), Is.True);
+        Assert.That(ruleset.ContainsKey(DungeonParameter.RoomCount.ToString()), Is.True);
+        Assert.That(ruleset.ContainsKey(DungeonParameter.EnemiesPerRoom.ToString()), Is.True);
+        Assert.That(ruleset.ContainsKey(DungeonParameter.ItemsPerRoom.ToString()), Is.True);
 
-        Assert.That(ruleset[DungeonParameter.RoomCount].GameParameter == GameParameter.ClearTime);
-        Assert.That(ruleset[DungeonParameter.CorridorSize].GameParameter == GameParameter.EnemiesDefeated);
-        Assert.That(ruleset[DungeonParameter.ItemsPerRoom].GameParameter == GameParameter.TotalHealthLost);
+        Assert.That(ruleset[DungeonParameter.RoomCount.ToString()].GameParameter == GameParameter.ClearTime);
+        Assert.That(ruleset[DungeonParameter.CorridorSize.ToString()].GameParameter == GameParameter.EnemiesDefeated);
+        Assert.That(ruleset[DungeonParameter.ItemsPerRoom.ToString()].GameParameter == GameParameter.CharacterHealth);
 
-        DungeonRule rule = ruleset[DungeonParameter.RoomCount];
+        DungeonRule rule = ruleset[DungeonParameter.RoomCount.ToString()];
         var gameData = new Dictionary<GameParameter, int>()
         {
             {GameParameter.ClearTime, 3 }

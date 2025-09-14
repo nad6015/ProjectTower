@@ -12,6 +12,7 @@ using Assets.PlayerCharacter;
 using Tests.Support;
 using Assets.PlayerCharacter.Resources;
 using Assets.Interactables;
+using Assets.DungeonGenerator.Components;
 
 public class DungeonMasterTests
 {

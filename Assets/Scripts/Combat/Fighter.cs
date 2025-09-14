@@ -94,6 +94,7 @@ namespace Assets.Combat
 
         public void Heal(int amountToHeal)
         {
+            Debug.Log("Heal");
             _stats[FighterStats.Health] += amountToHeal;
             _stats[FighterStats.Health] = Math.Min(_stats[FighterStats.Health], _maxStats[FighterStats.Health]);
             // TODO: Healing vfx

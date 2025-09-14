@@ -3,8 +3,6 @@ using Newtonsoft.Json.Linq;
 using Assets.DungeonGenerator.Components;
 using Assets.DungeonGenerator;
 using UnityEngine;
-using static Unity.IO.LowLevel.Unsafe.AsyncReadManagerMetrics;
-using System.Security.Cryptography;
 
 namespace Assets.DungeonMaster
 {
@@ -13,44 +11,45 @@ namespace Assets.DungeonMaster
     /// </summary>
     public static class DungeonMasterDeserializationUtil
     {
-        public static Dictionary<DungeonParameter, DungeonRule> BuildDungeonRuleset(JObject json)
+        public static Dictionary<string, DungeonRule> BuildDungeonRuleset(JObject json)
         {
-            Dictionary<DungeonParameter, DungeonRule> _rules = new();
+            Dictionary<string, DungeonRule> _rules = new();
 
             JsonUtils.ForEachIn(json["dungeonRules"], jRule =>
             {
-                DungeonParameter dungeonParameter = jRule["parameter"].ToObject<DungeonParameter>();
-
-                if (!_rules.ContainsKey(dungeonParameter))
+                string id = jRule["id"].ToString();
+                if (!_rules.ContainsKey(id))
                 {
+                    DungeonParameter dungeonParameter = jRule["parameter"].ToObject<DungeonParameter>();
                     GameParameter gameParameter = jRule["gameParam"].ToObject<GameParameter>();
 
                     ValueRepresentation value = new(
                         jRule["valueType"].ToObject<ValueType>(),
                         JsonUtils.ToDictionary(jRule["value"]));
 
-                    _rules[dungeonParameter] = new DungeonRule(dungeonParameter, gameParameter, BuildConditions(jRule), value);
+                    _rules[id] = new(id, dungeonParameter, gameParameter, BuildConditions(jRule), value);
                 }
             });
 
             return _rules;
         }
 
-        public static Dictionary<GameplayParameter, GameplayRule> BuildGameplayParams(JObject json)
+        public static Dictionary<string, GameplayRule> BuildGameplayParams(JObject json)
         {
-            Dictionary<GameplayParameter, GameplayRule> _rules = new();
+            Dictionary<string, GameplayRule> _rules = new();
 
             JsonUtils.ForEachIn(json["gameplayRules"], jRule =>
            {
-               GameplayParameter gameplayParameter = JsonUtils.ConvertToEnum<GameplayParameter>(jRule, "parameter");
-               if (!_rules.ContainsKey(gameplayParameter))
+               string id = jRule["id"].ToString();
+               if (!_rules.ContainsKey(id))
                {
+                   GameplayParameter gameplayParameter = JsonUtils.ConvertToEnum<GameplayParameter>(jRule, "parameter");
                    ValueRepresentation value = new(
                        JsonUtils.ConvertToEnum<ValueType>(jRule["valueType"]),
                         JsonUtils.ToDictionary(jRule["value"]));
                    GameParameter gameParameter = JsonUtils.ConvertToEnum<GameParameter>(jRule, "gameParam");
 
-                   _rules[gameplayParameter] = new(gameplayParameter, gameParameter, BuildConditions(jRule), value);
+                   _rules[id] = new(id, gameplayParameter, gameParameter, BuildConditions(jRule), value);
                }
            });
             return _rules;
@@ -67,37 +66,37 @@ namespace Assets.DungeonMaster
             JObject jFlows = JObject.Parse(flowsFile.text);
             JsonUtils.ForEachIn(jFlows, dungeonFlow =>
             {
-            var dungeonFlowChildren = dungeonFlow.Children();
-            List<FlowPattern> flowPatterns = new();
-            DungeonLayout layout = new();
+                var dungeonFlowChildren = dungeonFlow.Children();
+                List<FlowPattern> flowPatterns = new();
+                DungeonLayout layout = new();
 
-            DungeonMission mission = JsonUtils.ConvertToEnum<DungeonMission>(dungeonFlow.Path);
+                DungeonMission mission = JsonUtils.ConvertToEnum<DungeonMission>(dungeonFlow.Path);
 
-            foreach (var pattern in dungeonFlowChildren["flows"].Children())
-            {
-                flowPatterns.Add(new FlowPattern(pattern["matches"], pattern["replacer"]));
-            }
-
-            DungeonNode lastRoom = null;
-
-            foreach (var jNode in dungeonFlowChildren["baseDungeon"].Children())
-            {
-                DungeonNode room = new(jNode.ToObject<RoomType>());
-
-                layout.Add(room);
-
-                if (lastRoom != null)
+                foreach (var pattern in dungeonFlowChildren["flows"].Children())
                 {
-                    layout.Add(lastRoom, room);
+                    flowPatterns.Add(new FlowPattern(pattern["matches"], pattern["replacer"]));
                 }
 
-                lastRoom = room;
-            }
+                DungeonNode lastRoom = null;
 
-            config.DungeonFlows.Add(mission, flowPatterns);
-            config.BaseDungeons.Add(mission, layout);
-        });
-         
+                foreach (var jNode in dungeonFlowChildren["baseDungeon"].Children())
+                {
+                    DungeonNode room = new(jNode.ToObject<RoomType>());
+
+                    layout.Add(room);
+
+                    if (lastRoom != null)
+                    {
+                        layout.Add(lastRoom, room);
+                    }
+
+                    lastRoom = room;
+                }
+
+                config.DungeonFlows.Add(mission, flowPatterns);
+                config.BaseDungeons.Add(mission, layout);
+            });
+
             return config;
         }
 

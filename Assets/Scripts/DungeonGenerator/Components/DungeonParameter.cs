@@ -8,6 +8,7 @@
         EnemySpawnRate,
         ItemsPerRoom,
         EnemiesPerRoom,
+        LockCombatRoom,
         RoomCount,
         RoomFlow,
         Theme

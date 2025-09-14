@@ -5,10 +5,8 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
-using UnityEngine.TestTools.Utils;
 using static UnityEngine.GameObject;
 using static Assets.Utilities.GameObjectUtilities;
-using Assets.PlayerCharacter;
 using Tests.Support;
 using Assets.Combat;
 
@@ -16,7 +14,6 @@ public class DungeonAdaptionTests
 {
     DungeonMaster dungeonMaster;
     GameObject player;
-    DungeonGenerator dungeonGenerator;
 
     [UnitySetUp]
     public IEnumerator SetUp()
@@ -25,8 +22,10 @@ public class DungeonAdaptionTests
         yield return null;
     }
 
+  
+
     [UnityTest]
-    public IEnumerator ShouldAdaptNextDungeonBasedOnGameData()
+    public IEnumerator ShouldCollectFloorTimeStatsAndIncreaseDungeonParameter()
     {
         TestSetUp();
 
@@ -48,86 +47,6 @@ public class DungeonAdaptionTests
     }
 
     [UnityTest]
-    public IEnumerator ShouldIncreaseDungeonParameterValueIfRuleIsMet()
-    {
-        TestSetUp();
-
-        yield return new WaitForSeconds(1f);
-
-        Assert.That(dungeonMaster.State == DungeonMasterState.Running);
-        Assert.That(dungeonMaster.CurrentFloor == 1);
-
-        GameObject startPos = FindGameObjectWithTag("PlayerSpawn");
-
-        Vector3 startPosition = startPos.transform.position;
-
-        Assert.NotNull(startPos);
-        Assert.NotNull(player);
-
-        yield return new WaitForSeconds(1f);
-
-        dungeonMaster.OnDungeonCleared();
-
-        player = FindGameObjectWithTag("Player");
-        Assert.That(dungeonMaster.CurrentFloor == 1);
-        Assert.That(dungeonMaster.State == DungeonMasterState.GenerateDungeon);
-        Assert.NotNull(player);
-        Assert.That(FindComponentByTag<PlayerController>("Player").enabled == false); // PlayerController should not enabled while the dungeon is generating
-
-        yield return new WaitForSeconds(1f);
-
-        GameObject newStartPos = FindGameObjectWithTag("PlayerSpawn");
-        player = FindGameObjectWithTag("Player");
-
-        Assert.That(dungeonMaster.State == DungeonMasterState.Running);
-        Assert.That(dungeonMaster.CurrentFloor == 2);
-
-        Assert.NotNull(newStartPos);
-        Assert.NotNull(player);
-        Assert.That(newStartPos.transform.position, Is.Not.EqualTo(startPosition).Using(Vector3EqualityComparer.Instance));
-    }
-
-    [UnityTest]
-    public IEnumerator ShouldCollectFloorTimeStatsAndIncreaseDungeonParameter()
-    {
-        TestSetUp();
-
-        yield return new WaitForSeconds(1f);
-
-        Assert.That(dungeonMaster.State == DungeonMasterState.Running);
-        Assert.That(dungeonMaster.CurrentFloor == 1);
-
-        GameObject startPos = FindGameObjectWithTag("PlayerSpawn");
-
-        Vector3 startPosition = startPos.transform.position;
-
-        Assert.NotNull(startPos);
-        Assert.NotNull(player);
-
-        yield return new WaitForSeconds(1f);
-
-        dungeonMaster.OnDungeonCleared();
-
-        player = FindGameObjectWithTag("Player");
-        Assert.That(dungeonMaster.CurrentFloor == 1);
-        Assert.That(dungeonMaster.State == DungeonMasterState.GenerateDungeon);
-        Assert.NotNull(player);
-        Assert.That(FindComponentByTag<PlayerController>("Player").enabled == false); // PlayerController should not enabled while the dungeon is generating
-
-        yield return new WaitForSeconds(1f);
-
-        GameObject newStartPos = FindGameObjectWithTag("PlayerSpawn");
-        player = FindGameObjectWithTag("Player");
-
-        Assert.That(dungeonMaster.State == DungeonMasterState.Running);
-        Assert.That(dungeonMaster.CurrentFloor == 2);
-
-        Assert.NotNull(newStartPos);
-        Assert.NotNull(player);
-        Assert.That(newStartPos.transform.position, Is.Not.EqualTo(startPosition).Using(Vector3EqualityComparer.Instance));
-    }
-
-    [UnityTest]
     public IEnumerator ShouldCollectEnemiesDefeatedAndIncreaseDungeonParameter()
     {
         TestSetUp();
@@ -135,82 +54,57 @@ public class DungeonAdaptionTests
         yield return new WaitForSeconds(1f);
 
         Assert.That(dungeonMaster.State == DungeonMasterState.Running);
-        Assert.That(dungeonMaster.CurrentFloor == 1);
 
-        GameObject startPos = FindGameObjectWithTag("PlayerSpawn");
-
-        Vector3 startPosition = startPos.transform.position;
-
-        Assert.NotNull(startPos);
-        Assert.NotNull(player);
+        player.GetComponent<TestPlayableFighter>().DefeatRandomEnemy();
 
         yield return new WaitForSeconds(1f);
 
         dungeonMaster.OnDungeonCleared();
 
-        player = FindGameObjectWithTag("Player");
-        Assert.That(dungeonMaster.CurrentFloor == 1);
-        Assert.That(dungeonMaster.State == DungeonMasterState.GenerateDungeon);
-        Assert.NotNull(player);
-        Assert.That(FindComponentByTag<PlayerController>("Player").enabled == false); // PlayerController should not enabled while the dungeon is generating
-
         yield return new WaitForSeconds(1f);
-
-        GameObject newStartPos = FindGameObjectWithTag("PlayerSpawn");
-        player = FindGameObjectWithTag("Player");
 
         Assert.That(dungeonMaster.State == DungeonMasterState.Running);
         Assert.That(dungeonMaster.CurrentFloor == 2);
-
-        Assert.NotNull(newStartPos);
-        Assert.NotNull(player);
-        Assert.That(newStartPos.transform.position, Is.Not.EqualTo(startPosition).Using(Vector3EqualityComparer.Instance));
+        Assert.That(GameObject.FindObjectsByType<NpcFighter>(FindObjectsSortMode.None).Length >= 5);
     }
 
     [UnityTest]
-    public IEnumerator ShouldCollectCharacterHealthAndIncreaseDungeonParameter()
+    public IEnumerator ShouldCollectCharacterHealthLossAndIncreaseDungeonParameter()
     {
         TestSetUp();
 
         yield return new WaitForSeconds(1f);
 
         Assert.That(dungeonMaster.State == DungeonMasterState.Running);
-        Assert.That(dungeonMaster.CurrentFloor == 1);
 
-        GameObject startPos = FindGameObjectWithTag("PlayerSpawn");
-
-        Vector3 startPosition = startPos.transform.position;
-
-        Assert.NotNull(startPos);
-        Assert.NotNull(player);
+        player.GetComponent<TestPlayableFighter>().DamageSelf(4);
 
         yield return new WaitForSeconds(1f);
 
         dungeonMaster.OnDungeonCleared();
 
-        player = FindGameObjectWithTag("Player");
-        Assert.That(dungeonMaster.CurrentFloor == 1);
-        Assert.That(dungeonMaster.State == DungeonMasterState.GenerateDungeon);
-        Assert.NotNull(player);
-        Assert.That(FindComponentByTag<PlayerController>("Player").enabled == false); // PlayerController should not enabled while the dungeon is generating
-
         yield return new WaitForSeconds(1f);
-
-        GameObject newStartPos = FindGameObjectWithTag("PlayerSpawn");
-        player = FindGameObjectWithTag("Player");
 
         Assert.That(dungeonMaster.State == DungeonMasterState.Running);
         Assert.That(dungeonMaster.CurrentFloor == 2);
+        Assert.That(GameObject.FindObjectsByType<NpcFighter>(FindObjectsSortMode.None).Length >= 5);
 
-        Assert.NotNull(newStartPos);
-        Assert.NotNull(player);
-        Assert.That(newStartPos.transform.position, Is.Not.EqualTo(startPosition).Using(Vector3EqualityComparer.Instance));
+        player.GetComponent<TestPlayableFighter>().Heal(5);
+        player.GetComponent<TestPlayableFighter>().DamageSelf(1);
+
+        yield return new WaitForSeconds(1f);
+
+        dungeonMaster.OnDungeonCleared();
+
+        yield return new WaitForSeconds(1f);
+        Assert.That(dungeonMaster.State == DungeonMasterState.Running);
+        Assert.That(dungeonMaster.CurrentFloor == 3);
+        Assert.That(GameObject.FindObjectsByType<NpcFighter>(FindObjectsSortMode.None).Length <= 5);
     }
 
     private void TestSetUp()
     {
         dungeonMaster = FindComponentByTag<DungeonMaster>("DungeonMaster");
-        dungeonGenerator = FindComponentByTag<DungeonGenerator>("DungeonGenerator");
         player = FindGameObjectWithTag("Player");
     }
 }

@@ -7,8 +7,8 @@ namespace Assets.DungeonMaster
     {
         public GameplayParameter Parameter { get; }
 
-        public GameplayRule(GameplayParameter parameter, GameParameter gameParameter, List<ICondition> conditions, ValueRepresentation value) :
-            base(gameParameter, conditions, value)
+        public GameplayRule(string id, GameplayParameter parameter, GameParameter gameParameter, List<ICondition> conditions, ValueRepresentation value) :
+            base(id, gameParameter, conditions, value)
         {
             Parameter = parameter;
         }

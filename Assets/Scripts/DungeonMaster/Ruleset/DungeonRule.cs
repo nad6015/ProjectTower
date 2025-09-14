@@ -8,8 +8,8 @@ namespace Assets.DungeonMaster
     {
         public DungeonParameter Parameter { get; }
 
-        public DungeonRule(DungeonParameter parameter, GameParameter gameParameter, List<ICondition> conditions, ValueRepresentation value) 
-            : base(gameParameter, conditions, value)
+        public DungeonRule(string id, DungeonParameter parameter, GameParameter gameParameter, List<ICondition> conditions, ValueRepresentation value) 
+            : base(id, gameParameter, conditions, value)
         {
             Parameter = parameter;
         }

@@ -40,6 +40,7 @@ namespace Tests.Support
             ModifyStat(FighterStats.Health, -value);
             TakeDamage(this);
             SetStat(FighterStats.Attack, originalAtk);
+            Debug.Log(GetStat(FighterStats.Health));
         }
     }
 }
