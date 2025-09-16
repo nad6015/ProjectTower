@@ -81,7 +81,7 @@ GameObject:
   - component: {fileID: 5786447517652734510}
   - component: {fileID: 2600680609069488361}
   m_Layer: 7
-  m_Name: SkeletonSpeedster
+  m_Name: SkeletonSpellcaster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

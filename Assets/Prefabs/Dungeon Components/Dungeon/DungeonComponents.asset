@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilemap: {fileID: 11400000, guid: 8e7ae14269576af4598476686b92b10f, type: 2}
   enemies:
-  - {fileID: 9050257811646732317, guid: f9181df3fb1f384448c6981136c79383, type: 3}
+  - {fileID: 7807404158470223261, guid: bc4ccfbeb9b8ca74c9e9dc38c60637cf, type: 3}
   boss: {fileID: 0}
   startingPoint: {fileID: 7254044432296773021, guid: 176f7317eb4b3fd469f6b4461976d4d5, type: 3}
   exit: {fileID: 8684044341818389683, guid: 20f557f5c48279b4d9ec43df8dfe49e2, type: 3}

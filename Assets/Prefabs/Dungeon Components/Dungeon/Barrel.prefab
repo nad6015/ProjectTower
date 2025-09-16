@@ -64,7 +64,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fad605a64bb9092489cc350e69ebb4b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _itemBreakClip: {fileID: 0}
+  _itemBreakClip: {fileID: 8300000, guid: 78706589ae9260a42bf7438d748853d6, type: 3}
+  _mesh: {fileID: 2202792151707027886}
 --- !u!114 &5819248284586061273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,7 +142,7 @@ NavMeshObstacle:
   m_MoveThreshold: 0.1
   m_Carve: 0
   m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
   m_TimeToStationary: 0.5
 --- !u!1001 &2416776290451670793
 PrefabInstance:
@@ -219,5 +220,10 @@ PrefabInstance:
 --- !u!4 &1574627533405836052 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3769563866615321629, guid: 3ddfb275a6af7b54aa0decd735ed4b47, type: 3}
+  m_PrefabInstance: {fileID: 2416776290451670793}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2202792151707027886 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4547508563046649511, guid: 3ddfb275a6af7b54aa0decd735ed4b47, type: 3}
   m_PrefabInstance: {fileID: 2416776290451670793}
   m_PrefabAsset: {fileID: 0}
