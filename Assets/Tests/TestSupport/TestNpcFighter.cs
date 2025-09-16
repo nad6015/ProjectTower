@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Tests.Support
 {
-    public class TestNpcFighter : NpcFighter
+    public class TestNpcFighter : Enemy
     {
         public new void TakeDamage(Fighter attacker)
         {

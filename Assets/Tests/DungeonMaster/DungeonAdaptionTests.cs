@@ -43,7 +43,7 @@ public class DungeonAdaptionTests
 
         Assert.That(dungeonMaster.State == DungeonMasterState.Running);
         Assert.That(dungeonMaster.CurrentFloor == 2);
-        Assert.That(GameObject.FindObjectsByType<NpcFighter>(FindObjectsSortMode.None).Length >= 5);
+        Assert.That(GameObject.FindObjectsByType<Enemy>(FindObjectsSortMode.None).Length >= 5);
     }
 
     [UnityTest]
@@ -65,7 +65,7 @@ public class DungeonAdaptionTests
 
         Assert.That(dungeonMaster.State == DungeonMasterState.Running);
         Assert.That(dungeonMaster.CurrentFloor == 2);
-        Assert.That(GameObject.FindObjectsByType<NpcFighter>(FindObjectsSortMode.None).Length >= 5);
+        Assert.That(GameObject.FindObjectsByType<Enemy>(FindObjectsSortMode.None).Length >= 5);
     }
 
     [UnityTest]
@@ -87,7 +87,7 @@ public class DungeonAdaptionTests
 
         Assert.That(dungeonMaster.State == DungeonMasterState.Running);
         Assert.That(dungeonMaster.CurrentFloor == 2);
-        Assert.That(GameObject.FindObjectsByType<NpcFighter>(FindObjectsSortMode.None).Length >= 5);
+        Assert.That(GameObject.FindObjectsByType<Enemy>(FindObjectsSortMode.None).Length >= 5);
 
         player.GetComponent<TestPlayableFighter>().Heal(5);
         player.GetComponent<TestPlayableFighter>().DamageSelf(1);
@@ -99,7 +99,7 @@ public class DungeonAdaptionTests
         yield return new WaitForSeconds(1f);
         Assert.That(dungeonMaster.State == DungeonMasterState.Running);
         Assert.That(dungeonMaster.CurrentFloor == 3);
-        Assert.That(GameObject.FindObjectsByType<NpcFighter>(FindObjectsSortMode.None).Length <= 5);
+        Assert.That(GameObject.FindObjectsByType<Enemy>(FindObjectsSortMode.None).Length <= 5);
     }
 
     private void TestSetUp()

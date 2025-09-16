@@ -26,7 +26,7 @@ namespace Tests.DungeonPlayablity
         public IEnumerator ShouldReachDungeonEnd()
         {
             yield return new WaitForSeconds(1f);
-            var enemies = GameObject.FindObjectsByType<NpcFighter>(FindObjectsSortMode.None);
+            var enemies = GameObject.FindObjectsByType<Enemy>(FindObjectsSortMode.None);
             foreach (var enemy in enemies)
             {
                 enemy.gameObject.SetActive(false);

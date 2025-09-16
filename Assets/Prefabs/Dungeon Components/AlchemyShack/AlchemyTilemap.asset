@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c1e554144999d74abe38441adf88e74, type: 3}
+  m_Name: AlchemyTilemap
+  m_EditorClassIdentifier: 
+  wallTiles:
+  - {fileID: 3030302167426459883, guid: 766675ba1dc013e4f97c20cfbe75c02f, type: 3}
+  - {fileID: 3030302167426459883, guid: 766675ba1dc013e4f97c20cfbe75c02f, type: 3}
+  - {fileID: 3030302167426459883, guid: 766675ba1dc013e4f97c20cfbe75c02f, type: 3}
+  - {fileID: 3030302167426459883, guid: 766675ba1dc013e4f97c20cfbe75c02f, type: 3}
+  - {fileID: 3030302167426459883, guid: 21ab19a2c9ac81d44a133c31d77c4431, type: 3}
+  - {fileID: 3030302167426459883, guid: 6241b2a5b6934884da494244c17c13d4, type: 3}
+  - {fileID: 3030302167426459883, guid: 766675ba1dc013e4f97c20cfbe75c02f, type: 3}
+  - {fileID: 3030302167426459883, guid: 766675ba1dc013e4f97c20cfbe75c02f, type: 3}
+  - {fileID: 3030302167426459883, guid: 766675ba1dc013e4f97c20cfbe75c02f, type: 3}
+  - {fileID: 3030302167426459883, guid: 766675ba1dc013e4f97c20cfbe75c02f, type: 3}
+  - {fileID: 3030302167426459883, guid: 766675ba1dc013e4f97c20cfbe75c02f, type: 3}
+  - {fileID: 3030302167426459883, guid: 766675ba1dc013e4f97c20cfbe75c02f, type: 3}
+  - {fileID: 3030302167426459883, guid: 766675ba1dc013e4f97c20cfbe75c02f, type: 3}
+  - {fileID: 3030302167426459883, guid: 766675ba1dc013e4f97c20cfbe75c02f, type: 3}
+  - {fileID: 3030302167426459883, guid: 766675ba1dc013e4f97c20cfbe75c02f, type: 3}
+  - {fileID: 3030302167426459883, guid: 766675ba1dc013e4f97c20cfbe75c02f, type: 3}
+  - {fileID: 3030302167426459883, guid: b74553b8573f264439253a65766eefdc, type: 3}
+  floorTiles:
+  - {fileID: 8031560325989942358, guid: b693d3d0031812a46b5c46e5e2445192, type: 3}
+  - {fileID: 8031560325989942358, guid: dd9e963a667dcac4ca5997bca8ced133, type: 3}
+  - {fileID: 8031560325989942358, guid: 15169d46a642a5b40b2e96ef54a94200, type: 3}
+  - {fileID: 8031560325989942358, guid: 4af352238c3349448adf643e62530679, type: 3}
+  - {fileID: 8031560325989942358, guid: 4af352238c3349448adf643e62530679, type: 3}
+  - {fileID: 8031560325989942358, guid: 4af352238c3349448adf643e62530679, type: 3}
+  - {fileID: 8031560325989942358, guid: 4af352238c3349448adf643e62530679, type: 3}
+  - {fileID: 8031560325989942358, guid: 4af352238c3349448adf643e62530679, type: 3}
+  - {fileID: 8031560325989942358, guid: 4af352238c3349448adf643e62530679, type: 3}
+  - {fileID: 8031560325989942358, guid: 4af352238c3349448adf643e62530679, type: 3}
+  - {fileID: 8031560325989942358, guid: 4af352238c3349448adf643e62530679, type: 3}
+  propTiles:
+  - {fileID: 2411030350727224445, guid: c41d74fcc0801f244921f1ed7d2ad72c, type: 3}
+  roomCorner: {fileID: 9162778129440914531, guid: 3bc17762c4b3dc84ba960b2b38d7a768, type: 3}
+  corridorDoor: {fileID: 1804593036432212441, guid: cbfa40dc0f3f3444f828c4bacfb4e779, type: 3}
+  mainCameraColor: {r: 0.2509804, g: 0.19607845, b: 0.17254902, a: 0}

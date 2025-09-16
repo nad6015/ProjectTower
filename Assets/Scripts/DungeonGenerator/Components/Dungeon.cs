@@ -11,7 +11,7 @@ namespace Assets.DungeonGenerator.Components
     public class Dungeon
     {
         public List<DungeonRoom> DungeonRooms { get; internal set; }
-        public List<NpcFighter> Enemies { get; internal set; }
+        public List<Enemy> Enemies { get; internal set; }
 
         /// <summary>
         /// Constructs a new dungeon.

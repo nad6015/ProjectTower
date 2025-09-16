@@ -43,7 +43,7 @@ MonoBehaviour:
   - {fileID: 8031560325989942358, guid: 4af352238c3349448adf643e62530679, type: 3}
   - {fileID: 8031560325989942358, guid: 4af352238c3349448adf643e62530679, type: 3}
   propTiles:
-  - {fileID: 2411030350727224445, guid: c41d74fcc0801f244921f1ed7d2ad72c, type: 3}
+  - {fileID: 2411030350727224445, guid: 675150fd1231d7143ac985aada3437e9, type: 3}
   roomCorner: {fileID: 9162778129440914531, guid: 3bc17762c4b3dc84ba960b2b38d7a768, type: 3}
   corridorDoor: {fileID: 1804593036432212441, guid: cbfa40dc0f3f3444f828c4bacfb4e779, type: 3}
   mainCameraColor: {r: 0.2509804, g: 0.19607845, b: 0.17254902, a: 0}

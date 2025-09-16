@@ -246,7 +246,7 @@ namespace Assets.DungeonMaster
             CurrentFloor = 0;
 
         }
-        private void OnEnemyDefeated(NpcFighter fighter)
+        private void OnEnemyDefeated(Enemy fighter)
         {
             if (_floorStatistics.ContainsKey(GameParameter.EnemiesDefeated))
             {

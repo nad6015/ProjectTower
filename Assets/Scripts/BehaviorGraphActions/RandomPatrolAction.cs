@@ -42,7 +42,7 @@ public partial class RandomPatrolAction : Action
 
     protected override Status OnUpdate()
     {
-        if (HasReachedDestination(_navMeshAgent.transform, _navMeshAgent.transform.position))
+        if (HasReachedDestination(_navMeshAgent.transform, _patrolPoint))
         {
             return Status.Success;
         }

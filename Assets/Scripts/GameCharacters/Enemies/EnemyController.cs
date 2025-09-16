@@ -21,7 +21,7 @@ public class EnemyController : GameCharacterController
     protected override void Start()
     {
         base.Start();
-        _fighter = GetComponent<NpcFighter>();
+        _fighter = GetComponent<Enemy>();
         _agent = GetComponent<NavMeshAgent>();
         _graphAgent = GetComponent<BehaviorGraphAgent>();
         _animator = GetComponentInChildren<Animator>();

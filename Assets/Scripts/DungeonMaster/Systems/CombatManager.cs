@@ -7,13 +7,13 @@ namespace Assets.Combat
 {
     public class CombatManager : MonoBehaviour
     {
-        public event Action<NpcFighter> EnemyDefeated;
+        public event Action<Enemy> EnemyDefeated;
         public event Action<PlayableFighter> PlayerDefeated;
 
         public void OnNewDungeon()
         {
             // Listen to all enemies defeat event.
-            foreach (var enemy in GameObject.FindObjectsByType<NpcFighter>(FindObjectsSortMode.None))
+            foreach (var enemy in GameObject.FindObjectsByType<Enemy>(FindObjectsSortMode.None))
             {
                 enemy.GetComponent<Fighter>().OnDefeat += HandleEnemyDefeated;
             }
@@ -27,7 +27,7 @@ namespace Assets.Combat
 
         private void HandleEnemyDefeated(Fighter fighter)
         {
-            EnemyDefeated?.Invoke((NpcFighter)fighter);
+            EnemyDefeated?.Invoke((Enemy)fighter);
         }
 
         private void HandlePlayerDefeated(Fighter fighter)

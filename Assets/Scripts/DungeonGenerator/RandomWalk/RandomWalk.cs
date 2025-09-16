@@ -243,7 +243,7 @@ namespace Assets.DungeonGenerator
             Vector3 roomSize = PointUtils.RandomSize(roomSizeParam.min, roomSizeParam.max);
             Vector3 roomCenter = PointUtils.RandomPointWithinRange(min, max);
 
-            int roomOffset = Random.Range(Mathf.RoundToInt(roomSize.magnitude), Mathf.RoundToInt(roomSizeParam.max.magnitude)); // Distance between rooms
+            int roomOffset = Mathf.RoundToInt(roomSize.magnitude); // Distance between rooms
 
             if (isHorizontal)
             {

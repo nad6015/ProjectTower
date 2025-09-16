@@ -1,4 +1,5 @@
-﻿using Assets.DungeonGenerator.Components;
+﻿using Assets.Combat;
+using Assets.DungeonGenerator.Components;
 using Assets.DungeonGenerator.Components.Tiles;
 using Assets.Interactables;
 using System.Collections.Generic;
@@ -12,9 +13,12 @@ namespace Assets.DungeonGenerator
         public DungeonTilemap tilemap;
 
         public List<GameObject> enemies;
+        public Boss boss;
+
         public SpawnPoint startingPoint;
         public DungeonExit exit;
         public PickupItem doorKey;
+        public TreasureChest chest;
 
         public AudioClip FootstepAudio;
         public AudioClip DungeonMusic;

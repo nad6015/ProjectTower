@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilemap: {fileID: 11400000, guid: 8e7ae14269576af4598476686b92b10f, type: 2}
   enemies:
-  - {fileID: 7807404158470223261, guid: 8a3936195cd77f449baadaa5b9e38874, type: 3}
+  - {fileID: 9050257811646732317, guid: f9181df3fb1f384448c6981136c79383, type: 3}
+  boss: {fileID: 0}
   startingPoint: {fileID: 7254044432296773021, guid: 176f7317eb4b3fd469f6b4461976d4d5, type: 3}
   exit: {fileID: 8684044341818389683, guid: 20f557f5c48279b4d9ec43df8dfe49e2, type: 3}
   doorKey: {fileID: 7755368289592254985, guid: 4dd9073c733399a4084427390387fc87, type: 3}
+  chest: {fileID: 7994648521297478182, guid: 30144164c664af54085c21dba1c2d04c, type: 3}
   FootstepAudio: {fileID: 8300000, guid: 72f526a6a9890f643a88e85a61c86c8a, type: 3}
   DungeonMusic: {fileID: 8300000, guid: ad756c2cfc7eac0468e38b995de75a55, type: 3}

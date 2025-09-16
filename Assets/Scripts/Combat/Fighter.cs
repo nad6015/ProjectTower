@@ -96,7 +96,6 @@ namespace Assets.Combat
         {
             _stats[FighterStats.Health] += amountToHeal;
             _stats[FighterStats.Health] = Math.Min(_stats[FighterStats.Health], _maxStats[FighterStats.Health]);
-            // TODO: Healing vfx
 
             OnStatChange?.Invoke(FighterStats.Health);
         }
@@ -126,7 +125,7 @@ namespace Assets.Combat
         protected void TakeDamage(Fighter attacker)
         {
             float dmgDealt = attacker.GetStat(FighterStats.Attack) * (_isDefending ? 0.5f : 1f);
-            
+
             _stats[FighterStats.Health] -= dmgDealt;
             _animator.SetTrigger("Injured");
             OnStatChange?.Invoke(FighterStats.Health);
@@ -163,7 +162,10 @@ namespace Assets.Combat
         /// <summary>
         /// A callback for inheriting classes to do some work during the OnAnimationEnd handler.
         /// </summary>
-        protected abstract void AnimationEnded();
+        protected virtual void AnimationEnded()
+        {
+            // NO-OP
+        }
 
         /// <summary>
         /// Modifies the fighter's specified stat by a given amount. Does not affect the max stat.

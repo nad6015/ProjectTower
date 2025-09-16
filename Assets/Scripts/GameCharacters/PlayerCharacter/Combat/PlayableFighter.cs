@@ -109,7 +109,17 @@ namespace Assets.PlayerCharacter
         public void IncreaseStat(FighterStats stats, int _statIncrease)
         {
             SetStat(stats, GetMaxStat(stats) + _statIncrease);
-            // TODO: Animation to show what stat increased
+            _animator.SetTrigger("StatIncreased");
+        }
+
+        internal void TakeProjectileDamage(int dmg)
+        {
+            ModifyStat(FighterStats.Health, -dmg);
+            if (IsDead())
+            {
+                TakeDamage(this); // Need to call take damage in order to invoke base class event OnDefeated
+            }
+            _animator.SetTrigger("Injured");
         }
     }
 }
