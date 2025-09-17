@@ -6,7 +6,9 @@ namespace Assets.DungeonGenerator.Components.Rooms
     {
         internal override void Populate(DungeonRepresentation dungeon)
         {
-            // TODO
+            PlaceProps(dungeon);
+            PlaceProps(dungeon);
+            Contents.Add(new(dungeon.Components.boss.gameObject, Bounds.center));
         }
     }
 }

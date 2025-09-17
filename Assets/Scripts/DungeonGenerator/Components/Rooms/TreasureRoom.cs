@@ -5,8 +5,8 @@ namespace Assets.DungeonGenerator.Components.Rooms
     public class TreasureRoom : DungeonRoom
     {
         internal override void Populate(DungeonRepresentation dungeon)
-        { 
-            //TODO
+        {
+            Contents.Add(new(dungeon.Components.chest.gameObject, Bounds.center));
         }
     }
 }

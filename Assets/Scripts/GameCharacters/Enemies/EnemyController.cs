@@ -44,7 +44,7 @@ public class EnemyController : GameCharacterController
         _vocalizationCooldown -= Time.deltaTime;
         if (_vocalizationCooldown <= 0)
         {
-            PlaySound(_vocalizationAudio);
+            PlaySound(_vocalizationAudio, .2f);
             _vocalizationCooldown = Random.Range(0, _vocalizationCooldownMax);
         }
     }

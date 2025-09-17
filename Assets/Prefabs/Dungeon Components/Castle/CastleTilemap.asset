@@ -15,6 +15,26 @@ MonoBehaviour:
   wallTiles:
   - {fileID: 3030302167426459883, guid: cd459e7457c3a0d4a84e4fba790fcb74, type: 3}
   - {fileID: 3030302167426459883, guid: cd459e7457c3a0d4a84e4fba790fcb74, type: 3}
+  - {fileID: 3030302167426459883, guid: cd459e7457c3a0d4a84e4fba790fcb74, type: 3}
+  - {fileID: 3030302167426459883, guid: cd459e7457c3a0d4a84e4fba790fcb74, type: 3}
+  - {fileID: 3030302167426459883, guid: cd459e7457c3a0d4a84e4fba790fcb74, type: 3}
+  - {fileID: 3030302167426459883, guid: cd459e7457c3a0d4a84e4fba790fcb74, type: 3}
+  - {fileID: 3030302167426459883, guid: cd459e7457c3a0d4a84e4fba790fcb74, type: 3}
+  - {fileID: 3030302167426459883, guid: cd459e7457c3a0d4a84e4fba790fcb74, type: 3}
+  - {fileID: 3030302167426459883, guid: cd459e7457c3a0d4a84e4fba790fcb74, type: 3}
+  - {fileID: 3030302167426459883, guid: cd459e7457c3a0d4a84e4fba790fcb74, type: 3}
+  - {fileID: 3030302167426459883, guid: cd459e7457c3a0d4a84e4fba790fcb74, type: 3}
+  - {fileID: 3030302167426459883, guid: cd459e7457c3a0d4a84e4fba790fcb74, type: 3}
+  - {fileID: 3030302167426459883, guid: cd459e7457c3a0d4a84e4fba790fcb74, type: 3}
+  - {fileID: 3030302167426459883, guid: cd459e7457c3a0d4a84e4fba790fcb74, type: 3}
+  - {fileID: 3030302167426459883, guid: cd459e7457c3a0d4a84e4fba790fcb74, type: 3}
+  - {fileID: 3030302167426459883, guid: cd459e7457c3a0d4a84e4fba790fcb74, type: 3}
+  - {fileID: 3030302167426459883, guid: cd459e7457c3a0d4a84e4fba790fcb74, type: 3}
+  - {fileID: 3030302167426459883, guid: cd459e7457c3a0d4a84e4fba790fcb74, type: 3}
+  - {fileID: 3030302167426459883, guid: cd459e7457c3a0d4a84e4fba790fcb74, type: 3}
+  - {fileID: 3030302167426459883, guid: cd459e7457c3a0d4a84e4fba790fcb74, type: 3}
+  - {fileID: 3030302167426459883, guid: 6e5f1f45c31d62144abdbb7a6a4ee936, type: 3}
+  - {fileID: 3030302167426459883, guid: fe72e7e63d8798f4d8a9de0d8ae91875, type: 3}
   floorTiles:
   - {fileID: 8031560325989942358, guid: 2e7ae91cf64b0ec48a1935caeb847572, type: 3}
   - {fileID: 8031560325989942358, guid: 83d31a3582132bc489ec8200cef7143e, type: 3}

@@ -5,6 +5,8 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using static Assets.Utilities.GameObjectUtilities;
 using Assets.DungeonGenerator.Components.Rooms;
+using Assets.DungeonGenerator.DataStructures;
+using Assets.Combat;
 
 namespace Assets.DungeonGenerator.Components
 {
@@ -131,13 +133,16 @@ namespace Assets.DungeonGenerator.Components
         {
             float spawnRate = enemySpawnRate / 100f;
             Range<int> enemiesPerRoom = dungeon.Parameter<Range<int>>(DungeonParameter.EnemiesPerRoom);
-            List<GameObject> enemies = dungeon.Components.enemies;
+            Shufflebag<GameObject> enemies = new(dungeon.Components.enemies);
 
-            if (Random.value < spawnRate && enemies.Count > 0)
+            if (Random.value < spawnRate)
             {
                 int count = Random.Range(enemiesPerRoom.min, enemiesPerRoom.max);
-                GameObject enemy = dungeon.Components.enemies[0];
-                Contents.Add(new(enemy, enemy.transform.position + PointUtils.RandomPointWithinBounds(_safeArea)));
+                for (int i = 0; i < count; i++)
+                {
+                    GameObject enemy = enemies.TakeItem();
+                    Contents.Add(new(enemy, enemy.transform.position + PointUtils.RandomPointWithinBounds(_safeArea)));
+                }
             }
         }
 

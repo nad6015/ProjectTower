@@ -1,4 +1,5 @@
 ﻿using Assets.DungeonGenerator.Components;
+using Assets.DungeonGenerator.DataStructures;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,11 +21,14 @@ namespace Assets.DungeonGenerator
             DungeonLayout layout = dungeon.Layout;
 
             int roomCount = dungeon.Parameter<int>(DungeonParameter.RoomCount);
+            Shufflebag<FlowPattern> flows = new(dungeon.Flows);
             
             while (layout.Count < roomCount)
             {
-                foreach (var flow in dungeon.Flows)
+
+                for (int i = 0; i < dungeon.Flows.Count; i++)
                 {
+                    var flow = flows.TakeItem();
                     var rooms = layout.FindMatching(flow.Matches);
                     if (rooms.Count == flow.Matches.Count)
                     {

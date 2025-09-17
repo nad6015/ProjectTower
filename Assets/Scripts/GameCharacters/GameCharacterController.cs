@@ -34,7 +34,7 @@ namespace Assets.GameCharacters
 
         public void Footstep()
         {
-            PlaySound(_footstepAudio);
+            PlaySound(_footstepAudio, 0.1f);
         }
 
         protected void PlaySound(AudioClip clip, float volume = 0.5f)

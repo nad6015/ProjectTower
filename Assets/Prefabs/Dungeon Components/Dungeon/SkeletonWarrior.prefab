@@ -207,17 +207,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 7807404158470223261}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a83538da6b55fe54fb48df0dba24bfbf, type: 3}
+  m_Script: {fileID: 11500000, guid: 3408f2a592008034cbe94079e1af5157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
+  health: 3
   attack: 1
   speed: 3
   layerMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 128
   _hitbox: {fileID: 8261925513812931975}
-  _attackCooldownDuration: 2
+  _attackCooldownDuration: 0.5
+  _enemyType: 0
+  _projectile: {fileID: 0}
 --- !u!136 &2600680609069488361
 CapsuleCollider:
   m_ObjectHideFlags: 0
