@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 7e7285ce246dbda4d897a059e275d6d9
+guid: 976b8a0f61650e74587e7c0170dd6265
 AssetOrigin:
   serializedVersion: 1
-  productId: 276754
-  packageName: A modular Fantasy knight character
+  productId: 280220
+  packageName: Monster Low Poly
   packageVersion: 1.0
-  assetPath: Assets/Fantasy knight/Texture/Body/T_Body_AO.tga
-  uploadId: 642948
+  assetPath: Assets/Monster/Texture/T_Monster_Body_Normal_SkinAll.tga
+  uploadId: 651917
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -14,7 +14,7 @@ TextureImporter:
   mipmaps:
     mipMapMode: 0
     enableMipMap: 1
-    sRGBTexture: 1
+    sRGBTexture: 0
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
@@ -61,7 +61,7 @@ TextureImporter:
   alphaUsage: 1
   alphaIsTransparency: 0
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 1
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -76,7 +76,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 1024
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -115,7 +115,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
     buildTarget: WebGL
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1

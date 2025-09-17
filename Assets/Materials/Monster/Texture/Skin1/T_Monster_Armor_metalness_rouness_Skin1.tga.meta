@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 7e7285ce246dbda4d897a059e275d6d9
+guid: f46d588da3bcfb241b685128313d8d08
 AssetOrigin:
   serializedVersion: 1
-  productId: 276754
-  packageName: A modular Fantasy knight character
+  productId: 280220
+  packageName: Monster Low Poly
   packageVersion: 1.0
-  assetPath: Assets/Fantasy knight/Texture/Body/T_Body_AO.tga
-  uploadId: 642948
+  assetPath: Assets/Monster/Texture/Skin1/T_Monster_Armor_metalness_rouness_Skin1.tga
+  uploadId: 651917
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -76,7 +76,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 1024
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -115,7 +115,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
     buildTarget: WebGL
-    maxTextureSize: 2048
+    maxTextureSize: 4096
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
