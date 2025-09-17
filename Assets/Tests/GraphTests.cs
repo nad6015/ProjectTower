@@ -5,7 +5,7 @@ using Assets.DungeonGenerator.Components;
 
 public class GraphTests
 {
-    private readonly DungeonNode node = new(RoomType.Generic);
+    private readonly DungeonNode node = new(RoomType.Explore);
     private DungeonLayout graph;
 
     [SetUp]
@@ -150,7 +150,7 @@ public class GraphTests
 
         List<RoomType> replacer = new()
         {
-            RoomType.Combat, RoomType.Generic,RoomType.Treasure,RoomType.Boss
+            RoomType.Combat, RoomType.Explore,RoomType.Treasure,RoomType.Boss
         };
 
         List<DungeonNode> foundNodes = graph.FindMatching(pattern);
@@ -161,7 +161,7 @@ public class GraphTests
 
         Assert.That(graph.Count == count);
         Assert.That(graph.FindById(5).IsSameType(RoomType.Combat));
-        Assert.That(graph.FindById(6).IsSameType(RoomType.Generic));
+        Assert.That(graph.FindById(6).IsSameType(RoomType.Explore));
         Assert.That(graph.FindById(7).IsSameType(RoomType.Treasure));
         Assert.That(graph.FindById(8).IsSameType(RoomType.Boss));
 
@@ -207,7 +207,7 @@ public class GraphTests
 
         List<RoomType> replacer = new()
         {
-            RoomType.Combat, RoomType.Generic, RoomType.Treasure,
+            RoomType.Combat, RoomType.Explore, RoomType.Treasure,
             RoomType.Boss, RoomType.RestPoint, RoomType.Combat
         };
 
@@ -220,7 +220,7 @@ public class GraphTests
         Assert.That(graph.Count == count + 2);
 
         Assert.That(graph.FindById(1).IsSameType(RoomType.Combat));
-        Assert.That(graph.FindById(2).IsSameType(RoomType.Generic));
+        Assert.That(graph.FindById(2).IsSameType(RoomType.Explore));
         Assert.That(graph.FindById(3).IsSameType(RoomType.Treasure));
         Assert.That(graph.FindById(4).IsSameType(RoomType.Boss));
         Assert.That(graph.FindById(count).IsSameType(RoomType.RestPoint));
@@ -232,7 +232,7 @@ public class GraphTests
     public static IEnumerable<DungeonLayout> CompleteGraphs()
     {
         DungeonLayout singleNodeGraph = new();
-        singleNodeGraph.Add(new DungeonNode(RoomType.Generic));
+        singleNodeGraph.Add(new DungeonNode(RoomType.Explore));
 
         yield return singleNodeGraph;
         yield return Create3NodeGraph();
@@ -245,11 +245,11 @@ public class GraphTests
         DungeonLayout threeNodeGraph = Create3NodeGraph();
 
         threeNodeGraph.Remove(threeNodeGraph[threeNodeGraph.LastNode][0]);
-        threeNodeGraph.Add(threeNodeGraph.LastNode, new DungeonNode(RoomType.Generic));
+        threeNodeGraph.Add(threeNodeGraph.LastNode, new DungeonNode(RoomType.Explore));
 
         DungeonLayout tenNodeGraph = Create10NodeGraph();
         threeNodeGraph.Remove(tenNodeGraph[tenNodeGraph.LastNode][0].LinkedNodes[0]);
-        threeNodeGraph.Add(tenNodeGraph.LastNode, new DungeonNode(RoomType.Generic));
+        threeNodeGraph.Add(tenNodeGraph.LastNode, new DungeonNode(RoomType.Explore));
 
         yield return emptyGraph;
         yield return threeNodeGraph;

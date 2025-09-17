@@ -102,11 +102,6 @@ namespace Assets.DungeonGenerator.Components
                     dungeonRoom = NewGameObjectWithComponent<RestPointRoom>(name);
                     break;
                 }
-                case RoomType.Explore:
-                {
-                    dungeonRoom = NewGameObjectWithComponent<ExploreRoom>(name);
-                    break;
-                }
                 case RoomType.Boss:
                 {
                     dungeonRoom = NewGameObjectWithComponent<BossRoom>(name);
@@ -128,13 +123,13 @@ namespace Assets.DungeonGenerator.Components
 
         internal virtual void Populate(DungeonRepresentation dungeon)
         {
-            SpawnEnemies(dungeon);
+            SpawnEnemies(dungeon, dungeon.Parameter<int>(DungeonParameter.EnemySpawnRate));
             PlaceProps(dungeon);
         }
 
-        protected virtual void SpawnEnemies(DungeonRepresentation dungeon)
+        protected virtual void SpawnEnemies(DungeonRepresentation dungeon, int enemySpawnRate)
         {
-            float spawnRate = dungeon.Parameter<int>(DungeonParameter.EnemySpawnRate) / 100f;
+            float spawnRate = enemySpawnRate / 100f;
             Range<int> enemiesPerRoom = dungeon.Parameter<Range<int>>(DungeonParameter.EnemiesPerRoom);
             List<GameObject> enemies = dungeon.Components.enemies;
 

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<coverage version="1.0" date="2025-09-17_06-42-22" tag="">
+  <assembly name="Assembly-CSharp">
+    <class name="AttackPlayerAction" coveredlines="0" coverablelines="10" totallines="30" coveredbranches="0" totalbranches="0" />
+    <class name="RandomPatrolAction" coveredlines="0" coverablelines="32" totallines="74" coveredbranches="0" totalbranches="0" />
+  </assembly>
+  <assembly name="CombatSystem">
+    <class name="Assets.Combat.Fighter" coveredlines="56" coverablelines="89" totallines="199" coveredbranches="0" totalbranches="0" />
+  </assembly>
+  <assembly name="DungeonGenerator">
+    <class name="Assets.DungeonGenerator.Components.CombatRoom" coveredlines="0" coverablelines="4" totallines="13" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.Components.DestructibleItem" coveredlines="0" coverablelines="24" totallines="47" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.Components.DoorKey" coveredlines="0" coverablelines="3" totallines="13" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.Components.Dungeon" coveredlines="5" coverablelines="6" totallines="24" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.Components.DungeonComponentUtils" coveredlines="22" coverablelines="22" totallines="52" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.Components.DungeonDoor" coveredlines="0" coverablelines="21" totallines="44" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.Components.DungeonEndRoom" coveredlines="5" coverablelines="5" totallines="15" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.Components.DungeonExit" coveredlines="6" coverablelines="6" totallines="25" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.Components.DungeonNode" coveredlines="26" coverablelines="29" totallines="65" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.Components.DungeonNodeLink" coveredlines="5" coverablelines="5" totallines="19" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.Components.DungeonRepresentation" coveredlines="32" coverablelines="43" totallines="87" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.Components.DungeonRoom" coveredlines="52" coverablelines="138" totallines="228" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.Components.DungeonStartRoom" coveredlines="14" coverablelines="14" totallines="25" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.Components.LockedRoom" coveredlines="0" coverablelines="14" totallines="35" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.Components.Range[T]" coveredlines="5" coverablelines="5" totallines="15" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.Components.Rooms.BossRoom" coveredlines="0" coverablelines="2" totallines="12" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.Components.Rooms.RestPointRoom" coveredlines="0" coverablelines="3" totallines="12" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.Components.Rooms.TreasureRoom" coveredlines="0" coverablelines="2" totallines="12" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.Components.SpawnPoint" coveredlines="12" coverablelines="18" totallines="47" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.Components.Tiles.DungeonTile" coveredlines="25" coverablelines="26" totallines="51" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.Components.Tiles.DungeonTilemap" coveredlines="53" coverablelines="66" totallines="176" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.Components.TreasureChest" coveredlines="0" coverablelines="14" totallines="35" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.Components.ValueRepresentation" coveredlines="37" coverablelines="43" totallines="96" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.DataStructures.Shufflebag[T]" coveredlines="19" coverablelines="21" totallines="55" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.DungeonCorridor" coveredlines="0" coverablelines="30" totallines="63" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.DungeonFlow" coveredlines="0" coverablelines="7" totallines="20" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.DungeonGenerator" coveredlines="14" coverablelines="14" totallines="39" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.DungeonLayout" coveredlines="139" coverablelines="145" totallines="266" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.FlowPattern" coveredlines="15" coverablelines="15" totallines="28" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.GraphGrammar" coveredlines="24" coverablelines="24" totallines="50" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.JsonUtils" coveredlines="21" coverablelines="27" totallines="56" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.PointUtils" coveredlines="10" coverablelines="18" totallines="53" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonGenerator.RandomWalk" coveredlines="134" coverablelines="162" totallines="284" coveredbranches="0" totalbranches="0" />
+  </assembly>
+  <assembly name="DungeonMaster">
+    <class name="Assets.Combat.CombatManager" coveredlines="9" coverablelines="15" totallines="38" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.Combat.ResourceSystem" coveredlines="13" coverablelines="19" totallines="54" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonMaster.DungeonMaster" coveredlines="133" coverablelines="149" totallines="280" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonMaster.DungeonMasterDeserializationUtil" coveredlines="89" coverablelines="89" totallines="144" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonMaster.DungeonRule" coveredlines="5" coverablelines="5" totallines="17" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonMaster.GameplayRule" coveredlines="5" coverablelines="5" totallines="16" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonMaster.GreaterThanCondition" coveredlines="7" coverablelines="7" totallines="22" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonMaster.LessThanCondition" coveredlines="7" coverablelines="7" totallines="22" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.DungeonMaster.Rule" coveredlines="29" coverablelines="30" totallines="68" coveredbranches="0" totalbranches="0" />
+  </assembly>
+  <assembly name="GameCharacters">
+    <class name="Assets.Combat.Boss" coveredlines="0" coverablelines="6" totallines="23" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.Combat.Enemy" coveredlines="0" coverablelines="16" totallines="43" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.Combat.Projectile" coveredlines="0" coverablelines="15" totallines="35" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.GameCharacters.AnimationEventsHandler" coveredlines="0" coverablelines="15" totallines="55" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.GameCharacters.GameCharacterController" coveredlines="7" coverablelines="23" totallines="50" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.PlayerCharacter.HealthIncreaser" coveredlines="0" coverablelines="3" totallines="12" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.PlayerCharacter.PlayableFighter" coveredlines="22" coverablelines="70" totallines="125" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.PlayerCharacter.PlayerCamera" coveredlines="15" coverablelines="15" totallines="43" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.PlayerCharacter.PlayerController" coveredlines="55" coverablelines="67" totallines="169" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.PlayerCharacter.PlayerInventory" coveredlines="4" coverablelines="40" totallines="87" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.PlayerCharacter.PlayerMovement" coveredlines="29" coverablelines="47" totallines="97" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.PlayerCharacter.Resources.UsableItem" coveredlines="0" coverablelines="1" totallines="12" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.PlayerCharacter.StatIncreaser" coveredlines="0" coverablelines="4" totallines="15" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.UI.StatBar" coveredlines="19" coverablelines="33" totallines="73" coveredbranches="0" totalbranches="0" />
+    <class name="EnemyController" coveredlines="5" coverablelines="33" totallines="67" coveredbranches="0" totalbranches="0" />
+    <class name="EnemyHealthBar" coveredlines="6" coverablelines="8" totallines="24" coveredbranches="0" totalbranches="0" />
+    <class name="HealingItem" coveredlines="0" coverablelines="4" totallines="15" coveredbranches="0" totalbranches="0" />
+    <class name="InputSystemActions" coveredlines="44" coverablelines="274" totallines="1472" coveredbranches="0" totalbranches="0" />
+    <class name="PlayerHUD" coveredlines="21" coverablelines="21" totallines="67" coveredbranches="0" totalbranches="0" />
+  </assembly>
+  <assembly name="GameManager">
+    <class name="Assets.Audio.AudioManager" coveredlines="14" coverablelines="17" totallines="39" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.GameManager.SceneTransitionManager" coveredlines="20" coverablelines="29" totallines="74" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.GameManager.TransitionAnimator" coveredlines="9" coverablelines="9" totallines="31" coveredbranches="0" totalbranches="0" />
+    <class name="NewGame" coveredlines="0" coverablelines="6" totallines="19" coveredbranches="0" totalbranches="0" />
+  </assembly>
+  <assembly name="Interactables">
+    <class name="Assets.Interactables.Environment.SceneEntrance" coveredlines="0" coverablelines="3" totallines="27" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.Interactables.Interactable" coveredlines="22" coverablelines="25" totallines="48" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.Interactables.PickupItem" coveredlines="1" coverablelines="13" totallines="29" coveredbranches="0" totalbranches="0" />
+    <class name="ShowNote" coveredlines="5" coverablelines="8" totallines="19" coveredbranches="0" totalbranches="0" />
+  </assembly>
+  <assembly name="Tests">
+    <class name="CharacterMovementTest" coveredlines="8" coverablelines="44" totallines="79" coveredbranches="0" totalbranches="0" />
+    <class name="DungeonAdaptionTests" coveredlines="41" coverablelines="52" totallines="110" coveredbranches="0" totalbranches="0" />
+    <class name="DungeonComponentsTest" coveredlines="25" coverablelines="25" totallines="50" coveredbranches="0" totalbranches="0" />
+    <class name="DungeonGeneratorTest" coveredlines="13" coverablelines="18" totallines="50" coveredbranches="0" totalbranches="0" />
+    <class name="DungeonMasterTests" coveredlines="66" coverablelines="82" totallines="157" coveredbranches="0" totalbranches="0" />
+    <class name="DungeonParametersTest" coveredlines="8" coverablelines="15" totallines="37" coveredbranches="0" totalbranches="0" />
+    <class name="DungeonRulesetTest" coveredlines="23" coverablelines="36" totallines="78" coveredbranches="0" totalbranches="0" />
+    <class name="DungeonRuleTest" coveredlines="25" coverablelines="25" totallines="63" coveredbranches="0" totalbranches="0" />
+    <class name="GameplayAdaptionTests" coveredlines="27" coverablelines="38" totallines="87" coveredbranches="0" totalbranches="0" />
+    <class name="GameSceneManagerTests" coveredlines="10" coverablelines="10" totallines="29" coveredbranches="0" totalbranches="0" />
+    <class name="GraphGrammarTests" coveredlines="38" coverablelines="65" totallines="120" coveredbranches="0" totalbranches="0" />
+    <class name="GraphTests" coveredlines="138" coverablelines="166" totallines="294" coveredbranches="0" totalbranches="0" />
+    <class name="GreaterThanConditionTest" coveredlines="9" coverablelines="9" totallines="25" coveredbranches="0" totalbranches="0" />
+    <class name="ParameterSupport" coveredlines="3" coverablelines="3" totallines="13" coveredbranches="0" totalbranches="0" />
+    <class name="PlayerCameraTests" coveredlines="9" coverablelines="54" totallines="102" coveredbranches="0" totalbranches="0" />
+    <class name="PlayerControllerTests" coveredlines="4" coverablelines="14" totallines="35" coveredbranches="0" totalbranches="0" />
+    <class name="RandomWalkTests" coveredlines="18" coverablelines="98" totallines="166" coveredbranches="0" totalbranches="0" />
+    <class name="Tests.DungeonPlayablity.DungeonPlayabilityTest" coveredlines="0" coverablelines="3" totallines="75" coveredbranches="0" totalbranches="0" />
+    <class name="Tests.Support.TestNpcFighter" coveredlines="0" coverablelines="3" totallines="13" coveredbranches="0" totalbranches="0" />
+    <class name="Tests.Support.TestPlayableFighter" coveredlines="22" coverablelines="28" totallines="46" coveredbranches="0" totalbranches="0" />
+    <class name="Tests.Support.TestPlayer" coveredlines="4" coverablelines="4" totallines="17" coveredbranches="0" totalbranches="0" />
+    <class name="TestUtilities" coveredlines="3" coverablelines="6" totallines="14" coveredbranches="0" totalbranches="0" />
+    <class name="ValueRepresentationTest" coveredlines="22" coverablelines="22" totallines="52" coveredbranches="0" totalbranches="0" />
+  </assembly>
+  <assembly name="UI">
+    <class name="Assets.UI.StartMenu" coveredlines="0" coverablelines="25" totallines="54" coveredbranches="0" totalbranches="0" />
+    <class name="CloseModal" coveredlines="10" coverablelines="17" totallines="35" coveredbranches="0" totalbranches="0" />
+    <class name="RetryScreen" coveredlines="9" coverablelines="18" totallines="37" coveredbranches="0" totalbranches="0" />
+  </assembly>
+  <assembly name="Utilities">
+    <class name="Assets.PointUtils" coveredlines="0" coverablelines="21" totallines="58" coveredbranches="0" totalbranches="0" />
+    <class name="Assets.Utilities.GameObjectUtilities" coveredlines="7" coverablelines="7" totallines="19" coveredbranches="0" totalbranches="0" />
+  </assembly>
+</coverage>

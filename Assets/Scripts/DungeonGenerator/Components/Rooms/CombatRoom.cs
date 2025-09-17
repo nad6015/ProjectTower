@@ -7,8 +7,7 @@ namespace Assets.DungeonGenerator.Components
         internal override void Populate(DungeonRepresentation dungeon)
         {
             PlaceProps(dungeon);
-            SpawnEnemies(dungeon);
-            // TODO: chance of combat room being locked
+            SpawnEnemies(dungeon, 100);
         }
     }
 }

@@ -120,7 +120,7 @@ namespace Assets.DungeonGenerator
 
                     dir = _directions.TakeItem();
                     // If a room or a corridor already exists in that area, then loop again.
-                    if (CanPlaceRoom(nextRoom, corridor))
+                    if (CanPlaceRoom(nextRoom, corridor, node.Bounds))
                     {
                         _corridors.Add(corridorLink, null);
                         _roomBounds.Add(nextRoom, null);
@@ -261,11 +261,11 @@ namespace Assets.DungeonGenerator
         /// Checks if a room can be placed in the given bounds.
         /// </summary>
         /// <returns>true if no other room is in the location.</returns>
-        private bool CanPlaceRoom(Bounds newRoom, Bounds newCorridor)
+        private bool CanPlaceRoom(Bounds newRoom, Bounds newCorridor, Bounds connectingRoom)
         {
             foreach (var room in _roomBounds.Keys)
             {
-                if (room.Intersects(newRoom) || room.Intersects(newCorridor))
+                if (room.Intersects(newRoom) || (room != connectingRoom && room.Intersects(newCorridor)))
                 {
                     return false;
                 }
