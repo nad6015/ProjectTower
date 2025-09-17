@@ -10,7 +10,7 @@ namespace Assets.GameCharacters
         public event Action OnHitHandler;
         public event Action OnFootstepHandler;
         public event Action OnDodgeDoneHandler;
-        public event Action OnAttackStartHandler;
+        public event Action<GameObject> OnAttackStartHandler;
 
         /// <summary>
         /// Event handler for any animation with the OnFootstep event.
@@ -47,9 +47,9 @@ namespace Assets.GameCharacters
         /// <summary>
         /// Handler for any animation with the DodgeDone event.
         /// </summary>
-        public void AttackStart()
+        public void AttackStart(UnityEngine.Object gameObject)
         {
-            OnAttackStartHandler?.Invoke();
+            OnAttackStartHandler?.Invoke((GameObject)gameObject);
         }
     }
 }

@@ -1,6 +1,7 @@
-using Assets.Combat;
 using Assets.GameCharacters;
+using Assets.PlayerCharacter;
 using UnityEngine;
+using static Assets.Utilities.GameObjectUtilities;
 
 namespace Assets.Combat
 {
@@ -10,12 +11,15 @@ namespace Assets.Combat
         private EnemyType _enemyType;
 
         [SerializeField]
-        Projectile _projectile;
+        private Projectile _projectile;
+
+        private GameObject _targetIndicator;
 
         private void Start()
         {
             AnimationEventsHandler animationEventsHandler = GetComponentInChildren<AnimationEventsHandler>();
             animationEventsHandler.OnHitHandler += OnHit;
+            animationEventsHandler.OnAttackStartHandler += OnAttackStart;
         }
 
         private void OnHit()
@@ -30,13 +34,24 @@ namespace Assets.Combat
                 }
                 case EnemyType.Spellcaster:
                 {
-                    Debug.Log("Spell casted");
+                    GameObject.Instantiate(_projectile, _targetIndicator.transform.position, Quaternion.LookRotation(transform.forward));
+                    Destroy(_targetIndicator);
                     break;
                 }
                 case EnemyType.Warrior:
                 {
                     break;
                 }
+            }
+        }
+
+        private void OnAttackStart(GameObject gameObj)
+        {
+            if (_enemyType == EnemyType.Spellcaster)
+            {
+                Vector3 pos = FindComponentByTag<Transform>("Player").position;
+                pos.y = 0.1f;
+                _targetIndicator = GameObject.Instantiate(gameObj, pos, Quaternion.identity);
             }
         }
     }

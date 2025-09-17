@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Graph: {fileID: 7897121030452665415, guid: d008a40443f7e72419692f99ac10e14e, type: 2}
+  m_Graph: {fileID: 7897121030452665415, guid: 2a3cdc27401dd724cbeff4e123a5b935, type: 2}
   m_BlackboardVariableOverridesList:
   - rid: 159894739263422975
   m_IsInitialised: 0
@@ -219,7 +219,7 @@ MonoBehaviour:
   _hitbox: {fileID: 8261925513812931975}
   _attackCooldownDuration: 0.5
   _enemyType: 2
-  _projectile: {fileID: 0}
+  _projectile: {fileID: 5662361514851536829, guid: 617e5cdc87630cb47a1f670ef8ff43cc, type: 3}
 --- !u!136 &2600680609069488361
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -325,7 +325,7 @@ PrefabInstance:
     - target: {fileID: 2363613021623352506, guid: d22f19c596816ce45a79d46ce04df7e8, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 2f1c510916d35de43b3c7afa935c8476, type: 2}
+      objectReference: {fileID: 9100000, guid: b2b612b971205184e9cbccdbd47e7431, type: 2}
     - target: {fileID: 2363613021623352506, guid: d22f19c596816ce45a79d46ce04df7e8, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0
@@ -372,7 +372,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9036122995601800314, guid: d22f19c596816ce45a79d46ce04df7e8, type: 3}
       propertyPath: m_Name
-      value: Skeleton (1)
+      value: Skeleton
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
