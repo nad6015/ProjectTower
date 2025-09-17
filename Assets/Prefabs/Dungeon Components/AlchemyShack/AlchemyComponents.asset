@@ -16,7 +16,7 @@ MonoBehaviour:
   enemies:
   - {fileID: 7270154500855878095, guid: 3ce66a50911ca6949b71059586cebea1, type: 3}
   boss: {fileID: 0}
-  startingPoint: {fileID: 7254044432296773021, guid: 176f7317eb4b3fd469f6b4461976d4d5, type: 3}
+  startingPoint: {fileID: 7254044432296773021, guid: c0c03b03b1dbe0b4a82e352bc1ada198, type: 3}
   exit: {fileID: 8684044341818389683, guid: 20f557f5c48279b4d9ec43df8dfe49e2, type: 3}
   doorKey: {fileID: 7755368289592254985, guid: 4dd9073c733399a4084427390387fc87, type: 3}
   chest: {fileID: 7994648521297478182, guid: 442b9cafd7608954b8077d4f053a3b1b, type: 3}

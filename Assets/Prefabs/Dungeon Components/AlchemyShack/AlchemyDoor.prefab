@@ -169,6 +169,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1186881097168134030}
     m_Modifications:
+    - target: {fileID: 12514162463654536, guid: 766675ba1dc013e4f97c20cfbe75c02f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3d6ce49f558fe654698a529675a6b404, type: 2}
     - target: {fileID: 3030302167426459883, guid: 766675ba1dc013e4f97c20cfbe75c02f, type: 3}
       propertyPath: m_Name
       value: CastleWall (1)
@@ -231,6 +235,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1186881097168134030}
     m_Modifications:
+    - target: {fileID: 12514162463654536, guid: 766675ba1dc013e4f97c20cfbe75c02f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 3d6ce49f558fe654698a529675a6b404, type: 2}
     - target: {fileID: 3030302167426459883, guid: 766675ba1dc013e4f97c20cfbe75c02f, type: 3}
       propertyPath: m_Name
       value: CastleWall
