@@ -209,10 +209,16 @@ namespace Assets.DungeonGenerator
                 int maxX = Mathf.FloorToInt(b2.min.x + DungeonTilemap.TileUnit);
 
                 float minZ = Mathf.Max(b1.min.z, b2.min.z);
-                float maxZ = Mathf.Min(b1.max.z, b2.max.z) - corridorSize.z;
-                float z = Random.Range(minZ, maxZ);
+                float maxZ = Mathf.Min(b1.max.z, b2.max.z);
+                float z = Random.Range(minZ, maxZ - corridorSize.z);
+                float z2 = z + corridorSize.z;
 
-                corridorBounds.SetMinMax(new(minX, 0, z), new(maxX, 0, z + corridorSize.z));
+                if (z2 > maxZ)
+                {
+                    z2 = maxZ;
+                }
+
+                corridorBounds.SetMinMax(new(minX, 0, z), new(maxX, 0, z2));
             }
             else
             {
@@ -220,10 +226,16 @@ namespace Assets.DungeonGenerator
                 int maxZ = Mathf.FloorToInt(b2.min.z + DungeonTilemap.TileUnit);
 
                 float minX = Mathf.Max(b1.min.x, b2.min.x);
-                float maxX = Mathf.Min(b1.max.x, b2.max.x) - corridorSize.x;
-                float x = Random.Range(minX, maxX);
+                float maxX = Mathf.Min(b1.max.x, b2.max.x);
+                float x = Random.Range(minX, maxX - corridorSize.x);
+                float x2 = x + corridorSize.x;
 
-                corridorBounds.SetMinMax(new(x, 0, minZ), new(x + corridorSize.x, 0, maxZ));
+                if (x2 > maxX)
+                {
+                    x2 = maxX;
+                }
+
+                corridorBounds.SetMinMax(new(x, 0, minZ), new(x2, 0, maxZ));
             }
             return corridorBounds;
         }
