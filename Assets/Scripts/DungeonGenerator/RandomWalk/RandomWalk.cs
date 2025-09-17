@@ -87,7 +87,7 @@ namespace Assets.DungeonGenerator
                     continue;
                 }
                 _directions.RefreshBag();
-                for (var i = 0; i < 4; i++)
+                while(n.Bounds.size == Vector3.zero) 
                 {
                     Bounds nextRoom;
                     Bounds corridor;
