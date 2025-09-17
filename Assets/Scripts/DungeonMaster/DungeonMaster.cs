@@ -40,6 +40,8 @@ namespace Assets.DungeonMaster
 
         public DungeonMasterState State { get; private set; }
 
+        public DungeonLayout Layout { get { return _dungeonRep.Layout; } }
+
         private Dictionary<string, DungeonRule> GenerationRuleset { get; set; }
         private Dictionary<string, GameplayRule> GameplayRuleset { get; set; }
 

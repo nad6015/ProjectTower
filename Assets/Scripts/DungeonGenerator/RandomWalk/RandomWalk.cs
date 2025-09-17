@@ -265,7 +265,7 @@ namespace Assets.DungeonGenerator
         {
             foreach (var room in _roomBounds.Keys)
             {
-                if (room.Intersects(newRoom))
+                if (room.Intersects(newRoom) || room.Intersects(newCorridor))
                 {
                     return false;
                 }
