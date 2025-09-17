@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1587639197234043965}
   - component: {fileID: 7357234244633142170}
   m_Layer: 7
-  m_Name: MushroomWarrrior
+  m_Name: MushroomSpellcaster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,8 +59,8 @@ MonoBehaviour:
     m_Bits: 256
   _hitbox: {fileID: 2244381075913564088}
   _attackCooldownDuration: 0.5
-  _enemyType: 0
-  _projectile: {fileID: 0}
+  _enemyType: 2
+  _projectile: {fileID: 5662361514851536829, guid: 9a86ab3134d41f1439859b3368f891e5, type: 3}
 --- !u!114 &2286788763632386770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,7 +76,7 @@ MonoBehaviour:
   _attackAudio: {fileID: 8300000, guid: af8183a063315f4428b15dc5f386c27b, type: 3}
   _footstepAudio: {fileID: 8300000, guid: 85016e0f2b01da248b9663dd49a161b0, type: 3}
   _vocalizationCooldownMax: 10
-  _vocalizationAudio: {fileID: 8300000, guid: 4efbc380fa09d42a58aa2525a076ea31, type: 3}
+  _vocalizationAudio: {fileID: 0}
 --- !u!114 &4761756324457958592
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Graph: {fileID: 7897121030452665415, guid: d008a40443f7e72419692f99ac10e14e, type: 2}
+  m_Graph: {fileID: 7897121030452665415, guid: 2a3cdc27401dd724cbeff4e123a5b935, type: 2}
   m_BlackboardVariableOverridesList:
   - rid: 159894739263422975
   m_IsInitialised: 0
