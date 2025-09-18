@@ -210,7 +210,7 @@ namespace Assets.DungeonGenerator
 
                 float minZ = Mathf.Max(b1.min.z, b2.min.z);
                 float maxZ = Mathf.Min(b1.max.z, b2.max.z);
-                float z = Random.Range(minZ, maxZ - corridorSize.z);
+                float z = Random.Range(minZ + 1, maxZ - corridorSize.z);
                 float z2 = z + corridorSize.z;
 
                 if (z2 > maxZ)
@@ -227,7 +227,7 @@ namespace Assets.DungeonGenerator
 
                 float minX = Mathf.Max(b1.min.x, b2.min.x);
                 float maxX = Mathf.Min(b1.max.x, b2.max.x);
-                float x = Random.Range(minX, maxX - corridorSize.x);
+                float x = Random.Range(minX + 1, maxX - corridorSize.x);
                 float x2 = x + corridorSize.x;
 
                 if (x2 > maxX)

@@ -1,4 +1,6 @@
 Lowpoly Medieval Weapon Pack - VertexModeler [https://assetstore.unity.com/packages/3d/props/weapons/lowpoly-medieval-weapon-pack-291374]
+Lowpoly Magician RIO - VertexModeler [https://assetstore.unity.com/packages/3d/characters/humanoids/lowpoly-magician-rio-288942]
+
 Skeleton - SazenGames [TODO]
 
 10 Impact/Shield Blocks - StarNinja, OpenGameArt [https://opengameart.org/users/starninjas]
@@ -11,12 +13,12 @@ Swish - Bamboo Stick Weapon Swhoshes - qubodup [https://opengameart.org/content/
 
 Monster Roars - Audio Pack - VoiceBosch [https://assetstore.unity.com/packages/p/monster-roars-audio-pack-301118]
 
-Lowpoly Magician RIO - VertexModeler [https://assetstore.unity.com/packages/3d/characters/humanoids/lowpoly-magician-rio-288942]
-
 Training_Dummy  - 
-
-CemeteryPack - 
 
 Breaking Bottle  - spookymodem [https://opengameart.org/content/breaking-bottle] (CC-BY 3.0)
 
 5 break, crunch impacts - Independent.nu [https://opengameart.org/content/5-break-crunch-impacts] (CC0)
+
+Magic SFX Sample - ViRiX [https://opengameart.org/content/magic-sfx-sample] (CC-BY 3.0)
+
+Monster - 
