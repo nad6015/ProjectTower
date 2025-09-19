@@ -1,55 +1,54 @@
 {
-  "params": [
+  "dungeonParams": [
     {
       "parameter": "roomSize",
-      "gameParam": "clearTime",
       "valueType": "vectorRange",
       "value": {
         "minX": 15,
-        "minZ": 15,
-        "maxX": 35,
-        "maxZ": 35
-      }
-    },
-    {
-      "parameter": "corridorSize",
-      "gameParam": "clearTime",
-      "valueType": "vector",
-      "value": {
-        "x": 3,
-        "z": 3
-      }
-    },
-    {
-      "parameter": "enemySpawnRate",
-      "gameParam": "clearTime",
-      "valueType": "number",
-      "value": { "value": 50 },
+        "minZ": 10,
+        "maxX": 20,
+        "maxZ": 15
+      },
       "locked": false
     },
     {
+      "parameter": "corridorSize",
+      "valueType": "vector",
+      "value": {
+        "x": 4,
+        "z": 4
+      },
+      "locked": false
+    },
+    {
+      "parameter": "enemySpawnRate",
+      "valueType": "number",
+      "value": { "value": 75 }
+    },
+    {
       "parameter": "itemsPerRoom",
-      "gameParam": "clearTime",
       "valueType": "range",
       "value": {
-        "min": 0,
-        "max": 3
+        "min": 1,
+        "max": 1
       }
     },
     {
       "parameter": "enemiesPerRoom",
-      "gameParam": "clearTime",
       "valueType": "range",
       "value": {
-        "min": 0,
-        "max": 3
+        "min": 1,
+        "max": 1
       }
     },
     {
       "parameter": "roomCount",
-      "gameParam": "clearTime",
       "valueType": "number",
-      "value": { "value": 10 }
+      "value": { "value": 7 }
     }
+  ],
+  "gameplayParams": [
+    { "parameter": "itemDropRate", "valueType": "number", "value": { "value": 50 } },
+    { "parameter": "treasureDropRate", "valueType": "number", "value": { "value": 0 } }
   ]
 }

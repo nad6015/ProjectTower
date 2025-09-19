@@ -36,8 +36,6 @@ public class PlayerCameraTests : InputTestFixture
         Vector3 dir = (playerPos - camPos).normalized;
         float distY = playerPos.z - camPos.z;
 
-        Debug.Log(dir);
-
         Assert.That(camPos.x == 0);
         Assert.That(Mathf.Approximately(distY, _camera.DistanceFromPlayerZ));
         Assert.That(dir.z > 0.3f); // Assert camera is pointing in player's direction

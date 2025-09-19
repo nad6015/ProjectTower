@@ -159,23 +159,33 @@ namespace Assets.DungeonMaster
         private void DoWork()
         {
 
+            Debug.Log("Running dungeon ruleset.");
             foreach (DungeonRule rule in GenerationRuleset.Values)
             {
                 if (rule.ConditionsMet(_dungeonAdaption.FloorStatistics))
                 {
+                    Debug.Log("Rule met for " + rule.Id);
+                    Debug.Log("Previous value = " + rule.Value().ToString());
+                    
                     _dungeonRep.ModifyParameter(rule.Parameter, rule.Value());
+                    
+                    Debug.Log("New value = " + rule.Value().ToString());
+
                     _dungeonAdaption.Reset(rule.GameParameter);
                 }
             }
 
+            Debug.Log("Running gameplay ruleset.");
             foreach (GameplayRule rule in GameplayRuleset.Values)
             {
                 if (rule.ConditionsMet(_gameplayAdaption.FloorStatistics))
                 {
-                    if (!_gameplayParams.TryAdd(rule.Parameter, rule.Value()))
-                    {
-                        _gameplayParams[rule.Parameter].Modify(rule.Value());
-                    }
+                    Debug.Log("Rule met for " + rule.Id);
+                    Debug.Log("Previous value = " + rule.Value().ToString());
+
+                    _gameplayParams[rule.Parameter].Modify(rule.Value());
+
+                    Debug.Log("New value = " + rule.Value().ToString());
 
                     _resourceSystem.UpdateItemRates(_gameplayParams);
                     _gameplayAdaption.Reset(rule.GameParameter);

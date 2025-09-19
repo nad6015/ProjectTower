@@ -9,6 +9,7 @@ using static UnityEngine.GameObject;
 using static Assets.Utilities.GameObjectUtilities;
 using Tests.Support;
 using Assets.Combat;
+using Assets.DungeonGenerator.Components;
 
 public class DungeonAdaptionTests
 {
@@ -22,16 +23,15 @@ public class DungeonAdaptionTests
         yield return null;
     }
 
-  
-
     [UnityTest]
-    public IEnumerator ShouldCollectFloorTimeStatsAndIncreaseDungeonParameter()
+    public IEnumerator ShouldVaryItemCountBasedOnDefeatedEnemyCount()
     {
         TestSetUp();
 
         yield return new WaitForSeconds(1f);
 
         Assert.That(dungeonMaster.State == DungeonMasterState.Running);
+        Assert.That(GameObject.FindObjectsByType<DestructibleItem>(FindObjectsSortMode.None).Length <= 5);
 
         player.GetComponent<TestPlayableFighter>().DefeatRandomEnemy();
 
@@ -43,11 +43,12 @@ public class DungeonAdaptionTests
 
         Assert.That(dungeonMaster.State == DungeonMasterState.Running);
         Assert.That(dungeonMaster.CurrentFloor == 2);
-        Assert.That(GameObject.FindObjectsByType<Enemy>(FindObjectsSortMode.None).Length >= 5);
+        Assert.That(GameObject.FindObjectsByType<DestructibleItem>(FindObjectsSortMode.None).Length >= 10);
+
     }
 
     [UnityTest]
-    public IEnumerator ShouldCollectEnemiesDefeatedAndIncreaseDungeonParameter()
+    public IEnumerator ShouldVaryEnemyCountBasedOnCharacterHealth()
     {
         TestSetUp();
 
@@ -55,7 +56,8 @@ public class DungeonAdaptionTests
 
         Assert.That(dungeonMaster.State == DungeonMasterState.Running);
 
-        player.GetComponent<TestPlayableFighter>().DefeatRandomEnemy();
+        Assert.That(GameObject.FindObjectsByType<Enemy>(FindObjectsSortMode.None).Length <= 5);
+        player.GetComponent<TestPlayableFighter>().Heal(4);
 
         yield return new WaitForSeconds(1f);
 
@@ -65,32 +67,9 @@ public class DungeonAdaptionTests
 
         Assert.That(dungeonMaster.State == DungeonMasterState.Running);
         Assert.That(dungeonMaster.CurrentFloor == 2);
-        Assert.That(GameObject.FindObjectsByType<Enemy>(FindObjectsSortMode.None).Length >= 5);
-    }
-
-    [UnityTest]
-    public IEnumerator ShouldCollectCharacterHealthLossAndIncreaseDungeonParameter()
-    {
-        TestSetUp();
-
-        yield return new WaitForSeconds(1f);
-
-        Assert.That(dungeonMaster.State == DungeonMasterState.Running);
+        Assert.That(GameObject.FindObjectsByType<Enemy>(FindObjectsSortMode.None).Length >= 10);
 
         player.GetComponent<TestPlayableFighter>().DamageSelf(4);
-
-        yield return new WaitForSeconds(1f);
-
-        dungeonMaster.OnDungeonCleared();
-
-        yield return new WaitForSeconds(1f);
-
-        Assert.That(dungeonMaster.State == DungeonMasterState.Running);
-        Assert.That(dungeonMaster.CurrentFloor == 2);
-        Assert.That(GameObject.FindObjectsByType<Enemy>(FindObjectsSortMode.None).Length >= 5);
-
-        player.GetComponent<TestPlayableFighter>().Heal(5);
-        player.GetComponent<TestPlayableFighter>().DamageSelf(1);
 
         yield return new WaitForSeconds(1f);
 

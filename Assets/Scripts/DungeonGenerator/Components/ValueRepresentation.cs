@@ -86,10 +86,36 @@ namespace Assets.DungeonGenerator.Components
                     break;
                 }
                 case ValueType.Number:
-                {   
+                {
                     _value = (int)_value + value.Value<int>();
                     break;
                 }
+                case ValueType.Range:
+                {
+                    Range<int> range = (Range<int>)_value;
+                    Range<int> newRange = value.Value<Range<int>>();
+                    range.min += newRange.min;
+                    range.max += newRange.max;
+                    _value = range;
+                    break;
+                }
+            }
+        }
+
+        public override string ToString()
+        {
+            switch (Type)
+            {
+
+                case ValueType.String:
+                case ValueType.Number:
+                return _value.ToString();
+
+                case ValueType.Range:
+                Range<int> range = Value<Range<int>>();
+                return "Range{max: " + range.max + ", min: " + range.min + "}";
+                default:
+                return "Unknown";
             }
         }
     }

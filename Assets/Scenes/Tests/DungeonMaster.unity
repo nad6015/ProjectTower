@@ -486,9 +486,21 @@ PrefabInstance:
       value: GameSystems
       objectReference: {fileID: 0}
     - target: {fileID: 7751301447746594715, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
+      propertyPath: _defaultParamFile
+      value: 
+      objectReference: {fileID: 4900000, guid: b01790cb2dbe8844b8360c7a9caf599c, type: 3}
+    - target: {fileID: 7751301447746594715, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
+      propertyPath: _dungeonFlowsFile
+      value: 
+      objectReference: {fileID: 4900000, guid: 9d16550c7e575b24486eff7c07d32e95, type: 3}
+    - target: {fileID: 7751301447746594715, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
       propertyPath: _defaultRulesetFile
       value: 
       objectReference: {fileID: 4900000, guid: feec4b49b06160646986a10f5e9f42b8, type: 3}
+    - target: {fileID: 7751301447746594715, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
+      propertyPath: <MaxFloors>k__BackingField
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7751301447746594715, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
       propertyPath: '_componentsList.Array.data[0]'
       value: 
