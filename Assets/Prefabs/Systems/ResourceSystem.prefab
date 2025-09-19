@@ -44,5 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e532807eac0e714bbc498521503438c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chest: {fileID: 7994648521297478182, guid: 1125a0ced2561c643932fdc3091314c4, type: 3}
   _containerItemsList:
   - {fileID: 7852392728132166079, guid: 3a68e34b9cf70244d910afff8f8d8799, type: 3}
+  _treasureItemsList:
+  - {fileID: 4106962438030515148, guid: ca5e92a600c73c146a616d722cf0d381, type: 3}
+  - {fileID: 4705254285669230915, guid: 43db22a4cc9e2a448b3b121e7bd73130, type: 3}
+  - {fileID: 2839867462725761606, guid: 3292610ed7bd7d64ba9fe24d4979f7a6, type: 3}
+  - {fileID: 4869014030884491728, guid: 32321fbc64cc0ee478222c07867e401b, type: 3}
+  - {fileID: 4869014030884491728, guid: 32321fbc64cc0ee478222c07867e401b, type: 3}
+  - {fileID: 4869014030884491728, guid: 32321fbc64cc0ee478222c07867e401b, type: 3}

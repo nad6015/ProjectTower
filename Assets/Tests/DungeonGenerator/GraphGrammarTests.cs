@@ -1,6 +1,7 @@
 using Assets.DungeonGenerator;
 using Assets.DungeonGenerator.Components;
 using Assets.DungeonMaster;
+using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using System.Collections;
 using UnityEngine;
@@ -102,7 +103,7 @@ public class GraphGrammarTests
         TextAsset paramFile = support.ParamFile;
         TextAsset configFile = support.ConfigFile;
 
-        var parameters = DungeonMasterDeserializationUtil.BuildDungeonParameters(paramFile);
+        var parameters = DungeonMasterDeserializationUtil.BuildDungeonParameters(JObject.Parse(paramFile.text));
         var config = DungeonMasterDeserializationUtil.ReadGeneratorConfigFromJson(configFile);
         
         dungeon = new(config.BaseDungeons[DungeonMission.ExploreFloor], config.DungeonFlows[DungeonMission.ExploreFloor], null, parameters);

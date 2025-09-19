@@ -1,11 +1,13 @@
 ﻿using Assets.Combat;
 using Assets.PlayerCharacter.Resources;
+using UnityEngine;
 
 namespace Assets.PlayerCharacter
 {
     public class StatIncreaser : UsableItem
     {
-        public FighterStats Stats { get; protected set; }
+        [field: SerializeField]
+        public FighterStats Stats { get; private set; }
         private const int _statIncrease = 1;
         public override void Use(PlayerController player)
         {

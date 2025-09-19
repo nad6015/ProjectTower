@@ -1,5 +1,4 @@
 using System.Collections;
-using Assets.DungeonGenerator;
 using Assets.DungeonMaster;
 using NUnit.Framework;
 using UnityEngine;
@@ -26,7 +25,7 @@ public class GameplayAdaptionTests
     }
 
     [UnityTest]
-    public IEnumerator ShouldMonitorEnemiesDefeatedAndIncreaseStatIncreaserDropAccordingly()
+    public IEnumerator ShouldMonitorEnemiesDefeatedAndIncreaseTreasureChestDropAccordingly()
     {
         TestSetUp();
 
@@ -35,25 +34,19 @@ public class GameplayAdaptionTests
         Assert.That(dungeonMaster.State == DungeonMasterState.Running);
 
         TreasureChest chest = GameObject.FindFirstObjectByType<TreasureChest>();
-        chest.Open();
-
-        PickupItem item = GameObject.FindFirstObjectByType<PickupItem>();
         
-        Assert.That(item != null);
-        Assert.That(item.Pickup.GetComponent<StatIncreaser>() == null);
+        Assert.That(chest == null);
+
+        var enemies = GameObject.FindObjectsByType<TestNpcFighter>(FindObjectsSortMode.None);
+
+        // Defeat one enemies to increase treasure chest drop rate by 100
+        player.GetComponent<TestPlayableFighter>().DefeatRandomEnemy();  
         
-        GameObject.Destroy(item);
-
-        player.GetComponent<TestPlayableFighter>().DefeatRandomEnemy(); // Increase stat increaser item drop rate by 100
-
         yield return new WaitForSeconds(1f);
 
-        chest.Open();
+        chest = GameObject.FindFirstObjectByType<TreasureChest>();
 
-        item = GameObject.FindFirstObjectByType<PickupItem>();
-
-        Assert.That(item != null);
-        Assert.That(item.Pickup.GetComponent<StatIncreaser>() != null);
+        Assert.That(chest != null);
     }
 
     [UnityTest]

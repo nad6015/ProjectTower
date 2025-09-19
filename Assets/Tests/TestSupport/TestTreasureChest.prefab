@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 5639049094493027808}
   - component: {fileID: 7994648521297478182}
   m_Layer: 9
-  m_Name: TreasureChest
+  m_Name: TestTreasureChest
   m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -199,7 +199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7005978866154244310, guid: 7bc40f2a5b27761468e228e387db9d0e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.957
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7005978866154244310, guid: 7bc40f2a5b27761468e228e387db9d0e, type: 3}
       propertyPath: m_LocalPosition.z

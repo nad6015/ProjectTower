@@ -23,24 +23,22 @@ namespace Tests.Support
 
         public void DefeatRandomEnemy()
         {
-            TestNpcFighter enemy = GameObject.FindFirstObjectByType<TestNpcFighter>();
-            if (enemy != null)
+            var enemies = GameObject.FindObjectsByType<TestNpcFighter>(FindObjectsSortMode.None);
+            foreach (var enemy in enemies)
             {
-                Vector3 enemyPosition = new(transform.position.x, 1, transform.position.z + 1);
-                enemy.transform.SetPositionAndRotation(enemyPosition, Quaternion.identity);
-                enemy.TakeDamage(this);
-                Debug.Log(enemy.GetStat(FighterStats.Health));
+                if (enemy != null && !enemy.IsDead())
+                {
+                    Vector3 enemyPosition = new(transform.position.x, 1, transform.position.z + 1);
+                    enemy.transform.SetPositionAndRotation(enemyPosition, Quaternion.identity);
+                    enemy.TakeDamage(this);
+                }
             }
         }
 
         internal void DamageSelf(int value)
         {
             float originalAtk = GetMaxStat(FighterStats.Attack);
-            SetStat(FighterStats.Attack, 0);
             ModifyStat(FighterStats.Health, -value);
-            TakeDamage(this);
-            SetStat(FighterStats.Attack, originalAtk);
-            Debug.Log(GetStat(FighterStats.Health));
         }
     }
 }

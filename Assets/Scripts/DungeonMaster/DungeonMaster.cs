@@ -10,6 +10,7 @@ using Random = UnityEngine.Random;
 using static Assets.Utilities.GameObjectUtilities;
 using static Assets.DungeonMaster.DungeonMasterDeserializationUtil;
 using Assets.Audio;
+using System.Data;
 
 namespace Assets.DungeonMaster
 {
@@ -53,8 +54,8 @@ namespace Assets.DungeonMaster
         private DungeonMasterConfiguration _config;
         private Dictionary<DungeonParameter, ValueRepresentation> _dungeonParameters;
         private Dictionary<GameplayParameter, ValueRepresentation> _gameplayParams;
-        private Dictionary<GameParameter, int> _floorStatistics;
-        private List<GameParameter> _gameParametersToReset;
+        private AdaptionManager _dungeonAdaption;
+        private AdaptionManager _gameplayAdaption;
 
         private ResourceSystem _resourceSystem;
         private CombatManager _combatSystem;
@@ -65,9 +66,8 @@ namespace Assets.DungeonMaster
 
         public void Start()
         {
-            _floorStatistics = new();
-            _gameplayParams = new();
-            _gameParametersToReset = new();
+            _dungeonAdaption = new();
+            _gameplayAdaption = new();
 
             _dungeonGenerator = FindComponentByTag<DungeonGenerator.DungeonGenerator>("DungeonGenerator");
             _combatSystem = FindComponentByTag<CombatManager>("CombatSystem");
@@ -158,38 +158,27 @@ namespace Assets.DungeonMaster
         /// </summary>
         private void DoWork()
         {
-            
+
             foreach (DungeonRule rule in GenerationRuleset.Values)
             {
-                if (rule.ConditionsMet(_floorStatistics))
+                if (rule.ConditionsMet(_dungeonAdaption.FloorStatistics))
                 {
                     _dungeonRep.ModifyParameter(rule.Parameter, rule.Value());
-                    _gameParametersToReset.Add(rule.GameParameter); // Queue param for reset after modification
+                    _dungeonAdaption.Reset(rule.GameParameter);
                 }
             }
 
             foreach (GameplayRule rule in GameplayRuleset.Values)
             {
-                if (rule.ConditionsMet(_floorStatistics))
+                if (rule.ConditionsMet(_gameplayAdaption.FloorStatistics))
                 {
-                    if (!_gameplayParams.ContainsKey(rule.Parameter))
-                    {
-                        _gameplayParams[rule.Parameter] = rule.Value();
-                    }
-                    else
+                    if (!_gameplayParams.TryAdd(rule.Parameter, rule.Value()))
                     {
                         _gameplayParams[rule.Parameter].Modify(rule.Value());
                     }
-                    _resourceSystem.UpdateItemRates(_gameplayParams);
-                    _gameParametersToReset.Add(rule.GameParameter); // Queue param for reset after modification
-                }
-            }
 
-            foreach (var param in _gameParametersToReset)
-            {
-                if (_floorStatistics.ContainsKey(param))
-                {
-                    _floorStatistics[param] = 0;
+                    _resourceSystem.UpdateItemRates(_gameplayParams);
+                    _gameplayAdaption.Reset(rule.GameParameter);
                 }
             }
         }
@@ -237,9 +226,12 @@ namespace Assets.DungeonMaster
 
             JObject json = JObject.Parse(_defaultRulesetFile.text);
             GenerationRuleset = BuildDungeonRuleset(json);
-            GameplayRuleset = BuildGameplayParams(json);
+            GameplayRuleset = BuildGameplayRuleset(json);
 
-            _dungeonParameters = BuildDungeonParameters(_defaultParamFile);
+            json = JObject.Parse(_defaultParamFile.text);
+
+            _dungeonParameters = BuildDungeonParameters(json);
+            _gameplayParams = BuildGameplayParameters(json);
         }
 
         private void NextDungeonSection()
@@ -250,14 +242,8 @@ namespace Assets.DungeonMaster
         }
         private void OnEnemyDefeated(Enemy fighter)
         {
-            if (_floorStatistics.ContainsKey(GameParameter.EnemiesDefeated))
-            {
-                _floorStatistics[GameParameter.EnemiesDefeated]++;
-            }
-            else
-            {
-                _floorStatistics[GameParameter.EnemiesDefeated] = 1;
-            }
+            _dungeonAdaption.UpdateGameStatistics(GameParameter.EnemiesDefeated, 1);
+            _gameplayAdaption.UpdateGameStatistics(GameParameter.EnemiesDefeated, 1);
         }
 
         private void OnPlayerDefeated(PlayableFighter fighter)
@@ -273,7 +259,10 @@ namespace Assets.DungeonMaster
                 int playerHp = Mathf.RoundToInt(fighter.GetStat(stat));
                 int playerMaxHp = Mathf.RoundToInt(fighter.GetMaxStat(stat));
 
-                _floorStatistics[GameParameter.CharacterHealth] = Mathf.RoundToInt(((float)playerHp / playerMaxHp) * 100f);
+                int characterHealthPercentage = Mathf.RoundToInt(((float)playerHp / playerMaxHp) * 100f);
+
+                _dungeonAdaption.UpdateGameStatistics(GameParameter.CharacterHealth, characterHealthPercentage);
+                _gameplayAdaption.UpdateGameStatistics(GameParameter.CharacterHealth, characterHealthPercentage);
             }
         }
     }

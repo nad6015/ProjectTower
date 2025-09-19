@@ -134,6 +134,7 @@ namespace Assets.Combat
             {
                 OnDefeat?.Invoke(this);
                 _animator.SetTrigger("Defeated");
+               gameObject.SetActive(false);
             }
         }
 

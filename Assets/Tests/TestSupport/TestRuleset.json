@@ -2,7 +2,7 @@
   "gameplayRules": [
     {
       "id": "increaseItemCount",
-      "parameter": "restorationItem",
+      "parameter": "itemDropRate",
       "gameParam": "characterHealth",
       "conditions": [
         {
@@ -21,7 +21,7 @@
     },
     {
       "id": "decreaseItemCount",
-      "parameter": "restorationItem",
+      "parameter": "itemDropRate",
       "gameParam": "characterHealth",
       "conditions": [
         {
@@ -31,7 +31,22 @@
       ],
       "valueType": "number",
       "value": {
-        "value": "-100"
+        "value": "-200"
+      }
+    },
+    {
+      "id": "spawnTreasureChest",
+      "parameter": "treasureDropRate",
+      "gameParam": "EnemiesDefeated",
+      "conditions": [
+        {
+          "operator": ">",
+          "operand": "0"
+        }
+      ],
+      "valueType": "number",
+      "value": {
+        "value": "100"
       }
     }
   ],

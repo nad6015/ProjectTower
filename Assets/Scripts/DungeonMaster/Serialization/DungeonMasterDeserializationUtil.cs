@@ -34,7 +34,7 @@ namespace Assets.DungeonMaster
             return _rules;
         }
 
-        public static Dictionary<string, GameplayRule> BuildGameplayParams(JObject json)
+        public static Dictionary<string, GameplayRule> BuildGameplayRuleset(JObject json)
         {
             Dictionary<string, GameplayRule> _rules = new();
 
@@ -55,7 +55,13 @@ namespace Assets.DungeonMaster
             return _rules;
         }
 
-        public static DungeonMasterConfiguration ReadGeneratorConfigFromJson(TextAsset flowsFile)
+        /// <summary>
+        /// Reads the dungeon generator configuration from a json file and returns it as a
+        /// DungeonMasterConfiguration object.
+        /// </summary>
+        /// <param name="configFile">the json file containing the configuration</param>
+        /// <returns>A DungeonMasterConfiguration instance</returns>
+        public static DungeonMasterConfiguration ReadGeneratorConfigFromJson(TextAsset configFile)
         {
             DungeonMasterConfiguration config = new()
             {
@@ -63,7 +69,7 @@ namespace Assets.DungeonMaster
                 BaseDungeons = new()
             };
 
-            JObject jFlows = JObject.Parse(flowsFile.text);
+            JObject jFlows = JObject.Parse(configFile.text);
             JsonUtils.ForEachIn(jFlows, dungeonFlow =>
             {
                 var dungeonFlowChildren = dungeonFlow.Children();
@@ -100,16 +106,40 @@ namespace Assets.DungeonMaster
             return config;
         }
 
-        public static Dictionary<DungeonParameter, ValueRepresentation> BuildDungeonParameters(TextAsset jsonFile)
+        /// <summary>
+        /// Creates a dictionary of dungeon parameters used in the dungeon generation adaption.
+        /// </summary>
+        /// <param name="json">the json object containing the dungeon parameters</param>
+        /// <returns>A Dictionary of dungeon parameters and their values</returns>
+        public static Dictionary<DungeonParameter, ValueRepresentation> BuildDungeonParameters(JObject json)
         {
             Dictionary<DungeonParameter, ValueRepresentation> parameters = new();
-            JObject json = JObject.Parse(jsonFile.text);
-            JsonUtils.ForEachIn(json["params"], jParam =>
+
+            JsonUtils.ForEachIn(json["dungeonParams"], jParam =>
             {
                 DungeonParameter dungeonParameter = jParam["parameter"].ToObject<DungeonParameter>();
 
                 ValueType type = jParam["valueType"].ToObject<ValueType>();
                 parameters.Add(dungeonParameter, new ValueRepresentation(type, JsonUtils.ToDictionary(jParam["value"])));
+            });
+            return parameters;
+        }
+
+        /// <summary>
+        /// Creates a dictionary of gameplay parameters used in the gameplay adaption.
+        /// </summary>
+        /// <param name="json">the json object containing the gameplay parameters</param>
+        /// <returns>A Dictionary of gameplay parameters and their values</returns>
+        public static Dictionary<GameplayParameter, ValueRepresentation> BuildGameplayParameters(JObject json)
+        {
+            Dictionary<GameplayParameter, ValueRepresentation> parameters = new();
+
+            JsonUtils.ForEachIn(json["gameplayParams"], jParam =>
+            {
+                GameplayParameter gameplayParam = jParam["parameter"].ToObject<GameplayParameter>();
+
+                ValueType type = jParam["valueType"].ToObject<ValueType>();
+                parameters.Add(gameplayParam, new ValueRepresentation(type, JsonUtils.ToDictionary(jParam["value"])));
             });
             return parameters;
         }

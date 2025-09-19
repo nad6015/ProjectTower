@@ -6,6 +6,7 @@
     public enum GameplayParameter
     {
         None,
-        restorationItem
+        ItemDropRate,
+        TreasureDropRate
     }
 }

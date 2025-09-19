@@ -250,7 +250,6 @@ namespace Assets.DungeonGenerator
         private Bounds RandomRoom(Vector3 min, Vector3 max, Vector3 dir, bool isHorizontal)
         {
             Range<Vector3> roomSizeParam = _dungeon.Parameter<Range<Vector3>>(DungeonParameter.RoomSize);
-            Vector3 corridorSize = _dungeon.Parameter<Vector3>(DungeonParameter.CorridorSize);
 
             Vector3 roomSize = PointUtils.RandomSize(roomSizeParam.min, roomSizeParam.max);
             Vector3 roomCenter = PointUtils.RandomPointWithinRange(min, max);
