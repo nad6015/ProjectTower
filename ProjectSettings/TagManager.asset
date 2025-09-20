@@ -16,6 +16,7 @@ TagManager:
   - SceneManager
   - AudioManager
   - TestSupport
+  - Boss
   layers:
   - Default
   - TransparentFX

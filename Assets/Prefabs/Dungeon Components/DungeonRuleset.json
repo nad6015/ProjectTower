@@ -1,13 +1,17 @@
 {
   "gameplayRules": [
     {
-      "id": "increaseHealingDropRate",
-      "parameter": "restorationItem",
+      "id": "increaseItemCount",
+      "parameter": "itemDropRate",
       "gameParam": "characterHealth",
       "conditions": [
         {
           "operator": "<",
-          "operand": "3"
+          "operand": "30"
+        },
+        {
+          "operator": ">",
+          "operand": "0"
         }
       ],
       "valueType": "number",
@@ -16,35 +20,107 @@
       }
     },
     {
-      "id": "increaseItemDrop",
-      "parameter": "restorationItem",
+      "id": "decreaseItemCount",
+      "parameter": "itemDropRate",
       "gameParam": "characterHealth",
       "conditions": [
         {
-          "operator": "<",
+          "operator": ">",
+          "operand": "80"
+        }
+      ],
+      "valueType": "number",
+      "value": {
+        "value": "-10"
+      }
+    },
+    {
+      "id": "spawnTreasureChest",
+      "parameter": "treasureDropRate",
+      "gameParam": "EnemiesDefeated",
+      "conditions": [
+        {
+          "operator": ">",
           "operand": "3"
         }
       ],
       "valueType": "number",
       "value": {
-        "value": "10"
+        "value": "20"
       }
     }
   ],
   "dungeonRules": [
     {
-      "id": "increaseDungeonLength",
-      "parameter": "roomCount",
-      "gameParam": "clearTime",
+      "id": "increaseEnemiesPerRoom",
+      "parameter": "enemiesPerRoom",
+      "gameParam": "characterHealth",
+      "conditions": [
+        {
+          "operator": ">",
+          "operand": "50"
+        }
+      ],
+      "valueType": "range",
+      "value": {
+        "max": "2",
+        "min": "0"
+      }
+    },
+    {
+      "id": "decreaseEnemiesPerRoom",
+      "parameter": "enemiesPerRoom",
+      "gameParam": "characterHealth",
       "conditions": [
         {
           "operator": "<",
-          "operand": "5"
+          "operand": "30"
+        },
+        {
+          "operator": ">",
+          "operand": "0"
         }
       ],
-      "valueType": "number",
+      "valueType": "range",
       "value": {
-        "value": "3"
+        "max": "-1",
+        "min": "0"
+      }
+    },
+    {
+      "id": "increaseItemsPerRoom",
+      "parameter": "ItemsPerRoom",
+      "gameParam": "EnemiesDefeated",
+      "conditions": [
+        {
+          "operator": ">",
+          "operand": "3"
+        }
+      ],
+      "valueType": "range",
+      "value": {
+        "max": "2",
+        "min": "0"
+      }
+    },
+    {
+      "id": "decreaseItemsPerRoom",
+      "parameter": "ItemsPerRoom",
+      "gameParam": "EnemiesDefeated",
+      "conditions": [
+        {
+          "operator": "<",
+          "operand": "3"
+        },
+        {
+          "operator": ">",
+          "operand": "1"
+        }
+      ],
+      "valueType": "range",
+      "value": {
+        "max": "-1",
+        "min": "0"
       }
     }
   ]

@@ -14,6 +14,9 @@ namespace Assets.Combat
         [SerializeField]
         private float _timeToRemoval = 1.5f;
 
+        [SerializeField]
+        private bool _isSpell = false;
+
         private bool _shouldDestroy = false;
         private float _projectileTimedown = 5f;
 
@@ -27,7 +30,7 @@ namespace Assets.Combat
 
         private void Update()
         {
-            if (_shouldDestroy)
+            if (_shouldDestroy && _isSpell)
             {
                 if (_timeToRemoval <= 0)
                 {

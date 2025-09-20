@@ -13,7 +13,7 @@ namespace Assets.DungeonGenerator
         public DungeonTilemap tilemap;
 
         public List<GameObject> enemies;
-        public Boss boss;
+        public Enemy boss;
 
         public SpawnPoint startingPoint;
         public DungeonExit exit;

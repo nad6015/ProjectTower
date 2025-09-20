@@ -1,5 +1,5 @@
 {
-  "params": [
+  "dungeonParams": [
     {
       "parameter": "roomSize",
       "valueType": "vectorRange",
@@ -46,5 +46,9 @@
       "valueType": "number",
       "value": { "value": 3 }
     }
+  ],
+  "gameplayParams": [
+    { "parameter": "itemDropRate", "valueType": "number", "value": { "value": 50 } },
+    { "parameter": "treasureDropRate", "valueType": "number", "value": { "value": 0 } }
   ]
 }

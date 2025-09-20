@@ -82,14 +82,13 @@ namespace Assets.Combat
                 var colliders = Physics.OverlapBox(transform.position + transform.forward, Vector3.one, Quaternion.identity, layerMask);
                 foreach (var item in colliders)
                 {
-                    if (item.TryGetComponent<Fighter>(out var target))
+                    if (item.TryGetComponent<Fighter>(out var target) && target != this)
                     {
                         target.TakeDamage(this);
                     }
                 }
                 _attackCooldown = _attackCooldownDuration;
             }
-
         }
 
         public void Heal(int amountToHeal)

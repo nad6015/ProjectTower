@@ -39,8 +39,11 @@ namespace Assets.Interactables
 
         protected void DisableInteraction()
         {
-            controller.OnInteract -= HandleInteract;
-            controller.HideHUD();
+            if (controller != null)
+            {
+                controller.OnInteract -= HandleInteract;
+                controller.HideHUD();
+            }
         }
 
         protected abstract void HandleInteract(InputAction.CallbackContext context);

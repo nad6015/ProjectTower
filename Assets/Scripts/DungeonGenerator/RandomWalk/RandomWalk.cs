@@ -179,14 +179,6 @@ namespace Assets.DungeonGenerator
             foreach (var room in _roomBounds.Values)
             {
                 room.InstaniateContents(_dungeon);
-                if (room.DungeonNode.Type == RoomType.Start)
-                {
-                    continue;
-                }
-                foreach (var content in room.Contents)
-                {
-                    GameObject.Instantiate(content.Item1, content.Item2, Quaternion.identity, room.transform);
-                }
             }
         }
 

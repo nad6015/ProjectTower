@@ -21,5 +21,10 @@ namespace Assets.DungeonGenerator.Components
                 }
             }
         }
+
+        internal override void InstaniateContents(DungeonRepresentation dungeon)
+        {
+            // NO-OP, Instantiation happens in Populate
+        }
     }
 }

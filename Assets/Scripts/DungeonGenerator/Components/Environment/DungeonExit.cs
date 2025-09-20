@@ -19,6 +19,7 @@ namespace Assets.DungeonGenerator.Components
 
         protected override void HandleInteract(InputAction.CallbackContext context)
         {
+            DisableInteraction();
             DungeonCleared?.Invoke();
         }
     }

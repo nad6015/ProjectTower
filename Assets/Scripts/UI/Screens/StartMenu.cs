@@ -9,9 +9,6 @@ namespace Assets.UI
         [SerializeField]
         private UIDocument _credits;
 
-        [SerializeField]
-        private UIDocument _options;
-
         private VisualElement _root;
         private SceneTransitionManager _gameManager;
 
@@ -25,19 +22,11 @@ namespace Assets.UI
         {
             _root.Q<Button>("NewGame").clicked += NewGameClicked;
             _root.Q<Button>("Credits").clicked += ShowCredits;
-            _root.Q<Button>("Options").clicked += ShowOptions;
         }
         private void OnDisable()
         {
             _root.Q<Button>("NewGame").clicked -= NewGameClicked;
             _root.Q<Button>("Credits").clicked -= ShowCredits;
-            _root.Q<Button>("Options").clicked -= ShowOptions;
-        }
-
-        private void ShowOptions()
-        {
-            _root.visible = false;
-            _options.rootVisualElement.visible = true;
         }
 
         private void ShowCredits()

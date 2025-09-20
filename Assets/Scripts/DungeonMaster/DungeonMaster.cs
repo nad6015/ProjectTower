@@ -10,7 +10,6 @@ using Random = UnityEngine.Random;
 using static Assets.Utilities.GameObjectUtilities;
 using static Assets.DungeonMaster.DungeonMasterDeserializationUtil;
 using Assets.Audio;
-using System.Data;
 
 namespace Assets.DungeonMaster
 {
@@ -69,15 +68,17 @@ namespace Assets.DungeonMaster
             _dungeonAdaption = new();
             _gameplayAdaption = new();
 
+            ReadConfigurationFromFiles();
+
             _dungeonGenerator = FindComponentByTag<DungeonGenerator.DungeonGenerator>("DungeonGenerator");
             _combatSystem = FindComponentByTag<CombatManager>("CombatSystem");
             _sceneTransitionManager = FindComponentByTag<SceneTransitionManager>("SceneManager");
             _audioManager = FindComponentByTag<AudioManager>("AudioManager");
             _resourceSystem = FindComponentByTag<ResourceSystem>("ResourceSystem");
 
-            NextDungeonSection();
+            _resourceSystem.UpdateItemRates(_gameplayParams);
 
-            ReadConfigurationFromFiles();
+            NextDungeonSection();
 
             _combatSystem.EnemyDefeated += OnEnemyDefeated;
             _combatSystem.PlayerDefeated += OnPlayerDefeated;
@@ -158,24 +159,21 @@ namespace Assets.DungeonMaster
         /// </summary>
         private void DoWork()
         {
-
-            Debug.Log("Running dungeon ruleset.");
             foreach (DungeonRule rule in GenerationRuleset.Values)
             {
                 if (rule.ConditionsMet(_dungeonAdaption.FloorStatistics))
                 {
                     Debug.Log("Rule met for " + rule.Id);
                     Debug.Log("Previous value = " + rule.Value().ToString());
-                    
+
                     _dungeonRep.ModifyParameter(rule.Parameter, rule.Value());
-                    
+
                     Debug.Log("New value = " + rule.Value().ToString());
 
                     _dungeonAdaption.Reset(rule.GameParameter);
                 }
             }
 
-            Debug.Log("Running gameplay ruleset.");
             foreach (GameplayRule rule in GameplayRuleset.Values)
             {
                 if (rule.ConditionsMet(_gameplayAdaption.FloorStatistics))

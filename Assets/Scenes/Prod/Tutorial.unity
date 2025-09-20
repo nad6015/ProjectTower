@@ -129,15 +129,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1968421982472447155, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.964384
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1968421982472447155, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.768958
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1968421982472447155, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.883955
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1968421982472447155, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -197,7 +197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7751301447746594715, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
       propertyPath: <MaxFloors>k__BackingField
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7751301447746594715, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
       propertyPath: _parameterFiles.Array.size
@@ -209,7 +209,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: b2c37205087410b4a8080703ea44b20e, type: 2}
     - target: {fileID: 7751301447746594715, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
       propertyPath: <FloorsPerSection>k__BackingField
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7822902449526581457, guid: af2ef68cc740aaf48872ff83ecb0131b, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag

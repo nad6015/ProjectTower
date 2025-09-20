@@ -12,12 +12,12 @@ namespace Assets.DungeonGenerator.Components
         internal override void Populate(DungeonRepresentation dungeon)
         {
 
-            door = LockClosestDoor();
+            door = FindClosestDoor();
 
             base.Populate(dungeon);
         }
 
-        public override void InstaniateContents(DungeonRepresentation dungeon)
+        internal override void InstaniateContents(DungeonRepresentation dungeon)
         {
             var dungeonRooms = dungeon.GetConstructedDungeon().DungeonRooms;
 

@@ -28,8 +28,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 9077994093097649787}
   - {fileID: 2171203410833716830}
@@ -88,6 +88,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5639049094493027808}
   - component: {fileID: 7994648521297478182}
+  - component: {fileID: 7058538840177883482}
   m_Layer: 9
   m_Name: AlchemyTreasureChest
   m_TagString: Item
@@ -123,6 +124,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66cf52c6938ee6b46898dd264ec1e691, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &7058538840177883482
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2374991623033447861}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.5, y: 1, z: 1.5}
+  m_Center: {x: 0, y: 0.5, z: -0.3}
 --- !u!1001 &2702525640585501910
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -131,6 +153,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5617737623275842944}
     m_Modifications:
+    - target: {fileID: 5202189299571368386, guid: ceddce4fa21192b4894d7164957a9fa9, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: bee48461d9237144ea68de562c43aae2, type: 2}
     - target: {fileID: 5994607674021740567, guid: ceddce4fa21192b4894d7164957a9fa9, type: 3}
       propertyPath: m_Name
       value: 05_Vault_01_Chest_Bottom#1
@@ -237,6 +263,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 05_Vault_01_Chest_Top#1
       objectReference: {fileID: 0}
+    - target: {fileID: 8174332891088253881, guid: 7bc40f2a5b27761468e228e387db9d0e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: bee48461d9237144ea68de562c43aae2, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

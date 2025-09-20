@@ -51,6 +51,10 @@ namespace Assets.Combat
             {
                 Vector3 pos = FindComponentByTag<Transform>("Player").position;
                 pos.y = 0.1f;
+                if (_targetIndicator != null)
+                {
+                    Destroy(_targetIndicator);
+                }
                 _targetIndicator = GameObject.Instantiate(gameObj, pos, Quaternion.identity);
             }
         }

@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4864f590e6b94064abe7cbb17ca8fd52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackAudio: {fileID: 8300000, guid: af8183a063315f4428b15dc5f386c27b, type: 3}
+  _attackAudio: {fileID: 8300000, guid: 6e73cd9a6e031c04c96bc3b19497252b, type: 3}
   _footstepAudio: {fileID: 8300000, guid: 85016e0f2b01da248b9663dd49a161b0, type: 3}
   _vocalizationCooldownMax: 10
   _vocalizationAudio: {fileID: 8300000, guid: 4efbc380fa09d42a58aa2525a076ea31, type: 3}

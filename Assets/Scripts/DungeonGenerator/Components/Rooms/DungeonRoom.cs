@@ -6,7 +6,6 @@ using Random = UnityEngine.Random;
 using static Assets.Utilities.GameObjectUtilities;
 using Assets.DungeonGenerator.Components.Rooms;
 using Assets.DungeonGenerator.DataStructures;
-using Assets.Combat;
 
 namespace Assets.DungeonGenerator.Components
 {
@@ -16,10 +15,10 @@ namespace Assets.DungeonGenerator.Components
         public List<Tuple<GameObject, Vector3>> Contents { get; private set; }
         public DungeonNode DungeonNode { get; private set; }
         public RoomType Type { get { return DungeonNode.Type; } }
+        public Bounds SafeBounds { get; private set; } // Where in the room is safe to place items or traverse
 
         protected List<GameObject> _walls;
         protected GameObject _floor;
-        private Bounds _safeArea; // Where in the room is safe to place items
 
         private void Awake()
         {
@@ -71,7 +70,13 @@ namespace Assets.DungeonGenerator.Components
             }
         }
 
-        public virtual void InstaniateContents(DungeonRepresentation dungeon) { }
+        internal virtual void InstaniateContents(DungeonRepresentation dungeon) 
+        {
+            foreach (var content in Contents)
+            {
+                GameObject.Instantiate(content.Item1, content.Item2, Quaternion.identity, transform);
+            }
+        }
 
         public static DungeonRoom Create(DungeonNode node)
         {
@@ -109,6 +114,11 @@ namespace Assets.DungeonGenerator.Components
                     dungeonRoom = NewGameObjectWithComponent<BossRoom>(name);
                     break;
                 }
+                case RoomType.Treasure:
+                {
+                    dungeonRoom = NewGameObjectWithComponent<TreasureRoom>(name);
+                    break;
+                }
                 default:
                 {
                     dungeonRoom = NewGameObjectWithComponent<DungeonRoom>(name);
@@ -117,8 +127,8 @@ namespace Assets.DungeonGenerator.Components
             }
 
             // Setup safe area for later item placement
-            dungeonRoom._safeArea = new Bounds(node.Bounds.center, node.Bounds.size);
-            dungeonRoom._safeArea.Expand(-DungeonTilemap.TileUnit * 2);
+            dungeonRoom.SafeBounds = new Bounds(node.Bounds.center, node.Bounds.size);
+            dungeonRoom.SafeBounds.Expand(-DungeonTilemap.TileUnit * 2);
             dungeonRoom.DungeonNode = node;
             return dungeonRoom;
         }
@@ -141,7 +151,7 @@ namespace Assets.DungeonGenerator.Components
                 for (int i = 0; i < count; i++)
                 {
                     GameObject enemy = enemies.TakeItem();
-                    Contents.Add(new(enemy, enemy.transform.position + PointUtils.RandomPointWithinBounds(_safeArea)));
+                    Contents.Add(new(enemy, enemy.transform.position + PointUtils.RandomPointWithinBounds(SafeBounds)));
                 }
             }
         }
@@ -160,11 +170,11 @@ namespace Assets.DungeonGenerator.Components
                 }
                 Vector3 pos = prop.transform.position;
 
-                Contents.Add(new(prop.gameObject, pos + PointUtils.RandomPointWithinBounds(_safeArea)));
+                Contents.Add(new(prop.gameObject, pos + PointUtils.RandomPointWithinBounds(SafeBounds)));
             }
         }
 
-        protected DungeonDoor LockClosestDoor()
+        protected DungeonDoor FindClosestDoor()
         {
             DungeonNode lockedRoom = null;
 
@@ -186,7 +196,7 @@ namespace Assets.DungeonGenerator.Components
             }
             else
             {
-                lockedRoom = DungeonNode.LinkedNodes[0];
+                lockedRoom = DungeonNode.LinkedNodes[1];
             }
 
             DungeonCorridor corridor = null;
@@ -199,7 +209,7 @@ namespace Assets.DungeonGenerator.Components
                 }
             }
 
-            DungeonDoor door = corridor.Doors.Item1;
+            DungeonDoor door = corridor.Doors.Item2;
 
             return door;
         }

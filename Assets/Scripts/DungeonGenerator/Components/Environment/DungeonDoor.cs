@@ -1,5 +1,6 @@
 ﻿using Assets.Interactables;
 using Assets.PlayerCharacter;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -19,7 +20,7 @@ namespace Assets.DungeonGenerator.Components
             prompt = "Unlock";
         }
 
-        public DoorKey LockDoor(DoorKey doorKey)
+        internal DoorKey LockDoor(DoorKey doorKey)
         {
             _doorKey = doorKey;
             _locked = true;
@@ -28,17 +29,28 @@ namespace Assets.DungeonGenerator.Components
             return _doorKey;
         }
 
+        internal void LockDoor()
+        {
+            _locked = true;
+            _animator.SetBool("Locked", true);
+        }
+
         protected override void HandleInteract(InputAction.CallbackContext context)
         {
             PlayerInventory playerInventory = controller.GetComponent<PlayerInventory>();
             if (_locked && playerInventory.Contains(_doorKey))
             {
-                _locked = false;
-                _animator.SetBool("Locked", _locked);
-                DisableInteraction();
-                prompt = "";
-                playerInventory.Remove(_doorKey);
+                Unlock();
             }
+            playerInventory.Remove(_doorKey);
+        }
+
+        internal void Unlock()
+        {
+            _locked = false;
+            _animator.SetBool("Locked", _locked);
+            DisableInteraction();
+            prompt = "";
         }
     }
 }

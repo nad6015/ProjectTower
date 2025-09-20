@@ -50,6 +50,7 @@ MonoBehaviour:
   _projectileSpeedMultipler: 1.5
   _dmg: 2
   _timeToRemoval: 1.5
+  _isSpell: 1
 --- !u!65 &7381631555841415142
 BoxCollider:
   m_ObjectHideFlags: 0

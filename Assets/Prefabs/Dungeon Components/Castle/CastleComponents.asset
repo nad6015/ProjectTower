@@ -20,7 +20,7 @@ MonoBehaviour:
   - {fileID: 4729449741551381305, guid: 2cccbf115130abc499c098e9cd288c6f, type: 3}
   - {fileID: 4729449741551381305, guid: 2cccbf115130abc499c098e9cd288c6f, type: 3}
   - {fileID: 4729449741551381305, guid: 2cccbf115130abc499c098e9cd288c6f, type: 3}
-  boss: {fileID: 5800438343671669025, guid: 0f475ae1ab2ae864f91f9122c861ce73, type: 3}
+  boss: {fileID: 4086765775815744715, guid: 28631c8fa46ecf741a65002d3b2e0edf, type: 3}
   startingPoint: {fileID: 7254044432296773021, guid: 2913411542ccab74385f7e4ac0b345ec, type: 3}
   exit: {fileID: 8684044341818389683, guid: 20f557f5c48279b4d9ec43df8dfe49e2, type: 3}
   doorKey: {fileID: 7755368289592254985, guid: 4dd9073c733399a4084427390387fc87, type: 3}

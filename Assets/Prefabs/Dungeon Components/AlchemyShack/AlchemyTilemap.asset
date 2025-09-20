@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c1e554144999d74abe38441adf88e74, type: 3}
   m_Name: AlchemyTilemap
   m_EditorClassIdentifier: 
-  wallTiles: []
-  floorTiles:
+  wallTiles:
   - {fileID: 3030302167426459883, guid: 98c0713b9befdff4d91f59d9c0277236, type: 3}
   - {fileID: 3030302167426459883, guid: 98c0713b9befdff4d91f59d9c0277236, type: 3}
   - {fileID: 3030302167426459883, guid: 98c0713b9befdff4d91f59d9c0277236, type: 3}
@@ -27,24 +26,37 @@ MonoBehaviour:
   - {fileID: 3030302167426459883, guid: 98c0713b9befdff4d91f59d9c0277236, type: 3}
   - {fileID: 3030302167426459883, guid: 19d9594ad57813541ba1296d7a059146, type: 3}
   - {fileID: 3030302167426459883, guid: d29e0aa8e810c4e4688a1c19a14af162, type: 3}
-  - {fileID: 3030302167426459883, guid: 19d9594ad57813541ba1296d7a059146, type: 3}
-  propTiles:
+  - {fileID: 3030302167426459883, guid: 98c0713b9befdff4d91f59d9c0277236, type: 3}
+  - {fileID: 3030302167426459883, guid: 98c0713b9befdff4d91f59d9c0277236, type: 3}
+  - {fileID: 3030302167426459883, guid: 98c0713b9befdff4d91f59d9c0277236, type: 3}
+  - {fileID: 3030302167426459883, guid: 98c0713b9befdff4d91f59d9c0277236, type: 3}
+  - {fileID: 3030302167426459883, guid: 98c0713b9befdff4d91f59d9c0277236, type: 3}
+  - {fileID: 3030302167426459883, guid: 98c0713b9befdff4d91f59d9c0277236, type: 3}
+  - {fileID: 3030302167426459883, guid: 98c0713b9befdff4d91f59d9c0277236, type: 3}
+  - {fileID: 3030302167426459883, guid: 98c0713b9befdff4d91f59d9c0277236, type: 3}
+  - {fileID: 3030302167426459883, guid: 98c0713b9befdff4d91f59d9c0277236, type: 3}
+  - {fileID: 3030302167426459883, guid: 98c0713b9befdff4d91f59d9c0277236, type: 3}
+  - {fileID: 3030302167426459883, guid: 98c0713b9befdff4d91f59d9c0277236, type: 3}
+  - {fileID: 3030302167426459883, guid: 98c0713b9befdff4d91f59d9c0277236, type: 3}
+  floorTiles:
   - {fileID: 8031560325989942358, guid: ac9cda9a6ba93ef4f953c01e90c4f665, type: 3}
   - {fileID: 8031560325989942358, guid: ac9cda9a6ba93ef4f953c01e90c4f665, type: 3}
   - {fileID: 8031560325989942358, guid: ac9cda9a6ba93ef4f953c01e90c4f665, type: 3}
   - {fileID: 8031560325989942358, guid: ac9cda9a6ba93ef4f953c01e90c4f665, type: 3}
   - {fileID: 8031560325989942358, guid: ac9cda9a6ba93ef4f953c01e90c4f665, type: 3}
+  - {fileID: 8031560325989942358, guid: e0feae35b80c4c5419eeaa3675d29114, type: 3}
   - {fileID: 8031560325989942358, guid: ac9cda9a6ba93ef4f953c01e90c4f665, type: 3}
   - {fileID: 8031560325989942358, guid: ac9cda9a6ba93ef4f953c01e90c4f665, type: 3}
   - {fileID: 8031560325989942358, guid: ac9cda9a6ba93ef4f953c01e90c4f665, type: 3}
   - {fileID: 8031560325989942358, guid: ac9cda9a6ba93ef4f953c01e90c4f665, type: 3}
   - {fileID: 8031560325989942358, guid: ac9cda9a6ba93ef4f953c01e90c4f665, type: 3}
+  - {fileID: 8031560325989942358, guid: 991250a3ec2770d4faac07eb6e3e90b4, type: 3}
   - {fileID: 8031560325989942358, guid: ac9cda9a6ba93ef4f953c01e90c4f665, type: 3}
   - {fileID: 8031560325989942358, guid: e0feae35b80c4c5419eeaa3675d29114, type: 3}
   - {fileID: 8031560325989942358, guid: 0a16b4a50c6e31649a5cb848d5f3eebc, type: 3}
   - {fileID: 8031560325989942358, guid: 991250a3ec2770d4faac07eb6e3e90b4, type: 3}
-  - {fileID: 8031560325989942358, guid: e0feae35b80c4c5419eeaa3675d29114, type: 3}
-  - {fileID: 8031560325989942358, guid: 0a16b4a50c6e31649a5cb848d5f3eebc, type: 3}
+  propTiles:
+  - {fileID: 2411030350727224445, guid: 202a7b3f3a5be6a4c8403d81fa9b510e, type: 3}
   roomCorner: {fileID: 9162778129440914531, guid: 84b7712e34cd60140ab362275f163b55, type: 3}
-  corridorDoor: {fileID: 1804593036432212441, guid: cbfa40dc0f3f3444f828c4bacfb4e779, type: 3}
-  mainCameraColor: {r: 0.2509804, g: 0.19607845, b: 0.17254902, a: 0}
+  corridorDoor: {fileID: 1804593036432212441, guid: 59e2127d05b281946b95db906d600c77, type: 3}
+  mainCameraColor: {r: 0.1137255, g: 0.08627451, b: 0.10588236, a: 0}

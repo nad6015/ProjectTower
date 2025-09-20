@@ -34,7 +34,7 @@ public partial class RandomPatrolAction : Action
 
         _navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
 
-        _patrolPoint = PointUtils.RandomPointWithinBounds(room.Bounds);
+        _patrolPoint = PointUtils.RandomPointWithinBounds(room.SafeBounds);
         _navMeshAgent.destination = _patrolPoint;
        
         return Status.Running;

@@ -1,24 +1,53 @@
-Lowpoly Medieval Weapon Pack - VertexModeler [https://assetstore.unity.com/packages/3d/props/weapons/lowpoly-medieval-weapon-pack-291374]
+3D Dungeon Lowpoly Pack - CatBorg Studio [https://assetstore.unity.com/packages/p/3d-dungeon-lowpoly-pack-231265]
+
+Bow and Hammer Sound Effects - MGWSoundDesign [https://assetstore.unity.com/packages/audio/sound-fx/weapons/bow-and-hammer-sound-effects-163948]
+
+Cartoon FX Remaster Free - Jean Moreno [https://assetstore.unity.com/packages/p/cartoon-fx-remaster-free-109565]
+
+FREE Low Poly Human - RPG Character - Blink [https://assetstore.unity.com/packages/p/free-low-poly-human-rpg-character-219979]
+
+Free pack of medieval weapons - Osmanov [https://assetstore.unity.com/packages/p/free-pack-of-medieval-weapons-136607]
+
+Game Input Controller Icons Free - Amanz [https://assetstore.unity.com/packages/p/game-input-controller-icons-free-285953]
+
+Hats Pack | URP - Unity Technologies [https://assetstore.unity.com/packages/3d/hats-pack-urp-163011]
+
+Human Dance Animations FREE - Kevin Iglesias [https://assetstore.unity.com/packages/3d/animations/human-dance-animations-free-161313]
+
 Lowpoly Magician RIO - VertexModeler [https://assetstore.unity.com/packages/3d/characters/humanoids/lowpoly-magician-rio-288942]
 
-Skeleton - SazenGames [TODO]
+Lowpoly Medieval Weapon Pack - VertexModeler [https://assetstore.unity.com/packages/3d/props/weapons/lowpoly-medieval-weapon-pack-291374]
 
-10 Impact/Shield Blocks - StarNinja, OpenGameArt [https://opengameart.org/users/starninjas]
+Lowpoly MushroomMan Character - VertexModeler [https://assetstore.unity.com/packages/3d/characters/humanoids/lowpoly-mushroomman-character-287820]
 
-42 "Monster 2 RPG" Music Tracks - TroutSneeze [https://opengameart.org/content/42-monster-rpg-2-music-tracks] (CC0)
+Lowpoly training dummy  - iltaen [https://assetstore.unity.com/packages/3d/props/lowpoly-training-dummy-202311]
 
-Swish - Bamboo Stick Weapon Swhoshes - qubodup [https://opengameart.org/content/swish-bamboo-stick-weapon-swhoshes]
+Medieval Castle - Modular - Advance Studios [https://assetstore.unity.com/packages/p/medieval-castle-modular-282498]
 
-3D Dungeon Lowpoly Pack - 
+Modular Fantasy knight character - Anton Puzanov [https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/modular-fantasy-knight-character-276754]
+
+Monster Low Poly - Khornes [https://assetstore.unity.com/packages/3d/characters/humanoids/monster-low-poly-280220]
 
 Monster Roars - Audio Pack - VoiceBosch [https://assetstore.unity.com/packages/p/monster-roars-audio-pack-301118]
 
-Training_Dummy  - 
+RPG Character Mecanim Animation Pack FREE - Explosive [https://assetstore.unity.com/packages/3d/animations/rpg-character-mecanim-animation-pack-free-65284]
+
+Skybox Series Free - Avionx [https://assetstore.unity.com/packages/2d/textures-materials/sky/skybox-series-free-103633]
+
+Starter Assets: Character Controllers | URP - Unity Technologies [https://assetstore.unity.com/packages/essentials/starter-assets-character-controllers-urp-267961]
+
+Stylized Low Poly Skeleton - SazenGames [https://assetstore.unity.com/packages/3d/characters/humanoids/fantasy/stylized-low-poly-skeleton-306857]
+
+Zombie Sound Pack - Free Version - Catastic [https://assetstore.unity.com/packages/p/zombie-sound-pack-free-version-124430]
+
+10 Impact/Shield Blocks - StarNinja [https://opengameart.org/users/starninjas] (CC0)
+
+42 "Monster 2 RPG" Music Tracks - TroutSneeze [https://opengameart.org/content/42-monster-rpg-2-music-tracks] (CC0)
+
+Swish - Bamboo Stick Weapon Swhoshes - qubodup [https://opengameart.org/content/swish-bamboo-stick-weapon-swhoshes] (CC0)
 
 Breaking Bottle  - spookymodem [https://opengameart.org/content/breaking-bottle] (CC-BY 3.0)
 
 5 break, crunch impacts - Independent.nu [https://opengameart.org/content/5-break-crunch-impacts] (CC0)
 
 Magic SFX Sample - ViRiX [https://opengameart.org/content/magic-sfx-sample] (CC-BY 3.0)
-
-Monster - 
