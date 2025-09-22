@@ -43,8 +43,8 @@ public class DungeonAdaptionTests
 
         Assert.That(dungeonMaster.State == DungeonMasterState.Running);
         Assert.That(dungeonMaster.CurrentFloor == 2);
+        Debug.Log(GameObject.FindObjectsByType<DestructibleItem>(FindObjectsSortMode.None).Length);
         Assert.That(GameObject.FindObjectsByType<DestructibleItem>(FindObjectsSortMode.None).Length >= 10);
-
     }
 
     [UnityTest]

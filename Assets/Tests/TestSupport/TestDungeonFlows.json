@@ -3,16 +3,8 @@
     "baseDungeon": ["start", "explore", "combat", "explore", "end"],
     "flows": [
       {
-        "matches": ["restPoint", "explore"],
-        "replacer": ["explore", "combat"]
-      },
-      {
         "matches": ["explore", "combat"],
-        "replacer": ["combat", "explore", "combat", "treasure"]
-      },
-      {
-        "matches": ["combat", "explore"],
-        "replacer": ["explore", "restPoint"]
+        "replacer": ["combat", "explore", "combat"]
       }
     ]
   },
@@ -21,11 +13,7 @@
     "flows": [
       {
         "matches": ["combat", "lock"],
-        "replacer": ["lock", "combat", "combat", "restPoint"]
-      },
-      {
-        "matches": ["lock"],
-        "replacer": ["lock", "treasure", "combat"]
+        "replacer": ["combat", "lock", "combat", "restPoint"]
       },
       {
         "matches": ["combat"],
@@ -38,7 +26,7 @@
     "flows": [
       {
         "matches": ["combat"],
-        "replacer": ["restPoint", "treasure", "combat", "explore"]
+        "replacer": ["restPoint", "combat", "explore"]
       }
     ]
   }

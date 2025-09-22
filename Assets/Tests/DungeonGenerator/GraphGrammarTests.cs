@@ -24,7 +24,7 @@ public class GraphGrammarTests
     [UnityTest]
     public IEnumerator ShouldLoadBaseDungeonWhenRoomCountMatches()
     {
-        yield return TestSetUp(3);
+        yield return TestSetUp();
         DungeonLayout rooms = dungeon.Layout;
         Assert.That(rooms.Count == startingRoomCount);
 
@@ -43,7 +43,7 @@ public class GraphGrammarTests
         Assert.That(firstNode.Type == RoomType.Start);
         Assert.That(secondNode.Type == RoomType.Explore);
         Assert.That(thirdNode.Type == RoomType.Combat);
-        Assert.That(fourthNode.Type == RoomType.Treasure);
+        Assert.That(fourthNode.Type == RoomType.Explore);
         Assert.That(fifthNode.Type == RoomType.End);
 
         Assert.That(rooms.FirstNode.Type == RoomType.Start);
@@ -54,28 +54,29 @@ public class GraphGrammarTests
     [UnityTest]
     public IEnumerator ShouldGenerateDungeonFromFlows()
     {
-        yield return TestSetUp(5);
+        yield return TestSetUp(1);
 
         DungeonLayout rooms = dungeon.Layout;
         Assert.That(rooms.Count == startingRoomCount);
 
         algorithm.GenerateDungeon(dungeon);
 
-        rooms = dungeon.Layout;
+        Assert.That(rooms.Count == 6);
 
-        Assert.That(rooms.Count == 5);
 
         DungeonNode firstNode = rooms.FirstNode;
         DungeonNode secondNode = rooms[firstNode][0];
         DungeonNode thirdNode = rooms[secondNode][1];
         DungeonNode fourthNode = rooms[thirdNode][1];
-        DungeonNode fifthNode = rooms[fourthNode][1];
+        DungeonNode fifthNode = rooms[thirdNode][2];
+        DungeonNode sixthNode = rooms[fifthNode][1];
 
         Assert.That(firstNode.Type == RoomType.Start);
-        Assert.That(secondNode.Type == RoomType.Explore);
-        Assert.That(thirdNode.Type == RoomType.Combat);
-        Assert.That(fourthNode.Type == RoomType.Treasure);
-        Assert.That(fifthNode.Type == RoomType.End);
+        Assert.That(secondNode.Type == RoomType.Combat);
+        Assert.That(thirdNode.Type == RoomType.Explore);
+        Assert.That(fourthNode.Type == RoomType.Explore);
+        Assert.That(fifthNode.Type == RoomType.Combat);
+        Assert.That(sixthNode.Type == RoomType.End);
 
         Assert.That(rooms.FirstNode.Type == RoomType.Start);
         Assert.That(rooms.LastNode.Type == RoomType.End);
@@ -97,7 +98,7 @@ public class GraphGrammarTests
         Assert.That(rooms.IsConnected());
     }
 
-    private IEnumerator TestSetUp(int roomCount = 2)
+    private IEnumerator TestSetUp(int roomCount = 0)
     {
         ParameterSupport support = GameObject.FindGameObjectWithTag("TestSupport").GetComponent<ParameterSupport>();
         TextAsset paramFile = support.ParamFile;
@@ -105,7 +106,9 @@ public class GraphGrammarTests
 
         var parameters = DungeonMasterDeserializationUtil.BuildDungeonParameters(JObject.Parse(paramFile.text));
         var config = DungeonMasterDeserializationUtil.ReadGeneratorConfigFromJson(configFile);
-        
+
+        Debug.Log(config.BaseDungeons[DungeonMission.ExploreFloor].Count);
+
         dungeon = new(config.BaseDungeons[DungeonMission.ExploreFloor], config.DungeonFlows[DungeonMission.ExploreFloor], null, parameters);
         dungeon.ModifyParameter(DungeonParameter.RoomCount,
             new ValueRepresentation(ValueType.Number, new() { { "value", roomCount.ToString() } }));

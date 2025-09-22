@@ -10,7 +10,6 @@ using static UnityEngine.GameObject;
 using static Assets.Utilities.GameObjectUtilities;
 using Assets.PlayerCharacter;
 using Tests.Support;
-using Assets.PlayerCharacter.Resources;
 using Assets.Interactables;
 using Assets.DungeonGenerator.Components;
 
@@ -36,7 +35,7 @@ public class DungeonMasterTests
         Assert.That(dungeonMaster.CurrentFloor == 1);
 
         Assert.NotNull(dungeonGenerator);
-        Assert.That(dungeonGenerator.transform.childCount >= 10); // There should be at least 5 rooms + 5 corridors
+        Assert.That(dungeonGenerator.transform.childCount >= 9); // There should be at least 5 rooms + 4 corridors
 
         Assert.NotNull(FindGameObjectWithTag("Player"));
 
@@ -108,13 +107,16 @@ public class DungeonMasterTests
 
         DestructibleItem item = GameObject.FindFirstObjectByType<DestructibleItem>();
         item.transform.SetPositionAndRotation(new(player.transform.position.x, 1, player.transform.position.z + 1), Quaternion.identity);
+        player.GetComponent<TestPlayableFighter>().DamageSelf(3); // Restoration drop rate should increase by 100
         player.GetComponent<TestPlayableFighter>().Attack();
 
         yield return new WaitForSeconds(1f);
 
-        Assert.That(GameObject.FindFirstObjectByType<PickupItem>() == null);
-        GameObject.Destroy(item);
-        player.GetComponent<TestPlayableFighter>().DamageSelf(3); // Restoration drop rate should increase by 100
+        PickupItem healingItem = GameObject.FindFirstObjectByType<PickupItem>();
+        Assert.That(healingItem != null);
+        GameObject.Destroy(healingItem);
+        player.GetComponent<TestPlayableFighter>().Heal(5); // Restoration drop rate should decrease by 100
+
         yield return new WaitForSeconds(1f);
 
         DestructibleItem item2 = GameObject.FindFirstObjectByType<DestructibleItem>();
@@ -122,8 +124,8 @@ public class DungeonMasterTests
         player.GetComponent<TestPlayableFighter>().Attack();
         yield return new WaitForSeconds(1f);
 
-
-        Assert.That(GameObject.FindFirstObjectByType<PickupItem>() != null);
+        healingItem = GameObject.FindFirstObjectByType<PickupItem>();
+        Assert.That(healingItem == null);
     }
 
     [UnityTest]
@@ -135,7 +137,7 @@ public class DungeonMasterTests
 
         Assert.That(dungeonMaster.State == DungeonMasterState.Running);
 
-        player.GetComponent<TestPlayableFighter>().DefeatRandomEnemy();
+        player.GetComponent<TestPlayableFighter>().Heal(5);
 
         yield return new WaitForSeconds(1f);
 

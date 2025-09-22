@@ -5,11 +5,11 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
+using static Assets.Utilities.GameObjectUtilities;
 
 public class PlayerCameraTests : InputTestFixture
 {
-    private readonly GameObject _playerObj = Resources.Load<GameObject>("Player");
-    private GameObject _player;
+    private Transform _player;
     private PlayerCamera _camera;
     private Keyboard _keyboard;
     private Mouse _mouse;
@@ -31,7 +31,7 @@ public class PlayerCameraTests : InputTestFixture
         yield return TestSetup();
 
         Vector3 camPos = _camera.transform.position;
-        Vector3 playerPos = _player.transform.position;
+        Vector3 playerPos = _player.position;
 
         Vector3 dir = (playerPos - camPos).normalized;
         float distY = playerPos.z - camPos.z;
@@ -49,7 +49,7 @@ public class PlayerCameraTests : InputTestFixture
         yield return TestSetup();
 
         Vector3 camPos = _camera.transform.position;
-        Vector3 playerPos = _player.transform.position;
+        Vector3 playerPos = _player.position;
         
         Vector3 dir = (playerPos - camPos).normalized;
 
@@ -64,9 +64,9 @@ public class PlayerCameraTests : InputTestFixture
 
         // Asserts that the player has moved
         
-        Assert.That(_player.transform.position != playerPos);
+        Assert.That(_player.position != playerPos);
         
-        playerPos = _player.transform.position;
+        playerPos = _player.position;
         camPos = _camera.transform.position;
 
         distY = playerPos.z - camPos.z;
@@ -83,7 +83,7 @@ public class PlayerCameraTests : InputTestFixture
 
     private IEnumerator TestSetup()
     {
-        _player = GameObject.Instantiate(_playerObj, new Vector3(0, 1), Quaternion.identity);
+        _player = FindComponentByTag<Transform>("Player");
         _camera = Camera.main.GetComponent<PlayerCamera>();
         yield return new WaitForSeconds(1);
     }

@@ -13,28 +13,12 @@ namespace Assets.DungeonGenerator.Components
         public DungeonLayout Layout { get; private set; }
         public DungeonComponents Components { get; private set; }
         public List<FlowPattern> Flows { get; private set; }
-        public int Count { get { return _parameters.Count; } }
+        public int Count { get { return Parameters.Count; } }
 
-        private readonly Dictionary<DungeonParameter, ValueRepresentation> _parameters;
+        public Dictionary<DungeonParameter, ValueRepresentation> Parameters { get; private set; }
         private Dungeon _dungeon;
 
-        /// <summary>
-        /// Constructs dungeon parameters from a JSON file.
-        /// </summary>
-        /// <param name="parametersFile">A JSON file with the needed parameters within.</param>
-        public DungeonRepresentation(TextAsset file, DungeonComponents components)
-        {
-            Layout = new();
-            _dungeon = new Dungeon();
-            Flows = new List<FlowPattern>();
-            _parameters = new Dictionary<DungeonParameter, ValueRepresentation>();
-            Components = components;
-
-            JObject json = JObject.Parse(file.text);
-         
-        }
-
-        public DungeonRepresentation(
+         public DungeonRepresentation(
                 DungeonLayout dungeonLayout,
                 List<FlowPattern> flowPatterns,
                 DungeonComponents components,
@@ -43,18 +27,18 @@ namespace Assets.DungeonGenerator.Components
             Layout = dungeonLayout;
             Flows = flowPatterns;
             Components = components;
-            _parameters = parameters;
+            Parameters = parameters;
             _dungeon = new Dungeon();
         }
 
         public T Parameter<T>(DungeonParameter dungeonParams)
         {
-            return _parameters[dungeonParams].Value<T>();
+            return Parameters[dungeonParams].Value<T>();
         }
 
         public void ModifyParameter(DungeonParameter paramName, ValueRepresentation value)
         {
-            _parameters[paramName].Modify(value);
+            Parameters[paramName].Modify(value);
         }
 
         public void SetRooms(DungeonLayout dungeonRooms)
@@ -79,7 +63,7 @@ namespace Assets.DungeonGenerator.Components
 
         internal int RandomItemCount()
         {
-            Range<int> itemCountRange = _parameters[DungeonParameter.ItemsPerRoom].Value<Range<int>>();
+            Range<int> itemCountRange = Parameters[DungeonParameter.ItemsPerRoom].Value<Range<int>>();
 
             return UnityEngine.Random.Range(itemCountRange.min, itemCountRange.max);
         }

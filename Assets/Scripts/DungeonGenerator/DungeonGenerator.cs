@@ -6,11 +6,6 @@ namespace Assets.DungeonGenerator
 {
     public class DungeonGenerator : MonoBehaviour
     {
-        private void Start()
-        {
-
-        }
-
         /// <summary>
         /// Generates a new dungeon using the provided dungeon parameters.
         /// </summary>

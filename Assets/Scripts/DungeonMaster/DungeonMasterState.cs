@@ -1,7 +1,7 @@
 ﻿namespace Assets.DungeonMaster
 {
     /// <summary>
-    /// TODO
+    /// Representation of the DungeonMaster's states.
     /// </summary>
     public enum DungeonMasterState
     {

@@ -164,11 +164,11 @@ namespace Assets.DungeonMaster
                 if (rule.ConditionsMet(_dungeonAdaption.FloorStatistics))
                 {
                     Debug.Log("Rule met for " + rule.Id);
-                    Debug.Log("Previous value = " + rule.Value().ToString());
+                    Debug.Log("Previous value = " + _dungeonRep.Parameters[rule.Parameter].ToString());
 
                     _dungeonRep.ModifyParameter(rule.Parameter, rule.Value());
 
-                    Debug.Log("New value = " + rule.Value().ToString());
+                    Debug.Log("New value = " + _dungeonRep.Parameters[rule.Parameter].ToString());
 
                     _dungeonAdaption.Reset(rule.GameParameter);
                 }
@@ -179,11 +179,11 @@ namespace Assets.DungeonMaster
                 if (rule.ConditionsMet(_gameplayAdaption.FloorStatistics))
                 {
                     Debug.Log("Rule met for " + rule.Id);
-                    Debug.Log("Previous value = " + rule.Value().ToString());
+                    Debug.Log("Previous value = " + _gameplayParams[rule.Parameter].ToString());
 
                     _gameplayParams[rule.Parameter].Modify(rule.Value());
 
-                    Debug.Log("New value = " + rule.Value().ToString());
+                    Debug.Log("New value = " + _gameplayParams[rule.Parameter].ToString());
 
                     _resourceSystem.UpdateItemRates(_gameplayParams);
                     _gameplayAdaption.Reset(rule.GameParameter);

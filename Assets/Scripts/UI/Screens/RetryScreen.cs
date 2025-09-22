@@ -17,7 +17,7 @@ public class RetryScreen : MonoBehaviour
     {
         _root.Q<Button>("MainMenu").clicked += GoToStartScreen;
         _root.Q<Button>("TryAgainNoTutorial").clicked += GoToTowerB1;
-        _root.Q<Button>("MainMenu").clicked += GoToTutorial;
+        _root.Q<Button>("TryAgainWithTutorial").clicked += GoToTutorial;
     }
 
     private void GoToTutorial()

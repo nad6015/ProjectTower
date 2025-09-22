@@ -148,9 +148,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb2ac1f1fd493184c8ece97521b2b64b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ParamFile>k__BackingField: {fileID: 4900000, guid: c3e3dea475eb7654986c7e1b39eefb04, type: 3}
-  <ConfigFile>k__BackingField: {fileID: 4900000, guid: 6ff5a85fbb2d20642acfe7728e06203c, type: 3}
-  <RulesetFile>k__BackingField: {fileID: 4900000, guid: f6d4d6e88bf081f4c9d7eb7460577577, type: 3}
+  <ParamFile>k__BackingField: {fileID: 4900000, guid: b01790cb2dbe8844b8360c7a9caf599c, type: 3}
+  <ConfigFile>k__BackingField: {fileID: 4900000, guid: 9d16550c7e575b24486eff7c07d32e95, type: 3}
+  <RulesetFile>k__BackingField: {fileID: 4900000, guid: feec4b49b06160646986a10f5e9f42b8, type: 3}
+  <Components>k__BackingField: {fileID: 11400000, guid: 60d4a2d7729581b43aa719c06f097a6b, type: 2}
 --- !u!4 &751958449
 Transform:
   m_ObjectHideFlags: 0

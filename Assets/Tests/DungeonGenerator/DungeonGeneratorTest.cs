@@ -24,8 +24,8 @@ public class DungeonGeneratorTest
         //  Main camera
         //  At least one Directional Light
         //  The game systems prefab
+        yield return new WaitForSeconds(1f);
         Assert.That(SceneManager.GetActiveScene().rootCount == 4);
-        yield return null;
     }
 
     [UnityTest]
@@ -34,7 +34,7 @@ public class DungeonGeneratorTest
         DungeonGenerator dungeonGenerator = FindComponentByTag<DungeonGenerator>("DungeonGenerator");
         DungeonMaster dungeonMaster = FindComponentByTag<DungeonMaster>("DungeonMaster");
         dungeonMaster.enabled = false;
-        
+
         // Asserts that all root game objects are present
         Assert.That(SceneManager.GetActiveScene().rootCount == 4);
         Assert.That(dungeonGenerator.transform.childCount > 10);

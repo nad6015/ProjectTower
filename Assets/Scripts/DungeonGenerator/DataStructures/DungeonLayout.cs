@@ -31,7 +31,6 @@ namespace Assets.DungeonGenerator
         /// <param name="node"> the new node to add.</param>
         public void Add(DungeonNode node)
         {
-            // TODO: TEST FOR NULL NODE
             if (node != null && !_graph.Contains(node))
             {
                 _graph.Add(node);
@@ -150,7 +149,7 @@ namespace Assets.DungeonGenerator
             {
                 child.LinkedNodes.Remove(node);
             }
-            _graph.Remove(node); // TODO: Test that all instances of the node is removed from grpah
+            _graph.Remove(node);
         }
 
         private void VisitNode(DungeonNode node, HashSet<DungeonNode> visitedNodes)
@@ -257,7 +256,6 @@ namespace Assets.DungeonGenerator
             }
         }
 
-        //TODO: Write test for this method
         public DungeonNode FindById(int v)
         {
             return _graph.Find(n=>n.Id == v);

@@ -1,7 +1,7 @@
 ﻿namespace Assets.DungeonMaster
 {
     /// <summary>
-    /// TODO
+    /// The themes the dungeon generator supports.
     /// </summary>
     public enum DungeonTheme
     {

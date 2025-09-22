@@ -102,16 +102,13 @@ public class GraphTests
 
         Assert.That(graph.Count == 1);
     }
-    // TODO: Add tests that ensures all node have at most three neighbours
 
-    // TODO: Review graph terminology. I think better naming could be utilised.
     [TestCaseSource("CompleteGraphs")]
     public void ShouldReturnIsConnectedTrueIfGraphIsFullyLinked(DungeonLayout graph)
     {
         Assert.True(graph.IsConnected());
     }
 
-    // TODO: Review graph terminology. I think better naming could be utilised.
     [TestCaseSource("IncompleteGraphs")]
     public void ShouldReturnIsConnectedFalseIfGraphIsNotFullyLinked(DungeonLayout graph)
     {

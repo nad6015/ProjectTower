@@ -58,12 +58,12 @@
       "conditions": [
         {
           "operator": ">",
-          "operand": "50"
+          "operand": "90"
         }
       ],
       "valueType": "range",
       "value": {
-        "max": "2",
+        "max": "1",
         "min": "0"
       }
     },
@@ -74,7 +74,7 @@
       "conditions": [
         {
           "operator": "<",
-          "operand": "30"
+          "operand": "40"
         },
         {
           "operator": ">",

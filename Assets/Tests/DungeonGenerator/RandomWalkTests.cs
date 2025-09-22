@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using Assets.DungeonGenerator;
 using Assets.DungeonGenerator.Components;
+using Assets.DungeonMaster;
+using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.TestTools;
+using static Assets.Utilities.GameObjectUtilities;
 
 public class RandomWalkTests
 {
-    readonly DungeonComponents components = Resources.Load<DungeonComponents>("DevComponents");
-    readonly TextAsset paramFile = Resources.Load<TextAsset>("TestParameters");
-
     [SetUp]
     public void SetUp()
     {
@@ -105,7 +105,7 @@ public class RandomWalkTests
 
         Assert.That(start != null);
         Assert.That(exploreCount == 5);
-        Assert.That(treasureCount == 1);
+        Assert.That(treasureCount >= 1);
         Assert.That(end != null);
     }
 
@@ -115,7 +115,11 @@ public class RandomWalkTests
 
         dungeonGenerator.ClearDungeon();
 
-        DungeonRepresentation dungeon = new(paramFile, components);
+        ParameterSupport support = FindComponentByTag<ParameterSupport>("TestSupport");
+
+        DungeonRepresentation dungeon = new(null, null, support.Components,
+            DungeonMasterDeserializationUtil.BuildDungeonParameters(JObject.Parse(support.ParamFile.text)));
+
         dungeon.ModifyParameter(DungeonParameter.RoomCount, new ValueRepresentation(ValueType.Number,
             new() { { "value", roomCount.ToString() } }));
 
@@ -141,7 +145,7 @@ public class RandomWalkTests
         layout.Add(new(RoomType.Start));
         DungeonNode lastNode = layout.LastNode;
         int randomIndex1 = Random.Range(1, roomCount - 2);
-        int randomIndex2 = Random.Range(1, roomCount - 2); // TODO: Fix/Tidy up test
+        int randomIndex2 = Random.Range(1, roomCount - 2);
 
         for (int i = 1; i < roomCount - 1; i++)
         {

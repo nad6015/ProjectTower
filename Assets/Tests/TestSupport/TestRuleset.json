@@ -1,13 +1,13 @@
 {
   "gameplayRules": [
     {
-      "id": "increaseItemCount",
+      "id": "increaseItemDropRate",
       "parameter": "itemDropRate",
       "gameParam": "characterHealth",
       "conditions": [
         {
           "operator": "<",
-          "operand": "30"
+          "operand": "70"
         },
         {
           "operator": ">",
@@ -20,18 +20,18 @@
       }
     },
     {
-      "id": "decreaseItemCount",
+      "id": "decreaseItemDropRate",
       "parameter": "itemDropRate",
       "gameParam": "characterHealth",
       "conditions": [
         {
           "operator": ">",
-          "operand": "30"
+          "operand": "70"
         }
       ],
       "valueType": "number",
       "value": {
-        "value": "-200"
+        "value": "-100"
       }
     },
     {
@@ -52,7 +52,7 @@
   ],
   "dungeonRules": [
     {
-      "id": "roomCount",
+      "id": "RoomCount",
       "parameter": "roomCount",
       "gameParam": "clearTime",
       "conditions": [
@@ -67,7 +67,7 @@
       }
     },
     {
-      "id": "enemiesPerRoom",
+      "id": "EnemiesPerRoom",
       "parameter": "enemiesPerRoom",
       "gameParam": "characterHealth",
       "conditions": [
@@ -103,29 +103,37 @@
       }
     },
     {
-      "id": "itemsPerRoom",
-      "parameter": "ItemsPerRoom",
+      "id": "ItemsPerRoom",
+      "parameter": "itemsPerRoom",
       "gameParam": "EnemiesDefeated",
       "conditions": [
         {
           "operator": ">",
-          "operand": "4"
+          "operand": "0"
+        },
+        {
+          "operator": "<",
+          "operand": "2"
         }
       ],
       "valueType": "range",
       "value": {
-        "max": "3",
-        "min": "3"
+        "max": "5",
+        "min": "5"
       }
     },
     {
       "id": "decreaseItemsPerRoom",
-      "parameter": "ItemsPerRoom",
+      "parameter": "itemsPerRoom",
       "gameParam": "EnemiesDefeated",
       "conditions": [
         {
           "operator": ">",
-          "operand": "4"
+          "operand": "1"
+        },
+        {
+          "operator": "<",
+          "operand": "3"
         }
       ],
       "valueType": "range",
@@ -135,8 +143,8 @@
       }
     },
     {
-      "id": "itemsPerRoom",
-      "parameter": "ItemsPerRoom",
+      "id": "ItemsPerRoom",
+      "parameter": "itemsPerRoom",
       "gameParam": "clearTime",
       "conditions": [
         {

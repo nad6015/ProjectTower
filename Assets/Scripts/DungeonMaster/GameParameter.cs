@@ -1,7 +1,7 @@
 ﻿namespace Assets.DungeonMaster
 {
     /// <summary>
-    /// TODO
+    /// Representation of the game statisitics used for the dungeon and gameplay adaption.
     /// </summary>
     public enum GameParameter
     {

@@ -31,6 +31,7 @@ namespace Tests.Support
                     Vector3 enemyPosition = new(transform.position.x, 1, transform.position.z + 1);
                     enemy.transform.SetPositionAndRotation(enemyPosition, Quaternion.identity);
                     enemy.TakeDamage(this);
+                    break;
                 }
             }
         }

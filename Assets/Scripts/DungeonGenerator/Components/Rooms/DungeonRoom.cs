@@ -174,7 +174,7 @@ namespace Assets.DungeonGenerator.Components
             }
         }
 
-        protected DungeonDoor FindClosestDoor()
+        protected DungeonDoor FindClosestDoor(int linkedNodeIndex = 0)
         {
             DungeonNode lockedRoom = null;
 
@@ -196,7 +196,7 @@ namespace Assets.DungeonGenerator.Components
             }
             else
             {
-                lockedRoom = DungeonNode.LinkedNodes[1];
+                lockedRoom = DungeonNode.LinkedNodes[linkedNodeIndex];
             }
 
             DungeonCorridor corridor = null;

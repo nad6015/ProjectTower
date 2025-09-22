@@ -30,29 +30,30 @@ public class DungeonRulesetTest
         JObject json = JObject.Parse(FindComponentByTag<ParameterSupport>("TestSupport").RulesetFile.text);
         ruleset = DungeonMasterDeserializationUtil.BuildDungeonRuleset(json);
 
-
-
-        Assert.That(ruleset.Count == 3);
+        Assert.That(ruleset.Count == 5);
         Assert.That(ruleset.ContainsKey(DungeonParameter.RoomCount.ToString()), Is.True);
         Assert.That(ruleset.ContainsKey(DungeonParameter.EnemiesPerRoom.ToString()), Is.True);
         Assert.That(ruleset.ContainsKey(DungeonParameter.ItemsPerRoom.ToString()), Is.True);
 
         Assert.That(ruleset[DungeonParameter.RoomCount.ToString()].GameParameter == GameParameter.ClearTime);
-        Assert.That(ruleset[DungeonParameter.CorridorSize.ToString()].GameParameter == GameParameter.EnemiesDefeated);
-        Assert.That(ruleset[DungeonParameter.ItemsPerRoom.ToString()].GameParameter == GameParameter.CharacterHealth);
+        Assert.That(ruleset[DungeonParameter.EnemiesPerRoom.ToString()].GameParameter == GameParameter.CharacterHealth);
+        Assert.That(ruleset[DungeonParameter.ItemsPerRoom.ToString()].GameParameter == GameParameter.EnemiesDefeated);
 
-        DungeonRule rule = ruleset[DungeonParameter.RoomCount.ToString()];
+        DungeonRule rule = ruleset[DungeonParameter.EnemiesPerRoom.ToString()];
         var gameData = new Dictionary<GameParameter, int>()
         {
-            {GameParameter.ClearTime, 3 }
+            {GameParameter.CharacterHealth, 70 }
         };
 
         Assert.True(rule.ConditionsMet(gameData));
         Assert.NotNull(rule);
         ValueRepresentation value = rule.Value();
 
-        Assert.That(value.Type == ValueType.Number);
-        Assert.That(value.Value<int>() == 3);
+        Assert.That(value.Type == ValueType.Range);
+
+        Range<int> range = value.Value<Range<int>>();
+        Assert.That(range.max == 5);
+        Assert.That(range.min == 5);
     }
 
     [UnityTest]
@@ -69,7 +70,7 @@ public class DungeonRulesetTest
         foreach (JToken jRule in jRules)
         {
             // If this rule is found, increase the count by one.
-            count += jRule["parameter"].ToString() == "ItemsPerRoom" ? 1 : 0;
+            count += jRule["id"].ToString() == "ItemsPerRoom" ? 1 : 0;
         }
 
         Assert.That(ruleset.Count < jRules.Count);

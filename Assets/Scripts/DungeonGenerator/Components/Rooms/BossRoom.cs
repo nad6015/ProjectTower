@@ -12,7 +12,7 @@ namespace Assets.DungeonGenerator.Components.Rooms
         {
             PlaceProps(dungeon);
             Contents.Add(new(dungeon.Components.boss.gameObject, Bounds.center));
-            _door = FindClosestDoor();
+            _door = FindClosestDoor(1);
         }
 
         internal override void InstaniateContents(DungeonRepresentation dungeon)

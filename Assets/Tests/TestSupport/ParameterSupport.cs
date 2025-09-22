@@ -1,3 +1,4 @@
+using Assets.DungeonGenerator;
 using UnityEngine;
 
 public class ParameterSupport : MonoBehaviour
@@ -10,4 +11,7 @@ public class ParameterSupport : MonoBehaviour
 
     [field: SerializeField]
     public TextAsset RulesetFile { get; private set; }
+
+    [field: SerializeField]
+    public DungeonComponents Components { get; private set; }
 }

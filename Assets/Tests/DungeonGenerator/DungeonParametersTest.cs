@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 using static Assets.Utilities.GameObjectUtilities;
 using UnityEngine.TestTools;
 using System.Collections;
+using Assets.DungeonMaster;
+using Newtonsoft.Json.Linq;
 
 public class DungeonParametersTest
 {
@@ -22,16 +24,17 @@ public class DungeonParametersTest
     public IEnumerator ShouldGetAnyParameter()
     {
         yield return new WaitForSeconds(1);
-        parameters = new(FindComponentByTag<ParameterSupport>("TestSupport").ParamFile, null);
+        var param = DungeonMasterDeserializationUtil.BuildDungeonParameters(JObject.Parse(FindComponentByTag<ParameterSupport>("TestSupport").ParamFile.text));
+        parameters = new(null, null, null, param);
         Range<int> enemiesPerRoom = parameters.Parameter<Range<int>>(DungeonParameter.EnemiesPerRoom);
         Range<Vector3> roomSize = parameters.Parameter<Range<Vector3>>(DungeonParameter.RoomSize);
 
         Assert.That(6 == parameters.Count);
 
-        Assert.That(enemiesPerRoom.min == 0);
-        Assert.That(enemiesPerRoom.max == 3);
+        Assert.That(enemiesPerRoom.min == 1);
+        Assert.That(enemiesPerRoom.max == 2);
 
-        Assert.That(roomSize.min == new Vector3(15, 0, 15));
-        Assert.That(roomSize.max == new Vector3(35, 0, 35));
+        Assert.That(roomSize.min == new Vector3(15, 0, 10));
+        Assert.That(roomSize.max == new Vector3(20, 0, 15));
     }
 }

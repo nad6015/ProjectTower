@@ -109,8 +109,9 @@ namespace Assets.DungeonGenerator.Components.Tiles
         /// <summary>
         /// Draws a floor tile at the given position.
         /// </summary>
-        /// <param name="x">the x coordinate</param>
-        /// <param name="y">the y coordinate</param>
+        /// <param name="start">the starting x coordinate</param>
+        /// <param name="width">the width of the room</param>
+        /// <param name="height">the height of the room</param>
         /// <param name="transform">the parent transform of this tile</param>
         /// <returns></returns>
         public List<GameObject> DrawFloor(Vector3 start, int width, int height, Transform transform)
@@ -132,14 +133,14 @@ namespace Assets.DungeonGenerator.Components.Tiles
         }
 
         /// <summary>
-        /// TODO
+        /// Instantiates a gameobject at the given position.
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="z"></param>
-        /// <param name="tile"></param>
-        /// <param name="quaternion"></param>
-        /// <param name="transform"></param>
-        /// <returns></returns>
+        /// <param name="x">the x parameter</param>
+        /// <param name="z">the z parameter</param>
+        /// <param name="tile">the gameobject to instantiate</param>
+        /// <param name="quaternion">the rotation of the tile</param>
+        /// <param name="transform">the parent tranform of the tile</param>
+        /// <returns>the instantiated gameobject</returns>
         private GameObject Draw(float x, float z, GameObject tile, Quaternion quaternion, Transform transform)
         {
             GameObject gameObject = Instantiate(tile, new Vector3(x, 0, z), Quaternion.identity, transform);
@@ -147,25 +148,25 @@ namespace Assets.DungeonGenerator.Components.Tiles
             model.rotation *= quaternion;
             return gameObject;
         }
-
         /// <summary>
-        /// TODO
+        /// Instantiates a room corner at the given position.
         /// </summary>
-        /// <param name="bounds"></param>
-        /// <param name="transform"></param>
+        /// <param name="x">the x parameter</param>
+        /// <param name="z">the z parameter</param>
+        /// <param name="transform">the parent transform of the tile</param>
         public GameObject DrawRoomCorner(float x, float z, Transform transform)
         {
             return Draw(x, z, roomCorner, Quaternion.identity, transform);
         }
 
         /// <summary>
-        /// TODO
+        /// TInstantiates a room corner at the given position.
         /// </summary>
-        /// <param name="max"></param>
-        /// <param name="transform"></param>
-        public GameObject DrawRoomCorner(Vector3Int max, Transform transform)
+        /// <param name="pos">the position of the tile</param>
+        /// <param name="transform">the parent transform of the tile</param>
+        public GameObject DrawRoomCorner(Vector3Int pos, Transform transform)
         {
-            return DrawRoomCorner(max.x, max.z, transform);
+            return DrawRoomCorner(pos.x, pos.z, transform);
         }
 
         internal DungeonTile GetProp()
